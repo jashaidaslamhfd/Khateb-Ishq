@@ -120,6 +120,11 @@ jobs:
           URDU_TTS_RATE: "-12"
           VOICE_ENGINE: ${{ vars.VOICE_ENGINE || 'edge' }}
           HF_HUB_ENABLE_HF_TRANSFER: "1"
+          # Viral-status look — screen captions Roman Urdu, fast punch cuts,
+          # cinematic grade. (Owner request; repo vars can override.)
+          CAPTION_SCRIPT: ${{ vars.CAPTION_SCRIPT || 'roman' }}
+          FAST_CUT: ${{ vars.FAST_CUT || '1' }}
+          APPLY_GRADE: ${{ vars.APPLY_GRADE || '1' }}
           POETRY_SOURCE: "mix"
           TARGET_MIN_SECONDS: "30"
           TARGET_MAX_SECONDS: "57"

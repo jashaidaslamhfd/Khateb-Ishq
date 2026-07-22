@@ -358,12 +358,62 @@ def gen_TEMPLATE(prompt, seed, scene_text=None):
 
 
 # ---------------------------------------------------------------------------
+# 0) PIXABAY — channel owner's key; PREFERRED because search terms come from
+#    the script's own scene visuals (hook->rain, judai->empty bench etc.)
+# ---------------------------------------------------------------------------
+import re as _re
+
+PIXABAY_ENDPOINT = "https://pixabay.com/api/"
+_PIXABAY_STOP = {"cinematic", "moody", "vertical", "grain", "film", "with", "from",
+                 "soft", "text", "letters", "words", "signage", "calligraphy",
+                 "watermark", "people", "faces", "strictly", "captions", "typography"}
+
+
+def _pixabay_query(prompt: str) -> str:
+    words = _re.findall(r"[a-zA-Z]{3,}", str(prompt or ""))
+    words = [w for w in words if w.lower() not in _PIXABAY_STOP][:4]
+    return " ".join(words) or "rainy night"
+
+
+def gen_pixabay_image(prompt, seed, scene_text=None):
+    import requests as _rq
+    key = os.environ.get("PIXABAY_API_KEY")
+    if not key:
+        raise RuntimeError("PIXABAY_API_KEY not set")
+    q = urllib.parse.quote(_pixabay_query(prompt))
+    url = (f"{PIXABAY_ENDPOINT}?key={key}&q={q}&image_type=photo&orientation=vertical"
+           f"&safesearch=true&per_page=25&order=popular")
+    search = _rq.get(url, timeout=30)
+    if search.status_code != 200:
+        raise RuntimeError(f"Pixabay search http {search.status_code}")
+    hits = search.json().get("hits") or []
+    if not hits:
+        raise RuntimeError(f"Pixabay: 0 hits for query '{_pixabay_query(prompt)}'")
+    rng = random.Random(seed)
+    rng.shuffle(hits)
+    last_err = "no url"
+    for hit in hits[:8]:
+        img_url = hit.get("largeImageURL") or hit.get("webformatURL")
+        if not img_url:
+            continue
+        try:
+            dl = _rq.get(img_url, timeout=60)
+            if dl.status_code == 200 and len(dl.content) > 8000:
+                return dl.content, "jpg"
+            last_err = f"http {dl.status_code}"
+        except Exception as exc:  # keep walking the hit list
+            last_err = str(exc)[:80]
+    raise RuntimeError(f"Pixabay image download failed: {last_err}")
+
+
+# ---------------------------------------------------------------------------
 # REGISTRY — fallback order yahan control hota hai (upar se neeche try hoga)
 # env_keys: [] matlab koi key nahi chahiye, warna un sab env vars ka set
 # hona zaroori hai warna wo provider automatically skip ho jata hai.
 # 50 tak yahan providers add kar sakte hain — bas ek line.
 # ---------------------------------------------------------------------------
 PROVIDER_REGISTRY = [
+    {"name": "Pixabay",            "env_keys": ["PIXABAY_API_KEY"],   "generate": gen_pixabay_image},
     {"name": "AI-Horde",           "env_keys": [],                       "generate": gen_ai_horde},
     {"name": "Pollinations-flux",  "env_keys": [],                       "generate": gen_pollinations_flux},
     {"name": "Pollinations-turbo", "env_keys": [],                       "generate": gen_pollinations_turbo},

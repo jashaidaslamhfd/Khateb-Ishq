@@ -197,5 +197,76 @@ class VoiceEngineTests(unittest.TestCase):
                              "missing reference WAV must fall back, never crash")
 
 
+class ViralLookTests(unittest.TestCase):
+    """Owner's 2026-07-22 request: Pixabay visuals, Roman captions, fast cut."""
+
+    def test_caption_roman_field_does_not_break_validation(self):
+        import script_generator as sg
+        s = {"title": "بارش کی رات", "hook": "کچھ کہنے کی رات ہے", "cta": "فالو ضرور کریں",
+             "scenes": [
+                 {"visual": "rain window lamp", "caption": URDU_SHER_A,
+                  "caption_roman": "dil ke saagar mein lehar uthi"},
+                 {"visual": "empty chair rain", "caption": URDU_SHER_B,
+                  "caption_roman": "shaam dhali yaadon ka qaafila"},
+                 {"visual": "night street", "caption": URDU_SHER_A + " " + URDU_SHER_B,
+                  "caption_roman": "dil ke saagar mein lehar uthi phir chup"},
+             ]}
+        ok, issues = sg._validate_script(s)
+        latin_issues = [i for i in issues if "Latin" in i]
+        self.assertEqual(latin_issues, [], f"caption_roman (Latin) must be allowed: {issues}")
+
+    def test_roman_caption_picked_for_display(self):
+        try:
+            import importlib, video_editor
+        except Exception as exc:
+            self.skipTest(f"video_editor deps unavailable: {exc}")
+        from unittest.mock import patch
+        with patch.dict(os.environ, {"CAPTION_SCRIPT": "roman"}, clear=False):
+            importlib.reload(video_editor)
+            scene = {"caption": URDU_SHER_A, "caption_roman": "dil ke saagar mein lehar"}
+            self.assertEqual(video_editor._pick_display_caption(scene, {}),
+                             "dil ke saagar mein lehar")
+        with patch.dict(os.environ, {"CAPTION_SCRIPT": "urdu"}, clear=False):
+            importlib.reload(video_editor)
+            self.assertEqual(video_editor._pick_display_caption(scene, {}), URDU_SHER_A)
+
+    def test_roman_caption_strips_render(self):
+        try:
+            import importlib, video_editor
+        except Exception as exc:
+            self.skipTest(f"video_editor deps unavailable: {exc}")
+        from unittest.mock import patch
+        with patch.dict(os.environ, {"CAPTION_SCRIPT": "roman"}, clear=False):
+            importlib.reload(video_editor)
+            strip = video_editor._compose_caption_image("dil ke saagar mein lehar uthi phir chup ho gai")
+            self.assertEqual((strip.width, strip.height), (1080, 560))
+
+    def test_pixabay_provider_parses_hits(self):
+        from unittest.mock import patch
+        import image_providers as ip
+
+        class _Resp:
+            def __init__(self, payload=None, content=None, code=200):
+                self.status_code = code; self._p = payload or {}; self.content = content or b""
+
+            def json(self):
+                return self._p
+
+        fake_search = _Resp(payload={"hits": [{"largeImageURL": "https://x/img.jpg"}]})
+        fake_img = _Resp(content=b"\xff\xd8jpeg" + b"z" * 9000)
+        calls = []
+
+        def fake_get(url, timeout=None, **kw):
+            calls.append(url)
+            return fake_img if url == "https://x/img.jpg" else fake_search
+
+        with patch.dict(os.environ, {"PIXABAY_API_KEY": "k"}, clear=False), \
+             patch.object(ip.requests, "get", side_effect=fake_get):
+            data, ext = ip.gen_pixabay_image("moody rainy window at night", 42)
+        self.assertEqual(ext, "jpg")
+        self.assertGreater(len(data), 8000)
+        self.assertIn("pixabay.com/api", calls[0], "search must hit Pixabay API")
+
+
 if __name__ == "__main__":
     unittest.main()

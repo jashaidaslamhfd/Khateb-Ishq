@@ -38,6 +38,39 @@ _FONT_CANDIDATES = [
 MUSIC_VOLUME = float(os.environ.get("MUSIC_VOLUME", "0.08"))
 ZOOM = 1.08  # gentle Ken-Burns max zoom
 
+# ---- Viral-status look (owner request 2026-07-22) ------------------------
+# CAPTION_SCRIPT=roman -> on-screen captions in Roman Urdu (Latin); the VOICE
+# always stays native Urdu (scene["caption"]). "urdu" reverts to Nastaliq text.
+CAPTION_SCRIPT = os.environ.get("CAPTION_SCRIPT", "roman").strip().lower()
+# FAST_CUT=1 -> each scene becomes two punch-cuts (alt pan/zoom) like trending
+# sad-status edits. APPLY_GRADE=1 -> warm contrast grade + vignette + grain.
+FAST_CUT = os.environ.get("FAST_CUT", "1").strip().lower() in ("1", "true", "yes")
+APPLY_GRADE = os.environ.get("APPLY_GRADE", "1").strip().lower() in ("1", "true", "yes")
+
+_LATIN_FONT_CANDIDATES = [
+    "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
+    "/usr/share/fonts/truetype/liberation/LiberationSans-Bold.ttf",
+    "assets/fonts/DejaVuSans-Bold.ttf",
+]
+
+
+def _load_latin_font(size: int) -> ImageFont.FreeTypeFont:
+    for path in _LATIN_FONT_CANDIDATES:
+        if os.path.exists(path):
+            return ImageFont.truetype(path, size)
+    logger.warning("No Latin font found — Pillow default bitmap font (small)")
+    return ImageFont.load_default()
+
+
+def _pick_display_caption(scene: dict, seg: dict) -> str:
+    """Screen text: Roman Urdu when configured and the script provided one —
+    else the Urdu caption. Voice text is NEVER touched by this choice."""
+    if CAPTION_SCRIPT == "roman":
+        roman = (scene.get("caption_roman") or "").strip()
+        if roman:
+            return roman
+    return (seg.get("caption") or scene.get("caption") or "").strip()
+
 
 def _has_raqm() -> bool:
     try:
@@ -73,16 +106,89 @@ def _rtl_wrap(text: str, font: ImageFont.FreeTypeFont, draw: ImageDraw.ImageDraw
     return lines
 
 
+_FX_CACHE: dict = {}
+
+
+def _vignette() -> np.ndarray:
+    """Radial dark-edge mask, cached (2M-pixel grid is not cheap)."""
+    if "vig" not in _FX_CACHE:
+        yy, xx = np.mgrid[0:HEIGHT, 0:WIDTH]
+        d = np.sqrt(((xx - WIDTH / 2) / (WIDTH / 2)) ** 2 + ((yy - HEIGHT / 2) / (HEIGHT / 2)) ** 2)
+        _FX_CACHE["vig"] = (1.0 - 0.45 * np.clip(d - 0.55, 0, 1) ** 1.5).astype(np.float32)
+    return _FX_CACHE["vig"]
+
+
+def _grain() -> np.ndarray:
+    if "grain" not in _FX_CACHE:
+        rng = np.random.default_rng(7)
+        _FX_CACHE["grain"] = rng.normal(0.0, 4.0, (HEIGHT, WIDTH)).astype(np.float32)
+    return _FX_CACHE["grain"]
+
+
+def _grade_image(in_path: str, out_path: str, variant: int = 0) -> str:
+    """Cover-crop to 1080x1920 (alternate pans for fast-cut halves), then apply
+    the moody warm grade + vignette + film grain — the sad-status look."""
+    img = Image.open(in_path).convert("RGB")
+    sw, sh = img.size
+    scale = max(WIDTH / sw, HEIGHT / sh)
+    img = img.resize((int(sw * scale), int(sh * scale)), Image.LANCZOS)
+    nw, nh = img.size
+    span = max(0, nw - WIDTH)
+    x0 = int(span * (0.5 if variant == 0 else (0.12 if variant % 2 else 0.88)))
+    y0 = max(0, (nh - HEIGHT) // 2)
+    img = img.crop((x0, y0, x0 + WIDTH, y0 + HEIGHT))
+    arr = np.asarray(img).astype(np.float32)
+    arr[..., 0] *= 1.06              # warm highlights
+    arr[..., 2] *= 0.94              # cool shadows
+    arr = (arr - 128.0) * 1.08 + 118.0
+    arr *= _vignette()[..., None]
+    arr += _grain()[..., None]
+    Image.fromarray(np.clip(arr, 0, 255).astype(np.uint8)).save(out_path, quality=88)
+    return out_path
+
+
+def _scene_visual_files(img_path: str, index: int) -> list:
+    """Files for this scene's video: 2 graded alt-crops in fast-cut mode,
+    1 graded crop if only grading, untouched original if neither."""
+    if not APPLY_GRADE and not FAST_CUT:
+        return [img_path]
+    os.makedirs("output/segments", exist_ok=True)
+    if FAST_CUT:
+        a = _grade_image(img_path, f"output/segments/fx_{index}_a.jpg", variant=0)
+        b = _grade_image(img_path, f"output/segments/fx_{index}_b.jpg", variant=1)
+        return [a, b]
+    return [_grade_image(img_path, f"output/segments/fx_{index}.jpg", variant=0)]
+
+
 def _compose_caption_image(caption: str) -> Image.Image:
-    """Transparent caption strip: centered Urdu text, dark scrim for
-    readability, RTL shaping with Urdu language tag."""
+    """Transparent caption strip (1080x560). Two render branches:
+    - Latin text (Roman Urdu): DejaVu bold, LTR, textwrap.
+    - Urdu text: Naskh + libraqm RTL shaping with dark scrim."""
     strip = Image.new("RGBA", (WIDTH, 560), (0, 0, 0, 0))
     draw = ImageDraw.Draw(strip)
+    is_latin = caption and not any("\u0600" <= ch <= "\u06FF" for ch in caption)
+
+    if is_latin:
+        # ---- Roman Urdu branch: no raqm needed, LTR DejaVu ----
+        font = _load_latin_font(60)
+        lines = textwrap.wrap(caption, 22)
+        line_h = 78
+        box_h = line_h * len(lines) + 74
+        y0 = (560 - box_h) // 2
+        draw.rounded_rectangle([50, y0, WIDTH - 50, y0 + box_h], radius=34, fill=(0, 0, 0, 168))
+        y = y0 + 37
+        for line in lines:
+            w = draw.textlength(line, font=font)
+            draw.text(((WIDTH - w) / 2, y), line, font=font, fill=(255, 246, 230, 255),
+                      stroke_width=3, stroke_fill=(0, 0, 0, 225))
+            y += line_h
+        return strip
+
+    # ---- Urdu (Nastaliq) branch: raqm RTL shaping ----
     font = _load_font(72)
     rtl_kwargs = dict(direction="rtl", language="ur") if _has_raqm() else {}
     if not rtl_kwargs:
         logger.warning("Pillow without libraqm — Urdu shaping will look broken; rebuild pillow with raqm or use container fonts")
-
     lines = _rtl_wrap(caption, font, draw, WIDTH - 160) if rtl_kwargs else textwrap.wrap(caption, 22)
     line_h = 108
     box_h = line_h * len(lines) + 90
@@ -119,11 +225,20 @@ def build_video(image_paths: list, audio_segments: list, scenes: list) -> str:
     clips = []
     for i, (img_path, seg) in enumerate(zip(image_paths, audio_segments)):
         duration = float(seg.get("duration", 4.0)) + 0.35  # small breath after each misra
-        base = ImageClip(img_path).set_duration(duration)
-        zoomed = base.resize(lambda t: 1 + (ZOOM - 1) * min(1.0, t / max(duration, 0.01))).set_position(("center", "center"))
-        canvas = zoomed.on_color(size=(WIDTH, HEIGHT), color=(8, 8, 12), pos="center", col_opacity=1)
+        files = _scene_visual_files(img_path, i)           # graded crops (1 or 2)
+        per = duration / len(files)
+        cuts = []
+        for j, f in enumerate(files):
+            base = ImageClip(f).set_duration(per)
+            start_zoom = 1.0 + (ZOOM - 1.0) * (j / max(len(files) - 1, 1)) * 0.6
+            zoomed = base.resize(
+                lambda t, z0=start_zoom: z0 + ((ZOOM - 1.0) - (z0 - 1.0)) * min(1.0, t / max(per, 0.01))
+            ).set_position(("center", "center"))
+            cuts.append(zoomed.on_color(size=(WIDTH, HEIGHT), color=(8, 8, 12), pos="center", col_opacity=1))
+        canvas = (concatenate_videoclips(cuts, method="compose") if len(cuts) > 1 else cuts[0])
+        canvas = canvas.set_duration(duration)
 
-        caption_strip = _compose_caption_image(audio_segments[i].get("caption","" ) or scenes[i].get("caption", ""))
+        caption_strip = _compose_caption_image(_pick_display_caption(scenes[i], seg))
         tmp_strip = f"output/segments/caption_{i}.png"
         os.makedirs("output/segments", exist_ok=True)
         caption_strip.save(tmp_strip)

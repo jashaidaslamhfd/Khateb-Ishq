@@ -62,10 +62,11 @@ Rules — follow exactly:
   "description": "ایک جملہ خالص اردو میں — یہ ویڈیو کون سا احساس بیان کرتی ہے",
   "poet": "{poet_note}",
   "scenes": [
-    {{"visual": "8-12 English words: moody cinematic image description (rain, old book, dim lamp...) NO text in the image", "caption": "اردو جملہ یا شعر (زیادہ سے زیادہ {max_scene} الفاظ)"}},
+    {{"visual": "8-12 English words: moody cinematic image description (rain, old book, dim lamp...) NO text in the image", "caption": "اردو جملہ یا شعر (زیادہ سے زیادہ {max_scene} الفاظ)", "caption_roman": "wahi caption Roman Urdu (Latin letters) mein — Pakistani texting style"}},
     ... {scene_range} scenes total ...
   ]
 }}
+- caption_roman is REQUIRED per scene: EXACT same sher/meaning as the Urdu caption, written in casual Roman Urdu (Latin script) — this is ONLY for on-screen display; the voice always speaks the Urdu caption.
 - Scene 1: the hook line (one striking Urdu line, not a question).
 - Middle scenes: the poetry itself — 1 sher per scene, never split a sher across scenes.
 - Last scene: a closing line that RETURNS to the opening mood (poetry loops; replay is the algorithm's favorite).
