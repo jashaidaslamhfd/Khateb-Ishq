@@ -88,3 +88,8 @@ pw-browsers/
 node_modules/
 package-lock.json
 
+
+# Owner's raw voice reference — NEVER commit un-encrypted. Only the
+# GPG-encrypted twin (assets/voice_reference.wav.gpg) may be tracked.
+assets/voice_reference.wav
+assets/voice_reference_raw.*

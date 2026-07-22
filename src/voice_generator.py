@@ -52,10 +52,20 @@ def _rate() -> str:
 
 
 def _engine() -> str:
-    """Voice engine: 'edge' (free, native-Urdu neural — default) or 'elevenlabs'
-    (user's OWN cloned voice). Falls back to edge with a loud warning if the
-    clone credentials are not configured, so the channel can never break."""
+    """Voice engine: 'edge' (free, native-Urdu neural — default), 'elevenlabs'
+    (paid cloud clone) or 'qwenclone' (owner's OWN voice, free, zero-shot
+    Qwen3-TTS — see src/voice_clone.py). Any misconfiguration loudly falls
+    back to edge so the channel can never break."""
     eng = os.environ.get("VOICE_ENGINE", "edge").strip().lower()
+    if eng in ("qwenclone", "qwen3", "clone"):
+        try:
+            import voice_clone
+            if voice_clone.reference_ready():
+                return "qwenclone"
+            logger.warning("VOICE_ENGINE=qwenclone but no reference WAV found — falling back to Edge-TTS")
+        except Exception as exc:
+            logger.warning("qwenclone unavailable (%s) — falling back to Edge-TTS", exc)
+        return "edge"
     if eng == "elevenlabs":
         if os.environ.get("ELEVENLABS_API_KEY") and os.environ.get("ELEVENLABS_VOICE_ID"):
             return "elevenlabs"
@@ -104,15 +114,20 @@ def generate_voice_segments(scenes: List[dict], output_dir: str = "output/segmen
     voices = _resolve_voices()
     voice = voices[0]  # deterministic default; one speaker per poem, always
     rate = _rate()
-    speaker_tag = os.environ.get("ELEVENLABS_VOICE_ID", "")[:8] if engine == "elevenlabs" else voice
+    speaker_tag = (os.environ.get("ELEVENLABS_VOICE_ID", "")[:8] if engine == "elevenlabs"
+                   else "owner-clone" if engine == "qwenclone" else voice)
     segments = []
     for i, scene in enumerate(scenes):
         caption = (scene.get("caption", "") if isinstance(scene, dict) else str(scene)).strip() or "۔"
-        with tempfile.NamedTemporaryFile(suffix=".mp3", delete=False) as tmp:
+        suffix = ".wav" if engine == "qwenclone" else ".mp3"
+        with tempfile.NamedTemporaryFile(suffix=suffix, delete=False) as tmp:
             tmp_path = tmp.name
         try:
             if engine == "elevenlabs":
                 _synth_elevenlabs(caption, tmp_path)
+            elif engine == "qwenclone":
+                import voice_clone
+                voice_clone.synth_clone(caption, tmp_path)
             else:
                 asyncio.run(_synth(caption, voice, rate, tmp_path))
             audio, sr = sf.read(tmp_path, dtype="float32")

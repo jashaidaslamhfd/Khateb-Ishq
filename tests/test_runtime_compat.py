@@ -189,6 +189,13 @@ class VoiceEngineTests(unittest.TestCase):
                                      "ELEVENLABS_VOICE_ID": "y"}, clear=False):
             self.assertEqual(self.vg._engine(), "elevenlabs")
 
+    def test_qwenclone_without_reference_falls_back(self):
+        from unittest.mock import patch
+        with patch.dict(os.environ, {"VOICE_ENGINE": "qwenclone",
+                                     "VOICE_REFERENCE": "no/such/file.wav"}, clear=False):
+            self.assertEqual(self.vg._engine(), "edge",
+                             "missing reference WAV must fall back, never crash")
+
 
 if __name__ == "__main__":
     unittest.main()

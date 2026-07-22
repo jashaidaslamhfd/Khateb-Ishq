@@ -53,6 +53,37 @@ jobs:
           python -m compileall -q src scripts tests
           python -m unittest discover -s tests -v
 
+      # ---- Owner's cloned voice (Qwen3-TTS, free, zero-shot) ---------------
+      # Only active when VOICE_ENGINE=qwenclone. Decrypts the GPG-encrypted
+      # reference recording (owner's voice never sits raw in the public repo)
+      # and installs the heavier clone deps (torch CPU + qwen-tts).
+      - name: Cache Hugging Face models (voice clone, ~3 GB)
+        if: vars.VOICE_ENGINE == 'qwenclone'
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/huggingface
+          key: hf-qwen3tts-${{ runner.os }}-v1
+          restore-keys: hf-qwen3tts-
+
+      - name: Prepare cloned voice (decrypt reference + install engine)
+        if: vars.VOICE_ENGINE == 'qwenclone'
+        shell: bash
+        env:
+          VOICE_REF_PASSPHRASE: ${{ secrets.VOICE_REF_PASSPHRASE }}
+        run: |
+          set -euo pipefail
+          if [ -f assets/voice_reference.wav.gpg ]; then
+            if [ -z "${VOICE_REF_PASSPHRASE:-}" ]; then
+              echo "::error::VOICE_REF_PASSPHRASE secret missing"; exit 1
+            fi
+            gpg --batch --yes --passphrase "$VOICE_REF_PASSPHRASE" \
+                -o assets/voice_reference.wav -d assets/voice_reference.wav.gpg
+            echo "✓ owner's voice reference decrypted ($(stat -c%s assets/voice_reference.wav) bytes)"
+          else
+            echo "::warning::assets/voice_reference.wav.gpg not in repo — engine will fall back to Edge-TTS"
+          fi
+          python -m pip install --extra-index-url https://download.pytorch.org/whl/cpu torch qwen-tts
+
       - name: Validate required secrets (fail fast)
         shell: bash
         env:
@@ -87,6 +118,8 @@ jobs:
           CHANNEL_LANGUAGE: "ur"
           URDU_VOICE: "asad"
           URDU_TTS_RATE: "-12"
+          VOICE_ENGINE: ${{ vars.VOICE_ENGINE || 'edge' }}
+          HF_HUB_ENABLE_HF_TRANSFER: "1"
           POETRY_SOURCE: "mix"
           TARGET_MIN_SECONDS: "30"
           TARGET_MAX_SECONDS: "57"
