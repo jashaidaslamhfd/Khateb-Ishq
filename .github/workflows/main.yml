@@ -1,0 +1,140 @@
+name: "Khateb-Ishq - Urdu Poetry Shorts Automation"
+
+on:
+  workflow_dispatch:
+    inputs:
+      topic:
+        description: "Optional poetry theme (empty = next from the 500 catalogue)"
+        required: false
+        type: string
+  schedule:
+    # Pakistan has NO daylight-saving time (UTC+5 all year) — so no twin
+    # crons, no gate, no DST bugs. Exactly 3 runs/day, each ~60 min before a
+    # PKT publish slot; publishAt snaps publishing to the exact peak:
+    - cron: "0 4 * * *"    # 09:00 PKT → publish 10:00
+    - cron: "30 8 * * *"   # 13:30 PKT → publish 14:00
+    - cron: "30 15 * * *"  # 20:30 PKT → publish 21:00 (poetry golden hour)
+
+permissions:
+  contents: write
+
+concurrency:
+  group: khateb-ishq-generation
+  cancel-in-progress: false
+
+jobs:
+  generate-and-upload:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+          cache-dependency-path: requirements.txt
+
+      - name: Install system dependencies (Urdu fonts for RTL captions)
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          # fonts-noto provides NotoNaskhArabic-Bold.ttf — Pillow+libraqm
+          # shapes the Urdu script correctly in captions.
+          sudo apt-get install -y --no-install-recommends ffmpeg fonts-noto
+          python -m pip install --upgrade pip
+          for i in 1 2 3; do python -m pip install -r requirements.txt && break || { echo "retry $i"; sleep 15; }; done
+
+      - name: Run offline tests
+        run: |
+          set -euo pipefail
+          python scripts/generate_poetry_themes.py
+          python -m compileall -q src scripts tests
+          python -m unittest discover -s tests -v
+
+      - name: Validate required secrets (fail fast)
+        shell: bash
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
+        run: |
+          set -euo pipefail
+          missing=0
+          for var in GROQ_API_KEY GOOGLE_CLIENT_ID GOOGLE_CLIENT_SECRET REFRESH_TOKEN; do
+            if [ -z "${!var:-}" ]; then echo "::error::$var missing"; missing=1; fi
+          done
+          [ "$missing" -eq 0 ] && echo "✓ All required secrets present (must belong to the URDU channel's Google account!)"
+          exit "$missing"
+
+      - name: Generate and upload poetry Short
+        shell: bash
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GROQ_MODEL: "llama-3.3-70b-versatile"
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
+          YT_PRIVACY_STATUS: "private"
+          YT_SCHEDULE_PUBLISH: "true"
+          ENFORCE_POSTING_GAP: "true"
+          MIN_POST_GAP_HOURS: "3.0"
+          PUBLISH_TIMEZONE: "Asia/Karachi"
+          PUBLISH_SLOTS: "10:00,14:00,21:00"
+          YT_MADE_FOR_KIDS: "false"
+          CHANNEL_LANGUAGE: "ur"
+          URDU_VOICE: "asad"
+          URDU_TTS_RATE: "-12"
+          POETRY_SOURCE: "mix"
+          TARGET_MIN_SECONDS: "30"
+          TARGET_MAX_SECONDS: "57"
+          AI_HORDE_API_KEY: ${{ secrets.AI_HORDE_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          HF_API_KEY: ${{ secrets.HF_API_KEY }}
+          DEEPAI_API_KEY: ${{ secrets.DEEPAI_API_KEY }}
+          MODELSLAB_API_KEY: ${{ secrets.MODELSLAB_API_KEY }}
+          REPLICATE_API_TOKEN: ${{ secrets.REPLICATE_API_TOKEN }}
+          PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
+          PIXABAY_API_KEY: ${{ secrets.PIXABAY_API_KEY }}
+          MUSIC_VOLUME: "0.08"
+          VIDEO_TOPIC: ${{ inputs.topic || '' }}
+          PYTHONUNBUFFERED: "1"
+        run: |
+          set -euo pipefail
+          for attempt in 1 2 3; do
+            echo "=== Attempt $attempt / 3 ==="
+            if python src/main.py; then break
+            else
+              rc=$?; echo "::warning::Failed attempt $attempt code $rc"
+              if [ $attempt -eq 3 ]; then exit $rc; fi; sleep $((attempt * 30))
+            fi
+          done
+
+      - name: Persist channel state
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -z "$(git status --porcelain -- data/)" ]; then echo "No state changes."; exit 0; fi
+          git config user.name "khateb-ishq-bot"
+          git config user.email "khateb-ishq-bot@users.noreply.github.com"
+          git add data/
+          git commit -m "chore: persist Khateb-Ishq state [skip ci]"
+          for i in 1 2 3; do
+            if git pull --rebase origin "${GITHUB_REF_NAME}" && git push origin "HEAD:${GITHUB_REF_NAME}"; then break
+            else echo "Push retry $i"; sleep $((i*5)); [ $i -eq 3 ] && echo "::warning::state push failed; artifact has the recovery copy" && exit 0; fi
+          done
+
+      - name: Upload video and logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: khateb-ishq-run-${{ github.run_id }}
+          path: |
+            output/
+            pipeline.log
+            data/
+          if-no-files-found: ignore
+          retention-days: 14

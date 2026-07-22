@@ -1,0 +1,2502 @@
+[
+ {
+  "series_number": 1,
+  "series_title": "Kalam #1: Juda'I",
+  "theme": "aahista juda'i — raat ke do bajay"
+ },
+ {
+  "series_number": 2,
+  "series_title": "Kalam #2: Juda'I",
+  "theme": "aahista juda'i — barsati sham mein"
+ },
+ {
+  "series_number": 3,
+  "series_title": "Kalam #3: Juda'I",
+  "theme": "be-sahara juda'i — raat ke do bajay"
+ },
+ {
+  "series_number": 4,
+  "series_title": "Kalam #4: Juda'I",
+  "theme": "be-sahara juda'i — barsati sham mein"
+ },
+ {
+  "series_number": 5,
+  "series_title": "Kalam #5: Juda'I",
+  "theme": "gila-shikwa juda'i — raat ke do bajay"
+ },
+ {
+  "series_number": 6,
+  "series_title": "Kalam #6: Juda'I",
+  "theme": "gila-shikwa juda'i — barsati sham mein"
+ },
+ {
+  "series_number": 7,
+  "series_title": "Kalam #7: Juda'I",
+  "theme": "khafa juda'i — raat ke do bajay"
+ },
+ {
+  "series_number": 8,
+  "series_title": "Kalam #8: Juda'I",
+  "theme": "khafa juda'i — barsati sham mein"
+ },
+ {
+  "series_number": 9,
+  "series_title": "Kalam #9: Juda'I",
+  "theme": "shafaq-posh juda'i — raat ke do bajay"
+ },
+ {
+  "series_number": 10,
+  "series_title": "Kalam #10: Juda'I",
+  "theme": "shafaq-posh juda'i — barsati sham mein"
+ },
+ {
+  "series_number": 11,
+  "series_title": "Kalam #11: Juda'I",
+  "theme": "viran juda'i — raat ke do bajay"
+ },
+ {
+  "series_number": 12,
+  "series_title": "Kalam #12: Juda'I",
+  "theme": "viran juda'i — barsati sham mein"
+ },
+ {
+  "series_number": 13,
+  "series_title": "Kalam #13: Juda'I",
+  "theme": "narm juda'i — raat ke do bajay"
+ },
+ {
+  "series_number": 14,
+  "series_title": "Kalam #14: Juda'I",
+  "theme": "narm juda'i — barsati sham mein"
+ },
+ {
+  "series_number": 15,
+  "series_title": "Kalam #15: Juda'I",
+  "theme": "gehra juda'i — raat ke do bajay"
+ },
+ {
+  "series_number": 16,
+  "series_title": "Kalam #16: Juda'I",
+  "theme": "gehra juda'i — barsati sham mein"
+ },
+ {
+  "series_number": 17,
+  "series_title": "Kalam #17: Juda'I",
+  "theme": "be-khabar juda'i — raat ke do bajay"
+ },
+ {
+  "series_number": 18,
+  "series_title": "Kalam #18: Juda'I",
+  "theme": "be-khabar juda'i — barsati sham mein"
+ },
+ {
+  "series_number": 19,
+  "series_title": "Kalam #19: Juda'I",
+  "theme": "majrooh juda'i — raat ke do bajay"
+ },
+ {
+  "series_number": 20,
+  "series_title": "Kalam #20: Juda'I",
+  "theme": "majrooh juda'i — barsati sham mein"
+ },
+ {
+  "series_number": 21,
+  "series_title": "Kalam #21: Tanha'I",
+  "theme": "aahista tanha'i — raat ke do bajay"
+ },
+ {
+  "series_number": 22,
+  "series_title": "Kalam #22: Tanha'I",
+  "theme": "aahista tanha'i — barsati sham mein"
+ },
+ {
+  "series_number": 23,
+  "series_title": "Kalam #23: Tanha'I",
+  "theme": "be-sahara tanha'i — raat ke do bajay"
+ },
+ {
+  "series_number": 24,
+  "series_title": "Kalam #24: Tanha'I",
+  "theme": "be-sahara tanha'i — barsati sham mein"
+ },
+ {
+  "series_number": 25,
+  "series_title": "Kalam #25: Tanha'I",
+  "theme": "gila-shikwa tanha'i — raat ke do bajay"
+ },
+ {
+  "series_number": 26,
+  "series_title": "Kalam #26: Tanha'I",
+  "theme": "gila-shikwa tanha'i — barsati sham mein"
+ },
+ {
+  "series_number": 27,
+  "series_title": "Kalam #27: Tanha'I",
+  "theme": "khafa tanha'i — raat ke do bajay"
+ },
+ {
+  "series_number": 28,
+  "series_title": "Kalam #28: Tanha'I",
+  "theme": "khafa tanha'i — barsati sham mein"
+ },
+ {
+  "series_number": 29,
+  "series_title": "Kalam #29: Tanha'I",
+  "theme": "shafaq-posh tanha'i — raat ke do bajay"
+ },
+ {
+  "series_number": 30,
+  "series_title": "Kalam #30: Tanha'I",
+  "theme": "shafaq-posh tanha'i — barsati sham mein"
+ },
+ {
+  "series_number": 31,
+  "series_title": "Kalam #31: Tanha'I",
+  "theme": "viran tanha'i — raat ke do bajay"
+ },
+ {
+  "series_number": 32,
+  "series_title": "Kalam #32: Tanha'I",
+  "theme": "viran tanha'i — barsati sham mein"
+ },
+ {
+  "series_number": 33,
+  "series_title": "Kalam #33: Tanha'I",
+  "theme": "narm tanha'i — raat ke do bajay"
+ },
+ {
+  "series_number": 34,
+  "series_title": "Kalam #34: Tanha'I",
+  "theme": "narm tanha'i — barsati sham mein"
+ },
+ {
+  "series_number": 35,
+  "series_title": "Kalam #35: Tanha'I",
+  "theme": "gehra tanha'i — raat ke do bajay"
+ },
+ {
+  "series_number": 36,
+  "series_title": "Kalam #36: Tanha'I",
+  "theme": "gehra tanha'i — barsati sham mein"
+ },
+ {
+  "series_number": 37,
+  "series_title": "Kalam #37: Tanha'I",
+  "theme": "be-khabar tanha'i — raat ke do bajay"
+ },
+ {
+  "series_number": 38,
+  "series_title": "Kalam #38: Tanha'I",
+  "theme": "be-khabar tanha'i — barsati sham mein"
+ },
+ {
+  "series_number": 39,
+  "series_title": "Kalam #39: Tanha'I",
+  "theme": "majrooh tanha'i — raat ke do bajay"
+ },
+ {
+  "series_number": 40,
+  "series_title": "Kalam #40: Tanha'I",
+  "theme": "majrooh tanha'i — barsati sham mein"
+ },
+ {
+  "series_number": 41,
+  "series_title": "Kalam #41: Intezaar",
+  "theme": "aahista intezaar — raat ke do bajay"
+ },
+ {
+  "series_number": 42,
+  "series_title": "Kalam #42: Intezaar",
+  "theme": "aahista intezaar — barsati sham mein"
+ },
+ {
+  "series_number": 43,
+  "series_title": "Kalam #43: Intezaar",
+  "theme": "be-sahara intezaar — raat ke do bajay"
+ },
+ {
+  "series_number": 44,
+  "series_title": "Kalam #44: Intezaar",
+  "theme": "be-sahara intezaar — barsati sham mein"
+ },
+ {
+  "series_number": 45,
+  "series_title": "Kalam #45: Intezaar",
+  "theme": "gila-shikwa intezaar — raat ke do bajay"
+ },
+ {
+  "series_number": 46,
+  "series_title": "Kalam #46: Intezaar",
+  "theme": "gila-shikwa intezaar — barsati sham mein"
+ },
+ {
+  "series_number": 47,
+  "series_title": "Kalam #47: Intezaar",
+  "theme": "khafa intezaar — raat ke do bajay"
+ },
+ {
+  "series_number": 48,
+  "series_title": "Kalam #48: Intezaar",
+  "theme": "khafa intezaar — barsati sham mein"
+ },
+ {
+  "series_number": 49,
+  "series_title": "Kalam #49: Intezaar",
+  "theme": "shafaq-posh intezaar — raat ke do bajay"
+ },
+ {
+  "series_number": 50,
+  "series_title": "Kalam #50: Intezaar",
+  "theme": "shafaq-posh intezaar — barsati sham mein"
+ },
+ {
+  "series_number": 51,
+  "series_title": "Kalam #51: Intezaar",
+  "theme": "viran intezaar — raat ke do bajay"
+ },
+ {
+  "series_number": 52,
+  "series_title": "Kalam #52: Intezaar",
+  "theme": "viran intezaar — barsati sham mein"
+ },
+ {
+  "series_number": 53,
+  "series_title": "Kalam #53: Intezaar",
+  "theme": "narm intezaar — raat ke do bajay"
+ },
+ {
+  "series_number": 54,
+  "series_title": "Kalam #54: Intezaar",
+  "theme": "narm intezaar — barsati sham mein"
+ },
+ {
+  "series_number": 55,
+  "series_title": "Kalam #55: Intezaar",
+  "theme": "gehra intezaar — raat ke do bajay"
+ },
+ {
+  "series_number": 56,
+  "series_title": "Kalam #56: Intezaar",
+  "theme": "gehra intezaar — barsati sham mein"
+ },
+ {
+  "series_number": 57,
+  "series_title": "Kalam #57: Intezaar",
+  "theme": "be-khabar intezaar — raat ke do bajay"
+ },
+ {
+  "series_number": 58,
+  "series_title": "Kalam #58: Intezaar",
+  "theme": "be-khabar intezaar — barsati sham mein"
+ },
+ {
+  "series_number": 59,
+  "series_title": "Kalam #59: Intezaar",
+  "theme": "majrooh intezaar — raat ke do bajay"
+ },
+ {
+  "series_number": 60,
+  "series_title": "Kalam #60: Intezaar",
+  "theme": "majrooh intezaar — barsati sham mein"
+ },
+ {
+  "series_number": 61,
+  "series_title": "Kalam #61: Yaadein",
+  "theme": "aahista yaadein — raat ke do bajay"
+ },
+ {
+  "series_number": 62,
+  "series_title": "Kalam #62: Yaadein",
+  "theme": "aahista yaadein — barsati sham mein"
+ },
+ {
+  "series_number": 63,
+  "series_title": "Kalam #63: Yaadein",
+  "theme": "be-sahara yaadein — raat ke do bajay"
+ },
+ {
+  "series_number": 64,
+  "series_title": "Kalam #64: Yaadein",
+  "theme": "be-sahara yaadein — barsati sham mein"
+ },
+ {
+  "series_number": 65,
+  "series_title": "Kalam #65: Yaadein",
+  "theme": "gila-shikwa yaadein — raat ke do bajay"
+ },
+ {
+  "series_number": 66,
+  "series_title": "Kalam #66: Yaadein",
+  "theme": "gila-shikwa yaadein — barsati sham mein"
+ },
+ {
+  "series_number": 67,
+  "series_title": "Kalam #67: Yaadein",
+  "theme": "khafa yaadein — raat ke do bajay"
+ },
+ {
+  "series_number": 68,
+  "series_title": "Kalam #68: Yaadein",
+  "theme": "khafa yaadein — barsati sham mein"
+ },
+ {
+  "series_number": 69,
+  "series_title": "Kalam #69: Yaadein",
+  "theme": "shafaq-posh yaadein — raat ke do bajay"
+ },
+ {
+  "series_number": 70,
+  "series_title": "Kalam #70: Yaadein",
+  "theme": "shafaq-posh yaadein — barsati sham mein"
+ },
+ {
+  "series_number": 71,
+  "series_title": "Kalam #71: Yaadein",
+  "theme": "viran yaadein — raat ke do bajay"
+ },
+ {
+  "series_number": 72,
+  "series_title": "Kalam #72: Yaadein",
+  "theme": "viran yaadein — barsati sham mein"
+ },
+ {
+  "series_number": 73,
+  "series_title": "Kalam #73: Yaadein",
+  "theme": "narm yaadein — raat ke do bajay"
+ },
+ {
+  "series_number": 74,
+  "series_title": "Kalam #74: Yaadein",
+  "theme": "narm yaadein — barsati sham mein"
+ },
+ {
+  "series_number": 75,
+  "series_title": "Kalam #75: Yaadein",
+  "theme": "gehra yaadein — raat ke do bajay"
+ },
+ {
+  "series_number": 76,
+  "series_title": "Kalam #76: Yaadein",
+  "theme": "gehra yaadein — barsati sham mein"
+ },
+ {
+  "series_number": 77,
+  "series_title": "Kalam #77: Yaadein",
+  "theme": "be-khabar yaadein — raat ke do bajay"
+ },
+ {
+  "series_number": 78,
+  "series_title": "Kalam #78: Yaadein",
+  "theme": "be-khabar yaadein — barsati sham mein"
+ },
+ {
+  "series_number": 79,
+  "series_title": "Kalam #79: Yaadein",
+  "theme": "majrooh yaadein — raat ke do bajay"
+ },
+ {
+  "series_number": 80,
+  "series_title": "Kalam #80: Yaadein",
+  "theme": "majrooh yaadein — barsati sham mein"
+ },
+ {
+  "series_number": 81,
+  "series_title": "Kalam #81: Khwaab",
+  "theme": "aahista khwaab — raat ke do bajay"
+ },
+ {
+  "series_number": 82,
+  "series_title": "Kalam #82: Khwaab",
+  "theme": "aahista khwaab — barsati sham mein"
+ },
+ {
+  "series_number": 83,
+  "series_title": "Kalam #83: Khwaab",
+  "theme": "be-sahara khwaab — raat ke do bajay"
+ },
+ {
+  "series_number": 84,
+  "series_title": "Kalam #84: Khwaab",
+  "theme": "be-sahara khwaab — barsati sham mein"
+ },
+ {
+  "series_number": 85,
+  "series_title": "Kalam #85: Khwaab",
+  "theme": "gila-shikwa khwaab — raat ke do bajay"
+ },
+ {
+  "series_number": 86,
+  "series_title": "Kalam #86: Khwaab",
+  "theme": "gila-shikwa khwaab — barsati sham mein"
+ },
+ {
+  "series_number": 87,
+  "series_title": "Kalam #87: Khwaab",
+  "theme": "khafa khwaab — raat ke do bajay"
+ },
+ {
+  "series_number": 88,
+  "series_title": "Kalam #88: Khwaab",
+  "theme": "khafa khwaab — barsati sham mein"
+ },
+ {
+  "series_number": 89,
+  "series_title": "Kalam #89: Khwaab",
+  "theme": "shafaq-posh khwaab — raat ke do bajay"
+ },
+ {
+  "series_number": 90,
+  "series_title": "Kalam #90: Khwaab",
+  "theme": "shafaq-posh khwaab — barsati sham mein"
+ },
+ {
+  "series_number": 91,
+  "series_title": "Kalam #91: Khwaab",
+  "theme": "viran khwaab — raat ke do bajay"
+ },
+ {
+  "series_number": 92,
+  "series_title": "Kalam #92: Khwaab",
+  "theme": "viran khwaab — barsati sham mein"
+ },
+ {
+  "series_number": 93,
+  "series_title": "Kalam #93: Khwaab",
+  "theme": "narm khwaab — raat ke do bajay"
+ },
+ {
+  "series_number": 94,
+  "series_title": "Kalam #94: Khwaab",
+  "theme": "narm khwaab — barsati sham mein"
+ },
+ {
+  "series_number": 95,
+  "series_title": "Kalam #95: Khwaab",
+  "theme": "gehra khwaab — raat ke do bajay"
+ },
+ {
+  "series_number": 96,
+  "series_title": "Kalam #96: Khwaab",
+  "theme": "gehra khwaab — barsati sham mein"
+ },
+ {
+  "series_number": 97,
+  "series_title": "Kalam #97: Khwaab",
+  "theme": "be-khabar khwaab — raat ke do bajay"
+ },
+ {
+  "series_number": 98,
+  "series_title": "Kalam #98: Khwaab",
+  "theme": "be-khabar khwaab — barsati sham mein"
+ },
+ {
+  "series_number": 99,
+  "series_title": "Kalam #99: Khwaab",
+  "theme": "majrooh khwaab — raat ke do bajay"
+ },
+ {
+  "series_number": 100,
+  "series_title": "Kalam #100: Khwaab",
+  "theme": "majrooh khwaab — barsati sham mein"
+ },
+ {
+  "series_number": 101,
+  "series_title": "Kalam #101: Gham",
+  "theme": "aahista gham — raat ke do bajay"
+ },
+ {
+  "series_number": 102,
+  "series_title": "Kalam #102: Gham",
+  "theme": "aahista gham — barsati sham mein"
+ },
+ {
+  "series_number": 103,
+  "series_title": "Kalam #103: Gham",
+  "theme": "be-sahara gham — raat ke do bajay"
+ },
+ {
+  "series_number": 104,
+  "series_title": "Kalam #104: Gham",
+  "theme": "be-sahara gham — barsati sham mein"
+ },
+ {
+  "series_number": 105,
+  "series_title": "Kalam #105: Gham",
+  "theme": "gila-shikwa gham — raat ke do bajay"
+ },
+ {
+  "series_number": 106,
+  "series_title": "Kalam #106: Gham",
+  "theme": "gila-shikwa gham — barsati sham mein"
+ },
+ {
+  "series_number": 107,
+  "series_title": "Kalam #107: Gham",
+  "theme": "khafa gham — raat ke do bajay"
+ },
+ {
+  "series_number": 108,
+  "series_title": "Kalam #108: Gham",
+  "theme": "khafa gham — barsati sham mein"
+ },
+ {
+  "series_number": 109,
+  "series_title": "Kalam #109: Gham",
+  "theme": "shafaq-posh gham — raat ke do bajay"
+ },
+ {
+  "series_number": 110,
+  "series_title": "Kalam #110: Gham",
+  "theme": "shafaq-posh gham — barsati sham mein"
+ },
+ {
+  "series_number": 111,
+  "series_title": "Kalam #111: Gham",
+  "theme": "viran gham — raat ke do bajay"
+ },
+ {
+  "series_number": 112,
+  "series_title": "Kalam #112: Gham",
+  "theme": "viran gham — barsati sham mein"
+ },
+ {
+  "series_number": 113,
+  "series_title": "Kalam #113: Gham",
+  "theme": "narm gham — raat ke do bajay"
+ },
+ {
+  "series_number": 114,
+  "series_title": "Kalam #114: Gham",
+  "theme": "narm gham — barsati sham mein"
+ },
+ {
+  "series_number": 115,
+  "series_title": "Kalam #115: Gham",
+  "theme": "gehra gham — raat ke do bajay"
+ },
+ {
+  "series_number": 116,
+  "series_title": "Kalam #116: Gham",
+  "theme": "gehra gham — barsati sham mein"
+ },
+ {
+  "series_number": 117,
+  "series_title": "Kalam #117: Gham",
+  "theme": "be-khabar gham — raat ke do bajay"
+ },
+ {
+  "series_number": 118,
+  "series_title": "Kalam #118: Gham",
+  "theme": "be-khabar gham — barsati sham mein"
+ },
+ {
+  "series_number": 119,
+  "series_title": "Kalam #119: Gham",
+  "theme": "majrooh gham — raat ke do bajay"
+ },
+ {
+  "series_number": 120,
+  "series_title": "Kalam #120: Gham",
+  "theme": "majrooh gham — barsati sham mein"
+ },
+ {
+  "series_number": 121,
+  "series_title": "Kalam #121: Hijr",
+  "theme": "aahista hijr — raat ke do bajay"
+ },
+ {
+  "series_number": 122,
+  "series_title": "Kalam #122: Hijr",
+  "theme": "aahista hijr — barsati sham mein"
+ },
+ {
+  "series_number": 123,
+  "series_title": "Kalam #123: Hijr",
+  "theme": "be-sahara hijr — raat ke do bajay"
+ },
+ {
+  "series_number": 124,
+  "series_title": "Kalam #124: Hijr",
+  "theme": "be-sahara hijr — barsati sham mein"
+ },
+ {
+  "series_number": 125,
+  "series_title": "Kalam #125: Hijr",
+  "theme": "gila-shikwa hijr — raat ke do bajay"
+ },
+ {
+  "series_number": 126,
+  "series_title": "Kalam #126: Hijr",
+  "theme": "gila-shikwa hijr — barsati sham mein"
+ },
+ {
+  "series_number": 127,
+  "series_title": "Kalam #127: Hijr",
+  "theme": "khafa hijr — raat ke do bajay"
+ },
+ {
+  "series_number": 128,
+  "series_title": "Kalam #128: Hijr",
+  "theme": "khafa hijr — barsati sham mein"
+ },
+ {
+  "series_number": 129,
+  "series_title": "Kalam #129: Hijr",
+  "theme": "shafaq-posh hijr — raat ke do bajay"
+ },
+ {
+  "series_number": 130,
+  "series_title": "Kalam #130: Hijr",
+  "theme": "shafaq-posh hijr — barsati sham mein"
+ },
+ {
+  "series_number": 131,
+  "series_title": "Kalam #131: Hijr",
+  "theme": "viran hijr — raat ke do bajay"
+ },
+ {
+  "series_number": 132,
+  "series_title": "Kalam #132: Hijr",
+  "theme": "viran hijr — barsati sham mein"
+ },
+ {
+  "series_number": 133,
+  "series_title": "Kalam #133: Hijr",
+  "theme": "narm hijr — raat ke do bajay"
+ },
+ {
+  "series_number": 134,
+  "series_title": "Kalam #134: Hijr",
+  "theme": "narm hijr — barsati sham mein"
+ },
+ {
+  "series_number": 135,
+  "series_title": "Kalam #135: Hijr",
+  "theme": "gehra hijr — raat ke do bajay"
+ },
+ {
+  "series_number": 136,
+  "series_title": "Kalam #136: Hijr",
+  "theme": "gehra hijr — barsati sham mein"
+ },
+ {
+  "series_number": 137,
+  "series_title": "Kalam #137: Hijr",
+  "theme": "be-khabar hijr — raat ke do bajay"
+ },
+ {
+  "series_number": 138,
+  "series_title": "Kalam #138: Hijr",
+  "theme": "be-khabar hijr — barsati sham mein"
+ },
+ {
+  "series_number": 139,
+  "series_title": "Kalam #139: Hijr",
+  "theme": "majrooh hijr — raat ke do bajay"
+ },
+ {
+  "series_number": 140,
+  "series_title": "Kalam #140: Hijr",
+  "theme": "majrooh hijr — barsati sham mein"
+ },
+ {
+  "series_number": 141,
+  "series_title": "Kalam #141: Wafa",
+  "theme": "aahista wafa — raat ke do bajay"
+ },
+ {
+  "series_number": 142,
+  "series_title": "Kalam #142: Wafa",
+  "theme": "aahista wafa — barsati sham mein"
+ },
+ {
+  "series_number": 143,
+  "series_title": "Kalam #143: Wafa",
+  "theme": "be-sahara wafa — raat ke do bajay"
+ },
+ {
+  "series_number": 144,
+  "series_title": "Kalam #144: Wafa",
+  "theme": "be-sahara wafa — barsati sham mein"
+ },
+ {
+  "series_number": 145,
+  "series_title": "Kalam #145: Wafa",
+  "theme": "gila-shikwa wafa — raat ke do bajay"
+ },
+ {
+  "series_number": 146,
+  "series_title": "Kalam #146: Wafa",
+  "theme": "gila-shikwa wafa — barsati sham mein"
+ },
+ {
+  "series_number": 147,
+  "series_title": "Kalam #147: Wafa",
+  "theme": "khafa wafa — raat ke do bajay"
+ },
+ {
+  "series_number": 148,
+  "series_title": "Kalam #148: Wafa",
+  "theme": "khafa wafa — barsati sham mein"
+ },
+ {
+  "series_number": 149,
+  "series_title": "Kalam #149: Wafa",
+  "theme": "shafaq-posh wafa — raat ke do bajay"
+ },
+ {
+  "series_number": 150,
+  "series_title": "Kalam #150: Wafa",
+  "theme": "shafaq-posh wafa — barsati sham mein"
+ },
+ {
+  "series_number": 151,
+  "series_title": "Kalam #151: Wafa",
+  "theme": "viran wafa — raat ke do bajay"
+ },
+ {
+  "series_number": 152,
+  "series_title": "Kalam #152: Wafa",
+  "theme": "viran wafa — barsati sham mein"
+ },
+ {
+  "series_number": 153,
+  "series_title": "Kalam #153: Wafa",
+  "theme": "narm wafa — raat ke do bajay"
+ },
+ {
+  "series_number": 154,
+  "series_title": "Kalam #154: Wafa",
+  "theme": "narm wafa — barsati sham mein"
+ },
+ {
+  "series_number": 155,
+  "series_title": "Kalam #155: Wafa",
+  "theme": "gehra wafa — raat ke do bajay"
+ },
+ {
+  "series_number": 156,
+  "series_title": "Kalam #156: Wafa",
+  "theme": "gehra wafa — barsati sham mein"
+ },
+ {
+  "series_number": 157,
+  "series_title": "Kalam #157: Wafa",
+  "theme": "be-khabar wafa — raat ke do bajay"
+ },
+ {
+  "series_number": 158,
+  "series_title": "Kalam #158: Wafa",
+  "theme": "be-khabar wafa — barsati sham mein"
+ },
+ {
+  "series_number": 159,
+  "series_title": "Kalam #159: Wafa",
+  "theme": "majrooh wafa — raat ke do bajay"
+ },
+ {
+  "series_number": 160,
+  "series_title": "Kalam #160: Wafa",
+  "theme": "majrooh wafa — barsati sham mein"
+ },
+ {
+  "series_number": 161,
+  "series_title": "Kalam #161: Dard",
+  "theme": "aahista dard — raat ke do bajay"
+ },
+ {
+  "series_number": 162,
+  "series_title": "Kalam #162: Dard",
+  "theme": "aahista dard — barsati sham mein"
+ },
+ {
+  "series_number": 163,
+  "series_title": "Kalam #163: Dard",
+  "theme": "be-sahara dard — raat ke do bajay"
+ },
+ {
+  "series_number": 164,
+  "series_title": "Kalam #164: Dard",
+  "theme": "be-sahara dard — barsati sham mein"
+ },
+ {
+  "series_number": 165,
+  "series_title": "Kalam #165: Dard",
+  "theme": "gila-shikwa dard — raat ke do bajay"
+ },
+ {
+  "series_number": 166,
+  "series_title": "Kalam #166: Dard",
+  "theme": "gila-shikwa dard — barsati sham mein"
+ },
+ {
+  "series_number": 167,
+  "series_title": "Kalam #167: Dard",
+  "theme": "khafa dard — raat ke do bajay"
+ },
+ {
+  "series_number": 168,
+  "series_title": "Kalam #168: Dard",
+  "theme": "khafa dard — barsati sham mein"
+ },
+ {
+  "series_number": 169,
+  "series_title": "Kalam #169: Dard",
+  "theme": "shafaq-posh dard — raat ke do bajay"
+ },
+ {
+  "series_number": 170,
+  "series_title": "Kalam #170: Dard",
+  "theme": "shafaq-posh dard — barsati sham mein"
+ },
+ {
+  "series_number": 171,
+  "series_title": "Kalam #171: Dard",
+  "theme": "viran dard — raat ke do bajay"
+ },
+ {
+  "series_number": 172,
+  "series_title": "Kalam #172: Dard",
+  "theme": "viran dard — barsati sham mein"
+ },
+ {
+  "series_number": 173,
+  "series_title": "Kalam #173: Dard",
+  "theme": "narm dard — raat ke do bajay"
+ },
+ {
+  "series_number": 174,
+  "series_title": "Kalam #174: Dard",
+  "theme": "narm dard — barsati sham mein"
+ },
+ {
+  "series_number": 175,
+  "series_title": "Kalam #175: Dard",
+  "theme": "gehra dard — raat ke do bajay"
+ },
+ {
+  "series_number": 176,
+  "series_title": "Kalam #176: Dard",
+  "theme": "gehra dard — barsati sham mein"
+ },
+ {
+  "series_number": 177,
+  "series_title": "Kalam #177: Dard",
+  "theme": "be-khabar dard — raat ke do bajay"
+ },
+ {
+  "series_number": 178,
+  "series_title": "Kalam #178: Dard",
+  "theme": "be-khabar dard — barsati sham mein"
+ },
+ {
+  "series_number": 179,
+  "series_title": "Kalam #179: Dard",
+  "theme": "majrooh dard — raat ke do bajay"
+ },
+ {
+  "series_number": 180,
+  "series_title": "Kalam #180: Dard",
+  "theme": "majrooh dard — barsati sham mein"
+ },
+ {
+  "series_number": 181,
+  "series_title": "Kalam #181: Sukoon",
+  "theme": "aahista sukoon — raat ke do bajay"
+ },
+ {
+  "series_number": 182,
+  "series_title": "Kalam #182: Sukoon",
+  "theme": "aahista sukoon — barsati sham mein"
+ },
+ {
+  "series_number": 183,
+  "series_title": "Kalam #183: Sukoon",
+  "theme": "be-sahara sukoon — raat ke do bajay"
+ },
+ {
+  "series_number": 184,
+  "series_title": "Kalam #184: Sukoon",
+  "theme": "be-sahara sukoon — barsati sham mein"
+ },
+ {
+  "series_number": 185,
+  "series_title": "Kalam #185: Sukoon",
+  "theme": "gila-shikwa sukoon — raat ke do bajay"
+ },
+ {
+  "series_number": 186,
+  "series_title": "Kalam #186: Sukoon",
+  "theme": "gila-shikwa sukoon — barsati sham mein"
+ },
+ {
+  "series_number": 187,
+  "series_title": "Kalam #187: Sukoon",
+  "theme": "khafa sukoon — raat ke do bajay"
+ },
+ {
+  "series_number": 188,
+  "series_title": "Kalam #188: Sukoon",
+  "theme": "khafa sukoon — barsati sham mein"
+ },
+ {
+  "series_number": 189,
+  "series_title": "Kalam #189: Sukoon",
+  "theme": "shafaq-posh sukoon — raat ke do bajay"
+ },
+ {
+  "series_number": 190,
+  "series_title": "Kalam #190: Sukoon",
+  "theme": "shafaq-posh sukoon — barsati sham mein"
+ },
+ {
+  "series_number": 191,
+  "series_title": "Kalam #191: Sukoon",
+  "theme": "viran sukoon — raat ke do bajay"
+ },
+ {
+  "series_number": 192,
+  "series_title": "Kalam #192: Sukoon",
+  "theme": "viran sukoon — barsati sham mein"
+ },
+ {
+  "series_number": 193,
+  "series_title": "Kalam #193: Sukoon",
+  "theme": "narm sukoon — raat ke do bajay"
+ },
+ {
+  "series_number": 194,
+  "series_title": "Kalam #194: Sukoon",
+  "theme": "narm sukoon — barsati sham mein"
+ },
+ {
+  "series_number": 195,
+  "series_title": "Kalam #195: Sukoon",
+  "theme": "gehra sukoon — raat ke do bajay"
+ },
+ {
+  "series_number": 196,
+  "series_title": "Kalam #196: Sukoon",
+  "theme": "gehra sukoon — barsati sham mein"
+ },
+ {
+  "series_number": 197,
+  "series_title": "Kalam #197: Sukoon",
+  "theme": "be-khabar sukoon — raat ke do bajay"
+ },
+ {
+  "series_number": 198,
+  "series_title": "Kalam #198: Sukoon",
+  "theme": "be-khabar sukoon — barsati sham mein"
+ },
+ {
+  "series_number": 199,
+  "series_title": "Kalam #199: Sukoon",
+  "theme": "majrooh sukoon — raat ke do bajay"
+ },
+ {
+  "series_number": 200,
+  "series_title": "Kalam #200: Sukoon",
+  "theme": "majrooh sukoon — barsati sham mein"
+ },
+ {
+  "series_number": 201,
+  "series_title": "Kalam #201: Umeed",
+  "theme": "aahista umeed — raat ke do bajay"
+ },
+ {
+  "series_number": 202,
+  "series_title": "Kalam #202: Umeed",
+  "theme": "aahista umeed — barsati sham mein"
+ },
+ {
+  "series_number": 203,
+  "series_title": "Kalam #203: Umeed",
+  "theme": "be-sahara umeed — raat ke do bajay"
+ },
+ {
+  "series_number": 204,
+  "series_title": "Kalam #204: Umeed",
+  "theme": "be-sahara umeed — barsati sham mein"
+ },
+ {
+  "series_number": 205,
+  "series_title": "Kalam #205: Umeed",
+  "theme": "gila-shikwa umeed — raat ke do bajay"
+ },
+ {
+  "series_number": 206,
+  "series_title": "Kalam #206: Umeed",
+  "theme": "gila-shikwa umeed — barsati sham mein"
+ },
+ {
+  "series_number": 207,
+  "series_title": "Kalam #207: Umeed",
+  "theme": "khafa umeed — raat ke do bajay"
+ },
+ {
+  "series_number": 208,
+  "series_title": "Kalam #208: Umeed",
+  "theme": "khafa umeed — barsati sham mein"
+ },
+ {
+  "series_number": 209,
+  "series_title": "Kalam #209: Umeed",
+  "theme": "shafaq-posh umeed — raat ke do bajay"
+ },
+ {
+  "series_number": 210,
+  "series_title": "Kalam #210: Umeed",
+  "theme": "shafaq-posh umeed — barsati sham mein"
+ },
+ {
+  "series_number": 211,
+  "series_title": "Kalam #211: Umeed",
+  "theme": "viran umeed — raat ke do bajay"
+ },
+ {
+  "series_number": 212,
+  "series_title": "Kalam #212: Umeed",
+  "theme": "viran umeed — barsati sham mein"
+ },
+ {
+  "series_number": 213,
+  "series_title": "Kalam #213: Umeed",
+  "theme": "narm umeed — raat ke do bajay"
+ },
+ {
+  "series_number": 214,
+  "series_title": "Kalam #214: Umeed",
+  "theme": "narm umeed — barsati sham mein"
+ },
+ {
+  "series_number": 215,
+  "series_title": "Kalam #215: Umeed",
+  "theme": "gehra umeed — raat ke do bajay"
+ },
+ {
+  "series_number": 216,
+  "series_title": "Kalam #216: Umeed",
+  "theme": "gehra umeed — barsati sham mein"
+ },
+ {
+  "series_number": 217,
+  "series_title": "Kalam #217: Umeed",
+  "theme": "be-khabar umeed — raat ke do bajay"
+ },
+ {
+  "series_number": 218,
+  "series_title": "Kalam #218: Umeed",
+  "theme": "be-khabar umeed — barsati sham mein"
+ },
+ {
+  "series_number": 219,
+  "series_title": "Kalam #219: Umeed",
+  "theme": "majrooh umeed — raat ke do bajay"
+ },
+ {
+  "series_number": 220,
+  "series_title": "Kalam #220: Umeed",
+  "theme": "majrooh umeed — barsati sham mein"
+ },
+ {
+  "series_number": 221,
+  "series_title": "Kalam #221: Khamoshi",
+  "theme": "aahista khamoshi — raat ke do bajay"
+ },
+ {
+  "series_number": 222,
+  "series_title": "Kalam #222: Khamoshi",
+  "theme": "aahista khamoshi — barsati sham mein"
+ },
+ {
+  "series_number": 223,
+  "series_title": "Kalam #223: Khamoshi",
+  "theme": "be-sahara khamoshi — raat ke do bajay"
+ },
+ {
+  "series_number": 224,
+  "series_title": "Kalam #224: Khamoshi",
+  "theme": "be-sahara khamoshi — barsati sham mein"
+ },
+ {
+  "series_number": 225,
+  "series_title": "Kalam #225: Khamoshi",
+  "theme": "gila-shikwa khamoshi — raat ke do bajay"
+ },
+ {
+  "series_number": 226,
+  "series_title": "Kalam #226: Khamoshi",
+  "theme": "gila-shikwa khamoshi — barsati sham mein"
+ },
+ {
+  "series_number": 227,
+  "series_title": "Kalam #227: Khamoshi",
+  "theme": "khafa khamoshi — raat ke do bajay"
+ },
+ {
+  "series_number": 228,
+  "series_title": "Kalam #228: Khamoshi",
+  "theme": "khafa khamoshi — barsati sham mein"
+ },
+ {
+  "series_number": 229,
+  "series_title": "Kalam #229: Khamoshi",
+  "theme": "shafaq-posh khamoshi — raat ke do bajay"
+ },
+ {
+  "series_number": 230,
+  "series_title": "Kalam #230: Khamoshi",
+  "theme": "shafaq-posh khamoshi — barsati sham mein"
+ },
+ {
+  "series_number": 231,
+  "series_title": "Kalam #231: Khamoshi",
+  "theme": "viran khamoshi — raat ke do bajay"
+ },
+ {
+  "series_number": 232,
+  "series_title": "Kalam #232: Khamoshi",
+  "theme": "viran khamoshi — barsati sham mein"
+ },
+ {
+  "series_number": 233,
+  "series_title": "Kalam #233: Khamoshi",
+  "theme": "narm khamoshi — raat ke do bajay"
+ },
+ {
+  "series_number": 234,
+  "series_title": "Kalam #234: Khamoshi",
+  "theme": "narm khamoshi — barsati sham mein"
+ },
+ {
+  "series_number": 235,
+  "series_title": "Kalam #235: Khamoshi",
+  "theme": "gehra khamoshi — raat ke do bajay"
+ },
+ {
+  "series_number": 236,
+  "series_title": "Kalam #236: Khamoshi",
+  "theme": "gehra khamoshi — barsati sham mein"
+ },
+ {
+  "series_number": 237,
+  "series_title": "Kalam #237: Khamoshi",
+  "theme": "be-khabar khamoshi — raat ke do bajay"
+ },
+ {
+  "series_number": 238,
+  "series_title": "Kalam #238: Khamoshi",
+  "theme": "be-khabar khamoshi — barsati sham mein"
+ },
+ {
+  "series_number": 239,
+  "series_title": "Kalam #239: Khamoshi",
+  "theme": "majrooh khamoshi — raat ke do bajay"
+ },
+ {
+  "series_number": 240,
+  "series_title": "Kalam #240: Khamoshi",
+  "theme": "majrooh khamoshi — barsati sham mein"
+ },
+ {
+  "series_number": 241,
+  "series_title": "Kalam #241: Dua",
+  "theme": "aahista dua — raat ke do bajay"
+ },
+ {
+  "series_number": 242,
+  "series_title": "Kalam #242: Dua",
+  "theme": "aahista dua — barsati sham mein"
+ },
+ {
+  "series_number": 243,
+  "series_title": "Kalam #243: Dua",
+  "theme": "be-sahara dua — raat ke do bajay"
+ },
+ {
+  "series_number": 244,
+  "series_title": "Kalam #244: Dua",
+  "theme": "be-sahara dua — barsati sham mein"
+ },
+ {
+  "series_number": 245,
+  "series_title": "Kalam #245: Dua",
+  "theme": "gila-shikwa dua — raat ke do bajay"
+ },
+ {
+  "series_number": 246,
+  "series_title": "Kalam #246: Dua",
+  "theme": "gila-shikwa dua — barsati sham mein"
+ },
+ {
+  "series_number": 247,
+  "series_title": "Kalam #247: Dua",
+  "theme": "khafa dua — raat ke do bajay"
+ },
+ {
+  "series_number": 248,
+  "series_title": "Kalam #248: Dua",
+  "theme": "khafa dua — barsati sham mein"
+ },
+ {
+  "series_number": 249,
+  "series_title": "Kalam #249: Dua",
+  "theme": "shafaq-posh dua — raat ke do bajay"
+ },
+ {
+  "series_number": 250,
+  "series_title": "Kalam #250: Dua",
+  "theme": "shafaq-posh dua — barsati sham mein"
+ },
+ {
+  "series_number": 251,
+  "series_title": "Kalam #251: Dua",
+  "theme": "viran dua — raat ke do bajay"
+ },
+ {
+  "series_number": 252,
+  "series_title": "Kalam #252: Dua",
+  "theme": "viran dua — barsati sham mein"
+ },
+ {
+  "series_number": 253,
+  "series_title": "Kalam #253: Dua",
+  "theme": "narm dua — raat ke do bajay"
+ },
+ {
+  "series_number": 254,
+  "series_title": "Kalam #254: Dua",
+  "theme": "narm dua — barsati sham mein"
+ },
+ {
+  "series_number": 255,
+  "series_title": "Kalam #255: Dua",
+  "theme": "gehra dua — raat ke do bajay"
+ },
+ {
+  "series_number": 256,
+  "series_title": "Kalam #256: Dua",
+  "theme": "gehra dua — barsati sham mein"
+ },
+ {
+  "series_number": 257,
+  "series_title": "Kalam #257: Dua",
+  "theme": "be-khabar dua — raat ke do bajay"
+ },
+ {
+  "series_number": 258,
+  "series_title": "Kalam #258: Dua",
+  "theme": "be-khabar dua — barsati sham mein"
+ },
+ {
+  "series_number": 259,
+  "series_title": "Kalam #259: Dua",
+  "theme": "majrooh dua — raat ke do bajay"
+ },
+ {
+  "series_number": 260,
+  "series_title": "Kalam #260: Dua",
+  "theme": "majrooh dua — barsati sham mein"
+ },
+ {
+  "series_number": 261,
+  "series_title": "Kalam #261: Safar",
+  "theme": "aahista safar — raat ke do bajay"
+ },
+ {
+  "series_number": 262,
+  "series_title": "Kalam #262: Safar",
+  "theme": "aahista safar — barsati sham mein"
+ },
+ {
+  "series_number": 263,
+  "series_title": "Kalam #263: Safar",
+  "theme": "be-sahara safar — raat ke do bajay"
+ },
+ {
+  "series_number": 264,
+  "series_title": "Kalam #264: Safar",
+  "theme": "be-sahara safar — barsati sham mein"
+ },
+ {
+  "series_number": 265,
+  "series_title": "Kalam #265: Safar",
+  "theme": "gila-shikwa safar — raat ke do bajay"
+ },
+ {
+  "series_number": 266,
+  "series_title": "Kalam #266: Safar",
+  "theme": "gila-shikwa safar — barsati sham mein"
+ },
+ {
+  "series_number": 267,
+  "series_title": "Kalam #267: Safar",
+  "theme": "khafa safar — raat ke do bajay"
+ },
+ {
+  "series_number": 268,
+  "series_title": "Kalam #268: Safar",
+  "theme": "khafa safar — barsati sham mein"
+ },
+ {
+  "series_number": 269,
+  "series_title": "Kalam #269: Safar",
+  "theme": "shafaq-posh safar — raat ke do bajay"
+ },
+ {
+  "series_number": 270,
+  "series_title": "Kalam #270: Safar",
+  "theme": "shafaq-posh safar — barsati sham mein"
+ },
+ {
+  "series_number": 271,
+  "series_title": "Kalam #271: Safar",
+  "theme": "viran safar — raat ke do bajay"
+ },
+ {
+  "series_number": 272,
+  "series_title": "Kalam #272: Safar",
+  "theme": "viran safar — barsati sham mein"
+ },
+ {
+  "series_number": 273,
+  "series_title": "Kalam #273: Safar",
+  "theme": "narm safar — raat ke do bajay"
+ },
+ {
+  "series_number": 274,
+  "series_title": "Kalam #274: Safar",
+  "theme": "narm safar — barsati sham mein"
+ },
+ {
+  "series_number": 275,
+  "series_title": "Kalam #275: Safar",
+  "theme": "gehra safar — raat ke do bajay"
+ },
+ {
+  "series_number": 276,
+  "series_title": "Kalam #276: Safar",
+  "theme": "gehra safar — barsati sham mein"
+ },
+ {
+  "series_number": 277,
+  "series_title": "Kalam #277: Safar",
+  "theme": "be-khabar safar — raat ke do bajay"
+ },
+ {
+  "series_number": 278,
+  "series_title": "Kalam #278: Safar",
+  "theme": "be-khabar safar — barsati sham mein"
+ },
+ {
+  "series_number": 279,
+  "series_title": "Kalam #279: Safar",
+  "theme": "majrooh safar — raat ke do bajay"
+ },
+ {
+  "series_number": 280,
+  "series_title": "Kalam #280: Safar",
+  "theme": "majrooh safar — barsati sham mein"
+ },
+ {
+  "series_number": 281,
+  "series_title": "Kalam #281: Maut",
+  "theme": "aahista maut — raat ke do bajay"
+ },
+ {
+  "series_number": 282,
+  "series_title": "Kalam #282: Maut",
+  "theme": "aahista maut — barsati sham mein"
+ },
+ {
+  "series_number": 283,
+  "series_title": "Kalam #283: Maut",
+  "theme": "be-sahara maut — raat ke do bajay"
+ },
+ {
+  "series_number": 284,
+  "series_title": "Kalam #284: Maut",
+  "theme": "be-sahara maut — barsati sham mein"
+ },
+ {
+  "series_number": 285,
+  "series_title": "Kalam #285: Maut",
+  "theme": "gila-shikwa maut — raat ke do bajay"
+ },
+ {
+  "series_number": 286,
+  "series_title": "Kalam #286: Maut",
+  "theme": "gila-shikwa maut — barsati sham mein"
+ },
+ {
+  "series_number": 287,
+  "series_title": "Kalam #287: Maut",
+  "theme": "khafa maut — raat ke do bajay"
+ },
+ {
+  "series_number": 288,
+  "series_title": "Kalam #288: Maut",
+  "theme": "khafa maut — barsati sham mein"
+ },
+ {
+  "series_number": 289,
+  "series_title": "Kalam #289: Maut",
+  "theme": "shafaq-posh maut — raat ke do bajay"
+ },
+ {
+  "series_number": 290,
+  "series_title": "Kalam #290: Maut",
+  "theme": "shafaq-posh maut — barsati sham mein"
+ },
+ {
+  "series_number": 291,
+  "series_title": "Kalam #291: Maut",
+  "theme": "viran maut — raat ke do bajay"
+ },
+ {
+  "series_number": 292,
+  "series_title": "Kalam #292: Maut",
+  "theme": "viran maut — barsati sham mein"
+ },
+ {
+  "series_number": 293,
+  "series_title": "Kalam #293: Maut",
+  "theme": "narm maut — raat ke do bajay"
+ },
+ {
+  "series_number": 294,
+  "series_title": "Kalam #294: Maut",
+  "theme": "narm maut — barsati sham mein"
+ },
+ {
+  "series_number": 295,
+  "series_title": "Kalam #295: Maut",
+  "theme": "gehra maut — raat ke do bajay"
+ },
+ {
+  "series_number": 296,
+  "series_title": "Kalam #296: Maut",
+  "theme": "gehra maut — barsati sham mein"
+ },
+ {
+  "series_number": 297,
+  "series_title": "Kalam #297: Maut",
+  "theme": "be-khabar maut — raat ke do bajay"
+ },
+ {
+  "series_number": 298,
+  "series_title": "Kalam #298: Maut",
+  "theme": "be-khabar maut — barsati sham mein"
+ },
+ {
+  "series_number": 299,
+  "series_title": "Kalam #299: Maut",
+  "theme": "majrooh maut — raat ke do bajay"
+ },
+ {
+  "series_number": 300,
+  "series_title": "Kalam #300: Maut",
+  "theme": "majrooh maut — barsati sham mein"
+ },
+ {
+  "series_number": 301,
+  "series_title": "Kalam #301: Zindagi",
+  "theme": "aahista zindagi — raat ke do bajay"
+ },
+ {
+  "series_number": 302,
+  "series_title": "Kalam #302: Zindagi",
+  "theme": "aahista zindagi — barsati sham mein"
+ },
+ {
+  "series_number": 303,
+  "series_title": "Kalam #303: Zindagi",
+  "theme": "be-sahara zindagi — raat ke do bajay"
+ },
+ {
+  "series_number": 304,
+  "series_title": "Kalam #304: Zindagi",
+  "theme": "be-sahara zindagi — barsati sham mein"
+ },
+ {
+  "series_number": 305,
+  "series_title": "Kalam #305: Zindagi",
+  "theme": "gila-shikwa zindagi — raat ke do bajay"
+ },
+ {
+  "series_number": 306,
+  "series_title": "Kalam #306: Zindagi",
+  "theme": "gila-shikwa zindagi — barsati sham mein"
+ },
+ {
+  "series_number": 307,
+  "series_title": "Kalam #307: Zindagi",
+  "theme": "khafa zindagi — raat ke do bajay"
+ },
+ {
+  "series_number": 308,
+  "series_title": "Kalam #308: Zindagi",
+  "theme": "khafa zindagi — barsati sham mein"
+ },
+ {
+  "series_number": 309,
+  "series_title": "Kalam #309: Zindagi",
+  "theme": "shafaq-posh zindagi — raat ke do bajay"
+ },
+ {
+  "series_number": 310,
+  "series_title": "Kalam #310: Zindagi",
+  "theme": "shafaq-posh zindagi — barsati sham mein"
+ },
+ {
+  "series_number": 311,
+  "series_title": "Kalam #311: Zindagi",
+  "theme": "viran zindagi — raat ke do bajay"
+ },
+ {
+  "series_number": 312,
+  "series_title": "Kalam #312: Zindagi",
+  "theme": "viran zindagi — barsati sham mein"
+ },
+ {
+  "series_number": 313,
+  "series_title": "Kalam #313: Zindagi",
+  "theme": "narm zindagi — raat ke do bajay"
+ },
+ {
+  "series_number": 314,
+  "series_title": "Kalam #314: Zindagi",
+  "theme": "narm zindagi — barsati sham mein"
+ },
+ {
+  "series_number": 315,
+  "series_title": "Kalam #315: Zindagi",
+  "theme": "gehra zindagi — raat ke do bajay"
+ },
+ {
+  "series_number": 316,
+  "series_title": "Kalam #316: Zindagi",
+  "theme": "gehra zindagi — barsati sham mein"
+ },
+ {
+  "series_number": 317,
+  "series_title": "Kalam #317: Zindagi",
+  "theme": "be-khabar zindagi — raat ke do bajay"
+ },
+ {
+  "series_number": 318,
+  "series_title": "Kalam #318: Zindagi",
+  "theme": "be-khabar zindagi — barsati sham mein"
+ },
+ {
+  "series_number": 319,
+  "series_title": "Kalam #319: Zindagi",
+  "theme": "majrooh zindagi — raat ke do bajay"
+ },
+ {
+  "series_number": 320,
+  "series_title": "Kalam #320: Zindagi",
+  "theme": "majrooh zindagi — barsati sham mein"
+ },
+ {
+  "series_number": 321,
+  "series_title": "Kalam #321: Waqt",
+  "theme": "aahista waqt — raat ke do bajay"
+ },
+ {
+  "series_number": 322,
+  "series_title": "Kalam #322: Waqt",
+  "theme": "aahista waqt — barsati sham mein"
+ },
+ {
+  "series_number": 323,
+  "series_title": "Kalam #323: Waqt",
+  "theme": "be-sahara waqt — raat ke do bajay"
+ },
+ {
+  "series_number": 324,
+  "series_title": "Kalam #324: Waqt",
+  "theme": "be-sahara waqt — barsati sham mein"
+ },
+ {
+  "series_number": 325,
+  "series_title": "Kalam #325: Waqt",
+  "theme": "gila-shikwa waqt — raat ke do bajay"
+ },
+ {
+  "series_number": 326,
+  "series_title": "Kalam #326: Waqt",
+  "theme": "gila-shikwa waqt — barsati sham mein"
+ },
+ {
+  "series_number": 327,
+  "series_title": "Kalam #327: Waqt",
+  "theme": "khafa waqt — raat ke do bajay"
+ },
+ {
+  "series_number": 328,
+  "series_title": "Kalam #328: Waqt",
+  "theme": "khafa waqt — barsati sham mein"
+ },
+ {
+  "series_number": 329,
+  "series_title": "Kalam #329: Waqt",
+  "theme": "shafaq-posh waqt — raat ke do bajay"
+ },
+ {
+  "series_number": 330,
+  "series_title": "Kalam #330: Waqt",
+  "theme": "shafaq-posh waqt — barsati sham mein"
+ },
+ {
+  "series_number": 331,
+  "series_title": "Kalam #331: Waqt",
+  "theme": "viran waqt — raat ke do bajay"
+ },
+ {
+  "series_number": 332,
+  "series_title": "Kalam #332: Waqt",
+  "theme": "viran waqt — barsati sham mein"
+ },
+ {
+  "series_number": 333,
+  "series_title": "Kalam #333: Waqt",
+  "theme": "narm waqt — raat ke do bajay"
+ },
+ {
+  "series_number": 334,
+  "series_title": "Kalam #334: Waqt",
+  "theme": "narm waqt — barsati sham mein"
+ },
+ {
+  "series_number": 335,
+  "series_title": "Kalam #335: Waqt",
+  "theme": "gehra waqt — raat ke do bajay"
+ },
+ {
+  "series_number": 336,
+  "series_title": "Kalam #336: Waqt",
+  "theme": "gehra waqt — barsati sham mein"
+ },
+ {
+  "series_number": 337,
+  "series_title": "Kalam #337: Waqt",
+  "theme": "be-khabar waqt — raat ke do bajay"
+ },
+ {
+  "series_number": 338,
+  "series_title": "Kalam #338: Waqt",
+  "theme": "be-khabar waqt — barsati sham mein"
+ },
+ {
+  "series_number": 339,
+  "series_title": "Kalam #339: Waqt",
+  "theme": "majrooh waqt — raat ke do bajay"
+ },
+ {
+  "series_number": 340,
+  "series_title": "Kalam #340: Waqt",
+  "theme": "majrooh waqt — barsati sham mein"
+ },
+ {
+  "series_number": 341,
+  "series_title": "Kalam #341: Mazi",
+  "theme": "aahista mazi — raat ke do bajay"
+ },
+ {
+  "series_number": 342,
+  "series_title": "Kalam #342: Mazi",
+  "theme": "aahista mazi — barsati sham mein"
+ },
+ {
+  "series_number": 343,
+  "series_title": "Kalam #343: Mazi",
+  "theme": "be-sahara mazi — raat ke do bajay"
+ },
+ {
+  "series_number": 344,
+  "series_title": "Kalam #344: Mazi",
+  "theme": "be-sahara mazi — barsati sham mein"
+ },
+ {
+  "series_number": 345,
+  "series_title": "Kalam #345: Mazi",
+  "theme": "gila-shikwa mazi — raat ke do bajay"
+ },
+ {
+  "series_number": 346,
+  "series_title": "Kalam #346: Mazi",
+  "theme": "gila-shikwa mazi — barsati sham mein"
+ },
+ {
+  "series_number": 347,
+  "series_title": "Kalam #347: Mazi",
+  "theme": "khafa mazi — raat ke do bajay"
+ },
+ {
+  "series_number": 348,
+  "series_title": "Kalam #348: Mazi",
+  "theme": "khafa mazi — barsati sham mein"
+ },
+ {
+  "series_number": 349,
+  "series_title": "Kalam #349: Mazi",
+  "theme": "shafaq-posh mazi — raat ke do bajay"
+ },
+ {
+  "series_number": 350,
+  "series_title": "Kalam #350: Mazi",
+  "theme": "shafaq-posh mazi — barsati sham mein"
+ },
+ {
+  "series_number": 351,
+  "series_title": "Kalam #351: Mazi",
+  "theme": "viran mazi — raat ke do bajay"
+ },
+ {
+  "series_number": 352,
+  "series_title": "Kalam #352: Mazi",
+  "theme": "viran mazi — barsati sham mein"
+ },
+ {
+  "series_number": 353,
+  "series_title": "Kalam #353: Mazi",
+  "theme": "narm mazi — raat ke do bajay"
+ },
+ {
+  "series_number": 354,
+  "series_title": "Kalam #354: Mazi",
+  "theme": "narm mazi — barsati sham mein"
+ },
+ {
+  "series_number": 355,
+  "series_title": "Kalam #355: Mazi",
+  "theme": "gehra mazi — raat ke do bajay"
+ },
+ {
+  "series_number": 356,
+  "series_title": "Kalam #356: Mazi",
+  "theme": "gehra mazi — barsati sham mein"
+ },
+ {
+  "series_number": 357,
+  "series_title": "Kalam #357: Mazi",
+  "theme": "be-khabar mazi — raat ke do bajay"
+ },
+ {
+  "series_number": 358,
+  "series_title": "Kalam #358: Mazi",
+  "theme": "be-khabar mazi — barsati sham mein"
+ },
+ {
+  "series_number": 359,
+  "series_title": "Kalam #359: Mazi",
+  "theme": "majrooh mazi — raat ke do bajay"
+ },
+ {
+  "series_number": 360,
+  "series_title": "Kalam #360: Mazi",
+  "theme": "majrooh mazi — barsati sham mein"
+ },
+ {
+  "series_number": 361,
+  "series_title": "Kalam #361: Mohabbat",
+  "theme": "aahista mohabbat — raat ke do bajay"
+ },
+ {
+  "series_number": 362,
+  "series_title": "Kalam #362: Mohabbat",
+  "theme": "aahista mohabbat — barsati sham mein"
+ },
+ {
+  "series_number": 363,
+  "series_title": "Kalam #363: Mohabbat",
+  "theme": "be-sahara mohabbat — raat ke do bajay"
+ },
+ {
+  "series_number": 364,
+  "series_title": "Kalam #364: Mohabbat",
+  "theme": "be-sahara mohabbat — barsati sham mein"
+ },
+ {
+  "series_number": 365,
+  "series_title": "Kalam #365: Mohabbat",
+  "theme": "gila-shikwa mohabbat — raat ke do bajay"
+ },
+ {
+  "series_number": 366,
+  "series_title": "Kalam #366: Mohabbat",
+  "theme": "gila-shikwa mohabbat — barsati sham mein"
+ },
+ {
+  "series_number": 367,
+  "series_title": "Kalam #367: Mohabbat",
+  "theme": "khafa mohabbat — raat ke do bajay"
+ },
+ {
+  "series_number": 368,
+  "series_title": "Kalam #368: Mohabbat",
+  "theme": "khafa mohabbat — barsati sham mein"
+ },
+ {
+  "series_number": 369,
+  "series_title": "Kalam #369: Mohabbat",
+  "theme": "shafaq-posh mohabbat — raat ke do bajay"
+ },
+ {
+  "series_number": 370,
+  "series_title": "Kalam #370: Mohabbat",
+  "theme": "shafaq-posh mohabbat — barsati sham mein"
+ },
+ {
+  "series_number": 371,
+  "series_title": "Kalam #371: Mohabbat",
+  "theme": "viran mohabbat — raat ke do bajay"
+ },
+ {
+  "series_number": 372,
+  "series_title": "Kalam #372: Mohabbat",
+  "theme": "viran mohabbat — barsati sham mein"
+ },
+ {
+  "series_number": 373,
+  "series_title": "Kalam #373: Mohabbat",
+  "theme": "narm mohabbat — raat ke do bajay"
+ },
+ {
+  "series_number": 374,
+  "series_title": "Kalam #374: Mohabbat",
+  "theme": "narm mohabbat — barsati sham mein"
+ },
+ {
+  "series_number": 375,
+  "series_title": "Kalam #375: Mohabbat",
+  "theme": "gehra mohabbat — raat ke do bajay"
+ },
+ {
+  "series_number": 376,
+  "series_title": "Kalam #376: Mohabbat",
+  "theme": "gehra mohabbat — barsati sham mein"
+ },
+ {
+  "series_number": 377,
+  "series_title": "Kalam #377: Mohabbat",
+  "theme": "be-khabar mohabbat — raat ke do bajay"
+ },
+ {
+  "series_number": 378,
+  "series_title": "Kalam #378: Mohabbat",
+  "theme": "be-khabar mohabbat — barsati sham mein"
+ },
+ {
+  "series_number": 379,
+  "series_title": "Kalam #379: Mohabbat",
+  "theme": "majrooh mohabbat — raat ke do bajay"
+ },
+ {
+  "series_number": 380,
+  "series_title": "Kalam #380: Mohabbat",
+  "theme": "majrooh mohabbat — barsati sham mein"
+ },
+ {
+  "series_number": 381,
+  "series_title": "Kalam #381: Aashiqui",
+  "theme": "aahista aashiqui — raat ke do bajay"
+ },
+ {
+  "series_number": 382,
+  "series_title": "Kalam #382: Aashiqui",
+  "theme": "aahista aashiqui — barsati sham mein"
+ },
+ {
+  "series_number": 383,
+  "series_title": "Kalam #383: Aashiqui",
+  "theme": "be-sahara aashiqui — raat ke do bajay"
+ },
+ {
+  "series_number": 384,
+  "series_title": "Kalam #384: Aashiqui",
+  "theme": "be-sahara aashiqui — barsati sham mein"
+ },
+ {
+  "series_number": 385,
+  "series_title": "Kalam #385: Aashiqui",
+  "theme": "gila-shikwa aashiqui — raat ke do bajay"
+ },
+ {
+  "series_number": 386,
+  "series_title": "Kalam #386: Aashiqui",
+  "theme": "gila-shikwa aashiqui — barsati sham mein"
+ },
+ {
+  "series_number": 387,
+  "series_title": "Kalam #387: Aashiqui",
+  "theme": "khafa aashiqui — raat ke do bajay"
+ },
+ {
+  "series_number": 388,
+  "series_title": "Kalam #388: Aashiqui",
+  "theme": "khafa aashiqui — barsati sham mein"
+ },
+ {
+  "series_number": 389,
+  "series_title": "Kalam #389: Aashiqui",
+  "theme": "shafaq-posh aashiqui — raat ke do bajay"
+ },
+ {
+  "series_number": 390,
+  "series_title": "Kalam #390: Aashiqui",
+  "theme": "shafaq-posh aashiqui — barsati sham mein"
+ },
+ {
+  "series_number": 391,
+  "series_title": "Kalam #391: Aashiqui",
+  "theme": "viran aashiqui — raat ke do bajay"
+ },
+ {
+  "series_number": 392,
+  "series_title": "Kalam #392: Aashiqui",
+  "theme": "viran aashiqui — barsati sham mein"
+ },
+ {
+  "series_number": 393,
+  "series_title": "Kalam #393: Aashiqui",
+  "theme": "narm aashiqui — raat ke do bajay"
+ },
+ {
+  "series_number": 394,
+  "series_title": "Kalam #394: Aashiqui",
+  "theme": "narm aashiqui — barsati sham mein"
+ },
+ {
+  "series_number": 395,
+  "series_title": "Kalam #395: Aashiqui",
+  "theme": "gehra aashiqui — raat ke do bajay"
+ },
+ {
+  "series_number": 396,
+  "series_title": "Kalam #396: Aashiqui",
+  "theme": "gehra aashiqui — barsati sham mein"
+ },
+ {
+  "series_number": 397,
+  "series_title": "Kalam #397: Aashiqui",
+  "theme": "be-khabar aashiqui — raat ke do bajay"
+ },
+ {
+  "series_number": 398,
+  "series_title": "Kalam #398: Aashiqui",
+  "theme": "be-khabar aashiqui — barsati sham mein"
+ },
+ {
+  "series_number": 399,
+  "series_title": "Kalam #399: Aashiqui",
+  "theme": "majrooh aashiqui — raat ke do bajay"
+ },
+ {
+  "series_number": 400,
+  "series_title": "Kalam #400: Aashiqui",
+  "theme": "majrooh aashiqui — barsati sham mein"
+ },
+ {
+  "series_number": 401,
+  "series_title": "Kalam #401: Sheher",
+  "theme": "aahista sheher — raat ke do bajay"
+ },
+ {
+  "series_number": 402,
+  "series_title": "Kalam #402: Sheher",
+  "theme": "aahista sheher — barsati sham mein"
+ },
+ {
+  "series_number": 403,
+  "series_title": "Kalam #403: Sheher",
+  "theme": "be-sahara sheher — raat ke do bajay"
+ },
+ {
+  "series_number": 404,
+  "series_title": "Kalam #404: Sheher",
+  "theme": "be-sahara sheher — barsati sham mein"
+ },
+ {
+  "series_number": 405,
+  "series_title": "Kalam #405: Sheher",
+  "theme": "gila-shikwa sheher — raat ke do bajay"
+ },
+ {
+  "series_number": 406,
+  "series_title": "Kalam #406: Sheher",
+  "theme": "gila-shikwa sheher — barsati sham mein"
+ },
+ {
+  "series_number": 407,
+  "series_title": "Kalam #407: Sheher",
+  "theme": "khafa sheher — raat ke do bajay"
+ },
+ {
+  "series_number": 408,
+  "series_title": "Kalam #408: Sheher",
+  "theme": "khafa sheher — barsati sham mein"
+ },
+ {
+  "series_number": 409,
+  "series_title": "Kalam #409: Sheher",
+  "theme": "shafaq-posh sheher — raat ke do bajay"
+ },
+ {
+  "series_number": 410,
+  "series_title": "Kalam #410: Sheher",
+  "theme": "shafaq-posh sheher — barsati sham mein"
+ },
+ {
+  "series_number": 411,
+  "series_title": "Kalam #411: Sheher",
+  "theme": "viran sheher — raat ke do bajay"
+ },
+ {
+  "series_number": 412,
+  "series_title": "Kalam #412: Sheher",
+  "theme": "viran sheher — barsati sham mein"
+ },
+ {
+  "series_number": 413,
+  "series_title": "Kalam #413: Sheher",
+  "theme": "narm sheher — raat ke do bajay"
+ },
+ {
+  "series_number": 414,
+  "series_title": "Kalam #414: Sheher",
+  "theme": "narm sheher — barsati sham mein"
+ },
+ {
+  "series_number": 415,
+  "series_title": "Kalam #415: Sheher",
+  "theme": "gehra sheher — raat ke do bajay"
+ },
+ {
+  "series_number": 416,
+  "series_title": "Kalam #416: Sheher",
+  "theme": "gehra sheher — barsati sham mein"
+ },
+ {
+  "series_number": 417,
+  "series_title": "Kalam #417: Sheher",
+  "theme": "be-khabar sheher — raat ke do bajay"
+ },
+ {
+  "series_number": 418,
+  "series_title": "Kalam #418: Sheher",
+  "theme": "be-khabar sheher — barsati sham mein"
+ },
+ {
+  "series_number": 419,
+  "series_title": "Kalam #419: Sheher",
+  "theme": "majrooh sheher — raat ke do bajay"
+ },
+ {
+  "series_number": 420,
+  "series_title": "Kalam #420: Sheher",
+  "theme": "majrooh sheher — barsati sham mein"
+ },
+ {
+  "series_number": 421,
+  "series_title": "Kalam #421: Raat",
+  "theme": "aahista raat — raat ke do bajay"
+ },
+ {
+  "series_number": 422,
+  "series_title": "Kalam #422: Raat",
+  "theme": "aahista raat — barsati sham mein"
+ },
+ {
+  "series_number": 423,
+  "series_title": "Kalam #423: Raat",
+  "theme": "be-sahara raat — raat ke do bajay"
+ },
+ {
+  "series_number": 424,
+  "series_title": "Kalam #424: Raat",
+  "theme": "be-sahara raat — barsati sham mein"
+ },
+ {
+  "series_number": 425,
+  "series_title": "Kalam #425: Raat",
+  "theme": "gila-shikwa raat — raat ke do bajay"
+ },
+ {
+  "series_number": 426,
+  "series_title": "Kalam #426: Raat",
+  "theme": "gila-shikwa raat — barsati sham mein"
+ },
+ {
+  "series_number": 427,
+  "series_title": "Kalam #427: Raat",
+  "theme": "khafa raat — raat ke do bajay"
+ },
+ {
+  "series_number": 428,
+  "series_title": "Kalam #428: Raat",
+  "theme": "khafa raat — barsati sham mein"
+ },
+ {
+  "series_number": 429,
+  "series_title": "Kalam #429: Raat",
+  "theme": "shafaq-posh raat — raat ke do bajay"
+ },
+ {
+  "series_number": 430,
+  "series_title": "Kalam #430: Raat",
+  "theme": "shafaq-posh raat — barsati sham mein"
+ },
+ {
+  "series_number": 431,
+  "series_title": "Kalam #431: Raat",
+  "theme": "viran raat — raat ke do bajay"
+ },
+ {
+  "series_number": 432,
+  "series_title": "Kalam #432: Raat",
+  "theme": "viran raat — barsati sham mein"
+ },
+ {
+  "series_number": 433,
+  "series_title": "Kalam #433: Raat",
+  "theme": "narm raat — raat ke do bajay"
+ },
+ {
+  "series_number": 434,
+  "series_title": "Kalam #434: Raat",
+  "theme": "narm raat — barsati sham mein"
+ },
+ {
+  "series_number": 435,
+  "series_title": "Kalam #435: Raat",
+  "theme": "gehra raat — raat ke do bajay"
+ },
+ {
+  "series_number": 436,
+  "series_title": "Kalam #436: Raat",
+  "theme": "gehra raat — barsati sham mein"
+ },
+ {
+  "series_number": 437,
+  "series_title": "Kalam #437: Raat",
+  "theme": "be-khabar raat — raat ke do bajay"
+ },
+ {
+  "series_number": 438,
+  "series_title": "Kalam #438: Raat",
+  "theme": "be-khabar raat — barsati sham mein"
+ },
+ {
+  "series_number": 439,
+  "series_title": "Kalam #439: Raat",
+  "theme": "majrooh raat — raat ke do bajay"
+ },
+ {
+  "series_number": 440,
+  "series_title": "Kalam #440: Raat",
+  "theme": "majrooh raat — barsati sham mein"
+ },
+ {
+  "series_number": 441,
+  "series_title": "Kalam #441: Barsaat",
+  "theme": "aahista barsaat — raat ke do bajay"
+ },
+ {
+  "series_number": 442,
+  "series_title": "Kalam #442: Barsaat",
+  "theme": "aahista barsaat — barsati sham mein"
+ },
+ {
+  "series_number": 443,
+  "series_title": "Kalam #443: Barsaat",
+  "theme": "be-sahara barsaat — raat ke do bajay"
+ },
+ {
+  "series_number": 444,
+  "series_title": "Kalam #444: Barsaat",
+  "theme": "be-sahara barsaat — barsati sham mein"
+ },
+ {
+  "series_number": 445,
+  "series_title": "Kalam #445: Barsaat",
+  "theme": "gila-shikwa barsaat — raat ke do bajay"
+ },
+ {
+  "series_number": 446,
+  "series_title": "Kalam #446: Barsaat",
+  "theme": "gila-shikwa barsaat — barsati sham mein"
+ },
+ {
+  "series_number": 447,
+  "series_title": "Kalam #447: Barsaat",
+  "theme": "khafa barsaat — raat ke do bajay"
+ },
+ {
+  "series_number": 448,
+  "series_title": "Kalam #448: Barsaat",
+  "theme": "khafa barsaat — barsati sham mein"
+ },
+ {
+  "series_number": 449,
+  "series_title": "Kalam #449: Barsaat",
+  "theme": "shafaq-posh barsaat — raat ke do bajay"
+ },
+ {
+  "series_number": 450,
+  "series_title": "Kalam #450: Barsaat",
+  "theme": "shafaq-posh barsaat — barsati sham mein"
+ },
+ {
+  "series_number": 451,
+  "series_title": "Kalam #451: Barsaat",
+  "theme": "viran barsaat — raat ke do bajay"
+ },
+ {
+  "series_number": 452,
+  "series_title": "Kalam #452: Barsaat",
+  "theme": "viran barsaat — barsati sham mein"
+ },
+ {
+  "series_number": 453,
+  "series_title": "Kalam #453: Barsaat",
+  "theme": "narm barsaat — raat ke do bajay"
+ },
+ {
+  "series_number": 454,
+  "series_title": "Kalam #454: Barsaat",
+  "theme": "narm barsaat — barsati sham mein"
+ },
+ {
+  "series_number": 455,
+  "series_title": "Kalam #455: Barsaat",
+  "theme": "gehra barsaat — raat ke do bajay"
+ },
+ {
+  "series_number": 456,
+  "series_title": "Kalam #456: Barsaat",
+  "theme": "gehra barsaat — barsati sham mein"
+ },
+ {
+  "series_number": 457,
+  "series_title": "Kalam #457: Barsaat",
+  "theme": "be-khabar barsaat — raat ke do bajay"
+ },
+ {
+  "series_number": 458,
+  "series_title": "Kalam #458: Barsaat",
+  "theme": "be-khabar barsaat — barsati sham mein"
+ },
+ {
+  "series_number": 459,
+  "series_title": "Kalam #459: Barsaat",
+  "theme": "majrooh barsaat — raat ke do bajay"
+ },
+ {
+  "series_number": 460,
+  "series_title": "Kalam #460: Barsaat",
+  "theme": "majrooh barsaat — barsati sham mein"
+ },
+ {
+  "series_number": 461,
+  "series_title": "Kalam #461: Chand",
+  "theme": "aahista chand — raat ke do bajay"
+ },
+ {
+  "series_number": 462,
+  "series_title": "Kalam #462: Chand",
+  "theme": "aahista chand — barsati sham mein"
+ },
+ {
+  "series_number": 463,
+  "series_title": "Kalam #463: Chand",
+  "theme": "be-sahara chand — raat ke do bajay"
+ },
+ {
+  "series_number": 464,
+  "series_title": "Kalam #464: Chand",
+  "theme": "be-sahara chand — barsati sham mein"
+ },
+ {
+  "series_number": 465,
+  "series_title": "Kalam #465: Chand",
+  "theme": "gila-shikwa chand — raat ke do bajay"
+ },
+ {
+  "series_number": 466,
+  "series_title": "Kalam #466: Chand",
+  "theme": "gila-shikwa chand — barsati sham mein"
+ },
+ {
+  "series_number": 467,
+  "series_title": "Kalam #467: Chand",
+  "theme": "khafa chand — raat ke do bajay"
+ },
+ {
+  "series_number": 468,
+  "series_title": "Kalam #468: Chand",
+  "theme": "khafa chand — barsati sham mein"
+ },
+ {
+  "series_number": 469,
+  "series_title": "Kalam #469: Chand",
+  "theme": "shafaq-posh chand — raat ke do bajay"
+ },
+ {
+  "series_number": 470,
+  "series_title": "Kalam #470: Chand",
+  "theme": "shafaq-posh chand — barsati sham mein"
+ },
+ {
+  "series_number": 471,
+  "series_title": "Kalam #471: Chand",
+  "theme": "viran chand — raat ke do bajay"
+ },
+ {
+  "series_number": 472,
+  "series_title": "Kalam #472: Chand",
+  "theme": "viran chand — barsati sham mein"
+ },
+ {
+  "series_number": 473,
+  "series_title": "Kalam #473: Chand",
+  "theme": "narm chand — raat ke do bajay"
+ },
+ {
+  "series_number": 474,
+  "series_title": "Kalam #474: Chand",
+  "theme": "narm chand — barsati sham mein"
+ },
+ {
+  "series_number": 475,
+  "series_title": "Kalam #475: Chand",
+  "theme": "gehra chand — raat ke do bajay"
+ },
+ {
+  "series_number": 476,
+  "series_title": "Kalam #476: Chand",
+  "theme": "gehra chand — barsati sham mein"
+ },
+ {
+  "series_number": 477,
+  "series_title": "Kalam #477: Chand",
+  "theme": "be-khabar chand — raat ke do bajay"
+ },
+ {
+  "series_number": 478,
+  "series_title": "Kalam #478: Chand",
+  "theme": "be-khabar chand — barsati sham mein"
+ },
+ {
+  "series_number": 479,
+  "series_title": "Kalam #479: Chand",
+  "theme": "majrooh chand — raat ke do bajay"
+ },
+ {
+  "series_number": 480,
+  "series_title": "Kalam #480: Chand",
+  "theme": "majrooh chand — barsati sham mein"
+ },
+ {
+  "series_number": 481,
+  "series_title": "Kalam #481: Sooraj",
+  "theme": "aahista sooraj — raat ke do bajay"
+ },
+ {
+  "series_number": 482,
+  "series_title": "Kalam #482: Sooraj",
+  "theme": "aahista sooraj — barsati sham mein"
+ },
+ {
+  "series_number": 483,
+  "series_title": "Kalam #483: Sooraj",
+  "theme": "be-sahara sooraj — raat ke do bajay"
+ },
+ {
+  "series_number": 484,
+  "series_title": "Kalam #484: Sooraj",
+  "theme": "be-sahara sooraj — barsati sham mein"
+ },
+ {
+  "series_number": 485,
+  "series_title": "Kalam #485: Sooraj",
+  "theme": "gila-shikwa sooraj — raat ke do bajay"
+ },
+ {
+  "series_number": 486,
+  "series_title": "Kalam #486: Sooraj",
+  "theme": "gila-shikwa sooraj — barsati sham mein"
+ },
+ {
+  "series_number": 487,
+  "series_title": "Kalam #487: Sooraj",
+  "theme": "khafa sooraj — raat ke do bajay"
+ },
+ {
+  "series_number": 488,
+  "series_title": "Kalam #488: Sooraj",
+  "theme": "khafa sooraj — barsati sham mein"
+ },
+ {
+  "series_number": 489,
+  "series_title": "Kalam #489: Sooraj",
+  "theme": "shafaq-posh sooraj — raat ke do bajay"
+ },
+ {
+  "series_number": 490,
+  "series_title": "Kalam #490: Sooraj",
+  "theme": "shafaq-posh sooraj — barsati sham mein"
+ },
+ {
+  "series_number": 491,
+  "series_title": "Kalam #491: Sooraj",
+  "theme": "viran sooraj — raat ke do bajay"
+ },
+ {
+  "series_number": 492,
+  "series_title": "Kalam #492: Sooraj",
+  "theme": "viran sooraj — barsati sham mein"
+ },
+ {
+  "series_number": 493,
+  "series_title": "Kalam #493: Sooraj",
+  "theme": "narm sooraj — raat ke do bajay"
+ },
+ {
+  "series_number": 494,
+  "series_title": "Kalam #494: Sooraj",
+  "theme": "narm sooraj — barsati sham mein"
+ },
+ {
+  "series_number": 495,
+  "series_title": "Kalam #495: Sooraj",
+  "theme": "gehra sooraj — raat ke do bajay"
+ },
+ {
+  "series_number": 496,
+  "series_title": "Kalam #496: Sooraj",
+  "theme": "gehra sooraj — barsati sham mein"
+ },
+ {
+  "series_number": 497,
+  "series_title": "Kalam #497: Sooraj",
+  "theme": "be-khabar sooraj — raat ke do bajay"
+ },
+ {
+  "series_number": 498,
+  "series_title": "Kalam #498: Sooraj",
+  "theme": "be-khabar sooraj — barsati sham mein"
+ },
+ {
+  "series_number": 499,
+  "series_title": "Kalam #499: Sooraj",
+  "theme": "majrooh sooraj — raat ke do bajay"
+ },
+ {
+  "series_number": 500,
+  "series_title": "Kalam #500: Sooraj",
+  "theme": "majrooh sooraj — barsati sham mein"
+ }
+]

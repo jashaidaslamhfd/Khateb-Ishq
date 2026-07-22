@@ -1,0 +1,157 @@
+"""Strict media checks used before rendering and uploading."""
+from __future__ import annotations
+
+import json
+import os
+import shutil
+import subprocess
+from typing import Dict
+
+import numpy as np
+from PIL import Image
+
+
+def _ffprobe_exe() -> str:
+    """Return a usable ffprobe path.
+
+    Prefer a system 'ffprobe' on PATH; otherwise derive it from the
+    imageio-ffmpeg binary that this project already depends on (its ffmpeg
+    ships next to an ffprobe, or we can swap the filename). This stops
+    probe_video() from hard-failing on runners/machines where ffprobe isn't
+    installed as a bare command even though ffmpeg is available.
+    """
+    system = shutil.which("ffprobe")
+    if system:
+        return system
+    try:
+        import imageio_ffmpeg
+        ffmpeg = imageio_ffmpeg.get_ffmpeg_exe()
+        candidate = ffmpeg.replace("ffmpeg", "ffprobe")
+        if os.path.isfile(candidate):
+            return candidate
+    except Exception:
+        pass
+    return "ffprobe"  # last resort; will raise a clear error below if missing
+
+
+class MediaValidationError(RuntimeError):
+    pass
+
+
+def validate_scene_image(path: str, min_side: int = 512) -> Dict:
+    """Decode an image and reject error pages, corrupt, tiny or black assets."""
+    if not path or not os.path.isfile(path):
+        raise MediaValidationError(f"Image does not exist: {path}")
+    try:
+        with Image.open(path) as probe:
+            probe.verify()
+        with Image.open(path) as image:
+            image = image.convert("RGB")
+            width, height = image.size
+            if min(width, height) < min_side:
+                raise MediaValidationError(f"Image too small: {width}x{height}")
+            sample = np.asarray(image.resize((64, 64)), dtype=np.float32)
+            brightness = float(sample.mean())
+            variation = float(sample.std())
+            if brightness < 12.0:
+                raise MediaValidationError(f"Near-black image: brightness={brightness:.1f}")
+            if variation < 2.0:
+                raise MediaValidationError(f"Almost blank image: variation={variation:.1f}")
+            return {"width": width, "height": height, "brightness": brightness, "variation": variation}
+    except MediaValidationError:
+        raise
+    except Exception as exc:
+        raise MediaValidationError(f"Invalid image {path}: {exc}") from exc
+
+
+def pad_video_to_minimum(path: str, min_seconds: float) -> str:
+    """If video is slightly too short, pad it with a freeze frame at the end.
+    
+    Returns the path to the padded video (or original if no padding needed).
+    """
+    # First probe the current video
+    command = [
+        _ffprobe_exe(), "-v", "error", "-show_streams", "-show_format",
+        "-of", "json", path,
+    ]
+    try:
+        result = subprocess.run(command, capture_output=True, text=True, timeout=30, check=True)
+        data = json.loads(result.stdout)
+    except Exception as exc:
+        raise MediaValidationError(f"ffprobe failed during padding check: {exc}") from exc
+
+    duration = float(data.get("format", {}).get("duration") or 0)
+    
+    # If video is already long enough, return original
+    if duration >= min_seconds:
+        return path
+    
+    # Calculate how much padding we need
+    padding_needed = min_seconds - duration + 0.5  # Add 0.5s buffer
+    
+    # Create padded video using ffmpeg - freeze last frame
+    output_path = path.replace(".mp4", "_padded.mp4")
+    
+    # Use ffmpeg to pad with freeze frame
+    # tpad filter: duplicate last frame to extend video
+    # tpad.stop is a frame count, not milliseconds. The renderer outputs 30fps.
+    pad_frames = max(1, min(int(round(padding_needed * 30)), 30 * 20))
+    filter_complex = f"tpad=stop={pad_frames}:stop_mode=clone"
+    
+    command = [
+        shutil.which("ffmpeg") or "ffmpeg", "-y", "-i", path,
+        "-vf", filter_complex,
+        "-af", "apad",
+        "-t", f"{min_seconds + 0.5:.3f}",
+        "-c:v", "libx264", "-c:a", "aac",
+        "-pix_fmt", "yuv420p",
+        output_path
+    ]
+    
+    try:
+        subprocess.run(command, capture_output=True, text=True, timeout=60, check=True)
+        if os.path.isfile(output_path) and os.path.getsize(output_path) > 100000:
+            # Replace original with padded version
+            os.replace(output_path, path)
+            return path
+    except Exception:
+        # If padding fails, clean up and return original
+        if os.path.isfile(output_path):
+            os.remove(output_path)
+    
+    return path
+
+
+def probe_video(path: str) -> Dict:
+    """Use ffprobe to enforce a playable 9:16 Short with audio."""
+    if not os.path.isfile(path) or os.path.getsize(path) < 100_000:
+        raise MediaValidationError(f"Video missing or too small: {path}")
+    command = [
+        _ffprobe_exe(), "-v", "error", "-show_streams", "-show_format",
+        "-of", "json", path,
+    ]
+    try:
+        result = subprocess.run(command, capture_output=True, text=True, timeout=30, check=True)
+        data = json.loads(result.stdout)
+    except Exception as exc:
+        raise MediaValidationError(f"ffprobe failed: {exc}") from exc
+
+    streams = data.get("streams", [])
+    video = next((s for s in streams if s.get("codec_type") == "video"), None)
+    audio = next((s for s in streams if s.get("codec_type") == "audio"), None)
+    if not video or not audio:
+        raise MediaValidationError("Rendered file must contain video and audio streams")
+    width, height = int(video.get("width", 0)), int(video.get("height", 0))
+    duration = float(data.get("format", {}).get("duration") or video.get("duration") or 0)
+    if (width, height) != (1080, 1920):
+        raise MediaValidationError(f"Wrong canvas {width}x{height}; expected 1080x1920")
+    max_seconds = float(os.environ.get("TARGET_MAX_SECONDS", "55")) + 0.25
+    # Minimum too: a Short that's far too short (e.g. a truncated render)
+    # would otherwise pass this gate and get published. Give a small 5s
+    # grace below the configured target so normal short intros don't trip it.
+    min_seconds = max(0.0, float(os.environ.get("TARGET_MIN_SECONDS", "40")) - 5.0)
+    if duration <= 0 or duration > max_seconds:
+        raise MediaValidationError(f"Wrong duration {duration:.2f}s; maximum {max_seconds:.2f}s")
+    if duration < min_seconds:
+        raise MediaValidationError(f"Video too short {duration:.2f}s; minimum {min_seconds:.2f}s")
+    return {"width": width, "height": height, "duration": duration}
