@@ -93,3 +93,4 @@ package-lock.json
 # GPG-encrypted twin (assets/voice_reference.wav.gpg) may be tracked.
 assets/voice_reference.wav
 assets/voice_reference_raw.*
+assets/voice_ref_upload.*
