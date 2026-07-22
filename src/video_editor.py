@@ -17,6 +17,13 @@ import numpy as np
 import soundfile as sf
 from PIL import Image, ImageDraw, ImageFont, features
 
+# --- Pillow >= 10 compatibility: moviepy 1.x's resize fx still reads
+# Image.ANTIALIAS, which Pillow 10 removed (2023). Map it to LANCZOS.
+# Without this shim every Ken-Burns zoom crashes with:
+#   AttributeError: module 'PIL.Image' has no attribute 'ANTIALIAS'
+if not hasattr(Image, "ANTIALIAS"):
+    Image.ANTIALIAS = getattr(getattr(Image, "Resampling", Image), "LANCZOS", 1)
+
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
 

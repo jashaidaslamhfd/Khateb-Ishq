@@ -24,7 +24,9 @@ logger = logging.getLogger(__name__)
 
 MIN_SCENES = 3
 MAX_SCENES = 5
-MIN_WORDS = 45          # spoken Urdu words total (poetry pacing is slow)
+MIN_WORDS = 32          # voiceover counts SCENE CAPTIONS ONLY (hook/cta are metadata)
+                        # 2 couplets ≈ 34-48 Urdu words total; the old 45-word floor
+                        # rejected valid 2-sher scripts 3/3 times on CI (2026-07-22)
 MAX_WORDS = 110
 MAX_SCENE_WORDS = 30
 
@@ -50,6 +52,8 @@ _PROMPT = """You write for a Pakistani Urdu-poetry Shorts channel. Theme: "{them
 
 Rules — follow exactly:
 - ALL spoken text in pure URDU script (اردو رسم الخط), natural poetic register. No English words in captions except in `description`/`tags`.
+- STRICT: absolutely no Roman/Latin letters in title, hook, cta or captions — a caption written in Latin letters ("dard", "raat"...) is REJECTED by the validator.
+- LENGTH BUDGET: the scenes' captions TOGETHER must total 40-70 Urdu words (≈20-40 seconds at slow poetic pace); each caption 8-{max_scene} words. One full sher (both misre) per poetry scene.
 - Return ONLY JSON, exactly in this schema:
 {{
   "title": "مختصر اردو عنوان (3 سے 5 الفاظ)",
