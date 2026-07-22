@@ -51,26 +51,70 @@ def _rate() -> str:
     return f"{value:+.0f}%"
 
 
+def _engine() -> str:
+    """Voice engine: 'edge' (free, native-Urdu neural — default) or 'elevenlabs'
+    (user's OWN cloned voice). Falls back to edge with a loud warning if the
+    clone credentials are not configured, so the channel can never break."""
+    eng = os.environ.get("VOICE_ENGINE", "edge").strip().lower()
+    if eng == "elevenlabs":
+        if os.environ.get("ELEVENLABS_API_KEY") and os.environ.get("ELEVENLABS_VOICE_ID"):
+            return "elevenlabs"
+        logger.warning("VOICE_ENGINE=elevenlabs but ELEVENLABS_API_KEY / ELEVENLABS_VOICE_ID "
+                       "missing — falling back to Edge-TTS for this run")
+        return "edge"
+    return "edge"
+
+
 async def _synth(text: str, voice: str, rate: str, out_path: str) -> None:
     import edge_tts
     communicate = edge_tts.Communicate(text, voice, rate=rate)
     await communicate.save(out_path)
 
 
+def _synth_elevenlabs(text: str, out_path: str) -> None:
+    """User's cloned voice via ElevenLabs multilingual model.
+
+    eleven_multilingual_v2 supports Urdu; the voice itself is an Instant Voice
+    Clone of the channel owner (see README → Cloned voice). Cost: per character,
+    so keep poetry short (it already is)."""
+    import requests
+    voice_id = os.environ["ELEVENLABS_VOICE_ID"]
+    resp = requests.post(
+        f"https://api.elevenlabs.io/v1/text-to-speech/{voice_id}",
+        headers={"xi-api-key": os.environ["ELEVENLABS_API_KEY"],
+                 "Content-Type": "application/json"},
+        json={
+            "text": text,
+            "model_id": os.environ.get("ELEVENLABS_MODEL", "eleven_multilingual_v2"),
+            "voice_settings": {"stability": 0.55, "similarity_boost": 0.85, "style": 0.25},
+        },
+        timeout=120,
+    )
+    if resp.status_code != 200 or len(resp.content) < 1000:
+        raise RuntimeError(f"ElevenLabs TTS failed: {resp.status_code} {resp.text[:150]}")
+    with open(out_path, "wb") as fh:
+        fh.write(resp.content)
+
+
 def generate_voice_segments(scenes: List[dict], output_dir: str = "output/segments", **_ignored) -> List[Dict]:
     """One WAV segment per scene caption. All segments must use ONE voice —
     a poem that switches speaker mid-sher sounds like a bad radio edit."""
     os.makedirs(output_dir, exist_ok=True)
+    engine = _engine()
     voices = _resolve_voices()
-    voice = voices[0]  # deterministic default; rotate mode uses first for consistency within a video
+    voice = voices[0]  # deterministic default; one speaker per poem, always
     rate = _rate()
+    speaker_tag = os.environ.get("ELEVENLABS_VOICE_ID", "")[:8] if engine == "elevenlabs" else voice
     segments = []
     for i, scene in enumerate(scenes):
         caption = (scene.get("caption", "") if isinstance(scene, dict) else str(scene)).strip() or "۔"
         with tempfile.NamedTemporaryFile(suffix=".mp3", delete=False) as tmp:
             tmp_path = tmp.name
         try:
-            asyncio.run(_synth(caption, voice, rate, tmp_path))
+            if engine == "elevenlabs":
+                _synth_elevenlabs(caption, tmp_path)
+            else:
+                asyncio.run(_synth(caption, voice, rate, tmp_path))
             audio, sr = sf.read(tmp_path, dtype="float32")
         finally:
             if os.path.exists(tmp_path):
@@ -85,8 +129,8 @@ def generate_voice_segments(scenes: List[dict], output_dir: str = "output/segmen
         path = os.path.join(output_dir, f"seg_{i}.wav")
         sf.write(path, audio, sr)
         segments.append({"path": path, "duration": len(audio) / sr,
-                         "caption": caption, "tts_engine": f"edge_ur:{voice}"})
-        logger.info("Segment %d/%d via %s (%.1fs)", i + 1, len(scenes), voice, len(audio) / sr)
+                         "caption": caption, "tts_engine": f"{engine}:{speaker_tag}"})
+        logger.info("Segment %d/%d via %s (%.1fs)", i + 1, len(scenes), speaker_tag, len(audio) / sr)
     engines = {s["tts_engine"] for s in segments}
     if len(engines) != 1:
         raise RuntimeError(f"Mixed voices in one video: {engines}")

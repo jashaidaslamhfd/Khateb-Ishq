@@ -51,15 +51,15 @@ ORIGINAL_THEMES = [
 _PROMPT = """You write for a Pakistani Urdu-poetry Shorts channel. Theme: "{theme}"
 
 Rules — follow exactly:
-- ALL spoken text in pure URDU script (اردو رسم الخط), natural poetic register. No English words in captions except in `description`/`tags`.
-- STRICT: absolutely no Roman/Latin letters in title, hook, cta or captions — a caption written in Latin letters ("dard", "raat"...) is REJECTED by the validator.
+- ALL spoken text in pure URDU script (اردو رسم الخط), natural poetic register.
+- STRICT: absolutely no Roman/Latin letters in title, hook, cta, description or captions — a caption written in Latin letters ("dard", "raat"...) is REJECTED by the validator.
 - LENGTH BUDGET: the scenes' captions TOGETHER must total 40-70 Urdu words (≈20-40 seconds at slow poetic pace); each caption 8-{max_scene} words. One full sher (both misre) per poetry scene.
 - Return ONLY JSON, exactly in this schema:
 {{
   "title": "مختصر اردو عنوان (3 سے 5 الفاظ)",
   "hook": "پہلا جملہ — سننے والے کو روک دے (5 سے 8 الفاظ)",
   "cta": "مختصر فالو کی دعوت اردو میں",
-  "description": "One English sentence: what this video expresses (for SEO).",
+  "description": "ایک جملہ خالص اردو میں — یہ ویڈیو کون سا احساس بیان کرتی ہے",
   "poet": "{poet_note}",
   "scenes": [
     {{"visual": "8-12 English words: moody cinematic image description (rain, old book, dim lamp...) NO text in the image", "caption": "اردو جملہ یا شعر (زیادہ سے زیادہ {max_scene} الفاظ)"}},
@@ -82,11 +82,21 @@ def _has_urdu(text: str) -> bool:
     return bool(re.search(r"[؀-ۿ]", text or ""))
 
 
+def _has_latin(text: str) -> bool:
+    """Latin letters in a SPOKEN/ON-SCREEN field are fatal: Edge-TTS switches to an
+    English voice mid-sher (user report 2026-07-22). Mixed-language captions used
+    to slip through because _has_urdu only demanded ONE Arabic-script character."""
+    return bool(re.search(r"[A-Za-z]", text or ""))
+
+
 def _validate_script(script_data: Dict) -> Tuple[bool, List[str]]:
     issues = []
     for field in ("title", "hook", "cta", "scenes"):
         if not script_data.get(field):
             issues.append(f"Missing required field: {field}")
+    for field in ("title", "hook", "cta"):
+        if _has_latin(script_data.get(field, "")):
+            issues.append(f"'{field}' contains Latin letters (English text must never reach screen/voice)")
     scenes = script_data.get("scenes", [])
     if not (MIN_SCENES <= len(scenes) <= MAX_SCENES):
         issues.append(f"Scene count {len(scenes)} (allowed {MIN_SCENES}-{MAX_SCENES})")
@@ -100,6 +110,8 @@ def _validate_script(script_data: Dict) -> Tuple[bool, List[str]]:
         caption = scene.get("caption", "")
         if caption and not _has_urdu(caption):
             issues.append(f"Scene {i+1} caption is not Urdu script")
+        if caption and _has_latin(caption):
+            issues.append(f"Scene {i+1} caption contains Latin letters (TTS would speak them in English)")
         if _ar_count(caption) > MAX_SCENE_WORDS:
             issues.append(f"Scene {i+1} caption too long ({_ar_count(caption)} > {MAX_SCENE_WORDS})")
     return not issues, issues

@@ -21,7 +21,9 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(
 logger = logging.getLogger(__name__)
 
 MIN_BYTES = 4000  # smaller payloads are error pages / empty responses, not images
-STYLE = "cinematic moody sad poetry aesthetic, soft rain, dim warm lamp, film grain, 9:16 vertical, no text, no watermark, no people faces"
+STYLE = ("cinematic moody sad poetry aesthetic, soft rain on window, dim warm lamp, empty old room, "
+         "film grain, 9:16 vertical, strictly no letters, no words, no typography, no signage, "
+         "no captions, no calligraphy, no watermark, no people, no faces")
 
 
 def _provider_generate(provider: dict, prompt: str, seed: int, scene_text):

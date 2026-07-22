@@ -72,9 +72,11 @@ def _yt_client():
 
 def _build_description(script_data: dict, tags: list) -> str:
     poet = script_data.get("poet", "")
+    title = script_data.get("title", "")
     lines = [
-        script_data.get("description", ""),
-        f"🎙 نظم خوانی: AI Urdu narration | شاعر: {poet}" if poet else "",
+        f"🎙 {title} — اردو شاعری" if title else "🎙 اردو شاعری",
+        f"شاعر: {poet} | نظم خوانی: AI Urdu narration" if poet else "نظم خوانی: AI Urdu narration",
+        script_data.get("description", ""),   # Urdu sentence (see script_generator prompt)
         "",
         "روزانہ نئی شاعری — فالو/سبسکرائب کیجیے تاکہ کوئی نظم رہ نہ جائے۔",
         "",

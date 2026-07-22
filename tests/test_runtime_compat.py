@@ -137,6 +137,58 @@ class SpokenFloorTests(unittest.TestCase):
         self.assertFalse(ok)
         self.assertTrue(any("not Urdu script" in i for i in issues))
 
+    def test_mixed_latin_word_in_urdu_caption_rejected(self):
+        # THE bug from run #2: one Urdu word made _has_urdu pass, then TTS spoke
+        # the Latin word in an English accent. Must be caught now.
+        captions = [URDU_SHER_A + " raat hoti hai tonight", URDU_SHER_B, URDU_SHER_A + " " + URDU_SHER_B]
+        ok, issues = self.sg._validate_script(self._script(captions))
+        self.assertFalse(ok, "Latin word inside an Urdu caption must fail validation")
+        self.assertTrue(any("Latin" in i for i in issues))
+
+    def test_latin_title_rejected(self):
+        s = self._script([URDU_SHER_A, URDU_SHER_B, URDU_SHER_A + " " + URDU_SHER_B])
+        s["title"] = "sad raat کی ویڈیو"
+        ok, issues = self.sg._validate_script(s)
+        self.assertFalse(ok)
+        self.assertTrue(any("title" in i and "Latin" in i for i in issues))
+
+    def test_digits_and_urdu_punctuation_allowed(self):
+        captions = ["رات کے 2 بجے کی سکرین", URDU_SHER_A + " " + URDU_SHER_B, URDU_SHER_A + "۔"]
+        ok, issues = self.sg._validate_script(self._script(captions))
+        self.assertEqual([i for i in issues if "Latin" in i], [],
+                         f"digits/punct must not trigger the Latin filter: {issues}")
+
+
+class VoiceEngineTests(unittest.TestCase):
+    def setUp(self):
+        try:
+            import voice_generator
+        except Exception as exc:
+            self.skipTest(f"voice_generator unavailable: {exc}")
+        self.vg = voice_generator
+
+    def test_default_engine_is_edge(self):
+        from unittest.mock import patch
+        with patch.dict(os.environ, {}, clear=False):
+            os.environ.pop("VOICE_ENGINE", None)
+            self.assertEqual(self.vg._engine(), "edge")
+
+    def test_clone_request_without_creds_falls_back(self):
+        from unittest.mock import patch
+        clean = {k: v for k, v in os.environ.items()
+                 if k not in ("ELEVENLABS_API_KEY", "ELEVENLABS_VOICE_ID")}
+        with patch.dict(os.environ, clean, clear=True):
+            os.environ["VOICE_ENGINE"] = "elevenlabs"
+            self.assertEqual(self.vg._engine(), "edge",
+                             "missing clone creds must NEVER break the run")
+
+    def test_clone_engine_active_with_creds(self):
+        from unittest.mock import patch
+        with patch.dict(os.environ, {"VOICE_ENGINE": "elevenlabs",
+                                     "ELEVENLABS_API_KEY": "x",
+                                     "ELEVENLABS_VOICE_ID": "y"}, clear=False):
+            self.assertEqual(self.vg._engine(), "elevenlabs")
+
 
 if __name__ == "__main__":
     unittest.main()
