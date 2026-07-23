@@ -52,7 +52,8 @@ _PROMPT = """You write for a Pakistani Urdu-poetry Shorts channel. Theme: "{them
 
 Rules — follow exactly:
 - ALL spoken text in pure URDU script (اردو رسم الخط), natural poetic register.
-- STRICT: absolutely no Roman/Latin letters in title, hook, cta, description or captions — a caption written in Latin letters ("dard", "raat"...) is REJECTED by the validator.
+- STRICT: absolutely no Roman/Latin letters in title, hook, cta, description or captions — a caption written in Latin letters ("dard", "raat"...) is REJECTED by the validator. Do not copy the theme's Roman/Latin words into any output field.
+- Before returning JSON, check every title, hook, cta, description, and caption: it must contain Urdu Arabic-script text only, with no A-Z letters.
 - LENGTH BUDGET: the scenes' captions TOGETHER must total 40-70 Urdu words (≈20-40 seconds at slow poetic pace); each caption 8-{max_scene} words. One full sher (both misre) per poetry scene.
 - Return ONLY JSON, exactly in this schema:
 {{
@@ -170,9 +171,9 @@ def generate_script(theme: str = None, source: str = None) -> Dict:
     client = Groq(api_key=api_key)
     reply = client.chat.completions.create(
         model=os.environ.get("GROQ_MODEL", "llama-3.3-70b-versatile"),
-        messages=[{"role": "system", "content": "You are an Urdu poetry director for a sad-poetry Shorts channel. Return only valid JSON."},
+        messages=[{"role": "system", "content": "You are an Urdu poetry director for a sad-poetry Shorts channel. Return only valid JSON. Every spoken/display field must be Urdu Arabic script only; never use A-Z letters in title, hook, cta, description, or captions."},
                   {"role": "user", "content": prompt}],
-        temperature=0.85, max_tokens=1500,
+        temperature=0.45, max_tokens=1800,
     )
     data = _extract_json(reply.choices[0].message.content)
     data["source"] = source
