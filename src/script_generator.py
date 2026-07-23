@@ -36,7 +36,8 @@ logger = logging.getLogger(__name__)
 
 MIN_SCENES = 3
 MAX_SCENES = 5
-MIN_SPOKEN_WORDS = 40
+MIN_SPOKEN_WORDS = 32          # 2 couplets ≈ 34-48 Urdu words — a hard 40-word floor
+                               # rejects valid 2-sher scripts 3/3 times (CI lesson 2026-07-22)
 MAX_SPOKEN_WORDS = 110
 MAX_GEN_ATTEMPTS = 3
 
@@ -164,7 +165,16 @@ def _build_prompt(theme: str, mode: str, poet_key: str, feedback: list = None) -
         "'caption' ya 'title'/'hook'/'cta' fields mein na ghusne do (aik bhi English "
         "lafz TTS ka lahja kharab kar deta hai). Poetry ka معیار (quality) buland ho: "
         "asal, gehri, khoobsurat tashbeehat (imagery), sahi bahr/wazn ka ehsaas, aur "
-        "waqai dard/ehsaas jo dil ko chhoo jaye — sasta ya generic na ho.\n\n"
+        "waqai dard/ehsaas jo dil ko chhoo jaye — sasta ya generic na ho.\n"
+        "EMOTION TARGET (RULA DENE WALA): har caption kisi COMMON, REAL dard ko chhooe — "
+        "bewafai, judai, tanhai, intezaar, raat ki yaadein, apno ka be-his pana — jo har "
+        "aam aadmi apne dil se milaye. Abstract falsafa YA mushaira-style pech-o-kham "
+        "NAHI; seedha awaam ka dard, simple alfaaz, gehra ehsaas.\n"
+        "VIRAL HOOK: scene 1 pehle 2 second mein dil chubha de — ek relatable pain "
+        "statement (maslan 'jab apna bana hua bhi paraya lage...'). SAWAL na poochho — "
+        "zakhm dikhao. Hook ko question form mein kabhi mat likho.\n"
+        "CLIMAX = AANSO: aakhri scene sab se tez dard ho taake sunne wala video dobara "
+        "chalaye (rewatch = reach); koi halki/masali closing nahi.\n\n"
         "Output STRICTLY valid JSON, no markdown fences, no preamble, no explanation — "
         "just the JSON object, matching this exact shape:\n"
         "{\n"
@@ -177,8 +187,9 @@ def _build_prompt(theme: str, mode: str, poet_key: str, feedback: list = None) -
         '    {"visual": "<ENGLISH visual description for an AI image model — moody, '
         'cinematic, no on-image text/people/logos>",\n'
         '     "caption": "<Urdu sher/line to be SPOKEN — pure Urdu script only>",\n'
-        '     "caption_roman": "<same line transliterated to Roman Urdu, for optional '
-        'on-screen display only>"}\n'
+        '     "caption_roman": "<REQUIRED: exact same line in casual Roman Urdu — '
+        'Pakistani texting style — used for on-screen captions; voice always speaks '
+        'the Urdu caption, never this one>"}\n'
         "    ... (3 to 5 scenes total)\n"
         "  ]\n"
         "}\n\n"
