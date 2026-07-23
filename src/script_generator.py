@@ -1,189 +1,279 @@
 #!/usr/bin/env python3
-"""Urdu poetry script generator (Groq Llama).
+"""Urdu poetry script generation — Groq (Llama 3.3 70B), khateb-ishq quality bar.
 
-Two sourcing modes, by design (see README → content policy):
-- "classic": quote 2 public-domain couplets (Ghalib, Iqbal, Mir — died
-  1869/1938/1810 = safely PD) on a theme, plus one short Urdu context line.
-  The JSON response includes `source: "classic"` and `poet`.
-- "original": generate 2 ORIGINAL AI couplets on the theme — 100%
-  copyright-free and uniquely ours. `source: "original"`.
+Contract (see tests/test_poetry_core.py, tests/test_runtime_compat.py):
 
-Spoken body is deliberately short (~35-55s): poetry Shorts live and die on
-delivery pace, not word count. Validation therefore uses POETRY MODE rules
-(3-5 scenes, Urdu text present, no English story-arc constraints).
+    generate_script(theme: str) -> dict:
+        title, hook, cta, description, poet, source ("classic"/"original"),
+        tags, theme, topic, voiceover, scenes: [
+            {"visual": <English scene description for the image model>,
+             "caption": <Urdu-script sher/couplet — this gets SPOKEN>,
+             "caption_roman": <optional Roman-Urdu, on-screen only, never spoken>},
+            ...
+        ]
+
+    _validate_script(data: dict) -> (bool, list[str] issues)
+
+HARD RULE — why this file exists / why it matters for accent quality:
+Edge-TTS's ur-PK voices are genuinely native Urdu/Pakistani neural voices —
+they nail the Urdu/Hindi-region lahja. But if a SPOKEN field (title, hook,
+cta, or a scene's `caption`) contains even one stray Latin/Roman word, the
+TTS engine switches to an English phoneme set for that word mid-sentence —
+that's what produces the jarring "English accent" glitch in an otherwise
+Urdu narration. So every spoken field must be 100% Urdu script. Roman text
+is only ever allowed in `caption_roman`, which is on-screen-only and is
+never passed to the TTS engine (see video_editor._pick_display_caption).
 """
 
 import json
 import logging
 import os
+import random
 import re
-from typing import Dict, List, Tuple
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
 
 MIN_SCENES = 3
 MAX_SCENES = 5
-MIN_WORDS = 32          # voiceover counts SCENE CAPTIONS ONLY (hook/cta are metadata)
-                        # 2 couplets ≈ 34-48 Urdu words total; the old 45-word floor
-                        # rejected valid 2-sher scripts 3/3 times on CI (2026-07-22)
-MAX_WORDS = 110
-MAX_SCENE_WORDS = 30
+MIN_SPOKEN_WORDS = 40
+MAX_SPOKEN_WORDS = 110
+MAX_GEN_ATTEMPTS = 3
 
-# Themes where quoting classics feels natural vs. themes that suit originals
-CLASSIC_THEMES = {
-    "ghalib": ["dard-e-ishq (sorrow of love)", "mai-khana (the tavern and wine)", "hasti-o-fana (being and nothingness)", "umr guzri (a life spent)"],
-    "iqbal": ["khudi (selfhood)", "shaheen (the eagle's ambition)", "umeed-o-junoon (hope and passion)", "watan aur azmat (homeland and greatness)"],
-    "mir": ["gham-e-judai (grief of separation)", "yaad (longing and memory)", "be-rukhi (indifference of the beloved)", "sham-e-gham (the evening of sorrow)"],
+# Arabic script block + presentation forms — covers Urdu (Nastaliq/Naskh).
+_URDU_RE = re.compile(r"[\u0600-\u06FF\u0750-\u077F\uFB50-\uFDFF\uFE70-\uFEFF]")
+_LATIN_RE = re.compile(r"[A-Za-z]")
+
+# Content policy (README): classics are safe public-domain poets; these two
+# are still under copyright and must never be used on a monetized channel.
+_CLASSIC_POETS = {
+    "ghalib": "Mirza Ghalib (d.1869)",
+    "iqbal": "Allama Iqbal (d.1938)",
+    "mir": "Mir Taqi Mir (d.1810)",
 }
-ORIGINAL_THEMES = [
-    "tanhai aur raat (loneliness at 2am)", "terhi yaadein (memories that return)", "waqt ke zakhmon ka sulagna",
-    "sheher mein tanhai (alone in a crowded city)", "barsaat aur judai (rain and parting)", "ujaale se pehle ka sannata",
-    "mohabbat ka akhri paigham (the last message)", "khamoshi ka jawab (an answer made of silence)",
-    "safar aur maqsad (the journey and the destination)", "woh jo chale gaye (the ones who left)", "umeed ka diya",
-    "sehra ki tarah dil (a heart like a desert)", "guftagu ka wazan adhoori", "chand aur judai",
-    "sheesha sa dil (a heart like glass)", "aienay mein waqt", "khushbu ki yaadein", "dua aur sukoon",
-    "mazi ki chitthiyan (letters never sent)", "dhund mein sheher", "sooraj dhaltay waqt", "woh ada (that style of theirs)",
-    "khwabon ka sheher", "aankhen bolti hain", "raat ka safar", "dil ka dard aur hunar", "aktar judai ke bad",
-    "sukoon ki raah mein", "phool aur kaante", "zindagi ek safar", "intezaar ki ghariyan",
-]
-
-_PROMPT = """You write for a Pakistani Urdu-poetry Shorts channel. Theme: "{theme}"
-
-Rules — follow exactly:
-- ALL spoken text in pure URDU script (اردو رسم الخط), natural poetic register.
-- STRICT: absolutely no Roman/Latin letters in title, hook, cta, description or captions — a caption written in Latin letters ("dard", "raat"...) is REJECTED by the validator. Do not copy the theme's Roman/Latin words into any output field.
-- Before returning JSON, check every title, hook, cta, description, and caption: it must contain Urdu Arabic-script text only, with no A-Z letters.
-- LENGTH BUDGET: the scenes' captions TOGETHER must total 40-70 Urdu words (≈20-40 seconds at slow poetic pace); each caption 8-{max_scene} words. One full sher (both misre) per poetry scene.
-- Return ONLY JSON, exactly in this schema:
-{{
-  "title": "مختصر اردو عنوان (3 سے 5 الفاظ)",
-  "hook": "پہلا جملہ — سننے والے کو روک دے (5 سے 8 الفاظ)",
-  "cta": "مختصر فالو کی دعوت اردو میں",
-  "description": "ایک جملہ خالص اردو میں — یہ ویڈیو کون سا احساس بیان کرتی ہے",
-  "poet": "{poet_note}",
-  "scenes": [
-    {{"visual": "8-12 English words: moody cinematic image description (rain, old book, dim lamp...) NO text in the image", "caption": "اردو جملہ یا شعر (زیادہ سے زیادہ {max_scene} الفاظ)", "caption_roman": "wahi caption Roman Urdu (Latin letters) mein — Pakistani texting style"}},
-    ... {scene_range} scenes total ...
-  ]
-}}
-- caption_roman is REQUIRED per scene: EXACT same sher/meaning as the Urdu caption, written in casual Roman Urdu (Latin script) — this is ONLY for on-screen display; the voice always speaks the Urdu caption.
-- Scene 1: the hook line (one striking Urdu line, not a question).
-- Middle scenes: the poetry itself — 1 sher per scene, never split a sher across scenes.
-- Last scene: a closing line that RETURNS to the opening mood (poetry loops; replay is the algorithm's favorite).
-{content_rules}
-"""
+_FORBIDDEN_POETS = ("ahmad faraz", "parveen shakir")
 
 
-def _ar_count(text: str) -> int:
-    """Word count works for Urdu (space-separated tokens)."""
-    return len(text.split())
-
-
+# --------------------------------------------------------------------------- #
+# Validation
+# --------------------------------------------------------------------------- #
 def _has_urdu(text: str) -> bool:
-    return bool(re.search(r"[؀-ۿ]", text or ""))
+    return bool(_URDU_RE.search(text or ""))
 
 
 def _has_latin(text: str) -> bool:
-    """Latin letters in a SPOKEN/ON-SCREEN field are fatal: Edge-TTS switches to an
-    English voice mid-sher (user report 2026-07-22). Mixed-language captions used
-    to slip through because _has_urdu only demanded ONE Arabic-script character."""
-    return bool(re.search(r"[A-Za-z]", text or ""))
+    return bool(_LATIN_RE.search(text or ""))
 
 
-def _validate_script(script_data: Dict) -> Tuple[bool, List[str]]:
+def _check_urdu_field(label: str, text: str, issues: list) -> None:
+    """A spoken field must be non-empty, Urdu-script, and free of Latin words."""
+    text = (text or "").strip()
+    if not text:
+        issues.append(f"{label} is empty")
+        return
+    if not _has_urdu(text):
+        issues.append(f"{label} is not Urdu script: {text[:60]!r}")
+        return
+    if _has_latin(text):
+        issues.append(f"{label} contains Latin characters: {text[:60]!r}")
+
+
+def _validate_script(data: dict):
+    """Returns (is_valid, issues). `description` is metadata-only (YouTube
+    description), never spoken/rendered as captions, so it is NOT required
+    to be pure Urdu — it may legitimately be bilingual or English."""
     issues = []
-    for field in ("title", "hook", "cta", "scenes"):
-        if not script_data.get(field):
-            issues.append(f"Missing required field: {field}")
-    for field in ("title", "hook", "cta"):
-        if _has_latin(script_data.get(field, "")):
-            issues.append(f"'{field}' contains Latin letters (English text must never reach screen/voice)")
-    scenes = script_data.get("scenes", [])
-    if not (MIN_SCENES <= len(scenes) <= MAX_SCENES):
-        issues.append(f"Scene count {len(scenes)} (allowed {MIN_SCENES}-{MAX_SCENES})")
-    voiceover = " ".join(s.get("caption", "") for s in scenes)
-    words = _ar_count(voiceover)
-    if not (MIN_WORDS <= words <= MAX_WORDS):
-        issues.append(f"Spoken words {words} (allowed {MIN_WORDS}-{MAX_WORDS})")
-    for i, scene in enumerate(scenes):
-        if not scene.get("visual") or not scene.get("caption"):
-            issues.append(f"Scene {i+1} missing visual/caption")
+    if not isinstance(data, dict):
+        return False, ["Script is not a JSON object"]
+
+    _check_urdu_field("title", data.get("title", ""), issues)
+    _check_urdu_field("hook", data.get("hook", ""), issues)
+    _check_urdu_field("cta", data.get("cta", ""), issues)
+
+    scenes = data.get("scenes")
+    if not isinstance(scenes, list) or len(scenes) < MIN_SCENES:
+        got = len(scenes) if isinstance(scenes, list) else 0
+        issues.append(f"Need at least {MIN_SCENES} scenes, got {got}")
+        scenes = scenes if isinstance(scenes, list) else []
+
+    spoken_words = 0
+    for i, scene in enumerate(scenes, start=1):
+        if not isinstance(scene, dict):
+            issues.append(f"Scene {i} is not an object")
+            continue
         caption = scene.get("caption", "")
-        if caption and not _has_urdu(caption):
-            issues.append(f"Scene {i+1} caption is not Urdu script")
-        if caption and _has_latin(caption):
-            issues.append(f"Scene {i+1} caption contains Latin letters (TTS would speak them in English)")
-        if _ar_count(caption) > MAX_SCENE_WORDS:
-            issues.append(f"Scene {i+1} caption too long ({_ar_count(caption)} > {MAX_SCENE_WORDS})")
-    return not issues, issues
+        _check_urdu_field(f"Scene {i} caption", caption, issues)
+        spoken_words += len((caption or "").split())
+        if not (scene.get("visual") or "").strip():
+            issues.append(f"Scene {i} is missing a visual description")
+        # caption_roman is allowed to be Roman/Latin — on-screen only, never
+        # spoken — so it is intentionally NOT run through _check_urdu_field.
+
+    if spoken_words < MIN_SPOKEN_WORDS:
+        issues.append(f"Spoken words too few ({spoken_words} < {MIN_SPOKEN_WORDS})")
+    elif spoken_words > MAX_SPOKEN_WORDS:
+        issues.append(f"Spoken words too many ({spoken_words} > {MAX_SPOKEN_WORDS})")
+
+    return (len(issues) == 0), issues
 
 
-def _extract_json(raw: str) -> Dict:
-    match = re.search(r"\{.*\}", raw, re.S)
-    if not match:
-        raise ValueError(f"No JSON in model reply: {raw[:200]}")
-    return json.loads(match.group(0))
+# --------------------------------------------------------------------------- #
+# Poet / mode selection (content policy: 55% classics / 45% originals)
+# --------------------------------------------------------------------------- #
+def _pick_mode(pinned: str = None):
+    forced = (pinned or os.environ.get("POETRY_SOURCE", "mix")).strip().lower()
+    if forced in _CLASSIC_POETS:
+        return "classic", forced
+    if forced == "original":
+        return "original", None
+    # mix
+    if random.random() < 0.55:
+        poet = random.choice(list(_CLASSIC_POETS))
+        return "classic", poet
+    return "original", None
 
 
-def generate_script(theme: str = None, source: str = None) -> Dict:
-    """Generate one poetry script. `theme`/`source` default to env/rotation."""
-    source = (source or os.environ.get("POETRY_SOURCE", "mix")).lower()
-    if source == "mix":
-        import random
-        poet = random.choice(sorted(CLASSIC_THEMES))
-        classic = random.random() < 0.55  # 55% classics keeps proven quality, 45% originals builds identity
-        if classic:
-            source, poet_key = "classic", poet
-        else:
-            source, poet_key = "original", None
-    else:
-        poet_key = source if source in CLASSIC_THEMES else "ghalib"
-        source = "classic" if source in CLASSIC_THEMES else "original"
-
-    if not theme:
-        if source == "classic":
-            import random
-            theme = random.choice(CLASSIC_THEMES[poet_key])
-        else:
-            import random
-            theme = random.choice(ORIGINAL_THEMES)
-
-    if source == "classic":
-        content_rules = (
-            f"- This is a CLASSIC recitation: quote TWO famous couplets by {poet_key.title()} on this theme, quoted EXACTLY "
-            "(public domain — he died over 85 years ago), 1 sher per scene.\n"
-            "- If you cannot recall an exact sher, write ORIGINAL verses in his style instead and set poet to 'AI (inspired by " + poet_key.title() + ")'."
-        )
-        poet_note = poet_key.title()
-    else:
-        content_rules = "- This is ORIGINAL poetry: write TWO original couplets of your own on this theme (never quote living poets — Faraz & Parveen Shakir are still copyrighted!). Set poet to 'Original AI nazm'."
-        poet_note = "Original AI nazm"
-
-    prompt = _PROMPT.format(
-        theme=theme, poet_note=poet_note, max_scene=MAX_SCENE_WORDS,
-        scene_range=f"{MIN_SCENES}-{MAX_SCENES}", content_rules=content_rules)
-
-    api_key = os.environ.get("GROQ_API_KEY")
-    if not api_key:
-        raise RuntimeError("GROQ_API_KEY is not set")
+# --------------------------------------------------------------------------- #
+# Groq call
+# --------------------------------------------------------------------------- #
+def _client():
     from groq import Groq
-    client = Groq(api_key=api_key)
-    reply = client.chat.completions.create(
-        model=os.environ.get("GROQ_MODEL", "llama-3.3-70b-versatile"),
-        messages=[{"role": "system", "content": "You are an Urdu poetry director for a sad-poetry Shorts channel. Return only valid JSON. Every spoken/display field must be Urdu Arabic script only; never use A-Z letters in title, hook, cta, description, or captions."},
-                  {"role": "user", "content": prompt}],
-        temperature=0.45, max_tokens=1800,
-    )
-    data = _extract_json(reply.choices[0].message.content)
-    data["source"] = source
-    data["theme"] = theme
-    data.setdefault("poet", poet_note)
+    return Groq(api_key=os.environ["GROQ_API_KEY"])
 
-    valid, issues = _validate_script(data)
-    if not valid:
-        logger.warning("Poetry validation failed: %s", issues)
-        return None
-    data["voiceover"] = " ".join(s["caption"] for s in data["scenes"])
-    logger.info("Poetry script ready (%s, poet=%s): %s", source, data["poet"], data["title"])
-    return data
+
+def _build_prompt(theme: str, mode: str, poet_key: str, feedback: list = None) -> list:
+    if mode == "classic":
+        poet_name = _CLASSIC_POETS[poet_key]
+        source_rule = (
+            f"Poet: quote/recite AUTHENTIC, well-attested couplets by {poet_name} only. "
+            f"Never invent lines and attribute them to a real poet. "
+            f"Never use Ahmad Faraz or Parveen Shakir (still copyrighted) — pick a different "
+            f"real Ghalib/Iqbal/Mir couplet instead if unsure."
+        )
+    else:
+        poet_name = "AI Original"
+        source_rule = (
+            "Write 100% original Urdu couplets in the classical ghazal/nazm tradition "
+            "(you own the copyright — never copy or paraphrase a real poet's line)."
+        )
+
+    system = (
+        "Tum ek professional Urdu shair aur short-video script writer ho, jo Pakistani "
+        "audience ke liye viral 'sad poetry' YouTube Shorts likhte ho. Sirf khaalis, "
+        "adabi Urdu rasm-ul-khat mein likho — kabhi bhi Roman Urdu ya English lafz "
+        "'caption' ya 'title'/'hook'/'cta' fields mein na ghusne do (aik bhi English "
+        "lafz TTS ka lahja kharab kar deta hai). Poetry ka معیار (quality) buland ho: "
+        "asal, gehri, khoobsurat tashbeehat (imagery), sahi bahr/wazn ka ehsaas, aur "
+        "waqai dard/ehsaas jo dil ko chhoo jaye — sasta ya generic na ho.\n\n"
+        "Output STRICTLY valid JSON, no markdown fences, no preamble, no explanation — "
+        "just the JSON object, matching this exact shape:\n"
+        "{\n"
+        '  "title": "<Urdu title, short, punchy>",\n'
+        '  "hook": "<one Urdu line, first 2-3 seconds, must grab attention>",\n'
+        '  "cta": "<one Urdu call-to-action line, e.g. follow/subscribe ka Urdu jumla>",\n'
+        '  "description": "<one Urdu OR English sentence for the YouTube description>",\n'
+        '  "poet": "<poet name if classic, else \\"Original\\">",\n'
+        '  "scenes": [\n'
+        '    {"visual": "<ENGLISH visual description for an AI image model — moody, '
+        'cinematic, no on-image text/people/logos>",\n'
+        '     "caption": "<Urdu sher/line to be SPOKEN — pure Urdu script only>",\n'
+        '     "caption_roman": "<same line transliterated to Roman Urdu, for optional '
+        'on-screen display only>"}\n'
+        "    ... (3 to 5 scenes total)\n"
+        "  ]\n"
+        "}\n\n"
+        f"{source_rule}\n"
+        f"Total spoken words across all scene captions combined should land roughly "
+        f"between {MIN_SPOKEN_WORDS} and {MAX_SPOKEN_WORDS} words (a 30-57 second Short)."
+    )
+
+    user = f"Theme/topic: {theme}\n\nGenerate the JSON script now."
+    if feedback:
+        user += (
+            "\n\nYour previous attempt had these problems — fix ALL of them and "
+            "resend the full corrected JSON:\n- " + "\n- ".join(feedback)
+        )
+
+    return [{"role": "system", "content": system}, {"role": "user", "content": user}]
+
+
+def _extract_json(raw: str) -> dict:
+    raw = (raw or "").strip()
+    if raw.startswith("```"):
+        raw = raw.strip("`")
+        if raw.lower().startswith("json"):
+            raw = raw[4:]
+    start, end = raw.find("{"), raw.rfind("}")
+    if start == -1 or end == -1:
+        raise ValueError("No JSON object found in model output")
+    return json.loads(raw[start:end + 1])
+
+
+def _default_tags(poet: str, mode: str) -> list:
+    tags = ["urdu poetry", "shayari", "sad poetry", "urdu shorts"]
+    if mode == "classic" and poet:
+        tags.append(poet)
+    else:
+        tags.append("original shayari")
+    return tags
+
+
+# --------------------------------------------------------------------------- #
+# Public entry point
+# --------------------------------------------------------------------------- #
+def generate_script(theme: str) -> dict:
+    model = os.environ.get("GROQ_MODEL", "llama-3.3-70b-versatile")
+    mode, poet_key = _pick_mode()
+    client = _client()
+
+    feedback = None
+    last_data = None
+    for attempt in range(1, MAX_GEN_ATTEMPTS + 1):
+        messages = _build_prompt(theme, mode, poet_key, feedback)
+        try:
+            resp = client.chat.completions.create(
+                model=model,
+                messages=messages,
+                temperature=0.9,
+                max_tokens=1500,
+                response_format={"type": "json_object"},
+            )
+            raw = resp.choices[0].message.content
+            data = _extract_json(raw)
+        except Exception as exc:
+            logger.warning("Groq generation attempt %d failed: %s", attempt, exc)
+            feedback = [f"Previous attempt errored: {exc}. Resend strict valid JSON only."]
+            continue
+
+        last_data = data
+        valid, issues = _validate_script(data)
+        if valid:
+            poet_name = data.get("poet") or (_CLASSIC_POETS.get(poet_key, "Original") if mode == "classic" else "Original")
+            lowered = poet_name.lower()
+            if any(bad in lowered for bad in _FORBIDDEN_POETS):
+                logger.warning("Forbidden poet %s slipped through — retrying with original mode", poet_name)
+                mode, poet_key = "original", None
+                feedback = ["That poet is copyrighted and forbidden — write 100% original couplets instead."]
+                continue
+
+            data["poet"] = poet_name
+            data["source"] = mode
+            data["theme"] = theme
+            data["topic"] = theme
+            data["tags"] = data.get("tags") or _default_tags(poet_name, mode)
+            data["voiceover"] = " ".join(
+                (s.get("caption") or "").strip() for s in data["scenes"]
+            ).strip()
+            logger.info("Script ready (%s/%s, %d scenes, attempt %d)",
+                        mode, poet_name, len(data["scenes"]), attempt)
+            return data
+
+        logger.warning("Script attempt %d invalid: %s", attempt, issues)
+        feedback = issues
+
+    raise RuntimeError(f"Could not produce a valid Urdu script after {MAX_GEN_ATTEMPTS} attempts: "
+                        f"{feedback or 'unknown error'} (last raw: {str(last_data)[:200]})")
+
+
+if __name__ == "__main__":
+    print(json.dumps(generate_script("تنہائی"), ensure_ascii=False, indent=2))
