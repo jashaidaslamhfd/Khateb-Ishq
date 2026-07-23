@@ -7,6 +7,11 @@ on:
         description: "Optional poetry theme (empty = next from the 500 catalogue)"
         required: false
         type: string
+      force:
+        description: "Generate even if the minimum posting gap has not elapsed (manual tests only)"
+        required: false
+        default: false
+        type: boolean
   schedule:
     # Pakistan has NO daylight-saving time (UTC+5 all year) — so no twin
     # crons, no gate, no DST bugs. Exactly 3 runs/day, each ~60 min before a
@@ -42,7 +47,7 @@ jobs:
           sudo apt-get update
           # fonts-noto provides NotoNaskhArabic-Bold.ttf — Pillow+libraqm
           # shapes the Urdu script correctly in captions.
-          sudo apt-get install -y --no-install-recommends ffmpeg fonts-noto
+          sudo apt-get install -y --no-install-recommends ffmpeg fonts-noto sox
           python -m pip install --upgrade pip
           for i in 1 2 3; do python -m pip install -r requirements.txt && break || { echo "retry $i"; sleep 15; }; done
 
@@ -82,7 +87,7 @@ jobs:
           else
             echo "::warning::assets/voice_reference.wav.gpg not in repo — engine will fall back to Edge-TTS"
           fi
-          python -m pip install --extra-index-url https://download.pytorch.org/whl/cpu torch qwen-tts
+          python -m pip install --extra-index-url https://download.pytorch.org/whl/cpu torch qwen-tts hf_transfer
 
       - name: Validate required secrets (fail fast)
         shell: bash
@@ -110,7 +115,8 @@ jobs:
           REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
           YT_PRIVACY_STATUS: "private"
           YT_SCHEDULE_PUBLISH: "true"
-          ENFORCE_POSTING_GAP: "true"
+          # Keep the anti-spam gap for scheduled runs; manual tests can opt out.
+          ENFORCE_POSTING_GAP: ${{ inputs.force == true && 'false' || 'true' }}
           MIN_POST_GAP_HOURS: "3.0"
           PUBLISH_TIMEZONE: "Asia/Karachi"
           PUBLISH_SLOTS: "10:00,14:00,21:00"
