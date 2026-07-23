@@ -80,6 +80,14 @@ def run_pipeline(theme: str = None) -> dict:
             last_dt = datetime.fromisoformat(history[-1]["posted_at"])
             if not scheduler.validate_posting_interval(last_dt):
                 if os.environ.get("ENFORCE_POSTING_GAP", "true").lower() == "true":
+                    # LOUD skip: show a visible warning on the GitHub run summary
+                    # so the owner immediately sees "no video THIS run, by design"
+                    # instead of a quiet green run that produced nothing.
+                    hrs = os.environ.get("MIN_POST_GAP_HOURS", "3.0")
+                    print(f"::warning title=Skip (anti-spam, by design)::Last post was less than "
+                          f"{hrs}h ago — this run made NO video on purpose. Roz ki 3 videos "
+                          f"(10:00 / 14:00 / 21:00 PKT) apne time pe banti rahengi. "
+                          f"Test ke liye 'Run workflow' pe force=true tick karein.")
                     logger.warning("Too soon since last post — skipping (ENFORCE_POSTING_GAP=true)")
                     return {"success": False, "skipped": "posting_interval"}
         except Exception as exc:
