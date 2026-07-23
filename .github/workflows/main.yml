@@ -124,7 +124,7 @@ jobs:
           CHANNEL_LANGUAGE: "ur"
           URDU_VOICE: "asad"
           URDU_TTS_RATE: "-12"
-          VOICE_ENGINE: ${{ vars.VOICE_ENGINE || 'edge' }}
+          VOICE_ENGINE: "edge"
           HF_HUB_ENABLE_HF_TRANSFER: "1"
           # Viral-status look — screen captions Roman Urdu, fast punch cuts,
           # cinematic grade. (Owner request; repo vars can override.)
