@@ -105,6 +105,15 @@ jobs:
           [ "$missing" -eq 0 ] && echo "✓ All required secrets present (must belong to the URDU channel's Google account!)"
           exit "$missing"
 
+      - name: Verify YouTube channel identity (fail fast on wrong token)
+        shell: bash
+        env:
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
+          EXPECTED_CHANNEL_ID: ${{ vars.EXPECTED_CHANNEL_ID }}
+        run: python scripts/verify_channel.py
+
       - name: Generate and upload poetry Short
         shell: bash
         env:
