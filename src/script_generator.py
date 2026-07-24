@@ -36,9 +36,9 @@ logger = logging.getLogger(__name__)
 
 MIN_SCENES = 3
 MAX_SCENES = 5
-MIN_SPOKEN_WORDS = 32          # 2 couplets ≈ 34-48 Urdu words — a hard 40-word floor
+MIN_SPOKEN_WORDS = int(os.environ.get("MIN_SPOKEN_WORDS", "32"))  # 2 couplets ≈ 34-48 Urdu words — a hard 40-word floor
                                # rejects valid 2-sher scripts 3/3 times (CI lesson 2026-07-22)
-MAX_SPOKEN_WORDS = 110
+MAX_SPOKEN_WORDS = int(os.environ.get("MAX_SPOKEN_WORDS", "110"))
 MAX_GEN_ATTEMPTS = 3
 
 # Arabic script block + presentation forms — covers Urdu (Nastaliq/Naskh).
