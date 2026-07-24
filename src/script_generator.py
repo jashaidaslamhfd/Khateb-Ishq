@@ -51,6 +51,10 @@ _CLASSIC_POETS = {
     "ghalib": "Mirza Ghalib (d.1869)",
     "iqbal": "Allama Iqbal (d.1938)",
     "mir": "Mir Taqi Mir (d.1810)",
+    # Punjabi Sufi masters — public domain, and the channel's 40k-view
+    # "Kamli waly Muhammad" upload proved this Sufi cluster pulls views.
+    "bullehshah": "Bulleh Shah (d.1757)",
+    "warisshah": "Waris Shah (d.1798)",
 }
 _FORBIDDEN_POETS = ("ahmad faraz", "parveen shakir")
 
@@ -148,9 +152,15 @@ def _build_prompt(theme: str, mode: str, poet_key: str, feedback: list = None) -
         source_rule = (
             f"Poet: quote/recite AUTHENTIC, well-attested couplets by {poet_name} only. "
             f"Never invent lines and attribute them to a real poet. "
-            f"Never use Ahmad Faraz or Parveen Shakir (still copyrighted) — pick a different "
-            f"real Ghalib/Iqbal/Mir couplet instead if unsure."
+            f"Never use Ahmad Faraz or Parveen Shakir (still copyrighted) — if unsure, "
+            f"pick a different well-attested couplet by {poet_name} instead."
         )
+        if poet_key in ("bullehshah", "warisshah"):
+            source_rule += (
+                " This poet wrote in Punjabi: use their SHORT, simple Sufiyana lines "
+                "written in Urdu script (Shahmukhi), with easy pronunciation for Urdu "
+                "TTS — no long or obscure vocabulary."
+            )
     else:
         poet_name = "AI Original"
         source_rule = (

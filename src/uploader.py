@@ -78,11 +78,43 @@ def _build_description(script_data: dict, tags: list) -> str:
         f"شاعر: {poet} | نظم خوانی: AI Urdu narration" if poet else "نظم خوانی: AI Urdu narration",
         script_data.get("description", ""),   # Urdu sentence (see script_generator prompt)
         "",
+        "Sad Urdu poetry status 💔 dukhi shayari — heart touching 2 line poetry with AI Urdu narration.",
+        "",
         "روزانہ نئی شاعری — فالو/سبسکرائب کیجیے تاکہ کوئی نظم رہ نہ جائے۔",
         "",
         "#urdupoetry #shayari #sadpoetry " + " ".join(f"#{t.replace(' ', '')}" for t in tags[:5]),
     ]
     return "\n".join(line for line in lines if line is not None)[:4000]
+
+
+# Search-cluster title tails — the channel's 746k views mostly come from the
+# "sad background music / dukhi status" SEARCH cluster (views audit 2026-07),
+# so every new original recitation rides the same demand with a bilingual
+# title: Urdu hook + rotating Roman keyword tail (+ poet credit).
+_SEARCH_TAILS = (
+    "sad urdu poetry",
+    "dukhi status",
+    "heart touching shayari",
+    "2 line sad poetry",
+    "urdu poetry status",
+)
+
+
+def _seo_title(script_data: dict) -> str:
+    """Build the final upload title.  Rotation is deterministic (md5 of
+    title+poet) so retries of the SAME script never churn the title, and a
+    batch of uploads spreads across all five search tails."""
+    import hashlib
+    base = (script_data.get("title") or "اردو شاعری").strip()
+    poet = (script_data.get("poet") or "").strip()
+    idx = int(hashlib.md5(f"{base}|{poet}".encode("utf-8")).hexdigest()[:6], 16) % len(_SEARCH_TAILS)
+    poet_tag = f" | {poet.split(' (')[0]}" if poet and poet.lower() != "original" else ""
+    tail = _SEARCH_TAILS[idx] + poet_tag
+    title = f"{base} | {tail}"
+    if len(title) > 97:  # shave the Urdu base, never the search tail
+        keep = max(20, 97 - len(tail) - 4)
+        title = f"{base[:keep].rstrip()}… | {tail}"
+    return title[:100]
 
 
 def upload_all(video_path: str, thumb_path: str, script_data: dict) -> dict:
@@ -93,7 +125,12 @@ def upload_all(video_path: str, thumb_path: str, script_data: dict) -> dict:
         logger.info("Duplicate content — skipping re-upload (%s)", existing.get("youtube_video_id"))
         return {"youtube_success": True, "youtube_video_id": existing.get("youtube_video_id"), "duplicate": True}
 
-    tags = script_data.get("tags") or ["urdu poetry", "shayari", "sad poetry", "urdu shorts", script_data.get("poet", "khateb e ishq")]
+    base_tags = script_data.get("tags") or ["urdu poetry", "shayari", "sad poetry", "urdu shorts", script_data.get("poet", "khateb e ishq")]
+    # Always append the winning search-cluster tags (deduped, short: the
+    # 500-char tag limit is nowhere near).
+    cluster = ["sad urdu poetry", "dukhi status", "heart touching poetry",
+               "urdu poetry status", "2 line poetry"]
+    tags = list(base_tags) + [t for t in cluster if t not in base_tags]
     status_body = {
         "privacyStatus": YT_PRIVACY_STATUS,
         "selfDeclaredMadeForKids": MADE_FOR_KIDS,
@@ -106,7 +143,7 @@ def upload_all(video_path: str, thumb_path: str, script_data: dict) -> dict:
         logger.info("Scheduled → YouTube auto-publishes at %s (next PK peak)", publish_at)
 
     body = {"snippet": {
-            "title": (script_data.get("title") or "اردو شاعری")[:100],
+            "title": _seo_title(script_data),
             "description": _build_description(script_data, tags),
             "categoryId": CATEGORY_ID,
             "tags": tags,
