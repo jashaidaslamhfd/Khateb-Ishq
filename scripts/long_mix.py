@@ -114,12 +114,17 @@ def _zoompan(img_path: Path, duration: float, out_path: Path, zoom_in: bool = Tr
 
 # ----------------------------------------------------------------- poems
 def _fresh_script(topic: str) -> dict:
-    for attempt in range(1, MAX_SCRIPT_ATTEMPTS + 1):
+    """Groq's org TPM cap trips when 9 rapid calls fire per poem — back off
+    429-aware (75s) instead of burning the poem."""
+    for attempt in range(1, 6):
         try:
             return generate_script(topic)
         except Exception as exc:  # noqa: BLE001
-            logger.warning("script attempt %d failed: %s", attempt, exc)
-            time.sleep(20 * attempt)
+            msg = str(exc)
+            wait = 75 if "429" in msg else 25 * attempt
+            logger.warning("script attempt %d failed: %.150s — retrying in %ds",
+                           attempt, msg, wait)
+            time.sleep(wait)
     raise RuntimeError("script generation failed after retries")
 
 
@@ -296,6 +301,7 @@ def main() -> int:
             poems.append(_build_poem(i))
         except Exception as exc:  # noqa: BLE001
             logger.error("poem %d failed completely: %s — skipping it", i, exc)
+        time.sleep(12)  # pace LLM calls (org per-minute cap)
         if len(poems) >= 5 and len(poems) == POEMS - 1:
             break
     if len(poems) < 3:

@@ -50,8 +50,8 @@ jobs:
         shell: bash
         env:
           MIX_POEMS: ${{ github.event.inputs.poems || '8' }}
-          MIN_SPOKEN_WORDS: "70"
-          MAX_SPOKEN_WORDS: "100"
+          MIN_SPOKEN_WORDS: "50"
+          MAX_SPOKEN_WORDS: "85"
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
