@@ -106,6 +106,8 @@ def _seo_title(script_data: dict) -> str:
     batch of uploads spreads across all five search tails."""
     import hashlib
     base = (script_data.get("title") or "اردو شاعری").strip()
+    if " | " in base:
+        return base[:100]  # pre-built bilingual title (e.g. weekly long mixes)
     poet = (script_data.get("poet") or "").strip()
     idx = int(hashlib.md5(f"{base}|{poet}".encode("utf-8")).hexdigest()[:6], 16) % len(_SEARCH_TAILS)
     poet_tag = f" | {poet.split(' (')[0]}" if poet and poet.lower() != "original" else ""
