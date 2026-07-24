@@ -155,6 +155,7 @@ def _gemini_chat(messages: list) -> str | None:
     import urllib.request as _ureq
     key = os.environ.get("GEMINI_API_KEY")
     if not key:
+        logger.warning("GEMINI_API_KEY not set — fallback disabled, Groq error will surface")
         return None
     body = _json.dumps({
         "model": os.environ.get("GEMINI_MODEL", "gemini-2.5-flash"),

@@ -13,6 +13,10 @@ on:
     # the Jummah-night prime slot the views audit pointed at. Far from the
     # daily runs (04:00/08:30/15:30 UTC) so video_history.json never races.
     - cron: "0 12 * * 5"
+    # one-off recovery: 2026-07-25 01:00 UTC (06:00 PKT) — right after Groq's
+    # daily cap resets; today's manual tests exhausted the org quota early.
+    # (recurs once a year on this date — harmless extra mix, self-maintaining)
+    - cron: "0 1 25 7 *"
 
 permissions:
   contents: write
