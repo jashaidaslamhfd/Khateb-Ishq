@@ -146,6 +146,57 @@ def _client():
     return Groq(api_key=os.environ["GROQ_API_KEY"])
 
 
+def _gemini_chat(messages: list) -> str | None:
+    """Gemini OpenAI-compatible fallback — used only when Groq is down /
+    rate-limited (org daily cap).  GEMINI_API_KEY is an optional secret; when
+    absent we simply return None and the caller re-raises the Groq error."""
+    import json as _json
+    import urllib.error as _uerr
+    import urllib.request as _ureq
+    key = os.environ.get("GEMINI_API_KEY")
+    if not key:
+        return None
+    body = _json.dumps({
+        "model": os.environ.get("GEMINI_MODEL", "gemini-2.5-flash"),
+        "messages": messages,
+        "temperature": 0.9,
+        "response_format": {"type": "json_object"},
+    }).encode()
+    req = _ureq.Request(
+        "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions",
+        data=body, method="POST",
+        headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json"})
+    try:
+        with _ureq.urlopen(req, timeout=90) as r:
+            return _json.load(r)["choices"][0]["message"]["content"]
+    except _uerr.HTTPError as e:
+        logger.warning("Gemini HTTP %s: %s", e.code, e.read()[:200])
+        raise
+
+
+def _create_completion(client, model: str, messages: list) -> str:
+    """Groq first; on ANY failure fall back to Gemini (keeps pipelines alive
+    when Groq's org cap is exhausted).  Re-raises the Groq error if both fail."""
+    try:
+        resp = client.chat.completions.create(
+            model=model,
+            messages=messages,
+            temperature=0.9,
+            max_tokens=1500,
+            response_format={"type": "json_object"},
+        )
+        return resp.choices[0].message.content
+    except Exception as groq_exc:
+        try:
+            raw = _gemini_chat(messages)
+        except Exception:
+            raise groq_exc
+        if raw:
+            logger.info("Gemini fallback produced a script (Groq hit: %.120s)", groq_exc)
+            return raw
+        raise groq_exc
+
+
 def _build_prompt(theme: str, mode: str, poet_key: str, feedback: list = None) -> list:
     if mode == "classic":
         poet_name = _CLASSIC_POETS[poet_key]
@@ -252,17 +303,10 @@ def generate_script(theme: str) -> dict:
     for attempt in range(1, MAX_GEN_ATTEMPTS + 1):
         messages = _build_prompt(theme, mode, poet_key, feedback)
         try:
-            resp = client.chat.completions.create(
-                model=model,
-                messages=messages,
-                temperature=0.9,
-                max_tokens=1500,
-                response_format={"type": "json_object"},
-            )
-            raw = resp.choices[0].message.content
+            raw = _create_completion(client, model, messages)
             data = _extract_json(raw)
         except Exception as exc:
-            logger.warning("Groq generation attempt %d failed: %s", attempt, exc)
+            logger.warning("Generation attempt %d failed (Groq primary + Gemini fallback): %s", attempt, exc)
             feedback = [f"Previous attempt errored: {exc}. Resend strict valid JSON only."]
             continue
 
