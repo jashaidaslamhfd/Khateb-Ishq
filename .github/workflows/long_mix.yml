@@ -1,0 +1,84 @@
+name: "Khateb-Ishq - Weekly Long Poetry Mix"
+
+on:
+  workflow_dispatch:
+    inputs:
+      poems:
+        description: "Poems in the mix (3-10)"
+        required: false
+        default: "8"
+        type: string
+  schedule:
+    # Friday 12:00 UTC = 17:00 PKT → uploader snaps publishAt to 21:00 PKT,
+    # the Jummah-night prime slot the views audit pointed at. Far from the
+    # daily runs (04:00/08:30/15:30 UTC) so video_history.json never races.
+    - cron: "0 12 * * 5"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: khateb-ishq-generation
+  cancel-in-progress: false
+
+jobs:
+  long-mix:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+          cache-dependency-path: requirements.txt
+
+      - name: Install system dependencies (ffmpeg + Urdu fonts)
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends ffmpeg fonts-noto sox
+          python -m pip install --upgrade pip
+          for i in 1 2 3; do python -m pip install -r requirements.txt && break || { echo "retry $i"; sleep 15; }; done
+
+      - name: Compile check
+        run: python -m compileall -q src scripts
+
+      - name: Build + upload weekly long mix
+        shell: bash
+        env:
+          MIX_POEMS: ${{ github.event.inputs.poems || '8' }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
+          AI_HORDE_API_KEY: ${{ secrets.AI_HORDE_API_KEY }}
+          DEEPAI_API_KEY: ${{ secrets.DEEPAI_API_KEY }}
+          HF_API_KEY: ${{ secrets.HF_API_KEY }}
+          MODELSLAB_API_KEY: ${{ secrets.MODELSLAB_API_KEY }}
+          PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
+          PIXABAY_API_KEY: ${{ secrets.PIXABAY_API_KEY }}
+          REPLICATE_API_TOKEN: ${{ secrets.REPLICATE_API_TOKEN }}
+          VOICE_REF_PASSPHRASE: ${{ secrets.VOICE_REF_PASSPHRASE }}
+          VIDEO_HISTORY_PATH: "data/video_history.json"
+          PYTHONUNBUFFERED: "1"
+        run: |
+          set -euo pipefail
+          python scripts/long_mix.py
+
+      - name: Persist history
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/video_history.json
+          if git diff --cached --quiet; then
+            echo "no changes"
+          else
+            git commit -m "chore: weekly long-mix history [skip ci]"
+            git pull --rebase
+            git push
+          fi
