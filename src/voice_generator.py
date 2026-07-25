@@ -106,6 +106,34 @@ def _synth_elevenlabs(text: str, out_path: str) -> None:
         fh.write(resp.content)
 
 
+class CloneHung(RuntimeError):
+    """Raised when the CPU voice-clone model hangs on one segment."""
+
+
+def _synth_clone_guarded(text: str, out_path: str) -> None:
+    """Clone one segment with a hard hang-guard.
+
+    2026-07-25 live proof: segment 3 of a healthy script froze the CPU clone
+    for ~56 minutes and the whole upload died (run was cancelled by hand).
+    No segment may ever again park a pipeline run: CLONE_SEGMENT_TIMEOUT
+    (default 240s ≈ 4× a healthy 40-60s segment) aborts it loudly.
+    """
+    import signal
+
+    timeout = int(os.environ.get("CLONE_SEGMENT_TIMEOUT", "240"))
+
+    def _boom(*_a):
+        raise CloneHung(f"voice-clone segment exceeded {timeout}s")
+
+    signal.signal(signal.SIGALRM, _boom)
+    signal.alarm(timeout)
+    try:
+        import voice_clone
+        voice_clone.synth_clone(text, out_path)
+    finally:
+        signal.alarm(0)
+
+
 def generate_voice_segments(scenes: List[dict], output_dir: str = "output/segments", **_ignored) -> List[Dict]:
     """One WAV segment per scene caption. All segments must use ONE voice —
     a poem that switches speaker mid-sher sounds like a bad radio edit."""
@@ -114,41 +142,53 @@ def generate_voice_segments(scenes: List[dict], output_dir: str = "output/segmen
     voices = _resolve_voices()
     voice = voices[0]  # deterministic default; one speaker per poem, always
     rate = _rate()
-    speaker_tag = (os.environ.get("ELEVENLABS_VOICE_ID", "")[:8] if engine == "elevenlabs"
-                   else "owner-clone" if engine == "qwenclone" else voice)
-    segments = []
-    for i, scene in enumerate(scenes):
-        caption = (scene.get("caption", "") if isinstance(scene, dict) else str(scene)).strip() or "۔"
-        suffix = ".wav" if engine == "qwenclone" else ".mp3"
-        with tempfile.NamedTemporaryFile(suffix=suffix, delete=False) as tmp:
-            tmp_path = tmp.name
-        try:
-            if engine == "elevenlabs":
-                _synth_elevenlabs(caption, tmp_path)
-            elif engine == "qwenclone":
-                import voice_clone
-                voice_clone.synth_clone(caption, tmp_path)
-            else:
-                asyncio.run(_synth(caption, voice, rate, tmp_path))
-            audio, sr = sf.read(tmp_path, dtype="float32")
-        finally:
-            if os.path.exists(tmp_path):
-                os.remove(tmp_path)
-        if audio.ndim > 1:
-            audio = audio.mean(axis=1)
-        if audio.size == 0:
-            raise RuntimeError(f"Edge-TTS returned empty audio for scene {i+1}: {caption[:40]}")
-        peak = float(np.abs(audio).max())
-        if peak > 1.0:
-            audio = audio / peak * 0.95
-        path = os.path.join(output_dir, f"seg_{i}.wav")
-        sf.write(path, audio, sr)
-        segments.append({"path": path, "duration": len(audio) / sr,
-                         "caption": caption, "tts_engine": f"{engine}:{speaker_tag}"})
-        logger.info("Segment %d/%d via %s (%.1fs)", i + 1, len(scenes), speaker_tag, len(audio) / sr)
-    engines = {s["tts_engine"] for s in segments}
-    if len(engines) != 1:
-        raise RuntimeError(f"Mixed voices in one video: {engines}")
-    logger.info("Total narration: %.1fs via %s @ %s",
-                sum(s["duration"] for s in segments), voice, rate)
-    return segments
+
+    def render(eng: str) -> List[Dict]:
+        speaker_tag = (os.environ.get("ELEVENLABS_VOICE_ID", "")[:8] if eng == "elevenlabs"
+                       else "owner-clone" if eng == "qwenclone" else voice)
+        segments = []
+        for i, scene in enumerate(scenes):
+            caption = (scene.get("caption", "") if isinstance(scene, dict) else str(scene)).strip() or "۔"
+            suffix = ".wav" if eng == "qwenclone" else ".mp3"
+            with tempfile.NamedTemporaryFile(suffix=suffix, delete=False) as tmp:
+                tmp_path = tmp.name
+            try:
+                if eng == "elevenlabs":
+                    _synth_elevenlabs(caption, tmp_path)
+                elif eng == "qwenclone":
+                    _synth_clone_guarded(caption, tmp_path)
+                else:
+                    asyncio.run(_synth(caption, voice, rate, tmp_path))
+                audio, sr = sf.read(tmp_path, dtype="float32")
+            finally:
+                if os.path.exists(tmp_path):
+                    os.remove(tmp_path)
+            if audio.ndim > 1:
+                audio = audio.mean(axis=1)
+            if audio.size == 0:
+                raise RuntimeError(f"TTS returned empty audio for scene {i+1}: {caption[:40]}")
+            peak = float(np.abs(audio).max())
+            if peak > 1.0:
+                audio = audio / peak * 0.95
+            path = os.path.join(output_dir, f"seg_{i}.wav")
+            sf.write(path, audio, sr)
+            segments.append({"path": path, "duration": len(audio) / sr,
+                             "caption": caption, "tts_engine": f"{eng}:{speaker_tag}"})
+            logger.info("Segment %d/%d via %s (%.1fs)", i + 1, len(scenes), speaker_tag, len(audio) / sr)
+        engines = {s["tts_engine"] for s in segments}
+        if len(engines) != 1:
+            raise RuntimeError(f"Mixed voices in one video: {engines}")
+        logger.info("Total narration: %.1fs via %s @ %s",
+                    sum(s["duration"] for s in segments), voice, rate)
+        return segments
+
+    try:
+        return render(engine)
+    except CloneHung as e:
+        # One stuck segment froze a live run before — never again. Restart the
+        # WHOLE poem on edge so the single-voice rule survives and the upload
+        # still happens today instead of dying with a cancelled workflow.
+        logger.warning("%s — clone hung; regenerating entire poem via edge TTS", e)
+        if engine != "qwenclone":
+            raise
+        return render("edge")
