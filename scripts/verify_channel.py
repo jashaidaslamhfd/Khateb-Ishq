@@ -16,7 +16,7 @@ import urllib.error
 import urllib.parse
 import urllib.request
 
-EXPECTED = os.environ.get("EXPECTED_CHANNEL_ID", "UCUh400Xuscv23BLSegAyU2Q")
+EXPECTED = (os.environ.get("EXPECTED_CHANNEL_ID") or "").strip() or "UCUh400Xuscv23BLSegAyU2Q"
 
 
 def main() -> int:
