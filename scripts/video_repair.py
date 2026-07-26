@@ -126,12 +126,15 @@ def _get_all_video_ids(token, uploads_playlist):
 def _build_tags(title, is_music):
     base = MUSIC_TAGS if is_music else POETRY_TAGS
     words = [w.strip("#,.|!?'\"").lower() for w in title.split()]
+    # YouTube rejects tags containing emoji/symbols with HTTP 400
+    words = [re.sub(r"[^a-z0-9 \-]", "", w).strip() for w in words]
     extra = [w for w in words if len(w) > 3 and w not in STOPWORDS and w not in base]
     tags = list(base) + extra
-    seen, out = set(), []
+    seen, out, total = set(), [], 0
     for t in tags:
-        if t and t not in seen:
+        if t and t not in seen and total + len(t) < 450:  # API 500-char cap
             seen.add(t)
+            total += len(t) + 1
             out.append(t)
     return out[:15]
 
