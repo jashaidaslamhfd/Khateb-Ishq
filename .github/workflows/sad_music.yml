@@ -1,0 +1,110 @@
+name: "Khateb-Ishq — Daily Sad Background Music (Original, Copyright-Free)"
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Owner pivot 2026-07-26: daily 1–2 min ORIGINAL sad instrumentals instead
+    # of poetry ("poetry ki bajay abi ke lie sad background music"). These are
+    # the same Pakistan-peak slots poetry used to own — publishAt snaps each
+    # upload to the exact peak (10:00 / 14:00 / 21:00 PKT):
+    - cron: "0 4 * * *"    # publish ~10:00 PKT
+    - cron: "30 8 * * *"   # publish ~14:00 PKT
+    - cron: "30 15 * * *"  # publish ~21:00 PKT (golden hour)
+
+permissions:
+  contents: write
+
+concurrency:
+  group: khateb-sad-music
+  cancel-in-progress: false
+
+jobs:
+  compose-and-upload:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+          cache-dependency-path: requirements.txt
+
+      - name: Install system dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends ffmpeg fonts-noto
+          python -m pip install --upgrade pip
+          for i in 1 2 3; do python -m pip install -r requirements.txt && break || { echo "retry $i"; sleep 15; }; done
+
+      - name: Validate required secrets (fail fast)
+        shell: bash
+        env:
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
+        run: |
+          set -euo pipefail
+          missing=0
+          for var in GOOGLE_CLIENT_ID GOOGLE_CLIENT_SECRET REFRESH_TOKEN; do
+            if [ -z "${!var:-}" ]; then
+              echo "::error::$var missing — upload would fail at the end. Set it in repo secrets."
+              missing=1
+            fi
+          done
+          [ "$missing" -eq 0 ] && echo "✓ YouTube OAuth secrets present"
+          exit "$missing"
+
+      - name: Compose, build and upload today's sad instrumental
+        shell: bash
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
+          HF_API_KEY: ${{ secrets.HF_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          DEEPAI_API_KEY: ${{ secrets.DEEPAI_API_KEY }}
+          AI_HORDE_API_KEY: ${{ secrets.AI_HORDE_API_KEY }}
+          MODELSLAB_API_KEY: ${{ secrets.MODELSLAB_API_KEY }}
+          REPLICATE_API_TOKEN: ${{ secrets.REPLICATE_API_TOKEN }}
+          PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
+          PIXABAY_API_KEY: ${{ secrets.PIXABAY_API_KEY }}
+          AI_HORDE_MAX_WAIT: "180"
+          YT_CATEGORY_ID: "10"
+          YT_PRIVACY_STATUS: "private"
+          YT_SCHEDULE_PUBLISH: "true"
+          MUSIC_SECONDS: "95"
+          PYTHONUNBUFFERED: "1"
+        run: python scripts/sad_music_short.py
+
+      - name: Persist music rotation state
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -z "$(git status --porcelain -- data/music_state.json)" ]; then echo "No state change."; exit 0; fi
+          git config user.name "khateb-bot"
+          git config user.email "khateb-bot@users.noreply.github.com"
+          git add data/music_state.json
+          git commit -m "chore: daily sad-music state [skip ci]"
+          for i in 1 2 3; do
+            if git pull --rebase origin "${GITHUB_REF_NAME}" && git push origin "HEAD:${GITHUB_REF_NAME}"; then
+              break
+            else
+              echo "Push retry $i"; sleep $((i*5)); [ $i -eq 3 ] && exit 0
+            fi
+          done
+
+      - name: Upload artifacts (video + audio)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sad-music-${{ github.run_id }}
+          path: |
+            output/
+          if-no-files-found: ignore
+          retention-days: 14
