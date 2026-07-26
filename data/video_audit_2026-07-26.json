@@ -1,0 +1,1196 @@
+{
+ "date": "2026-07-26",
+ "channel": "Khateb-Ishq (UCUh400Xuscv23BLSegAyU2Q)",
+ "channel_video_count": 82,
+ "videos_scanned": 84,
+ "videos_clean": 1,
+ "videos_faulty": 83,
+ "fault_counts": {
+  "language_not_ur": 77,
+  "not_short": 26,
+  "tags_missing": 17,
+  "title_truncated": 11,
+  "duplicate_title": 10,
+  "description_empty": 9,
+  "thumbnail_possibly_auto": 8,
+  "tags_thin": 5,
+  "description_thin": 5,
+  "description_no_hashtag": 3,
+  "title_english_only": 2,
+  "scheduled_pending": 1,
+  "not_public": 1
+ },
+ "faulty_videos": [
+  {
+   "video_id": "pyp6ysAohU8",
+   "url": "https://youtu.be/pyp6ysAohU8",
+   "title": "sad background music no copyright| royalty free music| no copyright music| NCS sad background music",
+   "published_at": "2020-10-15T06:56:10Z",
+   "views": "77891",
+   "language": "en",
+   "tags_count": 23,
+   "desc_len": 283,
+   "faults": [
+    "title_truncated",
+    "description_no_hashtag",
+    "language_not_ur",
+    "thumbnail_possibly_auto",
+    "not_short"
+   ]
+  },
+  {
+   "video_id": "Q6MroxkhynU",
+   "url": "https://youtu.be/Q6MroxkhynU",
+   "title": "Sad 😢 Very Sad Lines | Khateb Ishq | Sad status | Dukhi status | #shorts #sadpoetry #viralshorts",
+   "published_at": "2025-03-28T17:19:15Z",
+   "views": "371",
+   "language": "en",
+   "tags_count": 0,
+   "desc_len": 0,
+   "faults": [
+    "title_truncated",
+    "description_empty",
+    "tags_missing",
+    "language_not_ur"
+   ]
+  },
+  {
+   "video_id": "pqEcrM9QfyU",
+   "url": "https://youtu.be/pqEcrM9QfyU",
+   "title": "Sad Lines 😭 Sad Poetry 😔 Sad Background Music #heartfeltshayari #poetry #shayari#status #statusvideo",
+   "published_at": "2025-03-25T00:16:56Z",
+   "views": "115",
+   "language": "en",
+   "tags_count": 0,
+   "desc_len": 0,
+   "faults": [
+    "title_truncated",
+    "description_empty",
+    "tags_missing",
+    "language_not_ur"
+   ]
+  },
+  {
+   "video_id": "gOSUv5z8Pus",
+   "url": "https://youtu.be/gOSUv5z8Pus",
+   "title": "HFD STUDIO Live Stream",
+   "published_at": "2025-02-05T05:36:54Z",
+   "views": "2",
+   "language": "en",
+   "tags_count": 0,
+   "desc_len": 44,
+   "faults": [
+    "description_thin",
+    "tags_missing",
+    "language_not_ur",
+    "duplicate_title"
+   ]
+  },
+  {
+   "video_id": "hkP2MDyNmA0",
+   "url": "https://youtu.be/hkP2MDyNmA0",
+   "title": "live",
+   "published_at": "2025-02-01T22:21:01Z",
+   "views": "13",
+   "language": "en",
+   "tags_count": 2,
+   "desc_len": 4094,
+   "faults": [
+    "title_english_only",
+    "tags_thin",
+    "language_not_ur",
+    "not_short"
+   ]
+  },
+  {
+   "video_id": "YR7kIOh8wuk",
+   "url": "https://youtu.be/YR7kIOh8wuk",
+   "title": "bast",
+   "published_at": "2025-02-01T14:36:56Z",
+   "views": "3",
+   "language": "en",
+   "tags_count": 0,
+   "desc_len": 4094,
+   "faults": [
+    "title_english_only",
+    "tags_missing",
+    "language_not_ur",
+    "not_short"
+   ]
+  },
+  {
+   "video_id": "HnbU8hvcY-k",
+   "url": "https://youtu.be/HnbU8hvcY-k",
+   "title": "HFD STUDIO Live Stream",
+   "published_at": "2025-01-30T07:27:53Z",
+   "views": "30",
+   "language": "en",
+   "tags_count": 0,
+   "desc_len": 44,
+   "faults": [
+    "description_thin",
+    "tags_missing",
+    "language_not_ur",
+    "duplicate_title"
+   ]
+  },
+  {
+   "video_id": "Qix25IRIFVU",
+   "url": "https://youtu.be/Qix25IRIFVU",
+   "title": "Sad background music no copyright | NCS | dukhi status | sad background music for poetry",
+   "published_at": "2026-07-23T05:28:36Z",
+   "views": "35",
+   "language": "en",
+   "tags_count": 32,
+   "desc_len": 937,
+   "faults": [
+    "description_no_hashtag",
+    "language_not_ur",
+    "duplicate_title"
+   ]
+  },
+  {
+   "video_id": "aBUqfJ0S81k",
+   "url": "https://youtu.be/aBUqfJ0S81k",
+   "title": "Dream Home #dreamhome #shorts #viralshorts",
+   "published_at": "2025-03-29T03:55:00Z",
+   "views": "51",
+   "language": "en",
+   "tags_count": 0,
+   "desc_len": 0,
+   "faults": [
+    "description_empty",
+    "tags_missing",
+    "language_not_ur"
+   ]
+  },
+  {
+   "video_id": "tMxkdKX3uNM",
+   "url": "https://youtu.be/tMxkdKX3uNM",
+   "title": "Sad 🔥 Lines #shorts",
+   "published_at": "2025-03-27T06:22:05Z",
+   "views": "565",
+   "language": "en",
+   "tags_count": 0,
+   "desc_len": 0,
+   "faults": [
+    "description_empty",
+    "tags_missing",
+    "language_not_ur"
+   ]
+  },
+  {
+   "video_id": "HIwXrP4jGuU",
+   "url": "https://youtu.be/HIwXrP4jGuU",
+   "title": "Sad Status😢 #sad #shorts #status",
+   "published_at": "2025-03-25T15:32:45Z",
+   "views": "116",
+   "language": "en",
+   "tags_count": 0,
+   "desc_len": 33,
+   "faults": [
+    "description_thin",
+    "tags_missing",
+    "language_not_ur"
+   ]
+  },
+  {
+   "video_id": "adICRumpI2k",
+   "url": "https://youtu.be/adICRumpI2k",
+   "title": "Love status💕 #shorts #poetry #shayari",
+   "published_at": "2025-03-25T15:16:50Z",
+   "views": "547",
+   "language": "en",
+   "tags_count": 0,
+   "desc_len": 19,
+   "faults": [
+    "description_thin",
+    "tags_missing",
+    "language_not_ur"
+   ]
+  },
+  {
+   "video_id": "OlCQG5BeBWA",
+   "url": "https://youtu.be/OlCQG5BeBWA",
+   "title": "Deep Lines😔 #shorts  #shayari  #Poetry",
+   "published_at": "2025-03-25T15:03:41Z",
+   "views": "531",
+   "language": "en",
+   "tags_count": 0,
+   "desc_len": 52,
+   "faults": [
+    "description_thin",
+    "tags_missing",
+    "language_not_ur"
+   ]
+  },
+  {
+   "video_id": "vDOzK4hVBJY",
+   "url": "https://youtu.be/vDOzK4hVBJY",
+   "title": "Amazing 💕 Khateb Ishq Poetry | Sad poetry | Urdu Poetry #poetry #statusvideo #viralshorts #shorts",
+   "published_at": "2025-03-24T17:28:11Z",
+   "views": "128",
+   "language": "en",
+   "tags_count": 31,
+   "desc_len": 370,
+   "faults": [
+    "title_truncated",
+    "language_not_ur",
+    "duplicate_title"
+   ]
+  },
+  {
+   "video_id": "VXNXwPch7mY",
+   "url": "https://youtu.be/VXNXwPch7mY",
+   "title": "Amazing 💕 Khateb Ishq Poetry | Sad poetry | Urdu Poetry #poetry #statusvideo #viralshorts #shorts",
+   "published_at": "2025-03-24T17:22:20Z",
+   "views": "542",
+   "language": "en",
+   "tags_count": 6,
+   "desc_len": 97,
+   "faults": [
+    "title_truncated",
+    "language_not_ur",
+    "duplicate_title"
+   ]
+  },
+  {
+   "video_id": "D1TRgUbye4E",
+   "url": "https://youtu.be/D1TRgUbye4E",
+   "title": "Latest 💕 Sad Poetry Collect Shayari Poetry Status #shorts #viralshorts #trendingshorts  #shortslove",
+   "published_at": "2025-03-23T05:30:01Z",
+   "views": "525",
+   "language": "en",
+   "tags_count": 0,
+   "desc_len": 99,
+   "faults": [
+    "title_truncated",
+    "tags_missing",
+    "language_not_ur"
+   ]
+  },
+  {
+   "video_id": "gwV4A7Q3kcw",
+   "url": "https://youtu.be/gwV4A7Q3kcw",
+   "title": "Sad 😢 Very Sad Lines | Beautiful Poetry Collection | Poetry 2025 | #short #viralshorts #poetry #sad",
+   "published_at": "2025-03-23T05:08:00Z",
+   "views": "511",
+   "language": "en",
+   "tags_count": 0,
+   "desc_len": 99,
+   "faults": [
+    "title_truncated",
+    "tags_missing",
+    "language_not_ur"
+   ]
+  },
+  {
+   "video_id": "ITlEEgD2BaA",
+   "url": "https://youtu.be/ITlEEgD2BaA",
+   "title": "Khamoshi 😶 ❤️ #shorts #poetry #love #nothingimposibleinthisworld",
+   "published_at": "2025-03-22T17:32:31Z",
+   "views": "606",
+   "language": "en",
+   "tags_count": 0,
+   "desc_len": 0,
+   "faults": [
+    "description_empty",
+    "tags_missing",
+    "language_not_ur"
+   ]
+  },
+  {
+   "video_id": "isW8vsl-aCw",
+   "url": "https://youtu.be/isW8vsl-aCw",
+   "title": "maintain the world #shorts",
+   "published_at": "2025-03-21T10:00:46Z",
+   "views": "695",
+   "language": "en",
+   "tags_count": 0,
+   "desc_len": 0,
+   "faults": [
+    "description_empty",
+    "tags_missing",
+    "language_not_ur"
+   ]
+  },
+  {
+   "video_id": "2Y4JAycbI8U",
+   "url": "https://youtu.be/2Y4JAycbI8U",
+   "title": "Eid collection 2025 #shorts #shortsvideo #fashion #fashiontrends",
+   "published_at": "2025-03-04T17:59:37Z",
+   "views": "575",
+   "language": "en",
+   "tags_count": 0,
+   "desc_len": 0,
+   "faults": [
+    "description_empty",
+    "tags_missing",
+    "language_not_ur"
+   ]
+  },
+  {
+   "video_id": "_ae5Cys3q-I",
+   "url": "https://youtu.be/_ae5Cys3q-I",
+   "title": "Ramzan mubarak 💕 to All Muslims #ramzan #ramzanmubarak #ramzanstatus #shorts",
+   "published_at": "2025-03-01T17:44:37Z",
+   "views": "62",
+   "language": "en",
+   "tags_count": 0,
+   "desc_len": 0,
+   "faults": [
+    "description_empty",
+    "tags_missing",
+    "language_not_ur"
+   ]
+  },
+  {
+   "video_id": "G2-Ml1I3uJI",
+   "url": "https://youtu.be/G2-Ml1I3uJI",
+   "title": "Emotional Background Music | Sad Lines 😭 #shorts #music #poetry #shayari",
+   "published_at": "2025-02-24T07:21:52Z",
+   "views": "46",
+   "language": "en",
+   "tags_count": 0,
+   "desc_len": 0,
+   "faults": [
+    "description_empty",
+    "tags_missing",
+    "language_not_ur"
+   ]
+  },
+  {
+   "video_id": "Yg4jc4Iz4yE",
+   "url": "https://youtu.be/Yg4jc4Iz4yE",
+   "title": "Urdu Poetry | Love shayari | sad shayari | sad poetry | status poetry | dukhi shayari | heartbroken",
+   "published_at": "2025-02-19T12:34:36Z",
+   "views": "33",
+   "language": "en",
+   "tags_count": 30,
+   "desc_len": 349,
+   "faults": [
+    "title_truncated",
+    "language_not_ur",
+    "not_short"
+   ]
+  },
+  {
+   "video_id": "pfLLBtpE8Vg",
+   "url": "https://youtu.be/pfLLBtpE8Vg",
+   "title": "Sad Background Music for Poetry | Shayari Background Music",
+   "published_at": "2025-02-10T15:35:43Z",
+   "views": "4862",
+   "language": "en",
+   "tags_count": 31,
+   "desc_len": 1860,
+   "faults": [
+    "language_not_ur",
+    "not_short",
+    "duplicate_title"
+   ]
+  },
+  {
+   "video_id": "OMXipmgE-IU",
+   "url": "https://youtu.be/OMXipmgE-IU",
+   "title": "💚 Best NonStop Love",
+   "published_at": "2025-02-07T03:46:08Z",
+   "views": "1198",
+   "language": "en",
+   "tags_count": 3,
+   "desc_len": 4094,
+   "faults": [
+    "tags_thin",
+    "language_not_ur",
+    "not_short"
+   ]
+  },
+  {
+   "video_id": "-wI96Q2C9gw",
+   "url": "https://youtu.be/-wI96Q2C9gw",
+   "title": "Sad song Hindi Background Music | New sad reels background",
+   "published_at": "2025-02-04T17:25:10Z",
+   "views": "24",
+   "language": "en",
+   "tags_count": 34,
+   "desc_len": 1619,
+   "faults": [
+    "language_not_ur",
+    "thumbnail_possibly_auto",
+    "not_short"
+   ]
+  },
+  {
+   "video_id": "srNzuDOqwqc",
+   "url": "https://youtu.be/srNzuDOqwqc",
+   "title": "Sad background Music for Poetry | Shayari Background Music",
+   "published_at": "2025-01-29T09:29:45Z",
+   "views": "3710",
+   "language": "en",
+   "tags_count": 30,
+   "desc_len": 1251,
+   "faults": [
+    "language_not_ur",
+    "not_short",
+    "duplicate_title"
+   ]
+  },
+  {
+   "video_id": "8vk2UTDfKj0",
+   "url": "https://youtu.be/8vk2UTDfKj0",
+   "title": "Sad Background Music for Portry | Poetry Background Music | Mery pas tum ho shayari Background Music",
+   "published_at": "2024-12-09T11:49:20Z",
+   "views": "10289",
+   "language": "en",
+   "tags_count": 32,
+   "desc_len": 336,
+   "faults": [
+    "title_truncated",
+    "language_not_ur",
+    "thumbnail_possibly_auto"
+   ]
+  },
+  {
+   "video_id": "qiZ572XLygM",
+   "url": "https://youtu.be/qiZ572XLygM",
+   "title": "sad background music for poetry | sad background music no copyright | background music for videos",
+   "published_at": "2022-10-26T16:40:54Z",
+   "views": "28301",
+   "language": "en",
+   "tags_count": 16,
+   "desc_len": 1021,
+   "faults": [
+    "title_truncated",
+    "language_not_ur",
+    "not_short"
+   ]
+  },
+  {
+   "video_id": "qYdqcYYARVQ",
+   "url": "https://youtu.be/qYdqcYYARVQ",
+   "title": "Bulleh shah kalam | Bulleh shah kalam in punjabi | Baba Bulleh shah kalam punjabi | #HfdStudio",
+   "published_at": "2020-11-23T07:30:00Z",
+   "views": "1778",
+   "language": "ms",
+   "tags_count": 23,
+   "desc_len": 356,
+   "faults": [
+    "language_not_ur",
+    "thumbnail_possibly_auto",
+    "not_short"
+   ]
+  },
+  {
+   "video_id": "iW61xfmpxrQ",
+   "url": "https://youtu.be/iW61xfmpxrQ",
+   "title": "Bulleh shah kalam | Bulleh shah kalam in punjabi | Baba Bulleh shah kalam punjabi",
+   "published_at": "2020-04-12T04:29:21Z",
+   "views": "7299",
+   "language": "ms",
+   "tags_count": 24,
+   "desc_len": 343,
+   "faults": [
+    "language_not_ur",
+    "thumbnail_possibly_auto",
+    "not_short"
+   ]
+  },
+  {
+   "video_id": "az6s1_4zgH8",
+   "url": "https://youtu.be/az6s1_4zgH8",
+   "title": "Sad background music no copyright | NCS | dukhi status | sad background music for poetry",
+   "published_at": "2020-04-04T18:55:51Z",
+   "views": "93220",
+   "language": "en",
+   "tags_count": 15,
+   "desc_len": 1484,
+   "faults": [
+    "description_no_hashtag",
+    "language_not_ur",
+    "duplicate_title"
+   ]
+  },
+  {
+   "video_id": "U63aYNffT04",
+   "url": "https://youtu.be/U63aYNffT04",
+   "title": "AI Couple Dance – Robot Love in Motion! ❤️🤖💃 #dance #shorts #viralvideo",
+   "published_at": "2025-03-29T18:21:33Z",
+   "views": "169",
+   "language": "en",
+   "tags_count": 3,
+   "desc_len": 506,
+   "faults": [
+    "tags_thin",
+    "language_not_ur"
+   ]
+  },
+  {
+   "video_id": "6Dh9XekfrjM",
+   "url": "https://youtu.be/6Dh9XekfrjM",
+   "title": "World 🌍 of Heavens #shorts #gilgitbaltistan #youtubeshorts #shortsfeed #shortsvideo",
+   "published_at": "2025-02-23T08:07:51Z",
+   "views": "244",
+   "language": "en",
+   "tags_count": 2,
+   "desc_len": 83,
+   "faults": [
+    "tags_thin",
+    "language_not_ur"
+   ]
+  },
+  {
+   "video_id": "9KE6CqyPYHk",
+   "url": "https://youtu.be/9KE6CqyPYHk",
+   "title": "Late Night Lofi Beats | Relaxing Study & Sleep Music",
+   "published_at": "2025-02-16T13:12:14Z",
+   "views": "147",
+   "language": "en",
+   "tags_count": 34,
+   "desc_len": 716,
+   "faults": [
+    "language_not_ur",
+    "not_short"
+   ]
+  },
+  {
+   "video_id": "4HDdf5enjkA",
+   "url": "https://youtu.be/4HDdf5enjkA",
+   "title": "Tea lovers #tea #viralshorts #shortsfeed",
+   "published_at": "2025-02-11T17:31:34Z",
+   "views": "25",
+   "language": "en",
+   "tags_count": 2,
+   "desc_len": 176,
+   "faults": [
+    "tags_thin",
+    "language_not_ur"
+   ]
+  },
+  {
+   "video_id": "Dy6kIzGJykc",
+   "url": "https://youtu.be/Dy6kIzGJykc",
+   "title": "The Heartbreak of Khateb Ishq | Sad Poetry | Shayari Music",
+   "published_at": "2025-02-08T03:27:41Z",
+   "views": "26",
+   "language": "en",
+   "tags_count": 30,
+   "desc_len": 1806,
+   "faults": [
+    "language_not_ur",
+    "not_public"
+   ]
+  },
+  {
+   "video_id": "YBKMykkV5F8",
+   "url": "https://youtu.be/YBKMykkV5F8",
+   "title": "sad songs khateb ishq",
+   "published_at": "2025-02-07T15:19:46Z",
+   "views": "2182",
+   "language": "en",
+   "tags_count": 12,
+   "desc_len": 4094,
+   "faults": [
+    "language_not_ur",
+    "not_short"
+   ]
+  },
+  {
+   "video_id": "wNhVR9qGsQw",
+   "url": "https://youtu.be/wNhVR9qGsQw",
+   "title": "💚 Best Mashup NonStop Love Mashup of Arijit Singh, Jubin Nautiyal, BPraak, AtifAslam",
+   "published_at": "2025-02-07T04:56:33Z",
+   "views": "1993",
+   "language": "en",
+   "tags_count": 12,
+   "desc_len": 4094,
+   "faults": [
+    "language_not_ur",
+    "not_short"
+   ]
+  },
+  {
+   "video_id": "zlj-nfC6BKc",
+   "url": "https://youtu.be/zlj-nfC6BKc",
+   "title": "Top HiTs 2025",
+   "published_at": "2025-02-06T06:40:18Z",
+   "views": "2634",
+   "language": "en",
+   "tags_count": 11,
+   "desc_len": 4094,
+   "faults": [
+    "language_not_ur",
+    "not_short"
+   ]
+  },
+  {
+   "video_id": "BqOxBTF4DpY",
+   "url": "https://youtu.be/BqOxBTF4DpY",
+   "title": "Sad background songs",
+   "published_at": "2025-02-04T11:36:26Z",
+   "views": "9",
+   "language": "en",
+   "tags_count": 15,
+   "desc_len": 4094,
+   "faults": [
+    "language_not_ur",
+    "thumbnail_possibly_auto"
+   ]
+  },
+  {
+   "video_id": "MXySwhUy0-Y",
+   "url": "https://youtu.be/MXySwhUy0-Y",
+   "title": "sad background music deep emotional & heart touching music",
+   "published_at": "2025-02-03T23:43:37Z",
+   "views": "59",
+   "language": "en",
+   "tags_count": 12,
+   "desc_len": 4094,
+   "faults": [
+    "language_not_ur",
+    "not_short"
+   ]
+  },
+  {
+   "video_id": "ecg5R5oRKqg",
+   "url": "https://youtu.be/ecg5R5oRKqg",
+   "title": "sad background music deep emotional & heart tauching music",
+   "published_at": "2025-02-03T11:04:40Z",
+   "views": "7",
+   "language": "en",
+   "tags_count": 12,
+   "desc_len": 4094,
+   "faults": [
+    "language_not_ur",
+    "not_short"
+   ]
+  },
+  {
+   "video_id": "H1GEuWL0nhs",
+   "url": "https://youtu.be/H1GEuWL0nhs",
+   "title": "Sad Background Music | Emotional Beats | No Copyright | NCS",
+   "published_at": "2025-02-03T06:55:34Z",
+   "views": "56",
+   "language": "en",
+   "tags_count": 29,
+   "desc_len": 1560,
+   "faults": [
+    "language_not_ur",
+    "not_short"
+   ]
+  },
+  {
+   "video_id": "GJVzaY4vAZQ",
+   "url": "https://youtu.be/GJVzaY4vAZQ",
+   "title": "🎶 Live Sad Songs | Heart-Touching Emotional Music | Feel the Pain & Heal",
+   "published_at": "2025-02-01T14:40:20Z",
+   "views": "2410",
+   "language": "en",
+   "tags_count": 28,
+   "desc_len": 697,
+   "faults": [
+    "language_not_ur",
+    "not_short"
+   ]
+  },
+  {
+   "video_id": "y22e7nx-0Jk",
+   "url": "https://youtu.be/y22e7nx-0Jk",
+   "title": "Sad Shayari village background Music | No copyright music | poetry Background Music",
+   "published_at": "2025-01-30T12:07:15Z",
+   "views": "3787",
+   "language": "en",
+   "tags_count": 27,
+   "desc_len": 1596,
+   "faults": [
+    "language_not_ur",
+    "not_short"
+   ]
+  },
+  {
+   "video_id": "9h2WPDjBdzc",
+   "url": "https://youtu.be/9h2WPDjBdzc",
+   "title": "Sad Shayari Background Music | Emotional Poetry Tunes",
+   "published_at": "2025-01-28T04:51:17Z",
+   "views": "7952",
+   "language": "en",
+   "tags_count": 31,
+   "desc_len": 605,
+   "faults": [
+    "language_not_ur",
+    "not_short"
+   ]
+  },
+  {
+   "video_id": "iGGjHIjsTCw",
+   "url": "https://youtu.be/iGGjHIjsTCw",
+   "title": "Sad Background Music 🎶 for Portry | video Background Music",
+   "published_at": "2025-01-19T09:02:18Z",
+   "views": "7087",
+   "language": "en",
+   "tags_count": 34,
+   "desc_len": 1643,
+   "faults": [
+    "language_not_ur",
+    "not_short"
+   ]
+  },
+  {
+   "video_id": "aqGj-ioTdjs",
+   "url": "https://youtu.be/aqGj-ioTdjs",
+   "title": "Sad background music no copyright | sad poetry music no copyright | sad background music for poetry",
+   "published_at": "2022-10-29T14:45:50Z",
+   "views": "23241",
+   "language": "en",
+   "tags_count": 17,
+   "desc_len": 609,
+   "faults": [
+    "title_truncated",
+    "language_not_ur"
+   ]
+  },
+  {
+   "video_id": "kGVtOWBjXB8",
+   "url": "https://youtu.be/kGVtOWBjXB8",
+   "title": "Sad background music no copyright | NCS | dukhi status",
+   "published_at": "2022-05-29T08:05:10Z",
+   "views": "24874",
+   "language": "en",
+   "tags_count": 19,
+   "desc_len": 4642,
+   "faults": [
+    "language_not_ur",
+    "duplicate_title"
+   ]
+  },
+  {
+   "video_id": "ELa1cdodgNA",
+   "url": "https://youtu.be/ELa1cdodgNA",
+   "title": "Sad background music no copyright | NCS | dukhi status",
+   "published_at": "2021-09-01T13:59:41Z",
+   "views": "76137",
+   "language": "ur",
+   "tags_count": 18,
+   "desc_len": 545,
+   "faults": [
+    "not_short",
+    "duplicate_title"
+   ]
+  },
+  {
+   "video_id": "ShKmQOOtzas",
+   "url": "https://youtu.be/ShKmQOOtzas",
+   "title": "Sad Poetry in urdu | Sad Urdu Poetry | Sad Urdu Shayari | Dukhi Shayari",
+   "published_at": "2020-03-30T05:59:31Z",
+   "views": "4288",
+   "language": "en",
+   "tags_count": 23,
+   "desc_len": 790,
+   "faults": [
+    "language_not_ur",
+    "not_short"
+   ]
+  },
+  {
+   "video_id": "0vXfqLqJY94",
+   "url": "https://youtu.be/0vXfqLqJY94",
+   "title": "شفق پوش زندگی | heart touching shayari | اوریجینل",
+   "published_at": "2026-07-25T19:20:35Z",
+   "views": "0",
+   "language": "ur",
+   "tags_count": 10,
+   "desc_len": 353,
+   "faults": [
+    "scheduled_pending"
+   ]
+  },
+  {
+   "video_id": "Ffxc2XACHKk",
+   "url": "https://youtu.be/Ffxc2XACHKk",
+   "title": "Sad shayari status in Urdu | Sad Urdu Poetry Shayari | Sad background Music for Poetry",
+   "published_at": "2025-05-11T05:12:33Z",
+   "views": "323",
+   "language": "en",
+   "tags_count": 31,
+   "desc_len": 1159,
+   "faults": [
+    "language_not_ur"
+   ]
+  },
+  {
+   "video_id": "xsUGY5t3OAc",
+   "url": "https://youtu.be/xsUGY5t3OAc",
+   "title": "Rona Aa Jayega 😭 | Latest Heartbreaking Punjabi Lines | Sad Status 2025 💔",
+   "published_at": "2025-03-28T17:18:48Z",
+   "views": "199",
+   "language": "en",
+   "tags_count": 31,
+   "desc_len": 1028,
+   "faults": [
+    "language_not_ur"
+   ]
+  },
+  {
+   "video_id": "GbxpYXlBPAw",
+   "url": "https://youtu.be/GbxpYXlBPAw",
+   "title": "I Tried Writing Poetry Again",
+   "published_at": "2025-03-23T06:49:39Z",
+   "views": "25",
+   "language": "en",
+   "tags_count": 15,
+   "desc_len": 294,
+   "faults": [
+    "language_not_ur"
+   ]
+  },
+  {
+   "video_id": "f3Uh55bLVlQ",
+   "url": "https://youtu.be/f3Uh55bLVlQ",
+   "title": "Latest 💕Bridal Bangles Collection Jhumka #shortviral #shorts #bangles #chura #jewellery",
+   "published_at": "2025-03-05T14:33:12Z",
+   "views": "541",
+   "language": "en",
+   "tags_count": 28,
+   "desc_len": 654,
+   "faults": [
+    "language_not_ur"
+   ]
+  },
+  {
+   "video_id": "V4s3lkpfMJY",
+   "url": "https://youtu.be/V4s3lkpfMJY",
+   "title": "Baba Bulleh Shah Kalam | Kalam Baba Bulleh shah Punjabi",
+   "published_at": "2025-03-04T17:31:07Z",
+   "views": "80",
+   "language": "en",
+   "tags_count": 27,
+   "desc_len": 1341,
+   "faults": [
+    "language_not_ur"
+   ]
+  },
+  {
+   "video_id": "zs92PPIlAgs",
+   "url": "https://youtu.be/zs92PPIlAgs",
+   "title": "new lofi sad song status || arjit singh song status 🥺 #shorts #short",
+   "published_at": "2025-02-26T17:01:29Z",
+   "views": "21",
+   "language": "en",
+   "tags_count": 10,
+   "desc_len": 98,
+   "faults": [
+    "language_not_ur"
+   ]
+  },
+  {
+   "video_id": "U6t0iybmwUw",
+   "url": "https://youtu.be/U6t0iybmwUw",
+   "title": "Wo bhi apny na huy 😢💔🔥 #shorts #sad #nusratfatehalikhan #song",
+   "published_at": "2025-02-22T17:53:54Z",
+   "views": "132",
+   "language": "en",
+   "tags_count": 12,
+   "desc_len": 289,
+   "faults": [
+    "language_not_ur"
+   ]
+  },
+  {
+   "video_id": "ynh9qoCgjRc",
+   "url": "https://youtu.be/ynh9qoCgjRc",
+   "title": "sad 😭 but deep Lines #sad #deep #emotional #love #whatsappstatus #youtubeshorts #fyp #foryou",
+   "published_at": "2025-02-22T14:46:26Z",
+   "views": "863",
+   "language": "en",
+   "tags_count": 15,
+   "desc_len": 358,
+   "faults": [
+    "language_not_ur"
+   ]
+  },
+  {
+   "video_id": "fW1RwfetV-E",
+   "url": "https://youtu.be/fW1RwfetV-E",
+   "title": "Sad Lines😔 | Dukhi Lines💔 | Sad Shayari✨ | #shorts",
+   "published_at": "2025-02-19T10:52:57Z",
+   "views": "269",
+   "language": "en",
+   "tags_count": 33,
+   "desc_len": 318,
+   "faults": [
+    "language_not_ur"
+   ]
+  },
+  {
+   "video_id": "0LsKiMTteWg",
+   "url": "https://youtu.be/0LsKiMTteWg",
+   "title": "Whatsapp Sad status 🥀 Urdu Poetry ✨ Dukhi shayari 💔 #shortsfeed #youtubeshorts #shorts",
+   "published_at": "2025-02-15T16:17:16Z",
+   "views": "169",
+   "language": "en",
+   "tags_count": 32,
+   "desc_len": 839,
+   "faults": [
+    "language_not_ur"
+   ]
+  },
+  {
+   "video_id": "7tRAe9qXazQ",
+   "url": "https://youtu.be/7tRAe9qXazQ",
+   "title": "Tehzeeb Hafi Ki Shayari | Dil Ko Chu Lene Wali Baatain ✨❤️ #Shorts",
+   "published_at": "2025-02-14T19:06:43Z",
+   "views": "444",
+   "language": "en",
+   "tags_count": 12,
+   "desc_len": 1023,
+   "faults": [
+    "language_not_ur"
+   ]
+  },
+  {
+   "video_id": "PT2kd7FdmFc",
+   "url": "https://youtu.be/PT2kd7FdmFc",
+   "title": "Sad 😞 Urdu Poetry #shortsfeed #shorts #shortsvideo",
+   "published_at": "2025-02-14T16:25:34Z",
+   "views": "427",
+   "language": "en",
+   "tags_count": 15,
+   "desc_len": 317,
+   "faults": [
+    "language_not_ur"
+   ]
+  },
+  {
+   "video_id": "8FaFiysdSYs",
+   "url": "https://youtu.be/8FaFiysdSYs",
+   "title": "Tehzib Hafi Sad 😢 Poetry 📖 #Poetry #shayari #sadmusic",
+   "published_at": "2025-02-14T16:00:42Z",
+   "views": "442",
+   "language": "en",
+   "tags_count": 12,
+   "desc_len": 323,
+   "faults": [
+    "language_not_ur"
+   ]
+  },
+  {
+   "video_id": "wh1l3YHa1sk",
+   "url": "https://youtu.be/wh1l3YHa1sk",
+   "title": "Beautiful 😻 roses 🌹 #rose #nature #heaven",
+   "published_at": "2025-02-13T04:37:08Z",
+   "views": "1682",
+   "language": "en",
+   "tags_count": 12,
+   "desc_len": 182,
+   "faults": [
+    "language_not_ur"
+   ]
+  },
+  {
+   "video_id": "ya6OYKok9FA",
+   "url": "https://youtu.be/ya6OYKok9FA",
+   "title": "Punjabi 🥻 Shayari ✍️ #bullehshah #shayari #punjabi",
+   "published_at": "2025-02-11T17:40:49Z",
+   "views": "21",
+   "language": "en",
+   "tags_count": 15,
+   "desc_len": 324,
+   "faults": [
+    "language_not_ur"
+   ]
+  },
+  {
+   "video_id": "tVJAYy4cdrA",
+   "url": "https://youtu.be/tVJAYy4cdrA",
+   "title": "Rain sounds like 2025 #rainsounds #naturelovers #rainyday",
+   "published_at": "2025-02-10T12:34:47Z",
+   "views": "83",
+   "language": "en",
+   "tags_count": 33,
+   "desc_len": 162,
+   "faults": [
+    "language_not_ur"
+   ]
+  },
+  {
+   "video_id": "GfCF2Z2sz5Y",
+   "url": "https://youtu.be/GfCF2Z2sz5Y",
+   "title": "Feel the Nature #feelthenatureworldbysm #naturelovers",
+   "published_at": "2025-02-09T17:34:24Z",
+   "views": "558",
+   "language": "en",
+   "tags_count": 29,
+   "desc_len": 187,
+   "faults": [
+    "language_not_ur"
+   ]
+  },
+  {
+   "video_id": "4Hu7cIgHNFs",
+   "url": "https://youtu.be/4Hu7cIgHNFs",
+   "title": "All-Natural ASMR: Relaxing Nature Sounds #nature #ASMR",
+   "published_at": "2025-02-09T17:21:15Z",
+   "views": "543",
+   "language": "en",
+   "tags_count": 28,
+   "desc_len": 219,
+   "faults": [
+    "language_not_ur"
+   ]
+  },
+  {
+   "video_id": "yB3emO2jus4",
+   "url": "https://youtu.be/yB3emO2jus4",
+   "title": "World Renowned Composer Shares Top SAD Soundtrack Tips",
+   "published_at": "2025-02-09T10:06:56Z",
+   "views": "3672",
+   "language": "en",
+   "tags_count": 29,
+   "desc_len": 1752,
+   "faults": [
+    "language_not_ur"
+   ]
+  },
+  {
+   "video_id": "n6s3MZwZE28",
+   "url": "https://youtu.be/n6s3MZwZE28",
+   "title": "Emotional Background Music for Poetry  #backgroundmusic",
+   "published_at": "2025-02-08T17:05:55Z",
+   "views": "8909",
+   "language": "en",
+   "tags_count": 24,
+   "desc_len": 297,
+   "faults": [
+    "language_not_ur"
+   ]
+  },
+  {
+   "video_id": "gwLIeKbuFFU",
+   "url": "https://youtu.be/gwLIeKbuFFU",
+   "title": "I Built My Dream Furniture Collection #furniture #khatebishq",
+   "published_at": "2025-02-08T14:15:48Z",
+   "views": "99",
+   "language": "en",
+   "tags_count": 28,
+   "desc_len": 600,
+   "faults": [
+    "language_not_ur"
+   ]
+  },
+  {
+   "video_id": "T8oPSYZJdPM",
+   "url": "https://youtu.be/T8oPSYZJdPM",
+   "title": "The Most Heartbreaking Punjabi Poetry Waris shah #warisShah",
+   "published_at": "2025-01-23T17:11:50Z",
+   "views": "632",
+   "language": "en",
+   "tags_count": 32,
+   "desc_len": 672,
+   "faults": [
+    "language_not_ur"
+   ]
+  },
+  {
+   "video_id": "Y7tzejU5Ea8",
+   "url": "https://youtu.be/Y7tzejU5Ea8",
+   "title": "TikTok Poetry Background Music | Sad Poetry Background Music",
+   "published_at": "2025-01-18T18:03:51Z",
+   "views": "5317",
+   "language": "en",
+   "tags_count": 30,
+   "desc_len": 1314,
+   "faults": [
+    "language_not_ur"
+   ]
+  },
+  {
+   "video_id": "wRUjzuI05Oo",
+   "url": "https://youtu.be/wRUjzuI05Oo",
+   "title": "Pashto Background Music | Sad Poetry Background for Poetry😭",
+   "published_at": "2024-12-30T07:14:49Z",
+   "views": "7166",
+   "language": "en",
+   "tags_count": 26,
+   "desc_len": 298,
+   "faults": [
+    "language_not_ur"
+   ]
+  },
+  {
+   "video_id": "stR0DOhdQGo",
+   "url": "https://youtu.be/stR0DOhdQGo",
+   "title": "Sad Background Music for Poetry 📖🎵",
+   "published_at": "2024-12-20T16:27:28Z",
+   "views": "8590",
+   "language": "en",
+   "tags_count": 31,
+   "desc_len": 1215,
+   "faults": [
+    "language_not_ur"
+   ]
+  },
+  {
+   "video_id": "aHOAyaTID8Y",
+   "url": "https://youtu.be/aHOAyaTID8Y",
+   "title": "Sad Poetry Background Music | sad Background Music for Poetry | Shayari Music",
+   "published_at": "2024-12-08T06:17:05Z",
+   "views": "11380",
+   "language": "en",
+   "tags_count": 34,
+   "desc_len": 309,
+   "faults": [
+    "language_not_ur"
+   ]
+  },
+  {
+   "video_id": "_0fabGeOlVg",
+   "url": "https://youtu.be/_0fabGeOlVg",
+   "title": "Sad Background Music No Copyright || Sad shayari background music || ncs sad background music",
+   "published_at": "2022-04-27T10:34:21Z",
+   "views": "33306",
+   "language": "ur",
+   "tags_count": 16,
+   "desc_len": 321,
+   "faults": [
+    "not_short"
+   ]
+  },
+  {
+   "video_id": "Wt_HYnVvQhI",
+   "url": "https://youtu.be/Wt_HYnVvQhI",
+   "title": "Sad background music no copyright | NCS | dukhi status | Non copyright music @khatebishq",
+   "published_at": "2022-04-03T06:16:39Z",
+   "views": "37680",
+   "language": "ur",
+   "tags_count": 19,
+   "desc_len": 324,
+   "faults": [
+    "thumbnail_possibly_auto"
+   ]
+  },
+  {
+   "video_id": "dt8sQLn_8TQ",
+   "url": "https://youtu.be/dt8sQLn_8TQ",
+   "title": "Sad Background Music No copyright | Sad Background Music | NCS | Dukhi status",
+   "published_at": "2022-01-12T14:24:18Z",
+   "views": "41503",
+   "language": "ur",
+   "tags_count": 27,
+   "desc_len": 305,
+   "faults": [
+    "not_short"
+   ]
+  },
+  {
+   "video_id": "ZKEmqJiABEk",
+   "url": "https://youtu.be/ZKEmqJiABEk",
+   "title": "Sad urdu poetry | dukhi status | alone status | best poetry",
+   "published_at": "2021-11-01T14:48:29Z",
+   "views": "0",
+   "language": "ur",
+   "tags_count": 30,
+   "desc_len": 275,
+   "faults": [
+    "thumbnail_possibly_auto"
+   ]
+  }
+ ]
+}
