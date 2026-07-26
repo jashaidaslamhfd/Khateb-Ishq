@@ -209,14 +209,15 @@ def main() -> int:
                          sn.get("defaultLanguage"), len(tags), len(new_tags),
                          len(desc), len(new_desc))
                 continue
+            # NOTE: never resend defaultAudioLanguage — videos stored with
+            # "zxx" (instrumental music) 400 when the value is echoed back;
+            # omitting the field keeps whatever YouTube already has.
             payload = {"id": vid, "snippet": {
                 "title": new_title,
                 "description": new_desc[:5000],
                 "categoryId": sn.get("categoryId", "22"),
                 "tags": new_tags,
                 "defaultLanguage": new_lang,
-                **({"defaultAudioLanguage": sn["defaultAudioLanguage"]}
-                   if sn.get("defaultAudioLanguage") else {}),
             }}
             try:
                 _req("PUT", DATA + "videos?part=snippet", token, payload)
