@@ -35,7 +35,9 @@ _FONT_CANDIDATES = [
     "/usr/share/fonts/truetype/noto/NotoSansArabic-Bold.ttf",
     "assets/fonts/NotoNaskhArabic-Bold.ttf",
 ]
-MUSIC_VOLUME = float(os.environ.get("MUSIC_VOLUME", "0.08"))
+# Owner feedback 2026-07-26: "poetry short, zyada music" — bed now sits at
+# 3.5% (workflow env) with fades below; voice is the king of the mix.
+MUSIC_VOLUME = float(os.environ.get("MUSIC_VOLUME", "0.05"))
 ZOOM = 1.08  # gentle Ken-Burns max zoom
 
 # ---- Viral-status look (owner request 2026-07-22) ------------------------
@@ -264,6 +266,11 @@ def build_video(image_paths: list, audio_segments: list, scenes: list) -> str:
             music = _cat([music] * loops).subclip(0, video.duration)
         else:
             music = music.subclip(0, video.duration)
+        # Gentle in/out fades so the bed never slaps in or cuts off mid-note —
+        # sad poetry should breathe. (Owner 2026-07-26: "zyada music")
+        from moviepy.audio.fx.all import audio_fadein, audio_fadeout
+        music = audio_fadein(music, 0.6)
+        music = audio_fadeout(music, min(3.0, max(1.0, video.duration * 0.18)))
         tracks.append(music)
     video = video.set_audio(CompositeAudioClip(tracks))
 

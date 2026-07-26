@@ -133,8 +133,11 @@ jobs:
           CHANNEL_LANGUAGE: "ur"
           URDU_VOICE: "asad"
           URDU_TTS_RATE: "-12"
-          # Repo variable VOICE_ENGINE (qwenclone | edge) selects the voice; edge is the safe default.
-          VOICE_ENGINE: ${{ vars.VOICE_ENGINE || 'edge' }}
+          # Voice HARD-SET to edge (ur-PK-AsadNeural, native Pakistani-Urdu
+          # neural, deep male). Owner 2026-07-26: qwenclone reference gave
+          # Urdu words an English-narrator feel, so vars.VOICE_ENGINE is
+          # deliberately ignored until a clean pure-Urdu reference exists.
+          VOICE_ENGINE: "edge"
           HF_HUB_ENABLE_HF_TRANSFER: "1"
           # Viral-status look — screen captions Roman Urdu, fast punch cuts,
           # cinematic grade. (Owner request; repo vars can override.)
@@ -142,7 +145,7 @@ jobs:
           FAST_CUT: ${{ vars.FAST_CUT || '1' }}
           APPLY_GRADE: ${{ vars.APPLY_GRADE || '1' }}
           POETRY_SOURCE: "mix"
-          TARGET_MIN_SECONDS: "30"
+          TARGET_MIN_SECONDS: "40"    # poems run 40-57s now (owner: 'poetry too short')
           TARGET_MAX_SECONDS: "57"
           AI_HORDE_API_KEY: ${{ secrets.AI_HORDE_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
@@ -152,7 +155,7 @@ jobs:
           REPLICATE_API_TOKEN: ${{ secrets.REPLICATE_API_TOKEN }}
           PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
           PIXABAY_API_KEY: ${{ secrets.PIXABAY_API_KEY }}
-          MUSIC_VOLUME: "0.08"
+          MUSIC_VOLUME: "0.035"   # poetry-first mix (owner: 'zyada music'); fades handled in video_editor
           VIDEO_TOPIC: ${{ inputs.topic || '' }}
           PYTHONUNBUFFERED: "1"
         run: |

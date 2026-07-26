@@ -34,7 +34,7 @@ from scheduler import PakistanPeakTimeScheduler
 MAX_SCRIPT_ATTEMPTS = 3
 MAX_IMAGE_RETRIES = 3
 HISTORY_PATH = os.environ.get("VIDEO_HISTORY_PATH", "data/video_history.json")
-TARGET_MIN = float(os.environ.get("TARGET_MIN_SECONDS", "30"))
+TARGET_MIN = float(os.environ.get("TARGET_MIN_SECONDS", "40"))  # poems run 40-57s now (owner 2026-07-26: 'poetry too short')
 TARGET_MAX = float(os.environ.get("TARGET_MAX_SECONDS", "57"))
 
 

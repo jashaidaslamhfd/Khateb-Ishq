@@ -36,8 +36,9 @@ logger = logging.getLogger(__name__)
 
 MIN_SCENES = 3
 MAX_SCENES = 5
-MIN_SPOKEN_WORDS = int(os.environ.get("MIN_SPOKEN_WORDS", "32"))  # 2 couplets ≈ 34-48 Urdu words — a hard 40-word floor
-                               # rejects valid 2-sher scripts 3/3 times (CI lesson 2026-07-22)
+MIN_SPOKEN_WORDS = int(os.environ.get("MIN_SPOKEN_WORDS", "50"))  # ~4 couplets ≈ 50-75 words
+                               # (owner 2026-07-26: poetry felt too short at the
+                               # old 32-word floor = 2 couplets)
 MAX_SPOKEN_WORDS = int(os.environ.get("MAX_SPOKEN_WORDS", "110"))
 MAX_GEN_ATTEMPTS = 3
 
@@ -252,12 +253,14 @@ def _build_prompt(theme: str, mode: str, poet_key: str, feedback: list = None) -
         '     "caption_roman": "<REQUIRED: exact same line in casual Roman Urdu — '
         'Pakistani texting style — used for on-screen captions; voice always speaks '
         'the Urdu caption, never this one>"}\n'
-        "    ... (3 to 5 scenes total)\n"
+        "    ... (4 to 6 scenes total — har scene aik mukammal misra/sher; kam se kam 4)\n"
         "  ]\n"
         "}\n\n"
         f"{source_rule}\n"
         f"Total spoken words across all scene captions combined should land roughly "
-        f"between {MIN_SPOKEN_WORDS} and {MAX_SPOKEN_WORDS} words (a 30-57 second Short)."
+        f"between {MIN_SPOKEN_WORDS} and {MAX_SPOKEN_WORDS} words (a 40-57 second Short). "
+        f"Kam az kam 4 mukammal ashaar/lines — 2 sher wali chhoti poetry viewer ko "
+        f"adhoori lagti hai (owner feedback 2026-07-26)."
     )
 
     user = f"Theme/topic: {theme}\n\nGenerate the JSON script now."

@@ -119,12 +119,20 @@ class SpokenFloorTests(unittest.TestCase):
             "scenes": [{"visual": "moody rain window", "caption": c} for c in captions],
         }
 
-    def test_two_couplets_pass_new_floor(self):
-        # 48 spoken words across 3 scenes — the 2-sher shape CI kept rejecting at 45-min
+    def test_two_couplets_now_rejected_owner_policy(self):
+        # Owner 2026-07-26: "poetry buhut short" — the old 2-sher floor is gone;
+        # 48 spoken words must now be REJECTED so every poem carries >=4 couplets.
         captions = [URDU_SHER_A + " " + URDU_SHER_B, URDU_SHER_B + " " + URDU_SHER_A, URDU_SHER_A]
         ok, issues = self.sg._validate_script(self._script(captions))
+        self.assertTrue(any("Spoken words" in i for i in issues),
+                        f"48-word 2-sher script should be rejected under the new floor: {issues}")
+
+    def test_full_poem_passes_new_floor(self):
+        # 4+ couplets across 3 scenes (~100 spoken words) — the new healthy shape
+        captions = [URDU_SHER_A + " " + URDU_SHER_B] * 3
+        ok, issues = self.sg._validate_script(self._script(captions))
         spoken_issues = [i for i in issues if "Spoken words" in i]
-        self.assertFalse(spoken_issues, f"2-couplet script rejected by floor: {issues}")
+        self.assertFalse(spoken_issues, f"full-length poem rejected by floor: {issues}")
 
     def test_tiny_script_still_rejected(self):
         ok, issues = self.sg._validate_script(self._script(["ایک دو تین", "چار پانچ", "چھ سات دن"]))
