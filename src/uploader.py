@@ -71,6 +71,21 @@ def _yt_client():
 
 
 def _build_description(script_data: dict, tags: list) -> str:
+    if script_data.get("kind") == "music":
+        title = script_data.get("title", "")
+        lines = [
+            f"🎵 {title}" if title else "🎵 Sad background music",
+            script_data.get("description", ""),
+            "",
+            "Ye instrumental track Khateb-e-Ishq ki 100% ORIGINAL composition hai — har sample isi project me note-by-note synthesize hota hai, koi copied ya downloaded music nahi. Is liye ye waqai copyright-free hai: na kisi ka claim, na strike ka khatar, aur channel ki monetization bilkul safe.",
+            "",
+            "Aap bhi isay apni videos/status me FREE use kar sakte hain — bas description me credit likhein: 'Music: Khateb-e-Ishq (YouTube)'.",
+            "",
+            "Rozana nayi original sad instrumental — subscribe kar lein taake koi dhun miss na ho.",
+            "",
+            "#sadmusic #backgroundmusic #copyrightfreemusic " + " ".join("#" + t.replace(" ", "") for t in tags[:5]),
+        ]
+        return "\n".join(lines)[:4000]
     poet = script_data.get("poet", "")
     title = script_data.get("title", "")
     lines = [
@@ -127,11 +142,18 @@ def upload_all(video_path: str, thumb_path: str, script_data: dict) -> dict:
         logger.info("Duplicate content — skipping re-upload (%s)", existing.get("youtube_video_id"))
         return {"youtube_success": True, "youtube_video_id": existing.get("youtube_video_id"), "duplicate": True}
 
-    base_tags = script_data.get("tags") or ["urdu poetry", "shayari", "sad poetry", "urdu shorts", script_data.get("poet", "khateb e ishq")]
-    # Always append the winning search-cluster tags (deduped, short: the
-    # 500-char tag limit is nowhere near).
-    cluster = ["sad urdu poetry", "dukhi status", "heart touching poetry",
-               "urdu poetry status", "2 line poetry"]
+    if script_data.get("kind") == "music":
+        base_tags = script_data.get("tags") or []
+        # Music search cluster (owner pivot 2026-07-26) — poetry cluster
+        # tags would be misleading metadata for instrumentals.
+        cluster = ["sad background music", "copyright free music", "royalty free music",
+                   "sad piano", "relaxing sad music", "dukhi status"]
+    else:
+        base_tags = script_data.get("tags") or ["urdu poetry", "shayari", "sad poetry", "urdu shorts", script_data.get("poet", "khateb e ishq")]
+        # Always append the winning search-cluster tags (deduped, short: the
+        # 500-char tag limit is nowhere near).
+        cluster = ["sad urdu poetry", "dukhi status", "heart touching poetry",
+                   "urdu poetry status", "2 line poetry"]
     tags = list(base_tags) + [t for t in cluster if t not in base_tags]
     status_body = {
         "privacyStatus": YT_PRIVACY_STATUS,
