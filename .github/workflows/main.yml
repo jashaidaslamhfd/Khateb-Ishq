@@ -20,7 +20,6 @@ on:
   #   - cron: "30 8 * * *"   # 13:30 PKT → publish 14:00 (afternoon peak)
   #   - cron: "0 13 * * *"   # 18:00 PKT → publish 18:30 (evening peak)
   #   - cron: "0 16 * * *"   # 21:00 PKT → publish 21:30 (poetry golden hour)
-  schedule: []
 
 permissions:
   contents: write
