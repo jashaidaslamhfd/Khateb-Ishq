@@ -8,14 +8,16 @@ import pytz
 
 
 class PakistanPeakTimeScheduler:
-    """Poetry-audience peaks (PKT): 10:00 morning scroll, 14:00 lunch,
-    21:00–23:00 the sad-poetry golden hours."""
+    """South Asia Poetry-audience peaks (Pakistan/India):
+    14:00 Afternoon Peak (Lunch/College-end),
+    18:30 Evening Peak (Commute/Relaxation),
+    21:30 Night Poetry Golden Hour (Absolute peak for sad poetry)."""
 
     TIMEZONE = os.environ.get("PUBLISH_TIMEZONE", "Asia/Karachi")
     PEAK_TIMES = [
-        {"hour": 10, "minute": 0, "name": "Morning"},
-        {"hour": 14, "minute": 0, "name": "Lunch"},
-        {"hour": 21, "minute": 0, "name": "Night poetry hours"},
+        {"hour": 14, "minute": 0, "name": "Afternoon Peak (14:00 PKT / 14:30 IST)"},
+        {"hour": 18, "minute": 30, "name": "Evening Peak (18:30 PKT / 19:00 IST)"},
+        {"hour": 21, "minute": 30, "name": "Night Poetry Golden Hour (21:30 PKT / 22:00 IST)"},
     ]
 
     def __init__(self):
@@ -34,10 +36,10 @@ class PakistanPeakTimeScheduler:
 
 def compute_publish_at(now: datetime = None) -> str:
     """Next peak slot (RFC-3339 UTC 'Z'), always >=30 min in the future.
-    Honors env: PUBLISH_TIMEZONE, PUBLISH_SLOTS='10:00,14:00,21:00'."""
+    Honors env: PUBLISH_TIMEZONE, PUBLISH_SLOTS='14:00,18:30,21:30'."""
     tz = pytz.timezone(os.environ.get("PUBLISH_TIMEZONE", "Asia/Karachi"))
     slots = []
-    for chunk in os.environ.get("PUBLISH_SLOTS", "10:00,14:00,21:00").split(","):
+    for chunk in os.environ.get("PUBLISH_SLOTS", "14:00,18:30,21:30").split(","):
         hour, minute = chunk.strip().split(":")
         slots.append((int(hour), int(minute)))
     now_local = (now or datetime.now(tz)).astimezone(tz)

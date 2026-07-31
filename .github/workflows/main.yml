@@ -17,9 +17,9 @@ on:
   # workflow now owns these exact Pakistan-peak slots — see sad_music.yml.
   # Manual poetry runs still work via workflow_dispatch above; to resume the
   # poetry schedule, restore:
-  #   - cron: "0 4 * * *"    # 09:00 PKT → publish 10:00
-  #   - cron: "30 8 * * *"   # 13:30 PKT → publish 14:00
-  #   - cron: "30 15 * * *"  # 20:30 PKT → publish 21:00 (poetry golden hour)
+  #   - cron: "30 8 * * *"   # 13:30 PKT → publish 14:00 (afternoon peak)
+  #   - cron: "0 13 * * *"   # 18:00 PKT → publish 18:30 (evening peak)
+  #   - cron: "0 16 * * *"   # 21:00 PKT → publish 21:30 (poetry golden hour)
   schedule: []
 
 permissions:
@@ -147,6 +147,7 @@ jobs:
           FAST_CUT: ${{ vars.FAST_CUT || '1' }}
           APPLY_GRADE: ${{ vars.APPLY_GRADE || '1' }}
           POETRY_SOURCE: "mix"
+          TOPIC_STRATEGY: "viral_hijack"
           TARGET_MIN_SECONDS: "40"    # poems run 40-57s now (owner: 'poetry too short')
           TARGET_MAX_SECONDS: "57"
           AI_HORDE_API_KEY: ${{ secrets.AI_HORDE_API_KEY }}

@@ -3,13 +3,13 @@ name: "Khateb-Ishq — Daily Sad Background Music (Original, Copyright-Free)"
 on:
   workflow_dispatch:
   schedule:
-    # Owner pivot 2026-07-26: daily 1–2 min ORIGINAL sad instrumentals instead
-    # of poetry ("poetry ki bajay abi ke lie sad background music"). These are
-    # the same Pakistan-peak slots poetry used to own — publishAt snaps each
-    # upload to the exact peak (10:00 / 14:00 / 21:00 PKT):
-    - cron: "0 4 * * *"    # publish ~10:00 PKT
-    - cron: "30 8 * * *"   # publish ~14:00 PKT
-    - cron: "30 15 * * *"  # publish ~21:00 PKT (golden hour)
+    # Pakistan & India South Asia Peaks:
+    # 14:00 PKT / 14:30 IST Peak
+    - cron: "30 8 * * *"    # publish ~14:00 PKT
+    # 18:30 PKT / 19:00 IST Peak
+    - cron: "0 13 * * *"   # publish ~18:30 PKT
+    # 21:30 PKT / 22:00 IST Peak (golden hour)
+    - cron: "0 16 * * *"  # publish ~21:30 PKT (golden hour)
 
 permissions:
   contents: write

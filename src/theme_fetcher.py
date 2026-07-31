@@ -20,6 +20,16 @@ def _used_themes() -> set:
 
 
 def get_theme(exclude_recent: int = 400) -> dict:
+    strategy = os.environ.get("TOPIC_STRATEGY", "poetry_series").strip().lower()
+    
+    # Dynamic South Asian poetry trend hijacker & real-time search trends strategy
+    if strategy in ("competitor_hijack", "viral_hijack"):
+        from competitor_hijacker_urdu import get_hijacked_viral_topic_ur
+        used = _used_themes()
+        chosen = get_hijacked_viral_topic_ur(list(used))
+        return {"topic": chosen["topic"], "series_number": 1,
+                "series_title": "Kalam #1: Gham", "source": chosen["source"]}
+
     catalogue = json.loads(THEMES_PATH.read_text(encoding="utf-8"))
     used = _used_themes()
     fresh = [t for t in catalogue if t["theme"].strip().lower() not in used]
