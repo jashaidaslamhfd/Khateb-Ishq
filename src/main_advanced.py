@@ -185,7 +185,23 @@ def run_pipeline(theme: str = None) -> dict:
 
     # ── Step 5: Video Build + Thumbnail ────────────────────────────────────
     final_video = build_video(image_paths, segments, script["scenes"])
-    thumb = generate_thumbnail(image_paths[0], script.get("title") or "اردو شاعری")
+
+    # ── Step 5.5: Thumbnail A/B Testing ────────────────────────────────────
+    try:
+        from thumbnail_ab import ThumbnailABGenerator
+        thumb_gen = ThumbnailABGenerator()
+        hook_roman = (script.get("hook_roman") or
+                      (script["scenes"][0].get("hook_roman") if script.get("scenes") else "") or
+                      (script["scenes"][0].get("caption_roman") if script.get("scenes") else "") or "")
+        title_display = script.get("title_roman") or script.get("title") or "Sad Urdu Poetry"
+        thumb_variants = thumb_gen.generate_variants(
+            image_paths[0], title_display, hook_roman)
+        thumb = thumb_gen.select_best(thumb_variants)
+        logger.info("🖼️ Thumbnail A/B: %d variants generated, best: %s",
+                    len(thumb_variants), thumb)
+    except Exception as exc:
+        logger.warning("Thumbnail A/B failed (non-critical): %s", exc)
+        thumb = generate_thumbnail(image_paths[0], script.get("title") or "اردو شاعری")
     logger.info("🎬 Video built: %s", final_video)
 
     # ── Step 6: Hashtag Optimization ───────────────────────────────────────
@@ -199,12 +215,39 @@ def run_pipeline(theme: str = None) -> dict:
         logger.warning("Hashtag optimization failed (non-critical): %s", exc)
         script["optimized_tags"] = script.get("tags", [])
 
+    # ── Step 6.5: SEO Score Check ─────────────────────────────────────────
+    try:
+        from seo_scorer import SEOScorer
+        scorer = SEOScorer()
+        script = scorer.auto_fix(script)  # Auto-fix SEO issues
+        seo_score = script.get("seo_score", {})
+        if seo_score:
+            logger.info("📊 SEO Score: %d/100 (Grade: %s) — %d fixes applied",
+                        seo_score.get("total", 0), seo_score.get("grade", "?"),
+                        seo_score.get("fix_count", 0))
+            if not seo_score.get("passed", False):
+                logger.warning("⚠️ SEO score below 70 — video may not rank well in search")
+    except Exception as exc:
+        logger.warning("SEO scoring failed (non-critical): %s", exc)
+
     # ── Step 7: YouTube Upload ─────────────────────────────────────────────
     result = upload_all(final_video, thumb, script)
     video_id = result.get("youtube_video_id")
     logger.info("📤 YouTube upload: %s", video_id or "FAILED")
 
-    # ── Step 8: Engagement Bot ─────────────────────────────────────────────
+    # ── Step 7.5: SRT Subtitles ────────────────────────────────────────────
+    if video_id and result.get("youtube_success"):
+        try:
+            from srt_generator import generate_srt
+            srt_path = generate_srt(segments, script["scenes"],
+                                    output_path="output/subtitles.srt")
+            logger.info("📝 SRT subtitles generated: %s", srt_path)
+            # Note: YouTube API doesn't support SRT upload via API v3.
+            # SRT is saved for manual upload or future API support.
+        except Exception as exc:
+            logger.warning("SRT generation failed (non-critical): %s", exc)
+
+      # ── Step 8: Engagement Bot ─────────────────────────────────────────────
     if video_id and result.get("youtube_success"):
         try:
             bot = EngagementBot()
@@ -218,6 +261,15 @@ def run_pipeline(theme: str = None) -> dict:
             logger.info("📢 Community post saved for manual posting")
         except Exception as exc:
             logger.warning("Engagement bot failed (non-critical): %s", exc)
+
+        # ── Step 8.5: AI Comment Responder ─────────────────────────────────
+        try:
+            from ai_comment_responder import AICommentResponder
+            responder = AICommentResponder()
+            reply_result = responder.process_video_comments(video_id, max_replies=3)
+            logger.info("🤖 AI replies: %d posted", reply_result.get("replies_posted", 0))
+        except Exception as exc:
+            logger.warning("AI comment responder failed (non-critical): %s", exc)
 
     # ── Step 9: Multi-Platform Posting ─────────────────────────────────────
     if video_id and result.get("youtube_success"):
