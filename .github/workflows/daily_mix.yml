@@ -1,0 +1,106 @@
+name: "Khateb-Ishq - Daily Long Poetry Mix (8-10 min)"
+
+on:
+  workflow_dispatch:
+    inputs:
+      poems:
+        description: "Poems in the mix (3-10)"
+        required: false
+        default: "8"
+        type: string
+  # Daily long mix — 2 videos per day for watch hours (monetization path)
+  # Need 3,491 more watch hours. Each mix = ~66.7 hours per 500 views.
+  # 2 mixes/day × 30 days = ~60 mixes → ~4,000 hours (if 500 views each)
+  schedule:
+    - cron: "0 4 * * *"     # UTC 04:00 = PKT 09:00 → morning mix
+    - cron: "0 16 * * *"    # UTC 16:00 = PKT 21:00 → evening mix
+
+permissions:
+  contents: write
+
+concurrency:
+  group: khateb-ishq-long-mix
+  cancel-in-progress: false
+
+jobs:
+  long-mix:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+          cache-dependency-path: requirements.txt
+
+      - name: Install system dependencies (ffmpeg + Urdu fonts)
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends ffmpeg fonts-noto sox
+          python -m pip install --upgrade pip
+          for i in 1 2 3; do python -m pip install -r requirements.txt && break || { echo "retry $i"; sleep 15; }; done
+
+      - name: Compile check
+        run: python -m compileall -q src scripts
+
+      - name: Verify YouTube channel identity
+        shell: bash
+        env:
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
+          EXPECTED_CHANNEL_ID: ${{ vars.EXPECTED_CHANNEL_ID }}
+        run: python scripts/verify_channel.py
+
+      - name: Build + upload daily long mix
+        shell: bash
+        env:
+          MIX_POEMS: ${{ github.event.inputs.poems || '8' }}
+          MIN_SPOKEN_WORDS: "50"
+          MAX_SPOKEN_WORDS: "85"
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
+          AI_HORDE_API_KEY: ${{ secrets.AI_HORDE_API_KEY }}
+          DEEPAI_API_KEY: ${{ secrets.DEEPAI_API_KEY }}
+          HF_API_KEY: ${{ secrets.HF_API_KEY }}
+          MODELSLAB_API_KEY: ${{ secrets.MODELSLAB_API_KEY }}
+          PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
+          PIXABAY_API_KEY: ${{ secrets.PIXABAY_API_KEY }}
+          REPLICATE_API_TOKEN: ${{ secrets.REPLICATE_API_TOKEN }}
+          VIDEO_HISTORY_PATH: "data/video_history.json"
+          PYTHONUNBUFFERED: "1"
+        run: |
+          set -euo pipefail
+          python scripts/long_mix.py
+
+      - name: Persist history
+        if: always()
+        run: |
+          git config user.name "khateb-ishq-bot"
+          git config user.email "khateb-ishq-bot@users.noreply.github.com"
+          git add data/ 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "no changes"
+          else
+            git commit -m "chore: daily long-mix history [skip ci]"
+            git pull --rebase --autostash || git pull --rebase || true
+            git push || { sleep 5; git pull --rebase --autostash; git push; }
+          fi
+
+      - name: Upload artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: long-mix-run-${{ github.run_id }}
+          path: |
+            output/
+            data/
+          if-no-files-found: ignore
+          retention-days: 7

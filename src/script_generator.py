@@ -96,6 +96,15 @@ def _validate_script(data: dict):
     _check_urdu_field("hook", data.get("hook", ""), issues)
     _check_urdu_field("cta", data.get("cta", ""), issues)
 
+    # title_roman and hook_roman are NOT Urdu — they're Roman/English for SEO
+    # They should be present but are allowed to be Latin characters
+    title_roman = (data.get("title_roman") or "").strip()
+    hook_roman = (data.get("hook_roman") or "").strip()
+    if not title_roman:
+        issues.append("title_roman is missing — needed for YouTube SEO title (Roman Urdu)")
+    if not hook_roman:
+        issues.append("hook_roman is missing — needed for on-screen hook overlay (Roman Urdu)")
+
     scenes = data.get("scenes")
     if not isinstance(scenes, list) or len(scenes) < MIN_SCENES:
         got = len(scenes) if isinstance(scenes, list) else 0
@@ -242,7 +251,9 @@ def _build_prompt(theme: str, mode: str, poet_key: str, feedback: list = None) -
         "just the JSON object, matching this exact shape:\n"
         "{\n"
         '  "title": "<Urdu title, short, punchy>",\n'
+        '  "title_roman": "<REQUIRED: same title in Roman Urdu / English — used for YouTube SEO title, never spoken>",\n'
         '  "hook": "<one Urdu line, first 2-3 seconds, must grab attention>",\n'
+        '  "hook_roman": "<REQUIRED: same hook in Roman Urdu — used for on-screen hook overlay, never spoken>",\n'
         '  "cta": "<one Urdu call-to-action line, e.g. follow/subscribe ka Urdu jumla>",\n'
         '  "description": "<one Urdu OR English sentence for the YouTube description>",\n'
         '  "poet": "<poet name if classic, else \\"Original\\">",\n'

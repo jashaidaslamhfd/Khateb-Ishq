@@ -175,10 +175,6 @@ def _compose_caption_image(caption: str) -> Image.Image:
     - Latin text (Roman Urdu): DejaVu bold, LTR, textwrap.
     - Urdu text: Naskh + libraqm RTL shaping with dark scrim."""
 
-    # ── Hook overlay for first 2 seconds (RETENTION FIX) ──────────────
-    # Big bold text at TOP of video — makes viewers stop scrolling
-    pass
-
 
 def _compose_hook_overlay(hook_text: str) -> Image.Image:
     """Big bold hook text overlay for the first 2 seconds of video.
@@ -342,6 +338,38 @@ def build_video(image_paths: list, audio_segments: list, scenes: list) -> str:
                          size=(WIDTH, HEIGHT)).set_duration(duration))
 
     video = concatenate_videoclips(clips, method="compose")
+
+    # ── LOOP TRICK (RETENTION FIX) ──────────────────────────────────
+    # Make the last scene's caption connect back to the first scene's
+    # hook — this creates a "seamless loop" feel that encourages
+    # viewers to rewatch (= more reach). The last caption fades into
+    # the first hook, making the viewer think "I want to hear that again"
+    if LOOP_TRICK and scenes and len(scenes) > 1:
+        try:
+            from moviepy.editor import TextClip
+            # Add a brief "rewatch" text overlay at the very end
+            last_clip = clips[-1]
+            hook_text = (scenes[0].get("hook_roman") or
+                         scenes[0].get("caption_roman") or
+                         scenes[0].get("caption", "")).strip()
+            if hook_text:
+                # The loop trick: last 1.5 seconds show the first hook again
+                # This creates a "deja vu" feeling → viewer rewatches
+                loop_strip = _compose_hook_overlay(hook_text)
+                loop_tmp = f"output/segments/loop_trick.png"
+                os.makedirs("output/segments", exist_ok=True)
+                loop_strip.save(loop_tmp)
+                from moviepy.editor import ImageClip as _IC
+                loop_clip = (_IC(loop_tmp).set_duration(min(1.5, last_clip.duration * 0.3))
+                             .set_position(("center", 200))
+                             .set_start(last_clip.duration - min(1.5, last_clip.duration * 0.3)))
+                from moviepy.editor import CompositeVideoClip
+                clips[-1] = CompositeVideoClip([last_clip, loop_clip],
+                                                size=(WIDTH, HEIGHT)).set_duration(last_clip.duration)
+                video = concatenate_videoclips(clips, method="compose")
+                logger.info("Loop trick applied: last scene reconnects to first hook")
+        except Exception as exc:
+            logger.warning("Loop trick failed (non-critical): %s", exc)
 
     audio_tracks = [AudioFileClip(seg["path"]) for seg in audio_segments]
     from moviepy.editor import concatenate_audioclips

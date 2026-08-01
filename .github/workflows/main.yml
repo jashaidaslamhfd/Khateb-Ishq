@@ -15,25 +15,39 @@ on:
   # ✅ ADVANCED PIPELINE — schedule based on REAL channel analytics data.
   # Owner data (2026-08-01): audience is active at specific hours per day.
   # Pipeline runs 30 min before each peak → publishAt snaps to the peak.
+  # PKT = UTC+5. So PKT 19:00 = UTC 14:00. Pipeline runs 30 min early = UTC 13:30.
   # Sunday: 7pm, 10pm | Mon: 3pm, 4pm | Tue: 3pm | Wed: 3,4,5,8,10pm
   # Thu: 1,4,5,8,10pm | Fri: 2,3,5,8pm | Sat: 3,5,11pm
   schedule:
-    # ── Every day: morning run (catches early peaks) ──
-    - cron: "30 7 * * 0"    # Sun 12:30 PKT → publish 7pm (19:00)
-    - cron: "0 10 * * 0"    # Sun 15:30 PKT → publish 10pm (22:00)
-    - cron: "0 9 * * 1"     # Mon 14:00 PKT → publish 3pm, 4pm
-    - cron: "0 12 * * 1"    # Mon 17:00 PKT → publish 4pm (second video)
-    - cron: "0 9 * * 2"     # Tue 14:00 PKT → publish 3pm
-    - cron: "0 9 * * 3"     # Wed 14:00 PKT → publish 3pm, 4pm, 5pm
-    - cron: "0 11 * * 3"    # Wed 16:00 PKT → publish 4pm, 5pm
-    - cron: "0 14 * * 3"    # Wed 19:00 PKT → publish 8pm, 10pm
-    - cron: "0 7 * * 4"     # Thu 12:00 PKT → publish 1pm, 4pm, 5pm
-    - cron: "0 10 * * 4"    # Thu 15:00 PKT → publish 4pm, 5pm
-    - cron: "0 14 * * 4"    # Thu 19:00 PKT → publish 8pm, 10pm
-    - cron: "0 8 * * 5"     # Fri 13:00 PKT → publish 2pm, 3pm, 5pm
-    - cron: "0 11 * * 5"    # Fri 16:00 PKT → publish 5pm, 8pm
-    - cron: "0 9 * * 6"     # Sat 14:00 PKT → publish 3pm, 5pm
-    - cron: "0 15 * * 6"    # Sat 20:00 PKT → publish 11pm
+    # ── Sunday: 7pm, 10pm PKT ──
+    - cron: "30 13 * * 0"    # UTC 13:30 = PKT 18:30 → publish 19:00
+    - cron: "0 17 * * 0"     # UTC 17:00 = PKT 22:00 → publish 22:00
+    # ── Monday: 3pm, 4pm PKT ──
+    - cron: "30 9 * * 1"     # UTC 09:30 = PKT 14:30 → publish 15:00
+    - cron: "30 10 * * 1"    # UTC 10:30 = PKT 15:30 → publish 16:00
+    # ── Tuesday: 3pm PKT ──
+    - cron: "30 9 * * 2"     # UTC 09:30 = PKT 14:30 → publish 15:00
+    # ── Wednesday: 3,4,5,8,10pm PKT ──
+    - cron: "30 9 * * 3"     # UTC 09:30 = PKT 14:30 → publish 15:00
+    - cron: "30 10 * * 3"    # UTC 10:30 = PKT 15:30 → publish 16:00
+    - cron: "30 11 * * 3"    # UTC 11:30 = PKT 16:30 → publish 17:00
+    - cron: "30 14 * * 3"    # UTC 14:30 = PKT 19:30 → publish 20:00
+    - cron: "0 17 * * 3"     # UTC 17:00 = PKT 22:00 → publish 22:00
+    # ── Thursday: 1,4,5,8,10pm PKT ──
+    - cron: "30 7 * * 4"     # UTC 07:30 = PKT 12:30 → publish 13:00
+    - cron: "30 10 * * 4"    # UTC 10:30 = PKT 15:30 → publish 16:00
+    - cron: "30 11 * * 4"    # UTC 11:30 = PKT 16:30 → publish 17:00
+    - cron: "30 14 * * 4"    # UTC 14:30 = PKT 19:30 → publish 20:00
+    - cron: "0 17 * * 4"     # UTC 17:00 = PKT 22:00 → publish 22:00
+    # ── Friday: 2,3,5,8pm PKT ──
+    - cron: "30 8 * * 5"     # UTC 08:30 = PKT 13:30 → publish 14:00
+    - cron: "30 9 * * 5"     # UTC 09:30 = PKT 14:30 → publish 15:00
+    - cron: "30 11 * * 5"    # UTC 11:30 = PKT 16:30 → publish 17:00
+    - cron: "30 14 * * 5"    # UTC 14:30 = PKT 19:30 → publish 20:00
+    # ── Saturday: 3,5,11pm PKT ──
+    - cron: "30 9 * * 6"     # UTC 09:30 = PKT 14:30 → publish 15:00
+    - cron: "30 11 * * 6"    # UTC 11:30 = PKT 16:30 → publish 17:00
+    - cron: "0 17 * * 6"     # UTC 17:00 = PKT 22:00 → publish 23:00
 
 permissions:
   contents: write
@@ -143,7 +157,7 @@ jobs:
           ENFORCE_POSTING_GAP: ${{ inputs.force == true && 'false' || 'true' }}
           MIN_POST_GAP_HOURS: "3.0"
           PUBLISH_TIMEZONE: "Asia/Karachi"
-          PUBLISH_SLOTS: "10:00,14:00,21:00"
+          PUBLISH_TIMEZONE: "Asia/Karachi"
           YT_MADE_FOR_KIDS: "false"
           CHANNEL_LANGUAGE: "ur"
           URDU_VOICE: "asad"

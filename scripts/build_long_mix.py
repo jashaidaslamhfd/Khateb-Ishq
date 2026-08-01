@@ -285,84 +285,25 @@ def _pick_music() -> str:
 
 
 def build_and_upload_mix(mix_number: int = 1) -> dict:
-    """Build a long mix video and upload it."""
-    from main import run_pipeline
+    """Build a long mix video and upload it.
+
+    Uses the long_mix.py approach: generates segments WITHOUT uploading
+    individually, then combines and uploads once as a mix.
+    """
     from uploader import upload_all
-    from video_editor import generate_thumbnail
 
-    # Generate 5-6 fresh poetry videos for the mix
-    segment_videos = []
-    num_segments = 6  # 6 × ~50s = ~300s = 5min + intro/end = ~5.5min
-
-    # To get 8+ minutes, we need more segments or longer poems
-    # Let's generate 8-10 segments
-    num_segments = 10  # 10 × ~50s = ~500s = ~8.3min
-
-    log.info("Building long mix #%d with %d segments...", mix_number, num_segments)
-
-    # Generate each segment as a separate pipeline run
-    for i in range(num_segments):
-        log.info("Generating segment %d/%d...", i + 1, num_segments)
-        try:
-            # Run pipeline for each segment
-            result = run_pipeline()
-            if result.get("success"):
-                video_path = f"{ROOT}/output/final_video.mp4"
-                if os.path.exists(video_path):
-                    # Copy to a unique name
-                    seg_path = f"{OUT}/mix/seg_{i}_{int(time.time())}.mp4"
-                    import shutil
-                    shutil.copy2(video_path, seg_path)
-                    segment_videos.append(seg_path)
-                    log.info("  ✅ Segment %d ready", i + 1)
-                else:
-                    log.warning("  ❌ Segment %d video not found", i + 1)
-            else:
-                log.warning("  ❌ Segment %d pipeline failed", i + 1)
-        except Exception as exc:
-            log.warning("  ❌ Segment %d failed: %s", i + 1, exc)
-
-        # Anti-spam: wait between segments
-        if i < num_segments - 1:
-            time.sleep(2)
-
-    if not segment_videos:
-        log.error("No segments generated — cannot build mix")
-        return {"success": False, "error": "no segments"}
-
-    # Build the mix video
-    music_path = _pick_music()
-    mix_video = _build_mix_video(segment_videos, mix_number, music_path)
-
-    # Generate thumbnail
-    thumb_path = f"{OUT}/mix/mix_thumb_{mix_number}.jpg"
-    if segment_videos and os.path.exists(segment_videos[0]):
-        from video_editor import generate_thumbnail
-        generate_thumbnail(segment_videos[0], f"Mix #{mix_number}").replace(".jpg", f"_{mix_number}.jpg")
-        # Copy the thumbnail
-        import shutil
-        src_thumb = f"{ROOT}/output/thumbnail.jpg"
-        if os.path.exists(src_thumb):
-            shutil.copy2(src_thumb, thumb_path)
-        else:
-            thumb_path = _build_intro_card(_create_mix_title(mix_number))
-
-    # Upload
-    script_data = {
-        "kind": "mix",
-        "title": _create_mix_title(mix_number),
-        "poet": "Various",
-        "description": MIX_DESCRIPTION,
-        "tags": MIX_TAGS,
-        "title_roman": _create_mix_title(mix_number),
-    }
-
+    # Delegate to long_mix.py which does this correctly
+    # (generates scripts, images, voice, builds video, uploads once)
+    log.info("Building long mix #%d via long_mix.py...", mix_number)
     try:
-        result = upload_all(mix_video, thumb_path, script_data)
-        log.info("Upload result: %s", result)
-        return {"success": True, "mix_number": mix_number, "result": result}
+        import long_mix
+        result = long_mix.main()
+        if result == 0:
+            return {"success": True, "mix_number": mix_number}
+        else:
+            return {"success": False, "error": "long_mix.py returned non-zero"}
     except Exception as exc:
-        log.error("Upload failed: %s", exc)
+        log.error("Long mix failed: %s", exc)
         return {"success": False, "error": str(exc)}
 
 

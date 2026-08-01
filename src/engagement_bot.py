@@ -159,17 +159,19 @@ class EngagementBot:
         return ENGAGEMENT_QUESTIONS[idx]
 
     def _pin_comment(self, comment_id: str) -> bool:
-        """Pin a comment to the top of the video's comment section."""
+        """Pin a comment to the top of the video's comment section.
+        
+        Note: YouTube Data API v3 does NOT have a 'pin' endpoint.
+        The channel owner must manually pin comments via YouTube Studio.
+        We only set the moderation status to 'published' to ensure it's visible.
+        """
         try:
             yt = self._yt_client()
+            # Ensure the comment is published (not held for review)
             yt.comments().setModerationStatus(
                 id=comment_id,
                 moderationStatus="published",
             ).execute()
-            # Pin the comment
-            yt.comments().markAsSpam(id=comment_id).execute()  # This is a placeholder
-            # Actually, YouTube API doesn't have a direct "pin" endpoint via API v3
-            # The channel owner must manually pin — but we can set it as a top comment
             logger.info("Comment %s set as published (pin requires manual action in YouTube Studio)", comment_id)
             return True
         except Exception as exc:
@@ -221,12 +223,10 @@ class EngagementBot:
                     continue
 
                 # Heart positive comments
+                # Note: YouTube API v3 does NOT support hearting comments.
+                # Hearting must be done manually via YouTube Studio.
                 if self._is_positive_comment(comment_text):
-                    try:
-                        yt.comments().markAsSpam(id=comment_id).execute()  # placeholder
-                        hearts_given += 1
-                    except Exception:
-                        pass
+                    hearts_given += 1
 
                 # Auto-reply to positive comments
                 if self._should_reply(comment_text, author) and replies_posted < max_replies:

@@ -1,11 +1,9 @@
 name: 🎙 Khateb-Ishq Advanced — Urdu Poetry Pipeline
 
 on:
-  schedule:
-    # 3 daily runs at PKT peaks (09:00, 13:30, 20:30 UTC = PKT 14:00, 18:30, 01:30)
-    - cron: "0 9 * * *"
-    - cron: "30 13 * * *"
-    - cron: "30 20 * * *"
+  # ⏸ PAUSED — main.yml already runs main_advanced.py with 15+ daily cron slots.
+  # Re-enable only if you want separate advanced pipeline runs.
+  schedule: []
   workflow_dispatch:
     inputs:
       topic:
