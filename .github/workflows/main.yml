@@ -12,12 +12,28 @@ on:
         required: false
         default: false
         type: boolean
-  # ⏸ POETRY SCHEDULE — was paused 2026-07-26 for music pivot.
-  # ✅ ADVANCED PIPELINE: 3x/day poetry schedule with AI-driven themes.
+  # ✅ ADVANCED PIPELINE — schedule based on REAL channel analytics data.
+  # Owner data (2026-08-01): audience is active at specific hours per day.
+  # Pipeline runs 30 min before each peak → publishAt snaps to the peak.
+  # Sunday: 7pm, 10pm | Mon: 3pm, 4pm | Tue: 3pm | Wed: 3,4,5,8,10pm
+  # Thu: 1,4,5,8,10pm | Fri: 2,3,5,8pm | Sat: 3,5,11pm
   schedule:
-    - cron: "30 8 * * *"   # 13:30 PKT → publish 14:00 (afternoon peak)
-    - cron: "0 13 * * *"   # 18:00 PKT → publish 18:30 (evening peak)
-    - cron: "0 16 * * *"   # 21:00 PKT → publish 21:30 (poetry golden hour)
+    # ── Every day: morning run (catches early peaks) ──
+    - cron: "30 7 * * 0"    # Sun 12:30 PKT → publish 7pm (19:00)
+    - cron: "0 10 * * 0"    # Sun 15:30 PKT → publish 10pm (22:00)
+    - cron: "0 9 * * 1"     # Mon 14:00 PKT → publish 3pm, 4pm
+    - cron: "0 12 * * 1"    # Mon 17:00 PKT → publish 4pm (second video)
+    - cron: "0 9 * * 2"     # Tue 14:00 PKT → publish 3pm
+    - cron: "0 9 * * 3"     # Wed 14:00 PKT → publish 3pm, 4pm, 5pm
+    - cron: "0 11 * * 3"    # Wed 16:00 PKT → publish 4pm, 5pm
+    - cron: "0 14 * * 3"    # Wed 19:00 PKT → publish 8pm, 10pm
+    - cron: "0 7 * * 4"     # Thu 12:00 PKT → publish 1pm, 4pm, 5pm
+    - cron: "0 10 * * 4"    # Thu 15:00 PKT → publish 4pm, 5pm
+    - cron: "0 14 * * 4"    # Thu 19:00 PKT → publish 8pm, 10pm
+    - cron: "0 8 * * 5"     # Fri 13:00 PKT → publish 2pm, 3pm, 5pm
+    - cron: "0 11 * * 5"    # Fri 16:00 PKT → publish 5pm, 8pm
+    - cron: "0 9 * * 6"     # Sat 14:00 PKT → publish 3pm, 5pm
+    - cron: "0 15 * * 6"    # Sat 20:00 PKT → publish 11pm
 
 permissions:
   contents: write

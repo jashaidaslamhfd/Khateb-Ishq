@@ -116,19 +116,41 @@ _SEARCH_TAILS = (
 
 
 def _seo_title(script_data: dict) -> str:
-    """Build the final upload title.  Rotation is deterministic (md5 of
-    title+poet) so retries of the SAME script never churn the title, and a
-    batch of uploads spreads across all five search tails."""
+    """Build the final upload title in ENGLISH/Roman Urdu (not Urdu script).
+
+    Owner request: title YouTube search mein English/Roman mein dikha —
+    Urdu script titles search mein barely rank karte. The on-screen captions
+    stay in Urdu/Roman as before; only the YouTube title is Roman.
+
+    Pattern: Roman Urdu hook + search tail + poet credit
+    Example: "Gham-e-Judai | sad urdu poetry | Ghalib"
+    """
     import hashlib
-    base = (script_data.get("title") or "اردو شاعری").strip()
+    import re
+
+    # Get the title — prefer Roman, fall back to Urdu
+    base = (script_data.get("title_roman") or "").strip()
+    if not base:
+        # Convert Urdu title to Roman if no roman title provided
+        base = (script_data.get("title") or "Urdu Poetry").strip()
+        # If base is in Urdu script, use a generic Roman hook instead
+        if re.search(r'[\u0600-\u06FF]', base):
+            base = "Sad Urdu Poetry"
+
+    # Get hook in Roman if available
+    hook_roman = (script_data.get("hook_roman") or "").strip()
+    if hook_roman and len(hook_roman) > len(base):
+        base = hook_roman[:60]
+
     if " | " in base:
-        return base[:100]  # pre-built bilingual title (e.g. weekly long mixes)
+        return base[:100]  # pre-built bilingual title
+
     poet = (script_data.get("poet") or "").strip()
     idx = int(hashlib.md5(f"{base}|{poet}".encode("utf-8")).hexdigest()[:6], 16) % len(_SEARCH_TAILS)
     poet_tag = f" | {poet.split(' (')[0]}" if poet and poet.lower() != "original" else ""
     tail = _SEARCH_TAILS[idx] + poet_tag
     title = f"{base} | {tail}"
-    if len(title) > 97:  # shave the Urdu base, never the search tail
+    if len(title) > 97:
         keep = max(20, 97 - len(tail) - 4)
         title = f"{base[:keep].rstrip()}… | {tail}"
     return title[:100]
