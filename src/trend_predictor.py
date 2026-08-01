@@ -108,6 +108,12 @@ CULTURAL_EVENTS = [
 
 # ── Rising keywords (Urdu poetry YouTube search trends) ───────────────────
 AUTOSUGGEST_SEEDS = [
+    # ── Channel's TOP search terms (real analytics 2026-08-01) ──
+    "poetry background music", "sad shayari background music",
+    "background music for poetry", "background music poetry",
+    "poetry bg music", "sad background music",
+    "copyright free background music", "no copyright music",
+    # ── General poetry seeds ──
     "urdu poetry", "sad shayari", "heart touching poetry",
     "2 line poetry urdu", "ghalib shayari", "ishq shayari",
     "dard bhari shayari", "rain poetry", "night poetry urdu",

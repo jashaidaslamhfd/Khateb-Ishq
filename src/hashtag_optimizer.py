@@ -35,15 +35,27 @@ MAX_TAG_CHARS = int(os.environ.get("MAX_HASHTAG_CHARS", "500"))
 
 # ── Seed keywords for YouTube search trend scraping ────────────────────────
 URDU_POETRY_SEEDS = [
+    # ── Channel's TOP search terms (real analytics 2026-08-01) ──
+    "poetry background music", "sad shayari background music",
+    "background music for poetry", "poetry bg music",
+    "sad background music", "copyright free background music",
+    "no copyright music", "background music poetry",
+    # ── General poetry seeds ──
     "urdu poetry sad", "sad shayari status", "ghalib poetry",
-    "urdupoetry", "2 line poetry", "heart touching shayari",
-    "motivational urdu poetry", "ishq shayari", "dukh shayari",
-    "dard bhari shayari", "tanhai poetry", "mohabbat poetry urdu",
-    "sufi poetry urdu", "punjabi sad poetry", "barish shayari",
+    "2 line poetry", "heart touching shayari",
+    "ishq shayari", "dukh shayari", "dard bhari shayari",
+    "tanhai poetry", "mohabbat poetry urdu", "barish shayari",
 ]
 
 # ── Pre-validated high-performing hashtag clusters ─────────────────────────
 STATIC_CLUSTERS = {
+    # ── REAL channel search data (owner provided 2026-08-01) ──
+    "channel_top_search": [
+        "poetrybackgroundmusic", "sadshayaribackgroundmusic",
+        "backgroundmusicforpoetry", "backgroundmusicpoetry",
+        "poetrybgmusic", "sadbackgroundmusic",
+        "copyrightfreebackgroundmusic", "nocopyrightmusic",
+    ],
     "poetry_core": ["urdupoetry", "shayari", "sadpoetry", "urdushayari", "poetry"],
     "sad_status": ["sadstatus", "dukhistatus", "sadshayari", "dard", "gham"],
     "heart_touching": ["hearttouching", "hearttouchingshayari", "emotionalpoetry"],
@@ -186,8 +198,11 @@ class HashtagOptimizer:
             add_tag(poet, 0)
         add_tag("khatebeishq", 0)  # Channel branding
 
+        # Priority 1: Channel's TOP search terms (real analytics data)
+        for tag in STATIC_CLUSTERS["channel_top_search"][:4]:
+            add_tag(tag, 1)
         # Priority 1: Core poetry tags
-        for tag in STATIC_CLUSTERS["poetry_core"][:3]:
+        for tag in STATIC_CLUSTERS["poetry_core"][:2]:
             add_tag(tag, 1)
         for tag in STATIC_CLUSTERS["sad_status"][:2]:
             add_tag(tag, 1)

@@ -102,16 +102,17 @@ def _build_description(script_data: dict, tags: list) -> str:
     return "\n".join(line for line in lines if line is not None)[:4000]
 
 
-# Search-cluster title tails — the channel's 746k views mostly come from the
-# "sad background music / dukhi status" SEARCH cluster (views audit 2026-07),
-# so every new original recitation rides the same demand with a bilingual
-# title: Urdu hook + rotating Roman keyword tail (+ poet credit).
+# Search-cluster title tails — based on REAL YouTube Analytics search data
+# (owner provided 2026-08-01). These 7 terms drive the most traffic to the
+# channel. Every video title rotates through these for maximum discoverability.
 _SEARCH_TAILS = (
-    "sad urdu poetry",
-    "dukhi status",
-    "heart touching shayari",
-    "2 line sad poetry",
-    "urdu poetry status",
+    "poetry background music",
+    "sad shayari background music",
+    "background music for poetry",
+    "background music poetry",
+    "poetry bg music",
+    "sad background music",
+    "copyright free background music",
 )
 
 
@@ -123,7 +124,7 @@ def _seo_title(script_data: dict) -> str:
     stay in Urdu/Roman as before; only the YouTube title is Roman.
 
     Pattern: Roman Urdu hook + search tail + poet credit
-    Example: "Gham-e-Judai | sad urdu poetry | Ghalib"
+    Example: "Gham-e-Judai | poetry background music | Ghalib"
     """
     import hashlib
     import re
@@ -166,16 +167,18 @@ def upload_all(video_path: str, thumb_path: str, script_data: dict) -> dict:
 
     if script_data.get("kind") == "music":
         base_tags = script_data.get("tags") or []
-        # Music search cluster (owner pivot 2026-07-26) — poetry cluster
-        # tags would be misleading metadata for instrumentals.
-        cluster = ["sad background music", "copyright free music", "royalty free music",
-                   "sad piano", "relaxing sad music", "dukhi status"]
+        # Music search cluster — REAL channel analytics (owner 2026-08-01)
+        cluster = ["poetry background music", "sad shayari background music",
+                   "background music for poetry", "sad background music",
+                   "copyright free background music", "no copyright music",
+                   "poetry bg music", "background music poetry"]
     else:
         base_tags = script_data.get("tags") or ["urdu poetry", "shayari", "sad poetry", "urdu shorts", script_data.get("poet", "khateb e ishq")]
-        # Always append the winning search-cluster tags (deduped, short: the
-        # 500-char tag limit is nowhere near).
-        cluster = ["sad urdu poetry", "dukhi status", "heart touching poetry",
-                   "urdu poetry status", "2 line poetry"]
+        # Poetry videos also ride the channel's top search terms
+        cluster = ["poetry background music", "sad shayari background music",
+                   "background music for poetry", "poetry bg music",
+                   "sad background music", "copyright free background music",
+                   "no copyright music", "background music poetry"]
     tags = list(base_tags) + [t for t in cluster if t not in base_tags]
     status_body = {
         "privacyStatus": YT_PRIVACY_STATUS,

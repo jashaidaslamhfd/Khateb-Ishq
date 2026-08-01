@@ -17,7 +17,10 @@ logger = logging.getLogger("competitor_hijacker_urdu")
 POETRY_KEYWORDS = {
     "juda", "juda'i", "muhabbat", "ishq", "dard", "tanhai", "gham", "shiri", "ghamgin",
     "ghalib", "iqbal", "mir", "shayar", "shayari", "ghazal", "status", "poetry",
-    "raat", "rain", "barish", "ashk", "aansu", "dil", "yaad", "yaadein", "zindagi"
+    "raat", "rain", "barish", "ashk", "aansu", "dil", "yaad", "yaadein", "zindagi",
+    # Channel's top search terms (real analytics 2026-08-01)
+    "background music", "bg music", "copyright free", "no copyright",
+    "sad background", "poetry background",
 }
 
 def fetch_youtube_autosuggest_ur(seed: str) -> list[str]:
@@ -77,7 +80,10 @@ def get_hijacked_viral_topic_ur(exclude_list: list[str] = None) -> dict:
     
     # --- Step 1: Real-time Autosuggest (Urdu/Shayari seeds) ---
     logger.info("Step 1/3: Harvesting real-time Urdu poetry search trends...")
-    seeds = ["urdu poetry sad", "sad shayari status", "ghalib poetry", "motivational quotes urdu"]
+    seeds = ["poetry background music", "sad shayari background music", "background music for poetry",
+             "background music poetry", "poetry bg music", "sad background music",
+             "copyright free background music", "no copyright music",
+             "urdu poetry sad", "ghalib poetry"]
     for seed in seeds:
         suggestions = fetch_youtube_autosuggest_ur(seed)
         for sug in suggestions:
