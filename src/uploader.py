@@ -174,11 +174,14 @@ def upload_all(video_path: str, thumb_path: str, script_data: dict) -> dict:
                    "poetry bg music", "background music poetry"]
     else:
         base_tags = script_data.get("tags") or ["urdu poetry", "shayari", "sad poetry", "urdu shorts", script_data.get("poet", "khateb e ishq")]
-        # Poetry videos also ride the channel's top search terms
+        # Poetry videos ride the channel's top search terms + India audience
         cluster = ["poetry background music", "sad shayari background music",
                    "background music for poetry", "poetry bg music",
                    "sad background music", "copyright free background music",
-                   "no copyright music", "background music poetry"]
+                   "no copyright music", "background music poetry",
+                   # India audience (45.6% of viewers) — Hindi crossover terms
+                   "hindi sad poetry", "dard bhari shayari hindi",
+                   "sad shayari hindi", "heart touching shayari hindi"]
     tags = list(base_tags) + [t for t in cluster if t not in base_tags]
     status_body = {
         "privacyStatus": YT_PRIVACY_STATUS,
