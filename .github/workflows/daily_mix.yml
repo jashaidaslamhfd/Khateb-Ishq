@@ -8,12 +8,14 @@ on:
         required: false
         default: "8"
         type: string
-  # Daily long mix — 2 videos per day for watch hours (monetization path)
-  # Need 3,491 more watch hours. Each mix = ~66.7 hours per 500 views.
-  # 2 mixes/day × 30 days = ~60 mixes → ~4,000 hours (if 500 views each)
+  # ⚔️ WAR MODE: 3 long mixes per day for watch hours
+  # Need 3,491 more watch hours in 30 days = ~116/day
+  # Each mix = ~33-80 hours (depends on retention)
+  # 3 mixes/day × 30 days = 90 mixes
   schedule:
-    - cron: "0 4 * * *"     # UTC 04:00 = PKT 09:00 → morning mix
-    - cron: "0 16 * * *"    # UTC 16:00 = PKT 21:00 → evening mix
+    - cron: "30 3 * * *"     # UTC 03:30 = PKT 08:30 → morning mix
+    - cron: "0 8 * * *"      # UTC 08:00 = PKT 13:00 → afternoon mix
+    - cron: "30 15 * * *"    # UTC 15:30 = PKT 20:30 → evening mix
 
 permissions:
   contents: write
