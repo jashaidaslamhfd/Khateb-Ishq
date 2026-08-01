@@ -589,7 +589,7 @@ def main() -> int:
 
     script_data = {
         "kind": "music",
-        "title": f"{mood['urdu']} | Sad Background Music (Copyright Free)",
+        "title": f"{mood['en']} | Sad Background Music Copyright Free | USE in Your Videos",
         "poet": "Original",
         "description": (f"{mood['urdu']} — {mood['en']}. Aik original sad instrumental, "
                         "Khateb-e-Ishq ki apni composition — moody, soft, aur bilkul copyright-free."),

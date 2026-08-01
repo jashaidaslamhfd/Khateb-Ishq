@@ -186,6 +186,16 @@ def run_pipeline(theme: str = None) -> dict:
     # ── Step 5: Video Build + Thumbnail ────────────────────────────────────
     final_video = build_video(image_paths, segments, script["scenes"])
 
+    # ── Step 5.2: Add EMOTION to the video (heartbeat + rain + soul) ──
+    try:
+        from emotion_engine import add_emotion_to_video
+        final_video = add_emotion_to_video(
+            final_video, script["scenes"], emotion_level="high"
+        )
+        logger.info("💕 Emotion engine applied: heartbeat + rain + soul")
+    except Exception as exc:
+        logger.warning("Emotion engine failed (non-critical): %s", exc)
+
     # ── Step 5.5: Thumbnail A/B Testing ────────────────────────────────────
     try:
         from thumbnail_ab import ThumbnailABGenerator
