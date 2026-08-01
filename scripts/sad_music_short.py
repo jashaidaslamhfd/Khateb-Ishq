@@ -47,8 +47,13 @@ OUT = "output"
 # ---------------------------------------------------------------------------
 # MOODS — daily rotation. Each mood = distinct key, progression, instrument
 # colour and ambience, so subscribers never hear "the same track" twice.
+#
+# UPDATED 2026-08-01: Added 5 VIRAL music moods (piano + rain + tabla).
+# These are the kind of tracks people WANT to use as background music on
+# TikTok/Reels/Shorts. The formula: Simple piano + Heavy rain + Gentle tabla.
 # ---------------------------------------------------------------------------
 MOODS = [
+    # ── ORIGINAL 4 MOODS (kept for variety) ──
     {
         "key": "barish_piano_am", "urdu": "بارش اور پیانو", "en": "Rainy Night Piano",
         "bpm": 56, "root": 57, "instrument": "piano",
@@ -91,6 +96,69 @@ MOODS = [
             "old photo album and candle in a dark room, cinematic",
             "vintage letters and dried rose on wooden table, moody light",
             "curtain moving gently in a dim nostalgic room, cinematic",
+        ],
+    },
+    # ── 5 VIRAL MOODS (piano + rain + tabla = the TikTok formula) ──
+    # These use pre-generated WAV files from generate_viral_music.py
+    # because they need the full viral formula: Simple piano + Heavy rain + Gentle tabla
+    {
+        "key": "barish_piano_viral", "urdu": "بارش پیانو", "en": "Rain Piano Viral",
+        "bpm": 56, "root": 57, "instrument": "piano",
+        "prog": [[57, 60, 64], [53, 57, 60], [48, 52, 55], [55, 59, 62]],
+        "rain": 0.040, "crackle": 0.0, "drone": 0.0,
+        "viral_wav": "assets/music/barish_piano_viral.wav",
+        "visuals": [
+            "heavy rain on window at night, city lights bokeh, cinematic, moody",
+            "rain pouring down a dark street, lone street lamp, cinematic",
+            "raindrops on glass with warm light inside, dark cinematic",
+        ],
+    },
+    {
+        "key": "raat_ka_dard", "urdu": "رات کا درد", "en": "Night Pain",
+        "bpm": 52, "root": 52, "instrument": "piano",
+        "prog": [[52, 55, 59], [48, 52, 55], [55, 59, 62], [57, 60, 64]],
+        "rain": 0.030, "crackle": 0.0, "drone": 0.0,
+        "viral_wav": "assets/music/raat_ka_dard.wav",
+        "visuals": [
+            "dark night sky with stars, silhouette of trees, cinematic",
+            "empty rooftop at night, moonlight, lonely cinematic",
+            "dark room with single window, moonlight streaming in, moody",
+        ],
+    },
+    {
+        "key": "judai_ka_mausam", "urdu": "جدائی کا موسم", "en": "Season of Separation",
+        "bpm": 50, "root": 50, "instrument": "piano",
+        "prog": [[50, 53, 57], [46, 50, 53], [53, 57, 60], [48, 52, 55]],
+        "rain": 0.035, "crackle": 0.0, "drone": 0.0,
+        "viral_wav": "assets/music/judai_ka_mausam.wav",
+        "visuals": [
+            "autumn leaves falling in rain, empty park bench, melancholic",
+            "broken heart shaped cloud in dark sky, cinematic, moody",
+            "rain on old wooden door, overgrown with vines, nostalgic",
+        ],
+    },
+    {
+        "key": "tanhai_ka_safar", "urdu": "تنہائی کا سفر", "en": "Journey of Loneliness",
+        "bpm": 48, "root": 57, "instrument": "piano",
+        "prog": [[57, 60, 64], [53, 57, 60], [48, 52, 55], [52, 55, 59]],
+        "rain": 0.020, "crackle": 0.0, "drone": 0.0,
+        "viral_wav": "assets/music/tanhai_ka_safar.wav",
+        "visuals": [
+            "empty road stretching into fog, night, cinematic, lonely",
+            "single figure walking in rain, silhouette, dark cinematic",
+            "deserted railway platform at night, fog, moody",
+        ],
+    },
+    {
+        "key": "dukh_ka_dariya", "urdu": "دکھ کا دریا", "en": "River of Sorrow",
+        "bpm": 50, "root": 55, "instrument": "piano",
+        "prog": [[55, 58, 62], [51, 55, 58], [46, 50, 53], [41, 45, 48]],
+        "rain": 0.045, "crackle": 0.0, "drone": 0.0,
+        "viral_wav": "assets/music/dukh_ka_dariya.wav",
+        "visuals": [
+            "dark river at night, rain falling on water, cinematic",
+            "tear drops on glass, blurred city lights behind, emotional",
+            "rain pouring on empty bridge at night, dark cinematic",
         ],
     },
 ]
@@ -246,7 +314,44 @@ def _melody(rng: random.Random, mood: dict, total_bars: int, intro_s: float) -> 
 
 
 def compose_music(mood: dict, seconds: float, seed: int) -> np.ndarray:
-    """Full arrangement -> stereo float array in [-1, 1]."""
+    """Full arrangement -> stereo float array in [-1, 1].
+    
+    If the mood has a 'viral_wav' key and the file exists, we use that
+    pre-generated viral track (piano + rain + tabla) instead of composing
+    from scratch. This ensures the best quality viral music is used.
+    """
+    # ── Check for pre-generated viral WAV ──
+    viral_wav = mood.get("viral_wav")
+    if viral_wav and os.path.exists(viral_wav):
+        log.info("Using pre-generated viral track: %s", viral_wav)
+        try:
+            import soundfile as sf
+            data, sr = sf.read(viral_wav, dtype="float64")
+            if data.ndim == 1:
+                data = np.stack([data, data])
+            elif data.ndim == 2:
+                data = data.T  # soundfile returns (frames, channels)
+            # Trim or loop to desired length
+            n = int(SR * seconds)
+            if data.shape[1] >= n:
+                data = data[:, :n]
+            else:
+                # Loop the viral track
+                loops = int(np.ceil(n / data.shape[1]))
+                data = np.tile(data, (1, loops))[:, :n]
+            # Apply fade in/out
+            fade_in = int(SR * 1.5)
+            fade_out = int(SR * 5.0)
+            data[:, :fade_in] *= np.linspace(0, 1, fade_in)
+            data[:, -fade_out:] *= np.linspace(1, 0, fade_out)
+            # Normalize
+            peak = float(np.max(np.abs(data))) or 1.0
+            data = data / peak * 0.92
+            return data
+        except Exception as exc:
+            log.warning("Failed to read viral WAV %s: %s — composing from scratch", viral_wav, exc)
+    
+    # ── Original composition fallback ──
     rng = random.Random(seed)
     np_rng = np.random.default_rng(seed)
     np.random.seed(seed % (2 ** 31))  # pads/plucks use global np.random
@@ -385,7 +490,13 @@ def _procedural_backdrop(path: str, mood: dict, seed: int) -> str:
     palettes = {"barish_piano_am": ((8, 16, 34), (16, 42, 84)),
                 "raat_drone_em": ((6, 8, 18), (26, 24, 52)),
                 "judai_plucks_dm": ((28, 14, 8), (74, 42, 18)),
-                "yaadein_piano_fm": ((24, 10, 20), (64, 30, 44))}
+                "yaadein_piano_fm": ((24, 10, 20), (64, 30, 44)),
+                # Viral mood palettes (rain + night themes)
+                "barish_piano_viral": ((6, 14, 30), (14, 38, 80)),
+                "raat_ka_dard": ((4, 6, 16), (22, 20, 48)),
+                "judai_ka_mausam": ((20, 10, 14), (56, 30, 40)),
+                "tanhai_ka_safar": ((8, 10, 20), (20, 28, 52)),
+                "dukh_ka_dariya": ((4, 4, 12), (18, 16, 40))}
     top, bottom = palettes.get(mood["key"], ((10, 10, 16), (30, 30, 46)))
     W, H = 1080, 1920
     img = Image.new("RGB", (W, H))

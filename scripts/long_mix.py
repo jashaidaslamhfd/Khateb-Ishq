@@ -55,6 +55,16 @@ MAX_SCRIPT_ATTEMPTS = 3
 MAX_IMAGE_RETRIES = 3
 MUSIC_VOLUME = float(os.environ.get("MIX_MUSIC_VOLUME", os.environ.get("MUSIC_VOLUME", "0.08")))
 
+# ── VIRAL MUSIC PRIORITY: Use pre-generated viral tracks first ──
+# These have the viral formula: Simple piano + Heavy rain + Gentle tabla
+VIRAL_MUSIC_TRACKS = [
+    "assets/music/barish_piano_viral.wav",
+    "assets/music/raat_ka_dard.wav",
+    "assets/music/judai_ka_mausam.wav",
+    "assets/music/tanhai_ka_safar.wav",
+    "assets/music/dukh_ka_dariya.wav",
+]
+
 
 # ----------------------------------------------------------------- helpers
 def _run(cmd: list) -> None:
@@ -239,7 +249,17 @@ def _assemble(poems: list) -> tuple:
           "-an", "-c:v", "copy", silent])
 
     # ---- mux: video + narration + looped music bed ----
-    music = _pick_music()
+    # PRIORITY: Use viral music tracks (piano + rain + tabla) first
+    # These are the kind people WANT to use as background music
+    music = None
+    # Try viral tracks first (random selection for variety)
+    import random as _rand
+    viral_tracks = [t for t in VIRAL_MUSIC_TRACKS if os.path.exists(t)]
+    if viral_tracks:
+        music = _rand.choice(viral_tracks)
+        logger.info("Using VIRAL music track: %s", os.path.basename(music))
+    if not music:
+        music = _pick_music()
     final = work / "final.mp4"
     if music:
         logger.info("Music bed: %s (vol %.2f)", music, MUSIC_VOLUME)
@@ -341,7 +361,18 @@ def main() -> int:
         "tags": tags,
         "poet": "",
     }
-    result = upload_all(str(final), thumb, script_data)
+    # ── Apply emotion engine to the final video (heartbeat + rain + soul) ──
+    final_str = str(final)
+    try:
+        from emotion_engine import add_emotion_to_video
+        final_str = add_emotion_to_video(
+            final_str, emotion_level="medium"  # Medium for long mixes — subtle emotion
+        )
+        logger.info("💕 Emotion engine applied to long mix: heartbeat + rain")
+    except Exception as exc:
+        logger.warning("Emotion engine failed for long mix (non-critical): %s", exc)
+
+    result = upload_all(final_str, thumb, script_data)
     logger.info("Upload result: %s", json.dumps(result)[:400])
 
     ok = bool(result.get("youtube_success") or result.get("youtube_video_id"))

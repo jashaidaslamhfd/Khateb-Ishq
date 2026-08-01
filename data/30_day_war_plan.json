@@ -1,0 +1,236 @@
+{
+  "generated_at": "2026-08-01T16:01:33.321938+00:00",
+  "current_stats": {
+    "subscribers": 2134,
+    "watch_hours": 509,
+    "retention": "32.6%",
+    "swipe_away": "67.4%",
+    "needed_watch_hours": 3491
+  },
+  "daily_schedule": [
+    {
+      "time": "04:00 PKT",
+      "type": "long_mix",
+      "duration": "8-10 min",
+      "purpose": "Watch hours (primary)",
+      "title_template": "Sad Poetry Mix #{n} | Heart Touching Shayari | Background Music",
+      "workflow": "daily_mix.yml"
+    },
+    {
+      "time": "09:00 PKT",
+      "type": "poetry_short",
+      "duration": "40-57 sec",
+      "purpose": "Algorithm engagement + daily content",
+      "title_template": "{hook} | Sad Urdu Poetry | poetry background music",
+      "workflow": "main.yml"
+    },
+    {
+      "time": "13:00 PKT",
+      "type": "long_mix",
+      "duration": "8-10 min",
+      "purpose": "Watch hours (primary)",
+      "title_template": "Dard Bhari Shayari Mix #{n} | Sad Background Music | Poetry BG Music",
+      "workflow": "daily_mix.yml"
+    },
+    {
+      "time": "15:00 PKT",
+      "type": "poetry_short",
+      "duration": "40-57 sec",
+      "purpose": "Algorithm engagement + peak hours",
+      "title_template": "{hook} | Emotional Poetry | sad shayari background music",
+      "workflow": "main.yml"
+    },
+    {
+      "time": "18:00 PKT",
+      "type": "music_short",
+      "duration": "1-2 min",
+      "purpose": "Search traffic (background music cluster)",
+      "title_template": "Sad Background Music | Copyright Free | Original #{n}",
+      "workflow": "sad_music.yml"
+    },
+    {
+      "time": "21:00 PKT",
+      "type": "long_mix",
+      "duration": "8-10 min",
+      "purpose": "Watch hours (evening peak)",
+      "title_template": "Emotional Poetry Mix #{n} | Background Music for Poetry | Heart Touching",
+      "workflow": "daily_mix.yml"
+    }
+  ],
+  "retention_fixes": {
+    "hook_overlay": {
+      "status": "IMPLEMENTED",
+      "description": "Big bold yellow text in first 2.5 seconds",
+      "expected_impact": "+10-15% retention",
+      "code": "video_editor.py HOOK_OVERLAY=1"
+    },
+    "fast_cut": {
+      "status": "IMPLEMENTED",
+      "description": "Each scene = 2 punch-cuts with alt pan/zoom",
+      "expected_impact": "+5-8% retention",
+      "code": "video_editor.py FAST_CUT=1"
+    },
+    "cinematic_grade": {
+      "status": "IMPLEMENTED",
+      "description": "Warm contrast + vignette + film grain",
+      "expected_impact": "+3-5% retention",
+      "code": "video_editor.py APPLY_GRADE=1"
+    },
+    "roman_captions": {
+      "status": "IMPLEMENTED",
+      "description": "On-screen captions in Roman Urdu (80% watch on mute)",
+      "expected_impact": "+5-10% retention",
+      "code": "video_editor.py CAPTION_SCRIPT=roman"
+    },
+    "loop_trick": {
+      "status": "IMPLEMENTED",
+      "description": "Last scene connects back to first hook",
+      "expected_impact": "+2-5% retention (rewatch)",
+      "code": "video_editor.py LOOP_TRICK=1"
+    },
+    "emotional_music": {
+      "status": "IMPLEMENTED",
+      "description": "Cinematic violin + cello + strings + reverb",
+      "expected_impact": "+3-5% retention",
+      "code": "generate_music_beds.py"
+    },
+    "total_expected": "+28-48% retention boost",
+    "current": "32.6%",
+    "target": "55%+",
+    "note": "These are additive. Hook overlay alone should push 32.6% → 45%+. Combined = 55%+."
+  },
+  "seo_strategy": {
+    "title_format": "Roman Hook | Search Term | Poet",
+    "title_examples": [
+      "Gham-e-Dil | Sad Urdu Poetry | Background Music | Ghalib",
+      "Jab Apna Bana Hua | Sad Shayari Background Music | Poetry BG Music",
+      "Dard Bhari Shayari | Poetry Background Music | Heart Touching",
+      "Tanhai Ki Raat | Background Music for Poetry | Copyright Free",
+      "Bewafai Ka Dard | Sad Background Music | Emotional Poetry"
+    ],
+    "must_include_terms": [
+      "poetry background music",
+      "sad shayari background music",
+      "background music for poetry",
+      "poetry bg music",
+      "sad background music",
+      "copyright free background music",
+      "no copyright music",
+      "background music poetry"
+    ],
+    "india_audience_tags": [
+      "hindi sad poetry",
+      "dard bhari shayari hindi",
+      "sad shayari hindi",
+      "heart touching shayari hindi",
+      "sad status hindi",
+      "dukhi status"
+    ],
+    "description_template": "🎵 {title} — Khateb-e-Ishq\n\nSad Urdu poetry status 💔 dukhi shayari — heart touching 2 line poetry with AI Urdu narration.\n\nYe shayari aapke dil ki baat keh rahi hai ❤️ Sunte rahiye...\n\n📌 SUBSCRIBE for daily sad poetry with background music\n🎵 Music: 100% Original & Copyright-Free (Khateb-e-Ishq composition)\n✅ Free to use with credit: 'Music: Khateb-e-Ishq (YouTube)'\n\n#poetrybackgroundmusic #sadshayaribackgroundmusic #backgroundmusicforpoetry\n#poetrybgmusic #sadbackgroundmusic #copyrightfreebackgroundmusic\n#nocopyrightmusic #urdupoetry #sadpoetry #shayari"
+  },
+  "weekly_plan": {
+    "week_1": {
+      "days": "Day 1-7",
+      "focus": "RETENTION FIX + LAUNCH",
+      "daily_content": 6,
+      "expected_watch_hours": 200,
+      "actions": [
+        "✅ Hook overlay ACTIVE on every video",
+        "✅ Fast cuts + cinematic grade ACTIVE",
+        "✅ Roman captions ACTIVE",
+        "✅ Loop trick ACTIVE",
+        "✅ 3 long mixes/day starting Day 1",
+        "✅ SEO scorer auto-fix on every upload",
+        "✅ Thumbnail A/B testing on every video",
+        "📊 Monitor retention after 48 hours",
+        "📊 If retention < 45%, adjust hook text"
+      ],
+      "milestone": "Retention should improve to 45%+ by Day 7"
+    },
+    "week_2": {
+      "days": "Day 8-14",
+      "focus": "VOLUME + SEO PUSH",
+      "daily_content": 6,
+      "expected_watch_hours": 600,
+      "actions": [
+        "📈 Check retention data — adjust if needed",
+        "🔍 SEO optimization on ALL videos",
+        "📝 SRT subtitles on every video",
+        "🏷️ A/B test title formats",
+        "💬 AI comment responder on every video",
+        "📱 Community posts daily",
+        "🎯 Target India audience with Hindi tags"
+      ],
+      "milestone": "Retention should be 50%+ by Day 14"
+    },
+    "week_3": {
+      "days": "Day 15-21",
+      "focus": "ALGORITHM PUSH",
+      "daily_content": 6,
+      "expected_watch_hours": 1200,
+      "actions": [
+        "🚀 Algorithm should start pushing videos",
+        "📈 Views should increase 2-3x",
+        "🎯 Focus on long mix titles with search terms",
+        "📊 Track which themes get most views",
+        "🔄 Double down on winning themes",
+        "💬 Engage with every comment within 1 hour",
+        "📱 Cross-post to TikTok/IG if enabled"
+      ],
+      "milestone": "Watch hours should be ~2,000 by Day 21"
+    },
+    "week_4": {
+      "days": "Day 22-30",
+      "focus": "FINAL SPRINT",
+      "daily_content": 6,
+      "expected_watch_hours": 1500,
+      "actions": [
+        "🏃 Maximum content output",
+        "📊 Check monetization progress daily",
+        "🎯 Focus on search-optimized long mixes",
+        "💬 Maximum engagement on every video",
+        "📢 Community posts for subscriber growth",
+        "🔔 Remind subscribers to turn on notifications",
+        "📈 Track watch hours progress"
+      ],
+      "milestone": "4,000 watch hours = MONETIZATION! 🎉"
+    }
+  },
+  "projections": {
+    "pessimistic": {
+      "retention": "35%",
+      "total_30_day_wh": 1490,
+      "total_with_current": 1999,
+      "monetized": false,
+      "gap": 2001
+    },
+    "moderate": {
+      "retention": "45%",
+      "total_30_day_wh": 2264,
+      "total_with_current": 2773,
+      "monetized": false,
+      "gap": 1227
+    },
+    "optimistic": {
+      "retention": "55%",
+      "total_30_day_wh": 3192,
+      "total_with_current": 3701,
+      "monetized": false,
+      "gap": 299
+    },
+    "viral": {
+      "retention": "60%",
+      "total_30_day_wh": 3715,
+      "total_with_current": 4224,
+      "monetized": true,
+      "gap": 0
+    }
+  },
+  "critical_insight": "Retention is EVERYTHING. At 32.6%, algorithm kills reach. At 55%+, algorithm pushes. Fix retention FIRST.",
+  "success_probability": {
+    "without_retention_fix": "5% — algorithm will not push videos",
+    "with_retention_fix_45pct": "30% — good but may need more time",
+    "with_retention_fix_55pct": "70% — algorithm will push, monetization likely",
+    "with_retention_fix_60pct": "90% — viral territory, monetization almost certain"
+  }
+}

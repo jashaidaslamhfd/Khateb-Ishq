@@ -283,6 +283,17 @@ def _pick_music() -> str | None:
     if exact:
         match = [t for t in tracks if t.endswith(exact)]
         return match[0] if match else None
+    # PRIORITY: Prefer viral tracks (piano + rain + tabla) over old tracks
+    # These are the kind people WANT to use as background music on TikTok
+    viral_tracks = [t for t in tracks if any(v in t for v in
+                    ["barish_piano_viral", "raat_ka_dard", "judai_ka_mausam",
+                     "tanhai_ka_safar", "dukh_ka_dariya"])]
+    if viral_tracks:
+        return random.choice(viral_tracks)
+    # Fallback: prefer any track with "viral" or "rain" in the name
+    rain_tracks = [t for t in tracks if "viral" in t.lower() or "rain" in t.lower()]
+    if rain_tracks:
+        return random.choice(rain_tracks)
     return random.choice(tracks) if tracks else None
 
 
@@ -346,28 +357,37 @@ def build_video(image_paths: list, audio_segments: list, scenes: list) -> str:
     # the first hook, making the viewer think "I want to hear that again"
     if LOOP_TRICK and scenes and len(scenes) > 1:
         try:
-            from moviepy.editor import TextClip
             # Add a brief "rewatch" text overlay at the very end
             last_clip = clips[-1]
             hook_text = (scenes[0].get("hook_roman") or
                          scenes[0].get("caption_roman") or
                          scenes[0].get("caption", "")).strip()
-            if hook_text:
+            if hook_text and last_clip.duration >= 2.0:
                 # The loop trick: last 1.5 seconds show the first hook again
                 # This creates a "deja vu" feeling → viewer rewatches
-                loop_strip = _compose_hook_overlay(hook_text)
-                loop_tmp = f"output/segments/loop_trick.png"
-                os.makedirs("output/segments", exist_ok=True)
-                loop_strip.save(loop_tmp)
-                from moviepy.editor import ImageClip as _IC
-                loop_clip = (_IC(loop_tmp).set_duration(min(1.5, last_clip.duration * 0.3))
-                             .set_position(("center", 200))
-                             .set_start(last_clip.duration - min(1.5, last_clip.duration * 0.3)))
-                from moviepy.editor import CompositeVideoClip
-                clips[-1] = CompositeVideoClip([last_clip, loop_clip],
-                                                size=(WIDTH, HEIGHT)).set_duration(last_clip.duration)
-                video = concatenate_videoclips(clips, method="compose")
-                logger.info("Loop trick applied: last scene reconnects to first hook")
+                # SAFETY: Only apply if last clip is >= 2 seconds (avoid visual glitch)
+                loop_duration = min(1.5, last_clip.duration * 0.3)
+                if loop_duration >= 0.5:  # Minimum meaningful duration
+                    loop_strip = _compose_hook_overlay(hook_text)
+                    loop_tmp = f"output/segments/loop_trick.png"
+                    os.makedirs("output/segments", exist_ok=True)
+                    loop_strip.save(loop_tmp)
+                    from moviepy.editor import ImageClip as _IC
+                    loop_clip = (_IC(loop_tmp).set_duration(loop_duration)
+                                 .set_position(("center", 200))
+                                 .set_start(last_clip.duration - loop_duration))
+                    from moviepy.editor import CompositeVideoClip
+                    clips[-1] = CompositeVideoClip([last_clip, loop_clip],
+                                                    size=(WIDTH, HEIGHT)).set_duration(last_clip.duration)
+                    video = concatenate_videoclips(clips, method="compose")
+                    logger.info("Loop trick applied: last scene reconnects to first hook (%.1fs overlay)", loop_duration)
+                else:
+                    logger.info("Loop trick skipped: last clip too short for meaningful overlay")
+            else:
+                if not hook_text:
+                    logger.info("Loop trick skipped: no hook text available")
+                else:
+                    logger.info("Loop trick skipped: last clip too short (%.1fs)", last_clip.duration)
         except Exception as exc:
             logger.warning("Loop trick failed (non-critical): %s", exc)
 

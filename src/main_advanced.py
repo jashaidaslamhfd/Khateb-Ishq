@@ -210,8 +210,12 @@ def run_pipeline(theme: str = None) -> dict:
         logger.info("🖼️ Thumbnail A/B: %d variants generated, best: %s",
                     len(thumb_variants), thumb)
     except Exception as exc:
-        logger.warning("Thumbnail A/B failed (non-critical): %s", exc)
-        thumb = generate_thumbnail(image_paths[0], script.get("title") or "اردو شاعری")
+        logger.warning("Thumbnail A/B failed (non-critical): %s — using basic thumbnail", exc)
+        try:
+            thumb = generate_thumbnail(image_paths[0], script.get("title") or "اردو شاعری")
+        except Exception as exc2:
+            logger.warning("Basic thumbnail also failed: %s — using first image", exc2)
+            thumb = image_paths[0]
     logger.info("🎬 Video built: %s", final_video)
 
     # ── Step 6: Hashtag Optimization ───────────────────────────────────────

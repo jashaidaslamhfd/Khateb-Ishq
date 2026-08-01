@@ -1,0 +1,72 @@
+name: "Generate Viral Music Tracks"
+
+on:
+  workflow_dispatch:
+    inputs:
+      force_regenerate:
+        description: "Force regenerate all tracks even if they exist"
+        required: false
+        default: false
+        type: boolean
+  schedule:
+    # Run weekly on Sunday at 00:00 UTC to regenerate any missing tracks
+    - cron: "0 0 * * 0"
+
+jobs:
+  generate-music:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          pip install numpy soundfile Pillow
+
+      - name: Check if viral tracks exist
+        id: check
+        run: |
+          MISSING=""
+          for track in barish_piano_viral raat_ka_dard judai_ka_mausam tanhai_ka_safar dukh_ka_dariya; do
+            if [ ! -f "assets/music/${track}.wav" ]; then
+              MISSING="${MISSING} ${track}"
+            fi
+          done
+          echo "missing=${MISSING}" >> $GITHUB_OUTPUT
+          if [ -n "${MISSING}" ] || [ "${{ inputs.force_regenerate }}" = "true" ]; then
+            echo "need_generate=true" >> $GITHUB_OUTPUT
+          else
+            echo "need_generate=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Generate viral music tracks
+        if: steps.check.outputs.need_generate == 'true'
+        run: |
+          echo "🔥 Generating viral music tracks..."
+          python3 scripts/generate_viral_music.py
+          echo ""
+          echo "✅ Generated tracks:"
+          ls -la assets/music/*.wav
+
+      - name: Commit and push music files
+        if: steps.check.outputs.need_generate == 'true'
+        run: |
+          git config user.email "jashaidaslamhfd@users.noreply.github.com"
+          git config user.name "jashaidaslamhfd"
+          git add assets/music/*.wav
+          if git diff --staged --quiet; then
+            echo "No new music files to commit"
+          else
+            git commit -m "🎵 Generate viral music tracks (piano + rain + tabla)"
+            git push
+          fi
