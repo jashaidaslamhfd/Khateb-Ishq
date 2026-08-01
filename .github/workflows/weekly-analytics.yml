@@ -1,0 +1,93 @@
+name: 📊 Weekly Performance Analytics
+
+on:
+  schedule:
+    # Every Monday at 06:00 UTC (11:00 PKT)
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+
+jobs:
+  analytics:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GH_PAT || github.token }}
+
+      - name: 🐍 Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: 📦 Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: 📊 Pull YouTube Analytics & Analyze
+        env:
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
+        run: |
+          python -c "
+          import json
+          from src.performance_learner import PerformanceLearner
+          learner = PerformanceLearner()
+          summary = learner.refresh_stats()
+          print('📊 PERFORMANCE SUMMARY')
+          print('=' * 50)
+          print(f'Channel subs: {summary[\"channel_subs\"]}')
+          print(f'Total views: {summary[\"total_views\"]}')
+          print(f'Total videos: {summary[\"total_videos\"]}')
+          print(f'Top themes: {summary[\"top_5_themes\"]}')
+          print(f'Top poets: {summary[\"top_5_poets\"]}')
+          print(f'Viral patterns: {summary[\"viral_patterns_count\"]}')
+          print()
+
+          # Recommendations
+          print('🎯 RECOMMENDATIONS')
+          print('=' * 50)
+          for t in learner.recommend_themes(5):
+              print(f'  Theme: {t[\"theme\"]} (weight: {t[\"weight\"]})')
+          for s in learner.recommend_publish_slots(3):
+              print(f'  Slot: {s[\"slot\"]} (weight: {s[\"weight\"]})')
+          for p in learner.recommend_poets(3):
+              print(f'  Poet: {p[\"poet\"]} (weight: {p[\"weight\"]})')
+          "
+
+      - name: 🔮 Refresh Trend Predictions
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+        run: |
+          python -c "
+          from src.trend_predictor import TrendPredictor
+          predictor = TrendPredictor()
+          predictions = predictor.predict(n=10)
+          print()
+          print('🔮 TREND PREDICTIONS')
+          print('=' * 50)
+          for i, p in enumerate(predictions, 1):
+              print(f'  {i}. {p[\"topic\"]} (score: {p[\"score\"]}, confidence: {p[\"confidence\"]})')
+          "
+
+      - name: 🏷️ Refresh Hashtag Trends
+        run: |
+          python -c "
+          from src.hashtag_optimizer import HashtagOptimizer
+          opt = HashtagOptimizer()
+          count = opt.refresh_trends()
+          print(f'🏷️ Refreshed {count} hashtag trends')
+          "
+
+      - name: 💾 Commit analytics data
+        run: |
+          git config user.name "khateb-ishq-bot"
+          git config user.email "bot@khateb-ishq.dev"
+          git add data/ || true
+          git diff --cached --quiet || git commit -m "chore: weekly analytics update [skip ci]"
+          git push || true

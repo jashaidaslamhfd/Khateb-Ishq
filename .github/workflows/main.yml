@@ -12,14 +12,12 @@ on:
         required: false
         default: false
         type: boolean
-  # ⏸ POETRY SCHEDULE PAUSED 2026-07-26 — owner: "poetry ki bajay abi ke lie
-  # 1-2 min ka sad background music upload karein". The daily ORIGINAL-music
-  # workflow now owns these exact Pakistan-peak slots — see sad_music.yml.
-  # Manual poetry runs still work via workflow_dispatch above; to resume the
-  # poetry schedule, restore:
-  #   - cron: "30 8 * * *"   # 13:30 PKT → publish 14:00 (afternoon peak)
-  #   - cron: "0 13 * * *"   # 18:00 PKT → publish 18:30 (evening peak)
-  #   - cron: "0 16 * * *"   # 21:00 PKT → publish 21:30 (poetry golden hour)
+  # ⏸ POETRY SCHEDULE — was paused 2026-07-26 for music pivot.
+  # ✅ ADVANCED PIPELINE: 3x/day poetry schedule with AI-driven themes.
+  schedule:
+    - cron: "30 8 * * *"   # 13:30 PKT → publish 14:00 (afternoon peak)
+    - cron: "0 13 * * *"   # 18:00 PKT → publish 18:30 (evening peak)
+    - cron: "0 16 * * *"   # 21:00 PKT → publish 21:30 (poetry golden hour)
 
 permissions:
   contents: write
@@ -146,7 +144,7 @@ jobs:
           FAST_CUT: ${{ vars.FAST_CUT || '1' }}
           APPLY_GRADE: ${{ vars.APPLY_GRADE || '1' }}
           POETRY_SOURCE: "mix"
-          TOPIC_STRATEGY: "viral_hijack"
+          TOPIC_STRATEGY: ${{ vars.TOPIC_STRATEGY || 'smart' }}
           TARGET_MIN_SECONDS: "40"    # poems run 40-57s now (owner: 'poetry too short')
           TARGET_MAX_SECONDS: "57"
           AI_HORDE_API_KEY: ${{ secrets.AI_HORDE_API_KEY }}
@@ -160,11 +158,25 @@ jobs:
           MUSIC_VOLUME: "0.035"   # poetry-first mix (owner: 'zyada music'); fades handled in video_editor
           VIDEO_TOPIC: ${{ inputs.topic || '' }}
           PYTHONUNBUFFERED: "1"
+          # ── Advanced pipeline vars ──
+          PERF_REFRESH_HOURS: "24"
+          VIRAL_MULTIPLIER: "10"
+          MAX_HASHTAGS: "15"
+          # ── Multi-platform (optional — set secrets + vars to enable) ──
+          TIKTOK_ENABLED: ${{ vars.TIKTOK_ENABLED || 'false' }}
+          TIKTOK_ACCESS_TOKEN: ${{ secrets.TIKTOK_ACCESS_TOKEN }}
+          TIKTOK_OPEN_ID: ${{ secrets.TIKTOK_OPEN_ID }}
+          INSTAGRAM_ENABLED: ${{ vars.INSTAGRAM_ENABLED || 'false' }}
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          IG_BUSINESS_ACCOUNT_ID: ${{ secrets.IG_BUSINESS_ACCOUNT_ID }}
+          FACEBOOK_ENABLED: ${{ vars.FACEBOOK_ENABLED || 'false' }}
+          FB_ACCESS_TOKEN: ${{ secrets.FB_ACCESS_TOKEN }}
+          FB_PAGE_ID: ${{ secrets.FB_PAGE_ID }}
         run: |
           set -euo pipefail
           for attempt in 1 2 3; do
             echo "=== Attempt $attempt / 3 ==="
-            if python src/main.py; then break
+            if python src/main_advanced.py; then break
             else
               rc=$?; echo "::warning::Failed attempt $attempt code $rc"
               if [ $attempt -eq 3 ]; then exit $rc; fi; sleep $((attempt * 30))
@@ -179,12 +191,31 @@ jobs:
           if [ -z "$(git status --porcelain -- data/)" ]; then echo "No state changes."; exit 0; fi
           git config user.name "khateb-ishq-bot"
           git config user.email "khateb-ishq-bot@users.noreply.github.com"
-          git add data/video_history.json data/upload_state.json 2>/dev/null || git add -u data/*_history.json data/*_state.json
+          git add data/ 2>/dev/null || true
           git commit -m "chore: persist Khateb-Ishq state [skip ci]"
           for i in 1 2 3; do
             if git pull --rebase origin "${GITHUB_REF_NAME}" && git push origin "HEAD:${GITHUB_REF_NAME}"; then break
             else echo "Push retry $i"; sleep $((i*5)); [ $i -eq 3 ] && echo "::warning::state push failed; artifact has the recovery copy" && exit 0; fi
           done
+
+      - name: "💬 Process engagement (comments & replies)"
+        if: success()
+        shell: bash
+        env:
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
+        run: |
+          python -c "
+          import sys; sys.path.insert(0, 'src')
+          try:
+              from engagement_bot import EngagementBot
+              bot = EngagementBot()
+              result = bot.process_all_videos()
+              print(f'Engagement: {result.get(\"total_replies\", 0)} replies, {result.get(\"total_hearts\", 0)} hearts')
+          except Exception as exc:
+              print(f'Engagement processing failed (non-critical): {exc}')
+          " || true
 
       - name: Upload video and logs
         if: always()

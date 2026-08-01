@@ -1,0 +1,137 @@
+name: 🎙 Khateb-Ishq Advanced — Urdu Poetry Pipeline
+
+on:
+  schedule:
+    # 3 daily runs at PKT peaks (09:00, 13:30, 20:30 UTC = PKT 14:00, 18:30, 01:30)
+    - cron: "0 9 * * *"
+    - cron: "30 13 * * *"
+    - cron: "30 20 * * *"
+  workflow_dispatch:
+    inputs:
+      topic:
+        description: "Override poetry topic (optional)"
+        required: false
+        default: ""
+      force:
+        description: "Force run (skip anti-spam check)"
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  poetry-short:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    permissions:
+      contents: write
+
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GH_PAT || github.token }}
+
+      - name: 🐍 Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: 📦 Install dependencies
+        run: |
+          pip install -r requirements.txt
+          sudo apt-get update -qq && sudo apt-get install -y -qq fonts-noto libraqm-dev ffmpeg
+
+      - name: 🔄 Refresh performance data (if stale)
+        if: ${{ github.event_name == 'schedule' }}
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
+        run: |
+          python -c "
+          from src.performance_learner import PerformanceLearner
+          learner = PerformanceLearner()
+          learner.refresh_stats()
+          print('✅ Performance data refreshed')
+          " || echo "⚠️ Performance refresh failed (non-critical)"
+
+      - name: 🔮 Refresh trend predictions
+        if: ${{ github.event_name == 'schedule' }}
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+        run: |
+          python -c "
+          from src.trend_predictor import TrendPredictor
+          predictor = TrendPredictor()
+          predictions = predictor.predict(n=10)
+          print(f'✅ {len(predictions)} trend predictions refreshed')
+          " || echo "⚠️ Trend refresh failed (non-critical)"
+
+      - name: 🏷️ Refresh hashtag trends
+        if: ${{ github.event_name == 'schedule' }}
+        run: |
+          python -c "
+          from src.hashtag_optimizer import HashtagOptimizer
+          opt = HashtagOptimizer()
+          count = opt.refresh_trends()
+          print(f'✅ {count} hashtag trends refreshed')
+          " || echo "⚠️ Hashtag refresh failed (non-critical)"
+
+      - name: 🎙 Run Advanced Pipeline
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          HF_API_KEY: ${{ secrets.HF_API_KEY }}
+          PIXABAY_API_KEY: ${{ secrets.PIXABAY_API_KEY }}
+          DEEPAI_API_KEY: ${{ secrets.DEEPAI_API_KEY }}
+          PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
+          VIDEO_TOPIC: ${{ github.event.inputs.topic }}
+          TOPIC_STRATEGY: ${{ vars.TOPIC_STRATEGY || 'smart' }}
+          VOICE_ENGINE: ${{ vars.VOICE_ENGINE || 'edge' }}
+          URDU_VOICE: ${{ vars.URDU_VOICE || 'asad' }}
+          URDU_TTS_RATE: ${{ vars.URDU_TTS_RATE || '-12' }}
+          POETRY_SOURCE: ${{ vars.POETRY_SOURCE || 'mix' }}
+          PUBLISH_SLOTS: ${{ vars.PUBLISH_SLOTS || '14:00,18:30,21:30' }}
+          CAPTION_SCRIPT: ${{ vars.CAPTION_SCRIPT || 'roman' }}
+          FAST_CUT: ${{ vars.FAST_CUT || '1' }}
+          APPLY_GRADE: ${{ vars.APPLY_GRADE || '1' }}
+          MUSIC_VOLUME: ${{ vars.MUSIC_VOLUME || '0.05' }}
+          ENFORCE_POSTING_GAP: ${{ github.event.inputs.force == 'true' && 'false' || 'true' }}
+          # Multi-platform (optional)
+          TIKTOK_ENABLED: ${{ vars.TIKTOK_ENABLED || 'false' }}
+          TIKTOK_ACCESS_TOKEN: ${{ secrets.TIKTOK_ACCESS_TOKEN }}
+          TIKTOK_OPEN_ID: ${{ secrets.TIKTOK_OPEN_ID }}
+          INSTAGRAM_ENABLED: ${{ vars.INSTAGRAM_ENABLED || 'false' }}
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          IG_BUSINESS_ACCOUNT_ID: ${{ secrets.IG_BUSINESS_ACCOUNT_ID }}
+          FACEBOOK_ENABLED: ${{ vars.FACEBOOK_ENABLED || 'false' }}
+          FB_ACCESS_TOKEN: ${{ secrets.FB_ACCESS_TOKEN }}
+          FB_PAGE_ID: ${{ secrets.FB_PAGE_ID }}
+        run: python src/main_advanced.py
+
+      - name: 💬 Process engagement (comments & replies)
+        if: ${{ github.event_name == 'schedule' }}
+        env:
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
+        run: |
+          python -c "
+          from src.engagement_bot import EngagementBot
+          bot = EngagementBot()
+          result = bot.process_all_videos()
+          print(f'✅ Engagement: {result[\"total_replies\"]} replies, {result[\"total_hearts\"]} hearts')
+          " || echo "⚠️ Engagement processing failed (non-critical)"
+
+      - name: 📊 Commit data updates
+        run: |
+          git config user.name "khateb-ishq-bot"
+          git config user.email "bot@khateb-ishq.dev"
+          git add data/ || true
+          git diff --cached --quiet || git commit -m "chore: advanced pipeline data update [skip ci]"
+          git push || true
