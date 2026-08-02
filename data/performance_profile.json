@@ -1,0 +1,28 @@
+{
+  "version": 2,
+  "last_updated": "2026-08-02T19:52:03.276583+00:00",
+  "channel_stats": {
+    "subscribers": 0,
+    "total_views": 0,
+    "total_videos": 2
+  },
+  "top_themes": [],
+  "top_poets": [],
+  "top_publish_slots": [],
+  "top_voices": [],
+  "top_caption_styles": [],
+  "viral_patterns": [],
+  "seasonal_peaks": [
+    {
+      "month": 7,
+      "avg_views": 0,
+      "count": 2
+    }
+  ],
+  "recommendations": {
+    "theme_hints": [],
+    "slot_hints": [],
+    "poet_hints": [],
+    "voice_hints": []
+  }
+}
