@@ -33,14 +33,16 @@ class PoetryValidationTests(unittest.TestCase):
     def _valid_fixture(self):
         return {
             "title": "تنہائی کی رات",
+            "title_roman": "Tanhai Ki Raat",
             "hook": "رات اور تنہائی کا سازش ہوتی ہے",
+            "hook_roman": "Raat aur tanhai ki sazish",
             "cta": "مزید شاعری کے لیے فالو کیجیے",
             "description": "An Urdu nazm on 2am loneliness.",
             "scenes": [
-                {"visual": "rainy window, dim lamp, moody night", "caption": "رات اور تنہائی کا سازش ہوتی ہے"},
-                {"visual": "old diary on wooden table", "caption": "ہو کے نہ بند یہ دروازہ دل کا کسی بھی صورت حال میں اکیلے رہ گئے"},
-                {"visual": "empty chair, cold tea", "caption": "جنہیں اداسی ہو گئی ہم ان دعاؤں میں یاد رکھا کریں گے خاموشی سے"},
-                {"visual": "dawn light through curtains", "caption": "رات اور تنہائی پھر اک دوسرے سے ملیں گی فردا کی رات میں"},
+                {"visual": "rainy window, dim lamp, moody night", "caption": "رات اور تنہائی کا سازش ہوتی ہے", "caption_roman": "Raat aur tanhai"},
+                {"visual": "old diary on wooden table", "caption": "ہو کے نہ بند یہ دروازہ دل کا کسی bhi صورت حال میں اکیلے رہ گئے", "caption_roman": "Dil ka darwaza"},
+                {"visual": "empty chair, cold tea", "caption": "جنہیں اداسی ہو گئی ہم ان دعاؤں میں یاد رکھا کریں گے خاموشی سے", "caption_roman": "Udasi ho gayi"},
+                {"visual": "dawn light through curtains", "caption": "رات اور تنہائی پھر اک دوسرے سے ملیں گی فردا کی رات میں", "caption_roman": "Raat aur tanhai phir"},
             ],
         }
 
