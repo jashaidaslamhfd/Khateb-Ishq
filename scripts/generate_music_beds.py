@@ -927,6 +927,69 @@ def master(sig: np.ndarray, name: str) -> str:
 # MAIN
 # ═══════════════════════════════════════════════════════════════════════════
 
+def build_tiktok_viral():
+    """🎵 TikTok Viral Sad Poetry Bed — The "Slowed + Reverb" formula.
+    
+    Formula: Deep Rain + Heavy Reverb + Simple Piano + Crying High Violin.
+    This matches the specific "viral" sound people search for on TikTok/Shorts.
+    """
+    np.random.seed(606)
+    n = int(SR * DUR)
+    bpm = 42  # Very slow
+    root = 50  # D minor
+    intro_s = 4.0
+    
+    # Pad progression (Dm - Bb - Gm - A)
+    pads = progression([Dm, Bb, Gm, A], chord_s=12.0, vol=0.55)
+    
+    # 1. SIMPLE PIANO HOOK (The "TikTok" style)
+    # Slow, simple notes with long spaces
+    rng = np.random.RandomState(606)
+    piano_notes = []
+    t = intro_s
+    while t < DUR - 5.0:
+        # High piano notes for that "chime" feel
+        midi = rng.choice([root+12, root+15, root+17, root+22, root+24])
+        piano_notes.append((t, rng.uniform(3.0, 5.0), midi, 0.4))
+        t += rng.uniform(6.0, 10.0)
+    piano = _place_piano(piano_notes, n)
+    
+    # 2. CRYING HIGH VIOLIN
+    # Very high pitch, lots of vibrato
+    total_bars = int((DUR - intro_s - 5.0) / (4 * 60.0 / bpm))
+    v_melody = []
+    t = intro_s + 2.0
+    for _ in range(total_bars * 2):
+        dur = rng.uniform(4.0, 8.0)
+        midi = rng.choice([root+12, root+14, root+17, root+20])
+        v_melody.append((t, dur, midi, 0.5))
+        t += dur + rng.uniform(2.0, 5.0)
+    violin = _place_violin(v_melody, n)
+    
+    # 3. ATMOSPHERE (Heavy Rain + Wind)
+    rain = rain_layer(n, 0.06, intensity=1.2)
+    # Muffled wind effect (low frequency noise)
+    wind_noise = rng.standard_normal((2, n))
+    k = np.hanning(2001)  # Heavy low pass
+    k /= k.sum()
+    wind = np.stack([np.convolve(wind_noise[0], k, mode="same"), 
+                     np.convolve(wind_noise[1], k, mode="same")]) * 0.05
+    
+    # Mix
+    mix = (pads + piano * 1.5 + violin * 1.8 + rain + wind)
+    
+    # 4. Muffled / Low-Pass Filter (The "next door" effect)
+    # Simple moving average to cut highs
+    k_lp = np.ones(8) / 8.0
+    mix[0] = np.convolve(mix[0], k_lp, mode="same")
+    mix[1] = np.convolve(mix[1], k_lp, mode="same")
+    
+    # 5. HEAVY REVERB (The "Slowed + Reverb" feel)
+    mix = simple_reverb(mix, wet=0.55, decay=0.6)
+    
+    return master(mix, "tiktok_style_poetry.wav")
+
+
 def main():
     print("🎻 Synthesizing CINEMATIC Khateb-Ishq music beds (numpy only, no samples)...")
     print("   Now with: violin, cello, lush strings, reverb, emotional arcs, thunder")
@@ -937,6 +1000,7 @@ def main():
         build_raat_cello(),      # 🌙 Deep Cello + Drone
         build_dard_sitar(),      # 🪕 Sitar-style + Drone
         build_gham_violin(),     # 💔 Solo Violin + Emotional Arc
+        build_tiktok_viral(),    # 🎵 TikTok Viral Style
     ]
     print(f"\n✅ Done — {len(paths)} CINEMATIC tracks in {OUT_DIR}/")
     print("   100% original: no attribution needed, no claim risk.")
