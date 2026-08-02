@@ -134,7 +134,6 @@ jobs:
           ENFORCE_POSTING_GAP: ${{ inputs.force == true && 'false' || 'true' }}
           MIN_POST_GAP_HOURS: "3.0"
           PUBLISH_TIMEZONE: "Asia/Karachi"
-          PUBLISH_TIMEZONE: "Asia/Karachi"
           YT_MADE_FOR_KIDS: "false"
           CHANNEL_LANGUAGE: "ur"
           URDU_VOICE: "asad"
