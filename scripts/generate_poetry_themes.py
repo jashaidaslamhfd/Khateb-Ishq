@@ -14,14 +14,18 @@ SUBJECTS = [
     "wafa", "dard", "sukoon", "umeed", "khamoshi", "dua", "safar", "maut",
     "zindagi", "waqt", "mazi", "mohabbat", "aashiqui", "sheher", "raat",
     "barsaat", "chand", "sooraj", "khushbu", "chitthi", "aina", "raaz",
-    "iktifa",
+    "iktifa", "bewafa", "dhoka", "maa ki yaad", "baap ka saya", "yateemi",
+    "paisa aur rishtay", "duniya ki be-his-pana", "mushkil waqt", "sacha ishq",
+    "khuda se umeed", "dil-e-nadaan", "akhri mulaqat", "purana sheher",
 ]
 MOODS = ["aahista", "be-sahara", "gila-shikwa", "khafa", "shafaq-posh",
-         "viran", "narm", "gehra", "be-khabar", "majrooh"]
+         "viran", "narm", "gehra", "be-khabar", "majrooh", "rula dene wala",
+         "dil chir dene wala", "bohot hi dukhi", "gham-geen", "emotional"]
 SETTINGS = ["raat ke do bajay", "barsati sham mein", "purani kitab ke sahaano mein",
             "khaali kamray mein", "musafir ki raah par", "sheher ki bheer mein",
             "sheeshey ke paas", "chhat ke kinaaray", "band darwaazay ke peechay",
-            "sooraj dhaltay waqt"]
+            "sooraj dhaltay waqt", "tanhai ki gali mein", "khamosh qabristan mein",
+            "railway station par", "purani tasveer ke samne"]
 
 themes = []
 seen = set()
