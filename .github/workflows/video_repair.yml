@@ -1,32 +1,57 @@
-name: Video Metadata Repair (one-shot)
+name: "Daily Metadata Auto-Repair"
 
 on:
+  schedule:
+    # Run once a day at 03:00 UTC (08:00 PKT)
+    - cron: "0 3 * * *"
   workflow_dispatch:
     inputs:
       apply:
-        description: "Write changes to YouTube (default = dry run)"
+        description: "Write changes to YouTube (default = true for manual)"
         required: false
-        default: "0"
+        default: "true"
+        type: boolean
+      limit:
+        description: "Max videos to scan"
+        required: false
+        default: "100"
+        type: string
 
 permissions:
   contents: write
 
 jobs:
-  repair:
+  auto-repair:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - name: Run video metadata repair
+          
+      - name: Run Auto-Repair
         env:
           GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
           GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
           REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
         run: |
-          if [ "${{ github.event.inputs.apply }}" = "1" ]; then
-            python scripts/video_repair.py --apply
-          else
-            python scripts/video_repair.py
+          # If triggered by schedule, apply is always true. 
+          # If manual, use input.
+          APPLY_FLAG=""
+          if [[ "${{ github.event_name }}" == "schedule" || "${{ github.event.inputs.apply }}" == "true" ]]; then
+            APPLY_FLAG="--apply"
           fi
+          
+          LIMIT="${{ github.event.inputs.limit || '100' }}"
+          
+          python scripts/auto_repair.py $APPLY_FLAG --limit $LIMIT
+
+      - name: Persist Logs
+        if: always()
+        run: |
+          git config user.name "khateb-ishq-bot"
+          git config user.email "bot@khateb-ishq.dev"
+          git add data/ || true
+          git commit -m "chore: daily metadata repair log update [skip ci]" || true
+          git push || true
