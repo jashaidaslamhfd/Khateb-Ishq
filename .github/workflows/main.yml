@@ -61,8 +61,9 @@ jobs:
         run: |
           set -euo pipefail
           python scripts/generate_poetry_themes.py
+          python -m pip install pytest
           python -m compileall -q src scripts tests
-          python -m unittest discover -s tests -v
+          python -m pytest tests/ -v
 
       # ---- Owner's cloned voice (Qwen3-TTS, free, zero-shot) ---------------
       # Only active when VOICE_ENGINE=qwenclone. Decrypts the GPG-encrypted
