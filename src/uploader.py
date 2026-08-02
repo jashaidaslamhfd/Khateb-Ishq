@@ -106,6 +106,7 @@ def _build_description(script_data: dict, tags: list) -> str:
 # (owner provided 2026-08-01). These 7 terms drive the most traffic to the
 # channel. Every video title rotates through these for maximum discoverability.
 _SEARCH_TAILS = (
+    "sad poetry background music",  # Added: User feedback 2026-08-03
     "poetry background music",
     "sad shayari background music",
     "background music for poetry",
