@@ -18,36 +18,13 @@ on:
   # PKT = UTC+5. So PKT 19:00 = UTC 14:00. Pipeline runs 30 min early = UTC 13:30.
   # Sunday: 7pm, 10pm | Mon: 3pm, 4pm | Tue: 3pm | Wed: 3,4,5,8,10pm
   # Thu: 1,4,5,8,10pm | Fri: 2,3,5,8pm | Sat: 3,5,11pm
+  # ⚔️ MONETIZATION WAR MODE: Target 4,000h by August 30th
+  # Focused peaks for maximum reach (3 per day)
   schedule:
-    # ── Sunday: 7pm, 10pm PKT ──
-    - cron: "30 13 * * 0"    # UTC 13:30 = PKT 18:30 → publish 19:00
-    - cron: "0 17 * * 0"     # UTC 17:00 = PKT 22:00 → publish 22:00
-    # ── Monday: 3pm, 4pm PKT ──
-    - cron: "30 9 * * 1"     # UTC 09:30 = PKT 14:30 → publish 15:00
-    - cron: "30 10 * * 1"    # UTC 10:30 = PKT 15:30 → publish 16:00
-    # ── Tuesday: 3pm PKT ──
-    - cron: "30 9 * * 2"     # UTC 09:30 = PKT 14:30 → publish 15:00
-    # ── Wednesday: 3,4,5,8,10pm PKT ──
-    - cron: "30 9 * * 3"     # UTC 09:30 = PKT 14:30 → publish 15:00
-    - cron: "30 10 * * 3"    # UTC 10:30 = PKT 15:30 → publish 16:00
-    - cron: "30 11 * * 3"    # UTC 11:30 = PKT 16:30 → publish 17:00
-    - cron: "30 14 * * 3"    # UTC 14:30 = PKT 19:30 → publish 20:00
-    - cron: "0 17 * * 3"     # UTC 17:00 = PKT 22:00 → publish 22:00
-    # ── Thursday: 1,4,5,8,10pm PKT ──
-    - cron: "30 7 * * 4"     # UTC 07:30 = PKT 12:30 → publish 13:00
-    - cron: "30 10 * * 4"    # UTC 10:30 = PKT 15:30 → publish 16:00
-    - cron: "30 11 * * 4"    # UTC 11:30 = PKT 16:30 → publish 17:00
-    - cron: "30 14 * * 4"    # UTC 14:30 = PKT 19:30 → publish 20:00
-    - cron: "0 17 * * 4"     # UTC 17:00 = PKT 22:00 → publish 22:00
-    # ── Friday: 2,3,5,8pm PKT ──
-    - cron: "30 8 * * 5"     # UTC 08:30 = PKT 13:30 → publish 14:00
-    - cron: "30 9 * * 5"     # UTC 09:30 = PKT 14:30 → publish 15:00
-    - cron: "30 11 * * 5"    # UTC 11:30 = PKT 16:30 → publish 17:00
-    - cron: "30 14 * * 5"    # UTC 14:30 = PKT 19:30 → publish 20:00
-    # ── Saturday: 3,5,11pm PKT ──
-    - cron: "30 9 * * 6"     # UTC 09:30 = PKT 14:30 → publish 15:00
-    - cron: "30 11 * * 6"    # UTC 11:30 = PKT 16:30 → publish 17:00
-    - cron: "0 17 * * 6"     # UTC 17:00 = PKT 22:00 → publish 23:00
+    # ── Daily: 14:00, 18:30, 21:30 PKT (Peaks) ──
+    - cron: "30 8 * * *"    # UTC 08:30 = PKT 13:30 → publish 14:00
+    - cron: "0 13 * * *"    # UTC 13:00 = PKT 18:00 → publish 18:30
+    - cron: "0 16 * * *"    # UTC 16:00 = PKT 21:00 → publish 21:30
 
 permissions:
   contents: write
