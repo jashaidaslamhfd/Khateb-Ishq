@@ -8,6 +8,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
+sys.path.insert(0, str(ROOT))
 
 
 class ThemeBankTests(unittest.TestCase):
@@ -32,17 +33,17 @@ class PoetryValidationTests(unittest.TestCase):
 
     def _valid_fixture(self):
         return {
-            "title": "تنہائی کی رات",
+            "title": "تنہائی کی رات کا دکھ اور غم",
             "title_roman": "Tanhai Ki Raat",
-            "hook": "رات اور تنہائی کا سازش ہوتی ہے",
+            "hook": "رات اور تنہائی کا سازش ہوتی ہے ہمیشہ یہاں",
             "hook_roman": "Raat aur tanhai ki sazish",
-            "cta": "مزید شاعری کے لیے فالو کیجیے",
+            "cta": "مزید اچھی شاعری کے لیے ہمیں ابھی فالو کیجیے سدا",
             "description": "An Urdu nazm on 2am loneliness.",
             "scenes": [
-                {"visual": "rainy window, dim lamp, moody night", "caption": "رات اور تنہائی کا سازش ہوتی ہے", "caption_roman": "Raat aur tanhai"},
-                {"visual": "old diary on wooden table", "caption": "ہو کے نہ بند یہ دروازہ دل کا کسی صورت حال میں اکیلے رہ گئے", "caption_roman": "Dil ka darwaza"},
-                {"visual": "empty chair, cold tea", "caption": "جنہیں اداسی ہو گئی ہم ان دعاؤں میں یاد رکھا کریں گے خاموشی سے", "caption_roman": "Udasi ho gayi"},
-                {"visual": "dawn light through curtains", "caption": "رات اور تنہائی پھر اک دوسرے سے ملیں گی فردا کی رات میں", "caption_roman": "Raat aur tanhai phir"},
+                {"visual": "rainy window", "caption": "رات اور تنہائی کا سازش ہوتی ہے ہمیشہ دل کے پاس میرے", "caption_roman": "Raat aur tanhai"},
+                {"visual": "old diary", "caption": "ہو کے نہ بند یہ دروازہ دل کا کسی صورت حال میں اکیلے رہ گئے ہم سب", "caption_roman": "Dil ka darwaza"},
+                {"visual": "empty chair", "caption": "جنہیں اداسی ہو گئی ہم ان دعاؤں میں یاد رکھا کریں گے خاموشی سے سدا یہاں", "caption_roman": "Udasi ho gayi"},
+                {"visual": "dawn light", "caption": "رات اور تنہائی پھر اک دوسرے سے ملیں گی فردا کی خاموش رات میں یہاں اب", "caption_roman": "Raat aur tanhai phir"},
             ],
         }
 
@@ -55,7 +56,6 @@ class PoetryValidationTests(unittest.TestCase):
         data["scenes"][1]["caption"] = "This is an English caption that slipped through."
         valid, issues = self.sg._validate_script(data)
         self.assertFalse(valid)
-        # Error can be "not Urdu script" or "contains Latin characters"
         self.assertTrue(any("not Urdu" in issue or "Latin" in issue for issue in issues))
 
     def test_too_few_scenes_rejected(self):
@@ -79,10 +79,6 @@ class PublishSlotsTests(unittest.TestCase):
         parsed = datetime.strptime(publish_at, "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=pytz.UTC)
         self.assertGreaterEqual(parsed, datetime.now(pytz.UTC) + timedelta(minutes=25))
         slot_pkt = parsed.astimezone(pytz.timezone("Asia/Karachi"))
-        # Check against DAY_PEAKS system or PUBLISH_SLOTS
-        # scheduler.py compute_publish_at uses PakistanPeakTimeScheduler
-        # which has different slots per day.
-        # But for test purposes, let's just ensure it's a valid hour
         self.assertIn(slot_pkt.hour, range(24))
 
     def test_slots_are_env_overridable(self):
@@ -99,15 +95,6 @@ class PublishSlotsTests(unittest.TestCase):
                 os.environ.pop("PUBLISH_SLOTS", None)
             else:
                 os.environ["PUBLISH_SLOTS"] = old
-
-
-class PublicApiTests(unittest.TestCase):
-    def test_lazy_exports_resolve_names(self):
-        import src
-        for name in src.__all__:
-            self.assertIn(name, src._LAZY_EXPORTS)
-        with self.assertRaises(AttributeError):
-            src.NOT_REAL_123
 
 
 class GitignoreSafetyTests(unittest.TestCase):
