@@ -110,6 +110,24 @@ def main():
         needs_fix = False
         new_sn = sn.copy()
 
+        # Fix Title (SEO optimization)
+        # If title is pure Urdu script, it won't rank.
+        # We'll append a viral search term if it's not there.
+        has_urdu = bool(re.search(r'[\u0600-\u06FF]', title))
+        has_viral_keyword = any(term in title.lower() for term in ["poetry", "music", "shayari", "status"])
+        
+        if has_urdu and not has_viral_keyword:
+            # We don't have an easy way to Romanize, but we can at least add keywords
+            viral_tail = " | Sad Urdu Poetry | sad poetry background music"
+            if len(title) + len(viral_tail) <= 100:
+                new_sn["title"] = title + viral_tail
+                needs_fix = True
+                log.info(f"Video {vid}: Adding viral keywords to title")
+        elif not has_viral_keyword:
+            new_sn["title"] = title + " | Sad Urdu Poetry status"
+            needs_fix = True
+            log.info(f"Video {vid}: Adding keywords to English title")
+
         # Fix Description
         if not desc or len(desc) < 80 or "#" not in desc:
             new_sn["description"] = (desc + HASHTAG_BLOCK).strip() if desc else DESC_BLOCK
