@@ -3,7 +3,6 @@ name: 🎙 Khateb-Ishq Advanced — Urdu Poetry Pipeline
 on:
   # ⏸ PAUSED — main.yml already runs main_advanced.py with 15+ daily cron slots.
   # Re-enable only if you want separate advanced pipeline runs.
-  schedule: []
   workflow_dispatch:
     inputs:
       topic:
