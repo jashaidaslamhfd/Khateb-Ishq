@@ -188,7 +188,7 @@ jobs:
           set -euo pipefail
           for attempt in 1 2 3; do
             echo "=== Attempt $attempt / 3 ==="
-            if python src/main_advanced.py; then break
+            if python scripts/sad_music_short.py; then break
             else
               rc=$?; echo "::warning::Failed attempt $attempt code $rc"
               if [ $attempt -eq 3 ]; then exit $rc; fi; sleep $((attempt * 30))
