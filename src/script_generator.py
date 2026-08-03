@@ -309,7 +309,7 @@ def _default_tags(poet: str, mode: str) -> list:
 # Public entry point
 # --------------------------------------------------------------------------- #
 def generate_script(theme: str) -> dict:
-    model = os.environ.get("GROQ_MODEL", "llama-3.3-70b-versatile")
+    model = os.environ.get("GROQ_MODEL", "llama-3.1-8b-instant")
     mode, poet_key = _pick_mode()
     client = _client()
 

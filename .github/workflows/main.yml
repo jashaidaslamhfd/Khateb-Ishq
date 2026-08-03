@@ -126,7 +126,7 @@ export VOICE_REF_PASSPHRASE="${VOICE_REF_PASSPHRASE:-khatebishqvoice}"
         shell: bash
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
-          GROQ_MODEL: "llama-3.3-70b-versatile"
+          GROQ_MODEL: "llama-3.1-8b-instant"
           GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
           GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
           REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
