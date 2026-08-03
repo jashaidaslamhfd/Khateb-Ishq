@@ -84,7 +84,7 @@ jobs:
           VOICE_REF_PASSPHRASE: ${{ secrets.VOICE_REF_PASSPHRASE }}
         run: |
           set -euo pipefail
-export VOICE_REF_PASSPHRASE="${VOICE_REF_PASSPHRASE:-khatebishqvoice}"
+          export VOICE_REF_PASSPHRASE="${VOICE_REF_PASSPHRASE:-khatebishqvoice}"
           if [ -f assets/voice_reference.wav.gpg ]; then
             if [ -z "${VOICE_REF_PASSPHRASE:-}" ]; then
               echo "::error::VOICE_REF_PASSPHRASE secret missing"; exit 1
