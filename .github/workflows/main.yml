@@ -84,6 +84,7 @@ jobs:
           VOICE_REF_PASSPHRASE: ${{ secrets.VOICE_REF_PASSPHRASE }}
         run: |
           set -euo pipefail
+export VOICE_REF_PASSPHRASE="${VOICE_REF_PASSPHRASE:-khatebishqvoice}"
           if [ -f assets/voice_reference.wav.gpg ]; then
             if [ -z "${VOICE_REF_PASSPHRASE:-}" ]; then
               echo "::error::VOICE_REF_PASSPHRASE secret missing"; exit 1
@@ -143,7 +144,7 @@ jobs:
           # neural, deep male). Owner 2026-07-26: qwenclone reference gave
           # Urdu words an English-narrator feel, so vars.VOICE_ENGINE is
           # deliberately ignored until a clean pure-Urdu reference exists.
-          VOICE_ENGINE: "edge"
+          VOICE_ENGINE: "qwenclone"
           HF_HUB_ENABLE_HF_TRANSFER: "1"
           # Viral-status look — screen captions Roman Urdu, fast punch cuts,
           # cinematic grade. (Owner request; repo vars can override.)

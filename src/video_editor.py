@@ -436,8 +436,8 @@ def generate_thumbnail(first_image: str, title: str, category: str = "Poetry") -
     draw.rectangle([40, 20, WIDTH - 40, 20 + 130 * len(lines) + 60], fill=(0, 0, 0, 165))
     for line in lines:
         w = draw.textlength(line, font=font, **(rtl or {}))
-        draw.text(((WIDTH - w) / 2, y), line, font=font, fill=(255, 235, 200, 255),
-                  stroke_width=4, stroke_fill=(0, 0, 0, 230), **(rtl or {}))
+        draw.text(((WIDTH - w) / 2, y), line, font=font, fill=(255, 255, 0, 255),
+                  stroke_width=6, stroke_fill=(0, 0, 0, 230), **(rtl or {}))
         y += 130
     out = img.convert("RGBA")
     out.alpha_composite(strip, (0, HEIGHT - 340 - 160))
