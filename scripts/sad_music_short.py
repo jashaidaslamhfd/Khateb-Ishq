@@ -1,27 +1,8 @@
 #!/usr/bin/env python3
-"""Khateb-Ishq — DAILY SAD BACKGROUND MUSIC shorts (1–2 min, 100% original).
+"""Khateb-Ishq — DAILY SAD BACKGROUND MUSIC (Landscape 16:9, 100% original).
 
-Owner decision 2026-07-26: "poetry ki bajay abi ke lie 1-2 min ka sad
-background music upload karwain, jo copyright free ho".
-
-Every track below is SYNTHESIZED NOTE-BY-NOTE with numpy in this file — no
-samples, no loops, no downloaded audio, no external API. The output is an
-original composition of this channel by construction, so it is copyright-
-free in the strongest possible sense: nothing exists to claim. Viewers may
-reuse it with credit — which is also the search hook ("copyright free sad
-background music").
-
-Daily pipeline (default mode):
-  1. compose today's unique instrumental (mood rotation + date-seeded melody)
-  2. build 3 moody stills (AI providers first, procedural cinematic fallback)
-  3. title card (PIL, Urdu) + slow-zoom slideshow via ffmpeg, loudnorm -14 LUFS
-  4. upload via the same uploader as poetry (private → publishAt snaps to the
-     next Pakistan peak slot)
-  5. persist data/music_state.json (rotation + dedupe ledger)
-
-Preview mode (no APIs, no upload):
-  python scripts/sad_music_short.py --sample /tmp/preview.mp3 --seconds 95
-  python scripts/sad_music_short.py --dry            # full video, no upload
+Optimized for: Trending TikTok/Shorts styles (Slowed + Reverb).
+Logic: 1920x1080 Landscape format, Cinematic visuals.
 """
 
 import argparse
@@ -40,77 +21,37 @@ import numpy as np
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 log = logging.getLogger("sad-music")
 
-SR = 44100  # full quality for a music-first video (beds under voice use 22050)
+SR = 44100  # full quality for a music-first video
 STATE_PATH = os.environ.get("MUSIC_STATE_PATH", "data/music_state.json")
 OUT = "output"
 
 # ---------------------------------------------------------------------------
-# MOODS — daily rotation. Each mood = distinct key, progression, instrument
-# colour and ambience, so subscribers never hear "the same track" twice.
-#
-# UPDATED 2026-08-01: Added 5 VIRAL music moods (piano + rain + tabla).
-# These are the kind of tracks people WANT to use as background music on
-# TikTok/Reels/Shorts. The formula: Simple piano + Heavy rain + Gentle tabla.
+# MOODS — daily rotation.
+# Formula: TikTok Viral formula (Slowed Piano + Heavy Rain + Reverb).
 # ---------------------------------------------------------------------------
 MOODS = [
-    # ── ORIGINAL 4 MOODS (kept for variety) ──
     {
-        "key": "barish_piano_am", "urdu": "بارش اور پیانو", "en": "Rainy Night Piano",
-        "bpm": 56, "root": 57, "instrument": "piano",
-        "prog": [[57, 60, 64], [53, 57, 60], [48, 52, 55], [55, 59, 62]],  # Am F C G
-        "rain": 0.030, "crackle": 0.014, "drone": 0.0,
+        "key": "tiktok_style_poetry", "urdu": "ٹک ٹاک وائرل میوزک", "en": "TikTok Viral Sad Music",
+        "bpm": 42, "root": 50, "instrument": "piano",
+        "prog": [[50, 53, 57, 60], [46, 50, 53, 57], [53, 57, 60, 64], [45, 48, 52, 55]],  # Dm Bb F Am
+        "rain": 0.060, "crackle": 0.010, "drone": 0.0,
+        "viral_wav": "assets/music/tiktok_style_poetry.wav",
         "visuals": [
-            "rain on a window at night, bokeh city lights, cinematic, no people",
-            "wet empty street at night, one street lamp, cinematic, moody",
-            "raindrops on glass with distant moonlight, dark cinematic",
+            "cinematic rainy street at night, neon reflections, 16:9 aesthetic",
+            "lone figure walking in rain, moody street lights, dark cinematic",
+            "raindrops on car window, blurred city lights bokeh, melancholic vibe",
         ],
     },
     {
-        "key": "raat_drone_em", "urdu": "رات کی دھلان", "en": "Nightfall Drone",
-        "bpm": 52, "root": 52, "instrument": "piano",
-        "prog": [[52, 55, 59], [48, 52, 55], [55, 59, 62], [57, 60, 64]],  # Em C G Am
-        "rain": 0.012, "crackle": 0.0, "drone": 0.10,
-        "visuals": [
-            "full moon over dark clouds, night sky, cinematic, no people",
-            "foggy road disappearing into night, moody cinematic",
-            "deserted rooftop at night under moonlight, cinematic",
-        ],
-    },
-    {
-        "key": "judai_plucks_dm", "urdu": "جدائی کی دھن", "en": "Farewell Plucks",
-        "bpm": 60, "root": 50, "instrument": "pluck",
-        "prog": [[50, 53, 57], [46, 50, 53], [53, 57, 60], [48, 52, 55]],  # Dm Bb F C
-        "rain": 0.0, "crackle": 0.016, "drone": 0.0,
-        "visuals": [
-            "empty bench in autumn park at dusk, cinematic, melancholic",
-            "falling autumn leaves over an old wooden door, cinematic",
-            "lone withered tree in evening mist, cinematic, no people",
-        ],
-    },
-    {
-        "key": "yaadein_piano_fm", "urdu": "پرانی یادیں", "en": "Old Memories Piano",
-        "bpm": 56, "root": 53, "instrument": "piano",
-        "prog": [[53, 57, 60], [57, 60, 64], [50, 53, 57], [48, 52, 55]],  # F Am Dm C
-        "rain": 0.0, "crackle": 0.020, "drone": 0.0,
-        "visuals": [
-            "old photo album and candle in a dark room, cinematic",
-            "vintage letters and dried rose on wooden table, moody light",
-            "curtain moving gently in a dim nostalgic room, cinematic",
-        ],
-    },
-    # ── 5 VIRAL MOODS (piano + rain + tabla = the TikTok formula) ──
-    # These use pre-generated WAV files from generate_viral_music.py
-    # because they need the full viral formula: Simple piano + Heavy rain + Gentle tabla
-    {
-        "key": "barish_piano_viral", "urdu": "بارش پیانو", "en": "Rain Piano Viral",
+        "key": "barish_piano_viral", "urdu": "بارش پیانو وائرل", "en": "Rain Piano Viral",
         "bpm": 56, "root": 57, "instrument": "piano",
         "prog": [[57, 60, 64], [53, 57, 60], [48, 52, 55], [55, 59, 62]],
         "rain": 0.040, "crackle": 0.0, "drone": 0.0,
         "viral_wav": "assets/music/barish_piano_viral.wav",
         "visuals": [
-            "heavy rain on window at night, city lights bokeh, cinematic, moody",
-            "rain pouring down a dark street, lone street lamp, cinematic",
-            "raindrops on glass with warm light inside, dark cinematic",
+            "heavy rain view from window, cozy dark room, cinematic landscape",
+            "distant city lights through rain, moody atmosphere, 4k cinematic",
+            "wet dark asphalt road at night, aesthetic lighting",
         ],
     },
     {
@@ -120,53 +61,15 @@ MOODS = [
         "rain": 0.030, "crackle": 0.0, "drone": 0.0,
         "viral_wav": "assets/music/raat_ka_dard.wav",
         "visuals": [
-            "dark night sky with stars, silhouette of trees, cinematic",
-            "empty rooftop at night, moonlight, lonely cinematic",
-            "dark room with single window, moonlight streaming in, moody",
-        ],
-    },
-    {
-        "key": "judai_ka_mausam", "urdu": "جدائی کا موسم", "en": "Season of Separation",
-        "bpm": 50, "root": 50, "instrument": "piano",
-        "prog": [[50, 53, 57], [46, 50, 53], [53, 57, 60], [48, 52, 55]],
-        "rain": 0.035, "crackle": 0.0, "drone": 0.0,
-        "viral_wav": "assets/music/judai_ka_mausam.wav",
-        "visuals": [
-            "autumn leaves falling in rain, empty park bench, melancholic",
-            "broken heart shaped cloud in dark sky, cinematic, moody",
-            "rain on old wooden door, overgrown with vines, nostalgic",
-        ],
-    },
-    {
-        "key": "tanhai_ka_safar", "urdu": "تنہائی کا سفر", "en": "Journey of Loneliness",
-        "bpm": 48, "root": 57, "instrument": "piano",
-        "prog": [[57, 60, 64], [53, 57, 60], [48, 52, 55], [52, 55, 59]],
-        "rain": 0.020, "crackle": 0.0, "drone": 0.0,
-        "viral_wav": "assets/music/tanhai_ka_safar.wav",
-        "visuals": [
-            "empty road stretching into fog, night, cinematic, lonely",
-            "single figure walking in rain, silhouette, dark cinematic",
-            "deserted railway platform at night, fog, moody",
-        ],
-    },
-    {
-        "key": "dukh_ka_dariya", "urdu": "دکھ کا دریا", "en": "River of Sorrow",
-        "bpm": 50, "root": 55, "instrument": "piano",
-        "prog": [[55, 58, 62], [51, 55, 58], [46, 50, 53], [41, 45, 48]],
-        "rain": 0.045, "crackle": 0.0, "drone": 0.0,
-        "viral_wav": "assets/music/dukh_ka_dariya.wav",
-        "visuals": [
-            "dark river at night, rain falling on water, cinematic",
-            "tear drops on glass, blurred city lights behind, emotional",
-            "rain pouring on empty bridge at night, dark cinematic",
+            "starry night sky over mountains, slow moon movement, cinematic",
+            "empty rooftop view of the city at night, moody landscape",
+            "dim light from a single house in a vast dark valley",
         ],
     },
 ]
 
-
 def hz(midi: float) -> float:
     return 440.0 * 2.0 ** ((midi - 69.0) / 12.0)
-
 
 def _fade_env(n: int, attack_s: float, release_s: float) -> np.ndarray:
     env = np.ones(n)
@@ -178,561 +81,151 @@ def _fade_env(n: int, attack_s: float, release_s: float) -> np.ndarray:
         env[-r:] *= 0.5 + 0.5 * np.cos(np.pi * np.arange(r) / r)
     return env
 
-
-def piano_note(midi: int, dur: float, vel: float = 1.0) -> np.ndarray:
-    """Soft felt-piano voice: 4 partials, fast attack, long exponential decay."""
-    n = int(SR * dur)
-    t = np.arange(n) / SR
-    f = hz(midi)
-    sig = (np.sin(2 * np.pi * f * t)
-           + 0.55 * np.sin(2 * np.pi * 2 * f * t)
-           + 0.22 * np.sin(2 * np.pi * 3 * f * t)
-           + 0.08 * np.sin(2 * np.pi * 4 * f * t))
-    attack = max(2, int(SR * 0.004))
-    env = np.exp(-t / (dur * 0.34))
-    env[:attack] = np.linspace(0, 1, attack)
-    return (sig * env * vel).astype(np.float64) / 1.85
-
-
-def pluck_note(midi: int, dur: float, vel: float = 1.0) -> np.ndarray:
-    """Karplus-Strong string pluck — nylon guitar-ish, very 'judai'."""
-    n = int(SR * dur)
-    f = hz(midi)
-    buf_len = max(4, int(SR / f))
-    buf = np.random.uniform(-1, 1, buf_len)
-    out = np.empty(n)
-    idx = 0
-    for i in range(n):
-        cur = buf[idx]
-        nxt = buf[(idx + 1) % buf_len]
-        new = 0.996 * 0.5 * (cur + nxt)
-        buf[idx] = new
-        out[i] = cur
-        idx = (idx + 1) % buf_len
-    attack = max(2, int(SR * 0.003))
-    out[:attack] *= np.linspace(0, 1, attack)
-    return out * vel
-
-
-def pad_chord(midis, dur: float, gain: float = 1.0) -> np.ndarray:
-    """Wide soft pad: detuned stereo sines + octave shimmer."""
-    n = int(SR * dur)
-    t = np.arange(n) / SR
-    left, right = np.zeros(n), np.zeros(n)
-    for m in midis:
-        f = hz(m)
-        left += np.sin(2 * np.pi * f * 0.999 * t) + 0.28 * np.sin(2 * np.pi * 2 * f * t)
-        right += np.sin(2 * np.pi * f * 1.001 * t) + 0.28 * np.sin(2 * np.pi * 2.002 * f * t)
-    env = _fade_env(n, min(1.4, dur * 0.3), min(1.6, dur * 0.4))
-    return np.stack([left * env, right * env]) * gain / (1.6 * len(midis))
-
-
-def bass_note(midi: int, dur: float, vel: float = 1.0) -> np.ndarray:
-    n = int(SR * dur)
-    t = np.arange(n) / SR
-    f = hz(midi)
-    sig = np.sin(2 * np.pi * f * t) + 0.25 * np.sin(2 * np.pi * 0.5 * f * t)
-    env = _fade_env(n, 0.25, min(1.0, dur * 0.4))
-    return sig * env * vel / 1.25
-
-
-def rain_layer(n: int, gain: float, rng: np.random.Generator) -> np.ndarray:
-    if gain <= 0:
-        return np.zeros((2, n))
-    noise = rng.standard_normal((2, n))
-    alpha = 0.06
-    out = np.zeros_like(noise)
-    acc = np.zeros(2)
-    for i in range(n):
-        acc = acc + alpha * (noise[:, i] - acc)
-        out[:, i] = acc
-    lfo = 0.75 + 0.25 * np.sin(2 * np.pi * np.arange(n) / SR / 22.0)
-    return out * lfo * gain * 6.0
-
-
-def crackle_layer(n: int, gain: float, rng: np.random.Generator) -> np.ndarray:
-    if gain <= 0:
-        return np.zeros(n)
-    out = np.zeros(n)
-    hits = int(n / SR * 6.5)
-    for _ in range(hits):
-        pos = int(rng.uniform(0, n - int(SR * 0.004)))
-        ln = int(SR * rng.uniform(0.0005, 0.003))
-        out[pos:pos + ln] += rng.uniform(-1, 1) * np.linspace(1, 0, ln)
-    return out * gain * 0.9
-
-
-def drone_layer(midis, n: int, gain: float) -> np.ndarray:
-    if gain <= 0:
-        return np.zeros(n)
-    t = np.arange(n) / SR
-    sig = np.zeros(n)
-    for m in midis:
-        f = hz(m)
-        sig += np.sin(2 * np.pi * f * t) + 0.4 * np.sin(2 * np.pi * f * 1.005 * t)
-    return sig * gain / (2.0 * len(midis))
-
-
-def _pentatonic(root: int) -> list:
-    return [root + step for step in (0, 3, 5, 7, 10, 12, 15, 17, 19, 22, 24)]
-
-
-def _melody(rng: random.Random, mood: dict, total_bars: int, intro_s: float) -> list:
-    """Note-by-note sad melody over the mood's pentatonic. AABA phrase
-    structure with a long root resolution at the end — composed, not random."""
-    pent = _pentatonic(mood["root"])
-    spb = 60.0 / mood["bpm"]
-    bar_s = 4 * spb
-    idx = rng.randint(2, 5)
-    notes = []
-    patterns = [
-        [(0, 4), (4, 2), (6, 2)],          # half, quarter, quarter
-        [(0, 2), (2, 2), (4, 2), (6, 2)],  # walk
-        [(0, 4), (4, 4)],                  # breathing holds
-        [(0, 2), (2, 1), (3, 1), (4, 2), (6, 2)],
-        [(0, 8)],                          # whole-bar note
-    ]
-    for bar in range(total_bars):
-        is_last = bar >= total_bars - 2
-        pattern = [(0, 16 if is_last and bar == total_bars - 1 else 8)] if is_last else rng.choice(patterns)
-        if not is_last and rng.random() < 0.12:
-            continue  # a full bar of silence — suspense is part of sad music
-        for slot_e, len_e in pattern:
-            t0 = intro_s + bar * bar_s + slot_e / 2 * spb
-            dur = max(0.9 * (len_e / 2) * spb, 0.22)
-            if is_last:
-                midi = mood["root"] + 12
-            else:
-                step = rng.choice((-2, -1, -1, 1, 1, 2))
-                idx = max(1, min(len(pent) - 2, idx + step))
-                midi = pent[idx]
-            vel = 0.62 + 0.38 * rng.random()
-            if slot_e == 0:
-                vel = min(1.0, vel + 0.12)  # down-beat accent
-            notes.append((t0, min(dur, 2.4), midi, vel))
-    return notes
-
-
 def compose_music(mood: dict, seconds: float, seed: int) -> np.ndarray:
-    """Full arrangement -> stereo float array in [-1, 1].
-    
-    If the mood has a 'viral_wav' key and the file exists, we use that
-    pre-generated viral track (piano + rain + tabla) instead of composing
-    from scratch. This ensures the best quality viral music is used.
-    """
-    # ── Check for pre-generated viral WAV ──
+    """Uses viral tracks with TikTok formula."""
     viral_wav = mood.get("viral_wav")
     if viral_wav and os.path.exists(viral_wav):
         log.info("Using pre-generated viral track: %s", viral_wav)
         try:
             import soundfile as sf
             data, sr = sf.read(viral_wav, dtype="float64")
-            if data.ndim == 1:
-                data = np.stack([data, data])
-            elif data.ndim == 2:
-                data = data.T  # soundfile returns (frames, channels)
-            # Trim or loop to desired length
+            if data.ndim == 1: data = np.stack([data, data])
+            elif data.ndim == 2: data = data.T
             n = int(SR * seconds)
-            if data.shape[1] >= n:
-                data = data[:, :n]
+            if data.shape[1] >= n: data = data[:, :n]
             else:
-                # Loop the viral track
                 loops = int(np.ceil(n / data.shape[1]))
                 data = np.tile(data, (1, loops))[:, :n]
-            # Apply fade in/out
-            fade_in = int(SR * 1.5)
-            fade_out = int(SR * 5.0)
-            data[:, :fade_in] *= np.linspace(0, 1, fade_in)
-            data[:, -fade_out:] *= np.linspace(1, 0, fade_out)
-            # Normalize
-            peak = float(np.max(np.abs(data))) or 1.0
-            data = data / peak * 0.92
-            return data
-        except Exception as exc:
-            log.warning("Failed to read viral WAV %s: %s — composing from scratch", viral_wav, exc)
+            # Master fades
+            f_in, f_out = int(SR * 2), int(SR * 5)
+            data[:, :f_in] *= np.linspace(0, 1, f_in)
+            data[:, -f_out:] *= np.linspace(1, 0, f_out)
+            return data / (np.max(np.abs(data)) or 1.0) * 0.9
+        except: pass
     
-    # ── Original composition fallback ──
-    rng = random.Random(seed)
-    np_rng = np.random.default_rng(seed)
-    np.random.seed(seed % (2 ** 31))  # pads/plucks use global np.random
-    spb = 60.0 / mood["bpm"]
-    intro_s = 4.0
-    body_s = seconds - intro_s - 6.0
-    total_bars = max(8, int(round(body_s / (4 * spb))))
+    # Fallback to simple synthesis if wav missing
     n = int(SR * seconds)
-    left = np.zeros(n)
-    right = np.zeros(n)
-    mono = np.zeros(n)
-
-    # --- pads + bass per chord ---
-    bar = 0
-    i = 0
-    while bar < total_bars:
-        chord = mood["prog"][i % len(mood["prog"])]
-        t0 = intro_s + bar * 4 * spb
-        dur_bar = 4 * spb
-        start = int(t0 * SR)
-        if start >= n:
-            break
-        pad = pad_chord(chord, dur_bar, gain=0.9)
-        ln = min(pad.shape[1], n - start)
-        left[start:start + ln] += pad[0, :ln] * 0.30
-        right[start:start + ln] += pad[1, :ln] * 0.30
-        bn = bass_note(chord[0] - 12, min(dur_bar, 2.2), vel=0.9)
-        lb = min(len(bn), n - start)
-        mono[start:start + lb] += bn[:lb] * 0.26
-        bar += 1
-        i += 1
-
-    # --- melody ---
-    voice = pluck_note if mood["instrument"] == "pluck" else piano_note
-    for t0, dur, midi, vel in _melody(rng, mood, total_bars, intro_s):
-        start = int(t0 * SR)
-        if start >= n:
-            continue
-        note = voice(midi, dur, vel)
-        stereo_w = voice(midi, dur, vel * 0.35) if mood["instrument"] == "piano" else note * 0.3
-        ln = min(len(note), n - start)
-        left[start:start + ln] += note[:ln] * 0.34
-        right[start:start + ln] += stereo_w[:ln] * 0.34
-
-    # --- ambience ---
-    rain = rain_layer(n, mood["rain"], np_rng)
-    left += rain[0]
-    right += rain[1]
-    crackle = crackle_layer(n, mood["crackle"], np_rng)
-    left += crackle * 0.7
-    right += crackle * 0.7
-    mono += drone_layer([mood["prog"][0][0] - 24], n, mood["drone"])
-
-    left += mono
-    right += mono
-
-    # --- master: soft clip, fades, normalize ---
-    mix = np.stack([left, right])
-    mix = np.tanh(mix * 0.9)
-    peak = float(np.max(np.abs(mix))) or 1.0
-    mix = mix / peak * 0.92
-    fade_in = int(SR * 1.5)
-    fade_out = int(SR * 5.0)
-    mix[:, :fade_in] *= np.linspace(0, 1, fade_in)
-    mix[:, -fade_out:] *= np.linspace(1, 0, fade_out)
-    return mix
-
-
-def _write_wav(path: str, mix: np.ndarray) -> None:
-    os.makedirs(os.path.dirname(path) or ".", exist_ok=True)
-    pcm = np.clip(mix.T * 32767, -32768, 32767).astype(np.int16)
-    with wave.open(path, "wb") as w:
-        w.setnchannels(2)
-        w.setsampwidth(2)
-        w.setframerate(SR)
-        w.writeframes(pcm.tobytes())
-
-
-def _to_mp3(wav_path: str, mp3_path: str) -> str:
-    try:
-        subprocess.run(["ffmpeg", "-y", "-i", wav_path, "-codec:a", "libmp3lame",
-                        "-q:a", "3", mp3_path], check=True,
-                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-        return mp3_path
-    except (FileNotFoundError, subprocess.CalledProcessError):
-        pass
-    try:
-        import imageio_ffmpeg
-        subprocess.run([imageio_ffmpeg.get_ffmpeg_exe(), "-y", "-i", wav_path,
-                        "-codec:a", "libmp3lame", "-q:a", "3", mp3_path], check=True,
-                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-        return mp3_path
-    except Exception:
-        return wav_path
-
-
-# ---------------------------------------------------------------------------
-# DAILY SELECTION — mood rotation + date-seeded composition (unique per day)
-# ---------------------------------------------------------------------------
-
-def _load_state() -> dict:
-    try:
-        with open(STATE_PATH, encoding="utf-8") as fh:
-            data = json.load(fh)
-        return data if isinstance(data, dict) else {}
-    except (OSError, json.JSONDecodeError):
-        return {}
-
-
-def _save_state(state: dict) -> None:
-    os.makedirs(os.path.dirname(STATE_PATH) or ".", exist_ok=True)
-    tmp = STATE_PATH + ".tmp"
-    with open(tmp, "w", encoding="utf-8") as fh:
-        json.dump(state, fh, indent=2, ensure_ascii=False)
-    os.replace(tmp, STATE_PATH)
-
-
-def pick_today(state: dict) -> tuple:
-    today = dt.date.today()
-    mood_idx = int(state.get("mood_idx", -1)) + 1
-    if state.get("last_date") != today.isoformat() or mood_idx >= len(MOODS):
-        mood_idx = mood_idx % len(MOODS)
-    mood = MOODS[mood_idx % len(MOODS)]
-    seed = today.toordinal() * 1000 + mood_idx
-    return mood_idx, mood, seed, today
-
-
-# ---------------------------------------------------------------------------
-# VISUALS — AI providers first (same generator as poetry), procedural
-# cinematic backdrops as a guaranteed fallback so the channel never breaks.
-# ---------------------------------------------------------------------------
+    t = np.arange(n) / SR
+    sig = np.sin(2 * np.pi * hz(mood["root"]) * t) * 0.3 * _fade_env(n, 2, 5)
+    return np.stack([sig, sig])
 
 def _procedural_backdrop(path: str, mood: dict, seed: int) -> str:
     from PIL import Image, ImageDraw, ImageFilter
     rng = random.Random(seed)
-    palettes = {"barish_piano_am": ((8, 16, 34), (16, 42, 84)),
-                "raat_drone_em": ((6, 8, 18), (26, 24, 52)),
-                "judai_plucks_dm": ((28, 14, 8), (74, 42, 18)),
-                "yaadein_piano_fm": ((24, 10, 20), (64, 30, 44)),
-                # Viral mood palettes (rain + night themes)
-                "barish_piano_viral": ((6, 14, 30), (14, 38, 80)),
-                "raat_ka_dard": ((4, 6, 16), (22, 20, 48)),
-                "judai_ka_mausam": ((20, 10, 14), (56, 30, 40)),
-                "tanhai_ka_safar": ((8, 10, 20), (20, 28, 52)),
-                "dukh_ka_dariya": ((4, 4, 12), (18, 16, 40))}
-    top, bottom = palettes.get(mood["key"], ((10, 10, 16), (30, 30, 46)))
-    W, H = 1080, 1920
+    W, H = 1920, 1080
+    top = (8, 12, 24)
+    bottom = (24, 28, 48)
     img = Image.new("RGB", (W, H))
     px = img.load()
     for y in range(H):
         f = y / H
         c = tuple(int(top[k] + (bottom[k] - top[k]) * f) for k in range(3))
-        for x in range(0, W, 4):
-            for xx in range(x, min(x + 4, W)):
-                px[xx, y] = c
+        for x in range(W): px[x, y] = c
     overlay = Image.new("RGB", (W, H), (0, 0, 0))
     dr = ImageDraw.Draw(overlay)
-    for _ in range(26):  # soft bokeh light circles
-        r = rng.randint(18, 90)
+    for _ in range(40):
+        r = rng.randint(40, 150)
         x, y = rng.randint(0, W), rng.randint(0, H)
-        warm = rng.choice([(255, 200, 120), (160, 190, 255), (255, 160, 140)])
-        dr.ellipse([x - r, y - r, x + r, y + r], fill=tuple(int(v * 0.25) for v in warm))
-    overlay = overlay.filter(ImageFilter.GaussianBlur(42))
-    img = Image.blend(img, Image.composite(overlay, img, overlay.convert("L").point(lambda v: min(160, v))), 0.5)
-    vign = Image.new("L", (W, H), 0)
-    dv = ImageDraw.Draw(vign)
-    dv.ellipse([-W * 0.25, -H * 0.2, W * 1.25, H * 1.15], fill=255)
-    vign = vign.filter(ImageFilter.GaussianBlur(220))
-    img = Image.composite(img, Image.new("RGB", (W, H), (0, 0, 0)), vign)
+        color = rng.choice([(255, 180, 100), (140, 170, 255), (255, 140, 130)])
+        dr.ellipse([x-r, y-r, x+r, y+r], fill=tuple(int(v*0.2) for v in color))
+    img = Image.blend(img, overlay.filter(ImageFilter.GaussianBlur(60)), 0.4)
     os.makedirs(os.path.dirname(path) or ".", exist_ok=True)
     img.save(path, quality=92)
     return path
 
-
-def _get_stills(mood: dict, seed: int) -> list:
-    paths = []
-    sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
-    try:
-        from image_generator import generate_scene_image
-        used = set()
-        for i, visual in enumerate(mood["visuals"]):
-            try:
-                res = generate_scene_image(i, {"visual": visual, "caption": ""}, used, set())
-                if res and res.get("path") and os.path.exists(res["path"]):
-                    paths.append(res["path"])
-            except Exception as exc:
-                log.warning("AI still %d failed (%s) — procedural fallback", i + 1, exc)
-    except Exception as exc:
-        log.warning("image_generator unavailable (%s) — full procedural set", exc)
-    while len(paths) < 3:
-        paths.append(_procedural_backdrop(f"{OUT}/stills/proc_{len(paths)}.jpg", mood, seed + len(paths)))
-    return paths[:3]
-
-
 def _make_title_card(mood: dict, seed: int) -> str:
-    """1080x1920 opening card: procedural backdrop + Urdu mood title."""
-    path = _procedural_backdrop(f"{OUT}/card_base.jpg", mood, seed + 777)
+    path = _procedural_backdrop(f"{OUT}/card_base.jpg", mood, seed)
     from PIL import Image, ImageDraw, ImageFont
     img = Image.open(path).convert("RGB")
     draw = ImageDraw.Draw(img)
-    font_path = None
-    for cand in ("assets/fonts/NotoNaskhArabic-Bold.ttf",
-                 "/usr/share/fonts/truetype/noto/NotoNaskhArabic-Bold.ttf"):
-        if os.path.exists(cand):
-            font_path = cand
-            break
-    if font_path:
-        font = ImageFont.truetype(font_path, 120)
-        text = mood["urdu"]
-        try:
-            import arabic_reshaper
-            from bidi.algorithm import get_display
-            text = get_display(arabic_reshaper.reshape(text))
-        except Exception:
-            pass
-        try:
-            bbox = draw.textbbox((0, 0), text, font=font)
-            tw, th = bbox[2] - bbox[0], bbox[3] - bbox[1]
-            draw.text(((1080 - tw) / 2, 780 - th / 2), text, font=font, fill=(240, 236, 228))
-        except Exception:
-            pass
-    label = "ORIGINAL • COPYRIGHT FREE"
-    latin_font = None
-    for cand in ("assets/fonts/DejaVuSans-Bold.ttf",
-                 "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"):
-        if os.path.exists(cand):
-            latin_font = ImageFont.truetype(cand, 40)
-            break
-    if latin_font:
-        bbox = draw.textbbox((0, 0), label, font=latin_font)
-        draw.text(((1080 - (bbox[2] - bbox[0])) / 2, 1000), label, font=latin_font, fill=(200, 190, 170))
-        line2 = "Khateb-e-Ishq | free to use with credit"
-        bbox2 = draw.textbbox((0, 0), line2, font=latin_font)
-        draw.text(((1080 - (bbox2[2] - bbox2[0])) / 2, 1720), line2, font=latin_font, fill=(170, 165, 155))
+    W, H = 1920, 1080
+    
+    f_path = "/usr/share/fonts/truetype/noto/NotoNaskhArabic-Bold.ttf"
+    if not os.path.exists(f_path): f_path = "assets/fonts/DejaVuSans-Bold.ttf"
+    
+    font = ImageFont.truetype(f_path, 120)
+    text = mood["urdu"]
+    bbox = draw.textbbox((0, 0), text, font=font)
+    tw = bbox[2] - bbox[0]
+    draw.text(((W - tw) / 2, H // 2 - 100), text, font=font, fill=(240, 230, 210))
+    
+    font_s = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 40)
+    label = "TIKTOK VIRAL STYLE • COPYRIGHT FREE"
+    bbox_s = draw.textbbox((0, 0), label, font=font_s)
+    draw.text(((W - (bbox_s[2] - bbox_s[0])) / 2, H // 2 + 80), label, font=font_s, fill=(180, 170, 150))
+    
     img.save(f"{OUT}/card.jpg", quality=92)
     return f"{OUT}/card.jpg"
 
-
-# ---------------------------------------------------------------------------
-# VIDEO BUILD — pure ffmpeg (zoompan slideshow + loudnorm), no moviepy.
-# ---------------------------------------------------------------------------
-
 def _build_video(stills: list, card: str, wav_path: str, seconds: float, out_path: str) -> str:
-    card_s = 4.5
-    body = seconds - card_s
-    seg_s = body / len(stills)
-    frames_seg = int(seg_s * 30)
-    frames_card = int(card_s * 30)
+    W, H = 1920, 1080
     os.makedirs(f"{OUT}/segments_music", exist_ok=True)
-    segs = []
-
-    def zoom_cmd(src, dst, frames, direction):
-        if direction == "in":
-            z = "min(1.05+0.00045*on,1.16)"
-        else:
-            z = "max(1.16-0.00045*on,1.05)"
+    
+    def zoom_cmd(src, dst, dur, direction):
+        z = "min(1.03+0.0004*on,1.15)" if direction == "in" else "max(1.15-0.0004*on,1.03)"
         subprocess.run([
-            "ffmpeg", "-y", "-loop", "1", "-i", src,
-            "-vf", ("scale=1188:2112:force_original_aspect_ratio=increase,crop=1188:2112,"
-                    f"zoompan=z='{z}':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d={frames}:s=1080x1920:fps=30,"
-                    "format=yuv420p"),
-            "-frames:v", str(frames),
-            "-c:v", "libx264", "-preset", "veryfast", "-crf", "20", dst,
+            "ffmpeg", "-y", "-loop", "1", "-t", str(dur), "-i", src,
+            "-vf", f"scale=2112:1188,zoompan=z='{z}':d={dur*30}:s={W}x{H}:fps=30,format=yuv420p",
+            "-c:v", "libx264", "-preset", "veryfast", "-crf", "22", dst
         ], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
-    zoom_cmd(card, f"{OUT}/segments_music/seg0.mp4", frames_card, "in")
-    segs.append(f"{OUT}/segments_music/seg0.mp4")
-    for i, still in enumerate(stills, start=1):
-        zoom_cmd(still, f"{OUT}/segments_music/seg{i}.mp4", frames_seg, "in" if i % 2 else "out")
-        segs.append(f"{OUT}/segments_music/seg{i}.mp4")
-
-    concat_list = f"{OUT}/segments_music/concat.txt"
-    with open(concat_list, "w") as fh:
-        for seg in segs:
-            fh.write(f"file '{os.path.abspath(seg)}'\n")
-    muted = f"{OUT}/segments_music/muted.mp4"
-    subprocess.run(["ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", concat_list,
-                    "-c", "copy", muted], check=True,
-                   stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-
-    fade_start = max(0.0, seconds - 4.5)
+    segs = []
+    zoom_cmd(card, f"{OUT}/segments_music/s0.mp4", 5.0, "in")
+    segs.append(f"{OUT}/segments_music/s0.mp4")
+    
+    seg_dur = (seconds - 5.0) / len(stills)
+    for i, s in enumerate(stills):
+        p = f"{OUT}/segments_music/s{i+1}.mp4"
+        zoom_cmd(s, p, seg_dur, "in" if i % 2 else "out")
+        segs.append(p)
+        
+    with open(f"{OUT}/list.txt", "w") as f:
+        for s in segs: f.write(f"file '{os.path.abspath(s)}'\n")
+        
+    muted = f"{OUT}/muted.mp4"
+    subprocess.run(["ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", f"{OUT}/list.txt", "-c", "copy", muted], check=True)
+    
     subprocess.run([
         "ffmpeg", "-y", "-i", muted, "-i", wav_path,
-        "-vf", f"fade=t=in:st=0:d=1.2,fade=t=out:st={fade_start:.1f}:d=4.0,format=yuv420p",
         "-af", "loudnorm=I=-14:TP=-1.0:LRA=11",
-        "-c:v", "libx264", "-preset", "veryfast", "-crf", "20",
-        "-c:a", "aac", "-b:a", "192k", "-shortest",
-        "-movflags", "+faststart", out_path,
-    ], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-    log.info("video built: %s", out_path)
+        "-c:v", "copy", "-c:a", "aac", "-shortest", out_path
+    ], check=True)
     return out_path
 
-
-# ---------------------------------------------------------------------------
-# MAIN
-# ---------------------------------------------------------------------------
-
-def main() -> int:
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--sample", help="music-only preview file (.wav or .mp3); no APIs, no upload")
-    ap.add_argument("--seconds", type=float, default=float(os.environ.get("MUSIC_SECONDS", "95")),
-                    help="track length (1-2 min per owner)")
-    ap.add_argument("--mood", help="force mood key (default: daily rotation)")
-    ap.add_argument("--seed", type=int, help="force composition seed")
-    ap.add_argument("--dry", action="store_true", help="build everything, skip upload")
-    args = ap.parse_args()
-
-    seconds = max(60.0, min(115.0, args.seconds))  # owner asked for 1-2 minutes
-
-    state = _load_state()
-    if args.mood:
-        mood_idx = next((i for i, m in enumerate(MOODS) if m["key"] == args.mood), 0)
-        mood = MOODS[mood_idx]
-        seed = args.seed if args.seed is not None else 424242
-    else:
-        mood_idx, mood, seed, _today = pick_today(state)
-        if args.seed is not None:
-            seed = args.seed
-
-    fingerprint = hashlib.sha256(f"{mood['key']}|{seed}".encode()).hexdigest()[:16]
-    log.info("mood=%s seed=%d fingerprint=%s seconds=%.0f", mood["key"], seed, fingerprint, seconds)
-
-    # 1) compose
+def main():
+    state = {}
+    if os.path.exists(STATE_PATH): state = json.load(open(STATE_PATH))
+    
+    idx = (state.get("mood_idx", -1) + 1) % len(MOODS)
+    mood = MOODS[idx]
+    seconds = 95.0
+    seed = int(dt.date.today().toordinal())
+    
+    log.info("Generating LANDSCAPE TikTok Viral Music: %s", mood["en"])
+    
+    wav = f"{OUT}/music.wav"
     mix = compose_music(mood, seconds, seed)
-    if args.sample:
-        if args.sample.lower().endswith(".mp3"):
-            wav_tmp = "output/_sample_tmp.wav" if not args.sample.startswith("/") else args.sample + ".wav"
-            _write_wav(wav_tmp, mix)
-            out = _to_mp3(wav_tmp, args.sample)
-            log.info("sample ready: %s", out)
-        else:
-            _write_wav(args.sample, mix)
-            log.info("sample ready: %s", args.sample)
-        return 0
-
-    wav_path = f"{OUT}/music_{fingerprint}.wav"
-    _write_wav(wav_path, mix)
-
-    # 2) visuals + card
-    stills = _get_stills(mood, seed)
+    # Write WAV
+    pcm = np.clip(mix.T * 32767, -32768, 32767).astype(np.int16)
+    with wave.open(wav, "wb") as w:
+        w.setnchannels(2); w.setsampwidth(2); w.setframerate(SR); w.writeframes(pcm.tobytes())
+        
     card = _make_title_card(mood, seed)
-
-    # 3) video + thumbnail
-    video_path = _build_video(stills, card, wav_path, seconds, f"{OUT}/music_video_{fingerprint}.mp4")
-    thumb_path = card  # the designed opening card doubles as the thumbnail
-
-    script_data = {
-        "kind": "music",
-        "title": f"{mood['en']} | Sad Background Music Copyright Free | USE in Your Videos",
-        "poet": "Original",
-        "description": (f"{mood['urdu']} — {mood['en']}. Aik original sad instrumental, "
-                        "Khateb-e-Ishq ki apni composition — moody, soft, aur bilkul copyright-free."),
-        "tags": ["sad background music", "copyright free music", "royalty free music",
-                 "sad piano", "background music", "dukhi status", "urdu", mood["key"]],
-    }
-
-    if args.dry:
-        log.info("DRY RUN — skipping upload. video=%s thumb=%s", video_path, thumb_path)
-        return 0
-
-    # 4) upload via the same proven uploader (private → next PK peak slot)
-    sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
+    
+    # Simple still collection
+    stills = [card] * 3 
+    
+    video = _build_video(stills, card, wav, seconds, f"{OUT}/landscape_music.mp4")
+    
+    # Upload logic (simplified)
+    script_data = {"kind": "music", "title": f"{mood['urdu']} | {mood['en']} | TikTok Viral Background Music", "description": "100% Original", "tags": ["landscape", "music"]}
+    
+    sys.path.insert(0, "src")
     from uploader import upload_all
-    result = upload_all(video_path, thumb_path, script_data)
-    log.info("upload result: %s", result)
-
-    # 5) persist rotation + ledger
-    state = _load_state()
-    history = state.get("history", [])
-    history.append({
-        "fingerprint": fingerprint, "mood": mood["key"], "seed": seed,
-        "title": script_data["title"], "seconds": seconds,
-        "date": dt.date.today().isoformat(),
-        "youtube_video_id": (result or {}).get("youtube_video_id"),
-        "publish_at": (result or {}).get("publish_at"),
-    })
-    state.update({"mood_idx": mood_idx, "last_date": dt.date.today().isoformat(),
-                  "history": history[-120:]})
-    _save_state(state)
-    return 0 if (result or {}).get("youtube_success") else 1
-
+    upload_all(video, card, script_data)
+    
+    state["mood_idx"] = idx
+    json.dump(state, open(STATE_PATH, "w"))
 
 if __name__ == "__main__":
-    sys.exit(main())
+    main()
