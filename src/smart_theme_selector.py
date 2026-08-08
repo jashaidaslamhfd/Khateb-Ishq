@@ -295,6 +295,8 @@ class SmartThemeSelector:
                 result.setdefault("voice", controls["best_voice"])
             if controls.get("best_publish_slots"):
                 result.setdefault("publish_slots", controls["best_publish_slots"])
+            if controls.get("best_hook_frame"):
+                result.setdefault("hook_style", controls["best_hook_frame"])
         except Exception as exc:
             logger.warning("Autonomous reroute skipped: %s", exc)
         return result

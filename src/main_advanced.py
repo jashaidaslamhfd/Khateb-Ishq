@@ -176,6 +176,20 @@ def run_pipeline(theme: str = None) -> dict:
     script["theme_strategy"] = theme_record.get("strategy", "unknown")
     logger.info("📝 Script (%s / %s): %s", script.get("source"), script.get("poet"), script.get("title"))
 
+    # ── Step 2.4: AUTONOMOUS HOOK GATE — a weak/absent hook is the #1 killer
+    # of Shorts retention. The ML brain scores the opening; reject below floor.
+    try:
+        from autonomous_controller import _hook_score
+        hook_s = _hook_score(script)
+        hook_min = int(os.environ.get("MIN_HOOK_SCORE", "50"))
+        logger.info("🧲 Hook score: %d/100 (min %d)", hook_s, hook_min)
+        if hook_s < hook_min:
+            raise RuntimeError(f"Autonomous hook gate: hook score {hook_s} < {hook_min} — weak opening")
+    except RuntimeError:
+        raise
+    except Exception as exc:
+        logger.warning("Autonomous hook gate skipped: %s", exc)
+
     # ── Step 2.5: AUTONOMOUS QUALITY GATE — reject garbled/broken Urdu before
     # wasting image/voice/render. The ML brain's _detect_quality_issues flags
     # non-Urdu text; enforce it here as a hard gate.

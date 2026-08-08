@@ -1,6 +1,9 @@
 {
-  "generated_at": "2026-08-08T14:58:31.888929+00:00",
+  "generated_at": "2026-08-08T15:01:37.402652+00:00",
   "recommended_cadence": 1,
+  "avg_ctr": null,
+  "avg_engagement": null,
+  "avg_hook_score": 61.2,
   "throttle": true,
   "throttle_reason": "last 4 videos avg 0 views",
   "winning_themes": [],

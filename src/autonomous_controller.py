@@ -109,6 +109,66 @@ def _detect_quality_issues(entry: dict) -> list[str]:
     return issues
 
 
+URDU_HOOK_PATTERNS = {
+    "question": ["کیا", "کیوں", "کب", "کس", "کہاں", "کیا آپ"],
+    "emotion": ["غم", "درد", "تڑپ", "یاد", "اشک", "دل", "آنسو", "جدائی"],
+    "curiosity": ["راز", "حقیقت", "سچ", "چھپا", "پوشیدہ"],
+}
+STOP_URDU = {"اور", "کا", "کی", "کے", "میں", "ہے", "ہیں", "تھا", "تھی", "یہ", "وہ", "سے", "نہیں", "بھی"}
+
+
+def _tokens_urdu(text: str) -> list[str]:
+    import re as _re
+    return _re.findall(r"[\u0600-\u06FF]+", text or "")
+
+
+def _hook_score(script: dict) -> int:
+    """Score how strong the opening hook is (0-100) from the hook/first scene."""
+    text = (script.get("hook") or script.get("voiceover") or "")[:200]
+    words = _tokens_urdu(text)
+    if not words:
+        return 40  # neutral when unknown
+    score = 50
+    low = text.lower()
+    for pattern, kws in URDU_HOOK_PATTERNS.items():
+        if any(k in low for k in kws):
+            score += 15
+    if len(words) >= 3:
+        score += 10
+    if len(words) > 15:
+        score -= 10  # too long a hook loses attention
+    return max(10, min(100, score))
+
+
+def _topic_demand(topic: str, trends: dict) -> float:
+    """Combine trend score (if any) with a base, for prioritizing topics."""
+    if not topic:
+        return 0.0
+    t = topic.strip().lower()
+    trend = trends.get("trending", {}) or {}
+    for rec in (trend if isinstance(trend, list) else trend.get("topics", [])):
+        if isinstance(rec, dict) and t in str(rec.get("topic", "")).lower():
+            return float(rec.get("score", 50))
+    return 50.0
+
+
+def _estimate_ctr(entry: dict) -> float | None:
+    """Estimate CTR from known fields if views/impressions present."""
+    views = int(entry.get("views") or 0)
+    imps = int(entry.get("impressions") or 0)
+    if views and imps:
+        return round(views / imps * 100.0, 2)
+    return None
+
+
+def _estimate_engagement(entry: dict) -> float | None:
+    views = int(entry.get("views") or 0)
+    comments = int(entry.get("comments") or 0)
+    if views and comments:
+        return round(comments / views * 100.0, 2)
+    return None
+
+
 def _learned_slots(slot_views: dict) -> list[int]:
     """Rank publish hours by avg views; return the top 3 PKT hours, falling
     back to the env PUBLISH_SLOTS if there is no view data yet."""
@@ -124,6 +184,19 @@ def _learned_slots(slot_views: dict) -> list[int]:
     return [int(x) for x in default.split(",") if x.strip()]
 
 
+def _hook_style(script: dict) -> str:
+    """Classify hook style: question / emotion / curiosity / neutral."""
+    text = (script.get("hook") or script.get("voiceover") or "")[:200]
+    low = text.lower()
+    if any(k in low for k in URDU_HOOK_PATTERNS["question"]):
+        return "question"
+    if any(k in low for k in URDU_HOOK_PATTERNS["emotion"]):
+        return "emotion"
+    if any(k in low for k in URDU_HOOK_PATTERNS["curiosity"]):
+        return "curiosity"
+    return "neutral"
+
+
 def analyse() -> dict:
     history = _load_json(VIDEO_HISTORY_PATH, [])
     if not isinstance(history, list):
@@ -135,6 +208,10 @@ def analyse() -> dict:
     cap_views: dict[str, list] = defaultdict(list)
     voice_views: dict[str, list] = defaultdict(list)
     slot_views: dict[str, list] = defaultdict(list)
+    hook_views: dict[str, list] = defaultdict(list)
+    ctr_samples: list = []
+    eng_samples: list = []
+    hook_style_views: dict[str, list] = defaultdict(list)
     quality_issues: list[dict] = []
     total_views = 0
     view_count = 0
@@ -166,6 +243,16 @@ def analyse() -> dict:
         if issues:
             quality_issues.append({"video_id": entry.get("youtube_video_id"),
                                    "title": entry.get("title"), "issues": issues})
+        # Advanced signals: hook score, CTR, engagement (may be None pre-data)
+        hook_views[entry.get("source", "unknown")].append(
+            (views, _hook_score(entry)))
+        hook_style_views[_hook_style(entry)].append(views)
+        ctr = _estimate_ctr(entry)
+        eng = _estimate_engagement(entry)
+        if ctr is not None:
+            ctr_samples.append(ctr)
+        if eng is not None:
+            eng_samples.append(eng)
 
     def _avg(vals: list) -> float:
         return sum(vals) / len(vals) if vals else 0.0
@@ -206,9 +293,25 @@ def analyse() -> dict:
                                       key=lambda x: x[1], reverse=True)[:3])
     engagement_rate = perf.get("avg_engagement")
 
+    avg_ctr = round(sum(ctr_samples) / len(ctr_samples), 2) if ctr_samples else None
+    avg_engagement = round(sum(eng_samples) / len(eng_samples), 2) if eng_samples else None
+    # average hook score across all videos (from hook_views buckets)
+    _all_hooks = [h for bucket in hook_views.values() for _, h in bucket]
+    avg_hook = round(sum(_all_hooks) / len(_all_hooks), 1) if _all_hooks else None
+
+    # Best hook style by avg views (confidence-gated to >=2 samples)
+    best_hook_frame = None
+    _hook_cands = {k: v for k, v in hook_style_views.items() if len(v) >= 2 and any(v)}
+    if _hook_cands:
+        best_hook_frame = max(_hook_cands, key=lambda k: sum(_hook_cands[k]) / len(_hook_cands[k]))
+
     controls = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "recommended_cadence": cadence,
+        "best_hook_frame": best_hook_frame,
+        "avg_ctr": avg_ctr,
+        "avg_engagement": avg_engagement,
+        "avg_hook_score": avg_hook,
         "throttle": throttle,
         "throttle_reason": f"last {len(recent)} videos avg {recent_avg:.0f} views" if recent else "no data yet",
         "winning_themes": winning_themes,
