@@ -129,6 +129,20 @@ def run_pipeline(theme: str = None) -> dict:
     else:
         logger.info("📊 Performance data is fresh, skipping refresh")
 
+    # ── Step 0.4: AUTONOMOUS BRAIN — compute every learned signal and store
+    # the decisions (cadence, throttle, themes, poets, quality gate, mistakes,
+    # slots) into data/autonomous_state.json so the rest of the pipeline reads
+    # and ENFORCES them. This is the "ML manages A-to-Z" core.
+    try:
+        from autonomous_controller import analyse as auto_analyse
+        auto_controls = auto_analyse()
+        logger.info("🧠 Autonomous brain: cadence=%s throttle=%s quality_issues=%d",
+                    auto_controls.get("recommended_cadence"),
+                    auto_controls.get("throttle"),
+                    len(auto_controls.get("quality_issues", [])))
+    except Exception as exc:
+        logger.warning("Autonomous brain analyse skipped: %s", exc)
+
     # ── Step 0.5: Anti-spam check ─────────────────────────────────────────
     history = _load_history()
     if history and history[-1].get("posted_at"):
@@ -161,6 +175,20 @@ def run_pipeline(theme: str = None) -> dict:
     script["series_title"] = theme_record.get("series_title") or script.get("title")
     script["theme_strategy"] = theme_record.get("strategy", "unknown")
     logger.info("📝 Script (%s / %s): %s", script.get("source"), script.get("poet"), script.get("title"))
+
+    # ── Step 2.5: AUTONOMOUS QUALITY GATE — reject garbled/broken Urdu before
+    # wasting image/voice/render. The ML brain's _detect_quality_issues flags
+    # non-Urdu text; enforce it here as a hard gate.
+    try:
+        from autonomous_controller import _detect_quality_issues
+        issues = _detect_quality_issues(script)
+        fatal = [i for i in issues if "garbled" in i or "voiceover missing" in i]
+        if fatal:
+            raise RuntimeError("Autonomous quality gate blocked: " + "; ".join(fatal))
+    except RuntimeError:
+        raise
+    except Exception as exc:
+        logger.warning("Autonomous quality gate skipped: %s", exc)
 
     # ── Step 3: Image Generation (deduped within video) ────────────────────
     used_hashes, used_fallbacks = set(), set()
@@ -329,6 +357,14 @@ def run_pipeline(theme: str = None) -> dict:
 def main() -> None:
     try:
         topic = os.environ.get("VIDEO_TOPIC") or None
+        try:
+            from autonomous_controller import get_controls
+            controls = get_controls()
+            if controls.get("throttle"):
+                logger.warning("Autonomous throttle ON: recent videos underperformed (%s)",
+                               controls.get("throttle_reason"))
+        except Exception as exc:
+            logger.warning("Autonomous cadence check skipped: %s", exc)
         run_pipeline(theme=topic)
     except KeyboardInterrupt:
         logger.info("Interrupted")

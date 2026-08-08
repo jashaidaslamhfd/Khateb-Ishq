@@ -76,6 +76,25 @@ jobs:
           print(f'\n🏷️ Refreshed {count} hashtag trends')
           "
 
+      - name: 🧠 Refresh Autonomous ML Brain
+        run: |
+          python -c "
+          import sys
+          sys.path.insert(0, 'src')
+          from autonomous_controller import analyse
+          controls = analyse()
+          print('🧠 AUTONOMOUS BRAIN')
+          print('=' * 50)
+          print(f'Cadence: {controls.get("recommended_cadence")}')
+          print(f'Throttle: {controls.get("throttle")} ({controls.get("throttle_reason")})')
+          print(f'Winning themes: {[t[\"key\"] for t in controls.get("winning_themes", [])]}')
+          print(f'Flop themes: {[t[\"key\"] for t in controls.get("flop_themes", [])]}')
+          print(f'Best caption: {controls.get("best_caption_style")}')
+          print(f'Quality issues: {len(controls.get("quality_issues", []))}')
+          print(f'Known mistakes: {controls.get("known_mistakes", [])}')
+          print(f'Avg views/video: {controls.get("avg_views_per_video")}')
+          "
+
       - name: 💾 Commit analytics data
         run: |
           git config user.name "khateb-ishq-bot"
