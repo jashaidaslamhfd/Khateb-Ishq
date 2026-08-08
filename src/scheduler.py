@@ -74,6 +74,37 @@ class PakistanPeakTimeScheduler:
         return now + timedelta(hours=3)
 
 
+def _taken_publish_times() -> set:
+    """Read already-scheduled publishAt timestamps from upload_state.json and
+    video_history.json so consecutive runs don't all claim the SAME peak slot
+    (which used to publish 2-3 videos at once)."""
+    import json as _json
+    taken: set = set()
+    paths = [
+        os.environ.get("UPLOAD_STATE_PATH", "data/upload_state.json"),
+        os.environ.get("VIDEO_HISTORY_PATH", "data/video_history.json"),
+    ]
+    for path in paths:
+        try:
+            if not os.path.exists(path):
+                continue
+            with open(path, encoding="utf-8") as fh:
+                data = _json.load(fh)
+            if isinstance(data, list):
+                for rec in data:
+                    if isinstance(rec, dict):
+                        pa = rec.get("publish_at")
+                        if pa:
+                            taken.add(str(pa))
+            elif isinstance(data, dict):
+                for rec in data.values():
+                    if isinstance(rec, dict) and rec.get("publish_at"):
+                        taken.add(str(rec["publish_at"]))
+        except Exception:
+            pass
+    return taken
+
+
 def compute_publish_at(now: datetime = None) -> str:
     """Next peak slot (RFC-3339 UTC 'Z'), always >=30 min in the future.
 
@@ -90,12 +121,14 @@ def compute_publish_at(now: datetime = None) -> str:
             hour, minute = chunk.strip().split(":")
             slots.append((int(hour), int(minute)))
         now_local = (now or datetime.now(tz)).astimezone(tz)
+        taken = _taken_publish_times()
         candidates = []
-        for day in (0, 1):
+        for day in range(0, 3):
             for hour, minute in slots:
                 slot = now_local.replace(hour=hour, minute=minute, second=0, microsecond=0) + timedelta(days=day)
                 if slot >= now_local + timedelta(minutes=30):
-                    candidates.append(slot)
+                    if slot.astimezone(pytz.UTC).strftime("%Y-%m-%dT%H:%M:%SZ") not in taken:
+                        candidates.append(slot)
         best = min(candidates) if candidates else (now_local + timedelta(days=1)).replace(
             hour=slots[0][0], minute=slots[0][1], second=0, microsecond=0)
         return best.astimezone(pytz.UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
@@ -104,19 +137,15 @@ def compute_publish_at(now: datetime = None) -> str:
     scheduler = PakistanPeakTimeScheduler()
     now_local = (now or datetime.now(tz)).astimezone(tz)
 
-    # Check today's peaks
+    taken = _taken_publish_times()
     candidates = []
-    for hour in scheduler.get_today_peaks(now_local):
-        slot = now_local.replace(hour=hour, minute=0, second=0, microsecond=0)
-        if slot >= now_local + timedelta(minutes=30):
-            candidates.append(slot)
-
-    # If no more peaks today, check tomorrow
-    if not candidates:
-        tomorrow = now_local + timedelta(days=1)
-        for hour in scheduler.get_today_peaks(tomorrow):
-            slot = tomorrow.replace(hour=hour, minute=0, second=0, microsecond=0)
-            candidates.append(slot)
-
+    # Look ahead across the next 4 days so consecutive runs land on distinct peaks.
+    for day in range(0, 4):
+        day_dt = now_local + timedelta(days=day)
+        for hour in scheduler.get_today_peaks(day_dt):
+            slot = day_dt.replace(hour=hour, minute=0, second=0, microsecond=0)
+            if slot >= now_local + timedelta(minutes=30):
+                if slot.astimezone(pytz.UTC).strftime("%Y-%m-%dT%H:%M:%SZ") not in taken:
+                    candidates.append(slot)
     best = min(candidates) if candidates else (now_local + timedelta(hours=3))
     return best.astimezone(pytz.UTC).strftime("%Y-%m-%dT%H:%M:%SZ")

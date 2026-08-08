@@ -202,7 +202,11 @@ def main():
     seed = int(dt.date.today().toordinal())
     
     log.info("Generating LANDSCAPE TikTok Viral Music: %s", mood["en"])
-    
+    # Ensure the output directory exists before writing music.wav — the
+    # scheduled run failed with FileNotFoundError: output/music.wav because
+    # nothing created output/ first (2026-08-08).
+    os.makedirs(OUT, exist_ok=True)
+
     wav = f"{OUT}/music.wav"
     mix = compose_music(mood, seconds, seed)
     # Write WAV

@@ -158,6 +158,31 @@ def _seo_title(script_data: dict) -> str:
     return title[:100]
 
 
+
+
+def _sanitize_tags(tags: list) -> list:
+    """Return a YouTube-valid tag list: alnum/space only, each <= 100 chars,
+    trimmed to 500 total characters (YouTube rejects 'invalidTags' when the
+    combined tags exceed 500 chars — the long_mix failure of 2026-08-08)."""
+    import re as _re
+    cleaned = []
+    total = 0
+    for t in (tags or []):
+        t = str(t).strip()
+        # YouTube tags: only letters, numbers, spaces; strip punctuation/emoji
+        t = _re.sub(r"[^\w\s]", " ", t, flags=_re.UNICODE)
+        t = _re.sub(r"\s+", " ", t).strip()
+        if not t:
+            continue
+        if len(t) > 100:
+            t = t[:100]
+        # Stop adding if we'd exceed 500 chars
+        if total + len(t) + 1 > 500:
+            break
+        cleaned.append(t)
+        total += len(t) + 1
+    return cleaned
+
 def upload_all(video_path: str, thumb_path: str, script_data: dict) -> dict:
     fingerprint = _fingerprint(script_data)
     state = _load_state()
@@ -183,7 +208,7 @@ def upload_all(video_path: str, thumb_path: str, script_data: dict) -> dict:
                    # India audience (45.6% of viewers) — Hindi crossover terms
                    "hindi sad poetry", "dard bhari shayari hindi",
                    "sad shayari hindi", "heart touching shayari hindi"]
-    tags = list(base_tags) + [t for t in cluster if t not in base_tags]
+    tags = _sanitize_tags(list(base_tags) + [t for t in cluster if t not in base_tags])
     status_body = {
         "privacyStatus": YT_PRIVACY_STATUS,
         "selfDeclaredMadeForKids": MADE_FOR_KIDS,

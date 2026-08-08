@@ -126,7 +126,10 @@ jobs:
         shell: bash
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
-          GROQ_MODEL: "llama-3.1-8b-instant"
+          # Urdu poetry needs a stronger model for valid Urdu JSON couplets — the
+          # 8b model was emitting broken escaping / garbage 'poet' fields
+          # (json_validate_failed). 70b is the env.example-recommended model.
+          GROQ_MODEL: "llama-3.3-70b-versatile"
           GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
           GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
           REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
