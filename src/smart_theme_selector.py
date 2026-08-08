@@ -297,6 +297,17 @@ class SmartThemeSelector:
                 result.setdefault("publish_slots", controls["best_publish_slots"])
             if controls.get("best_hook_frame"):
                 result.setdefault("hook_style", controls["best_hook_frame"])
+            # ADVANCE: attach the ML topic-demand score so downstream (script
+            # generator) can weight selection toward high-demand topics.
+            try:
+                from autonomous_controller import _topic_demand
+                result.setdefault("demand_score", _topic_demand(topic, {}))
+            except Exception:
+                pass
+            # ADVANCE: surface CTR/engagement signals so the theme selection can
+            # favor patterns that historically earned views.
+            result.setdefault("avg_ctr", controls.get("avg_ctr"))
+            result.setdefault("avg_engagement", controls.get("avg_engagement"))
         except Exception as exc:
             logger.warning("Autonomous reroute skipped: %s", exc)
         return result

@@ -82,10 +82,10 @@ def _save_history(record: dict) -> None:
     os.replace(tmp, HISTORY_PATH)
 
 
-def _script_with_retries(theme: str) -> dict:
+def _script_with_retries(theme: str, hook_style: str | None = None) -> dict:
     for attempt in range(1, MAX_SCRIPT_ATTEMPTS + 1):
         try:
-            script = generate_script(theme=theme)
+            script = generate_script(theme=theme, hook_style=hook_style)
             if script:
                 return script
         except Exception as exc:
@@ -169,8 +169,26 @@ def run_pipeline(theme: str = None) -> dict:
                 theme_record.get("strategy", "unknown"),
                 theme_record.get("source", "unknown"))
 
+    # ── Step 1.5: ADVANCE DECISION LOG — surface the ML brain's full decision
+    # set (topic demand, hook style, CTR, engagement, slots) for this run so
+    # the generated video is driven by every learned signal, not just theme.
+    try:
+        from autonomous_controller import get_controls
+        _ctl = get_controls()
+        logger.info(
+            "🧠 Advance decisions → demand=%.1f hook=%s ctr=%s eng=%s cadence=%s slots=%s",
+            theme_record.get("demand_score", 0.0),
+            theme_record.get("hook_style") or _ctl.get("best_hook_frame"),
+            _ctl.get("avg_ctr"),
+            _ctl.get("avg_engagement"),
+            _ctl.get("recommended_cadence"),
+            _ctl.get("best_publish_slots"),
+        )
+    except Exception as exc:
+        logger.warning("Advance decision log skipped: %s", exc)
+
     # ── Step 2: Script Generation ──────────────────────────────────────────
-    script = _script_with_retries(theme_record["topic"])
+    script = _script_with_retries(theme_record["topic"], theme_record.get("hook_style"))
     script["topic"] = theme_record["topic"]
     script["series_title"] = theme_record.get("series_title") or script.get("title")
     script["theme_strategy"] = theme_record.get("strategy", "unknown")

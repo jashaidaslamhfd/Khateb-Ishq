@@ -208,7 +208,7 @@ def _create_completion(client, model: str, messages: list) -> str:
         raise groq_exc
 
 
-def _build_prompt(theme: str, mode: str, poet_key: str, feedback: list = None) -> list:
+def _build_prompt(theme: str, mode: str, poet_key: str, feedback: list = None, hook_style: str | None = None) -> list:
     if mode == "classic":
         poet_name = _CLASSIC_POETS[poet_key]
         source_rule = (
@@ -274,7 +274,15 @@ def _build_prompt(theme: str, mode: str, poet_key: str, feedback: list = None) -
         f"adhoori lagti hai (owner feedback 2026-07-26)."
     )
 
-    user = f"Theme/topic: {theme}\n\nGenerate the JSON script now."
+    hook_hint = ""
+    if hook_style:
+        hint_map = {
+            "question": "Hook ko sawal ke roop mein shuru karo (jaise: 'Kya aap jante hain...')",
+            "emotion": "Hook ko gham/dard ki leher ke saath shuru karo (dil, yaad, tarp)",
+            "curiosity": "Hook ko raaz/haqeeqat ki curiosity ke saath shuru karo",
+        }
+        hook_hint = "\n" + hint_map.get(hook_style, "")
+    user = f"Theme/topic: {theme}\n\nGenerate the JSON script now.{hook_hint}"
     if feedback:
         user += (
             "\n\nYour previous attempt had these problems — fix ALL of them and "
@@ -308,7 +316,7 @@ def _default_tags(poet: str, mode: str) -> list:
 # --------------------------------------------------------------------------- #
 # Public entry point
 # --------------------------------------------------------------------------- #
-def generate_script(theme: str) -> dict:
+def generate_script(theme: str, hook_style: str | None = None) -> dict:
     model = os.environ.get("GROQ_MODEL", "llama-3.1-8b-instant")
     mode, poet_key = _pick_mode()
     client = _client()
@@ -316,7 +324,7 @@ def generate_script(theme: str) -> dict:
     feedback = None
     last_data = None
     for attempt in range(1, MAX_GEN_ATTEMPTS + 1):
-        messages = _build_prompt(theme, mode, poet_key, feedback)
+        messages = _build_prompt(theme, mode, poet_key, feedback, hook_style)
         try:
             raw = _create_completion(client, model, messages)
             data = _extract_json(raw)
