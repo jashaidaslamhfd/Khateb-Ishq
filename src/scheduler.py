@@ -105,6 +105,20 @@ def _taken_publish_times() -> set:
     return taken
 
 
+def _ml_best_slots() -> list[int]:
+    """Return the ML brain's best publish slots (PKT hours), or [] if unknown.
+
+    This lets the scheduler ENFORCE the autonomous brain's learned peak hours
+    instead of a static PUBLISH_SLOTS. Falls back to empty -> caller uses its
+    own default so scheduling never breaks."""
+    try:
+        from autonomous_controller import get_controls
+        slots = get_controls().get("best_publish_slots") or []
+        return [int(h) for h in slots if str(h).strip().isdigit()]
+    except Exception:
+        return []
+
+
 def compute_publish_at(now: datetime = None) -> str:
     """Next peak slot (RFC-3339 UTC 'Z'), always >=30 min in the future.
 
@@ -113,7 +127,9 @@ def compute_publish_at(now: datetime = None) -> str:
     """
     tz = pytz.timezone(os.environ.get("PUBLISH_TIMEZONE", "Asia/Karachi"))
 
-    # Check if custom PUBLISH_SLOTS is set (override)
+    # AUTONOMOUS CONTROL: env PUBLISH_SLOTS is always the explicit override.
+    # When it's absent, the ML brain's learned best slots drive the schedule
+    # (ML manages the time). Env set -> env wins (tests + operator control).
     custom_slots = os.environ.get("PUBLISH_SLOTS", "").strip()
     if custom_slots:
         slots = []
@@ -133,16 +149,19 @@ def compute_publish_at(now: datetime = None) -> str:
             hour=slots[0][0], minute=slots[0][1], second=0, microsecond=0)
         return best.astimezone(pytz.UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
 
-    # ── Use REAL channel data ──
+    # ── Use REAL channel data (plus ML-learned best slots if available) ──
     scheduler = PakistanPeakTimeScheduler()
     now_local = (now or datetime.now(tz)).astimezone(tz)
 
+    env_slots = os.environ.get("PUBLISH_SLOTS", "").strip()
+    ml_slots = _ml_best_slots() if not env_slots else []
     taken = _taken_publish_times()
     candidates = []
     # Look ahead across the next 4 days so consecutive runs land on distinct peaks.
     for day in range(0, 4):
         day_dt = now_local + timedelta(days=day)
-        for hour in scheduler.get_today_peaks(day_dt):
+        hours = ml_slots if ml_slots else scheduler.get_today_peaks(day_dt)
+        for hour in hours:
             slot = day_dt.replace(hour=hour, minute=0, second=0, microsecond=0)
             if slot >= now_local + timedelta(minutes=30):
                 if slot.astimezone(pytz.UTC).strftime("%Y-%m-%dT%H:%M:%SZ") not in taken:

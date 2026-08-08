@@ -109,6 +109,21 @@ def _detect_quality_issues(entry: dict) -> list[str]:
     return issues
 
 
+def _learned_slots(slot_views: dict) -> list[int]:
+    """Rank publish hours by avg views; return the top 3 PKT hours, falling
+    back to the env PUBLISH_SLOTS if there is no view data yet."""
+    buckets = []
+    for hour, vals in slot_views.items():
+        if any(vals):
+            buckets.append((int(hour), len(vals), sum(vals) / len(vals)))
+    if buckets:
+        buckets.sort(key=lambda x: x[2], reverse=True)
+        top = [b[0] for b in buckets[:3]]
+        return top
+    default = os.environ.get("PUBLISH_SLOTS", "10,14,21")
+    return [int(x) for x in default.split(",") if x.strip()]
+
+
 def analyse() -> dict:
     history = _load_json(VIDEO_HISTORY_PATH, [])
     if not isinstance(history, list):
@@ -119,6 +134,7 @@ def analyse() -> dict:
     poet_views: dict[str, list] = defaultdict(list)
     cap_views: dict[str, list] = defaultdict(list)
     voice_views: dict[str, list] = defaultdict(list)
+    slot_views: dict[str, list] = defaultdict(list)
     quality_issues: list[dict] = []
     total_views = 0
     view_count = 0
@@ -131,6 +147,21 @@ def analyse() -> dict:
         poet_views[(entry.get("poet") or "unknown").strip().lower()].append(views)
         cap_views[(entry.get("caption_style") or entry.get("CAPTION_SCRIPT") or "unknown")].append(views)
         voice_views[(entry.get("voice") or entry.get("URDU_VOICE") or "unknown")].append(views)
+        # Learn best publish slot (PKT hour) from actual performance.
+        for fld in ("publish_at", "posted_at"):
+            ts = entry.get(fld)
+            if ts:
+                try:
+                    # publish_at is UTC ISO; convert to PKT hour
+                    dt = datetime.fromisoformat(str(ts).replace("Z", "+00:00"))
+                    if dt.tzinfo is None:
+                        dt = dt.replace(tzinfo=timezone.utc)
+                    pkt = dt.astimezone(timezone.utc)  # Asia/Karachi = UTC+5
+                    hour = (pkt.hour + 5) % 24
+                    slot_views[str(hour)].append(views)
+                    break
+                except Exception:
+                    pass
         issues = _detect_quality_issues(entry)
         if issues:
             quality_issues.append({"video_id": entry.get("youtube_video_id"),
@@ -186,7 +217,7 @@ def analyse() -> dict:
         "flop_poets": flop_poets,
         "best_caption_style": best_caption[0]["key"] if best_caption else None,
         "best_voice": best_voice[0]["key"] if best_voice else None,
-        "best_publish_slots": [int(x) for x in os.environ.get("PUBLISH_SLOTS", "10,14,21").split(",") if x.strip()],
+        "best_publish_slots": _learned_slots(slot_views),
         "traffic_source_insight": traffic_insight,
         "engagement_rate": engagement_rate,
         "avg_views_per_video": round(avg_views, 1),

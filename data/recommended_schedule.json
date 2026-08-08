@@ -1,0 +1,14 @@
+{
+  "generated_at_utc": "2026-08-08T14:58:31.888929+00:00",
+  "best_publish_slots_pkt": [
+    10,
+    14,
+    21
+  ],
+  "recommended_crons_utc": [
+    "30 4 * * *",
+    "30 8 * * *",
+    "30 15 * * *"
+  ],
+  "explanation": "Pipeline runs 30 min before each learned PKT peak so the video is scheduled to auto-publish exactly at the peak."
+}

@@ -95,6 +95,10 @@ jobs:
           print(f'Avg views/video: {controls.get("avg_views_per_video")}')
           "
 
+      - name: ⏰ Self-tune cron schedule from ML-learned slots
+        run: |
+          python scripts/tune_schedule.py
+
       - name: 💾 Commit analytics data
         run: |
           git config user.name "khateb-ishq-bot"
