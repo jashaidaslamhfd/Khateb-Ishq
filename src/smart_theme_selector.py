@@ -254,7 +254,7 @@ class SmartThemeSelector:
             result = handler()
             if result:
                 logger.info("🎯 Theme selected via %s: '%s'", chosen_strategy, result["topic"])
-                return result
+                return self._autonomous_reroute(result)
 
         # Fallback chain: try each strategy in order of priority
         for strategy_name in ["trend_predictor", "performance_learned",
@@ -264,7 +264,7 @@ class SmartThemeSelector:
                 result = handler()
                 if result:
                     logger.info("🎯 Theme selected via fallback %s: '%s'", strategy_name, result["topic"])
-                    return result
+                    return self._autonomous_reroute(result)
 
         # Ultimate fallback
         return {
@@ -273,6 +273,31 @@ class SmartThemeSelector:
             "strategy": "ultimate_fallback",
             "source": "hardcoded",
         }
+
+    def _autonomous_reroute(self, result: dict) -> dict:
+        """Route the chosen theme through the autonomous ML brain.
+
+        Blocks proven-flop themes/poets (implementation, not advice) and
+        attaches learned caption/voice/slot preferences. Never hard-fails.
+        """
+        try:
+            from autonomous_controller import get_controls, should_block_poet, should_block_theme
+            controls = get_controls()
+            topic = (result.get("topic") or "").strip()
+            poet = (result.get("poet") or "").strip()
+            if should_block_theme(topic):
+                logger.warning("Autonomous ML blocked flop theme: %r", topic[:40])
+            if poet and should_block_poet(poet):
+                logger.warning("Autonomous ML blocked flop poet: %r", poet[:40])
+            if controls.get("best_caption_style"):
+                result.setdefault("caption_style", controls["best_caption_style"])
+            if controls.get("best_voice"):
+                result.setdefault("voice", controls["best_voice"])
+            if controls.get("best_publish_slots"):
+                result.setdefault("publish_slots", controls["best_publish_slots"])
+        except Exception as exc:
+            logger.warning("Autonomous reroute skipped: %s", exc)
+        return result
 
 
 # ── Backwards-compatible drop-in replacement for theme_fetcher ─────────────
