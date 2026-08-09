@@ -42,11 +42,11 @@ def _resolve_voices() -> List[str]:
 
 
 def _rate() -> str:
-    # negative = slower. clamp -25%..+5% (sad poetry lives around -8..-15)
+    # negative = slower. -14% is the golden mushaira sad poetry pace
     try:
-        value = float(os.environ.get("URDU_TTS_RATE", "-12"))
+        value = float(os.environ.get("URDU_TTS_RATE", "-14"))
     except ValueError:
-        value = -12.0
+        value = -14.0
     value = max(-25.0, min(5.0, value))
     return f"{value:+.0f}%"
 
@@ -106,8 +106,27 @@ def _synth_elevenlabs(text: str, out_path: str) -> None:
         fh.write(resp.content)
 
 
-class CloneHung(RuntimeError):
-    """Raised when the CPU voice-clone model hangs on one segment."""
+def _master_vocal_audio(in_wav: str, out_wav: str) -> None:
+    """Master the raw TTS voice to give it deep studio baritone warmth,
+    crystal clarity, and broadcast loudness (-14 LUFS)."""
+    import subprocess
+    cmd = [
+        "ffmpeg", "-y", "-i", in_wav,
+        "-af", (
+            "highpass=f=80,"                           # Clean low-end rumble
+            "equalizer=f=220:t=q:w=1.2:g=2.2,"          # Warm baritone chest resonance
+            "equalizer=f=3600:t=q:w=1.8:g=1.2,"         # Crisp speech articulation
+            "loudnorm=I=-14:TP=-1.5:LRA=8"              # Social media broadcast standard
+        ),
+        "-ar", "44100", "-ac", "2", out_wav
+    ]
+    try:
+        subprocess.run(cmd, check=True, capture_output=True)
+    except Exception as exc:
+        logger.warning("Vocal mastering filter fallback (using raw audio): %s", exc)
+        if in_wav != out_wav and os.path.exists(in_wav):
+            import shutil
+            shutil.copy(in_wav, out_wav)
 
 
 def _synth_clone_guarded(text: str, out_path: str) -> None:
@@ -170,11 +189,16 @@ def generate_voice_segments(scenes: List[dict], output_dir: str = "output/segmen
             peak = float(np.abs(audio).max())
             if peak > 1.0:
                 audio = audio / peak * 0.95
-            path = os.path.join(output_dir, f"seg_{i}.wav")
-            sf.write(path, audio, sr)
-            segments.append({"path": path, "duration": len(audio) / sr,
+            raw_path = os.path.join(output_dir, f"raw_seg_{i}.wav")
+            sf.write(raw_path, audio, sr)
+            _master_vocal_audio(raw_path, path)
+            if os.path.exists(raw_path):
+                os.remove(raw_path)
+            dur_audio, dur_sr = sf.read(path)
+            duration_s = len(dur_audio) / dur_sr
+            segments.append({"path": path, "duration": duration_s,
                              "caption": caption, "tts_engine": f"{eng}:{speaker_tag}"})
-            logger.info("Segment %d/%d via %s (%.1fs)", i + 1, len(scenes), speaker_tag, len(audio) / sr)
+            logger.info("Segment %d/%d via %s (%.1fs) [Mastered]", i + 1, len(scenes), speaker_tag, duration_s)
         engines = {s["tts_engine"] for s in segments}
         if len(engines) != 1:
             raise RuntimeError(f"Mixed voices in one video: {engines}")

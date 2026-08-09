@@ -283,17 +283,18 @@ def _pick_music() -> str | None:
     if exact:
         match = [t for t in tracks if t.endswith(exact)]
         return match[0] if match else None
-    # PRIORITY: Prefer viral tracks (piano + rain + tabla) over old tracks
-    # These are the kind people WANT to use as background music on TikTok
-    viral_tracks = [t for t in tracks if any(v in t for v in
-                    ["barish_piano_viral", "raat_ka_dard", "judai_ka_mausam",
-                     "tanhai_ka_safar", "dukh_ka_dariya"])]
-    if viral_tracks:
-        return random.choice(viral_tracks)
-    # Fallback: prefer any track with "viral" or "rain" in the name
-    rain_tracks = [t for t in tracks if "viral" in t.lower() or "rain" in t.lower()]
-    if rain_tracks:
-        return random.choice(rain_tracks)
+    # PRIORITY #1: Top TikTok/Reels Multi-Instrument Sad Master Tracks (Flute + Violins + Drums + Piano)
+    multi_instrument_tracks = [t for t in tracks if any(v in t for v in [
+        "viral_tiktok_sad_flute_violin_beat",
+        "jaun_elia_style_darbari_cello",
+        "tanhai_aesthetic_piano_violin_rain",
+        "rula_dene_wala_sarangi_bansuri",
+        "dil_ka_gham_piano",
+        "tanhai_flute_ambient",
+        "judai_sad_strings",
+    ])]
+    if multi_instrument_tracks:
+        return random.choice(multi_instrument_tracks)
     return random.choice(tracks) if tracks else None
 
 

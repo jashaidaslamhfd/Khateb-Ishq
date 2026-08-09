@@ -317,7 +317,13 @@ def _default_tags(poet: str, mode: str) -> list:
 # Public entry point
 # --------------------------------------------------------------------------- #
 def generate_script(theme: str, hook_style: str | None = None) -> dict:
-    model = os.environ.get("GROQ_MODEL", "llama-3.1-8b-instant")
+    single = os.environ.get("GROQ_MODEL", "").strip()
+    models = ([single] if single else [
+        "llama-3.3-70b-versatile",
+        "openai/gpt-oss-120b",
+        "llama-3.1-70b-versatile",
+        "llama-3.1-8b-instant"
+    ])
     mode, poet_key = _pick_mode()
     client = _client()
 
@@ -325,12 +331,18 @@ def generate_script(theme: str, hook_style: str | None = None) -> dict:
     last_data = None
     for attempt in range(1, MAX_GEN_ATTEMPTS + 1):
         messages = _build_prompt(theme, mode, poet_key, feedback, hook_style)
-        try:
-            raw = _create_completion(client, model, messages)
-            data = _extract_json(raw)
-        except Exception as exc:
-            logger.warning("Generation attempt %d failed (Groq primary + Gemini fallback): %s", attempt, exc)
-            feedback = [f"Previous attempt errored: {exc}. Resend strict valid JSON only."]
+        data = None
+        for model in models:
+            try:
+                raw = _create_completion(client, model, messages)
+                data = _extract_json(raw)
+                break
+            except Exception as exc:
+                logger.warning("Generation with %s failed: %s", model, exc)
+                continue
+
+        if data is None:
+            feedback = ["All LLM models failed. Resend strict valid JSON only."]
             continue
 
         last_data = data
