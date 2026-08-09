@@ -161,36 +161,28 @@ def _build_video(stills: list, card: str, wav_path: str, seconds: float, out_pat
     W, H = 1920, 1080
     os.makedirs(f"{OUT}/segments_music", exist_ok=True)
 
-    def zoom_cmd(src, dst, dur, direction):
-        # FIXED 2026-08-09: the zoompan filter with d={dur*30} frames at 2112x1188
-        # was rendering ~2800 heavy zoom frames per 95s video, which blew past the
-        # 45-min job timeout (the run was auto-cancelled before upload). Speed it up:
-        #   - render at 24fps (d = dur*24) instead of 30
-        #   - upscale AFTER zoompan (start from a small padded source, let ffmpeg
-        #     resample to 1920x1080 once) — far fewer expensive zoom calculations
-        #   - ultrafast preset so concat + mux have time to finish
-        fps = 24
-        # zoompan source is 720p (cheaper); scale up to full res on the way out.
-        zoompan = ("scale=1080:720,zoompan="
-                   f"z='min(1.03+0.0004*on,1.15)'" if direction == "in" else
-                   "scale=1080:720,zoompan="
-                   f"z='max(1.15-0.0004*on,1.03)'")
-        zoompan += f":d={int(dur*fps)}:s={W}x{H}:fps={fps},format=yuv420p"
+    # FIXED 2026-08-09 (2nd attempt): the previous zoompan approach was STILL too
+    # slow — ffmpeg's zoompan is a per-frame temporal filter and a 95s video was
+    # blowing the 45-min job timeout even after the first optimization. We now
+    # render each still as a PLAIN loop (scale-to-canvas + short audio-fade). No
+    # per-frame filter = encodes in seconds, well inside the timeout.
+    def still_cmd(src, dst, dur):
         subprocess.run([
             "ffmpeg", "-y", "-loop", "1", "-t", str(dur), "-i", src,
-            "-vf", zoompan,
+            "-vf", f"scale={W}:{H}:force_original_aspect_ratio=decrease,"
+                   f"pad={W}:{H}:(ow-iw)/2:(oh-ih)/2,setsar=1,format=yuv420p",
             "-c:v", "libx264", "-preset", "ultrafast", "-crf", "24",
             "-threads", "2", dst
         ], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
     segs = []
-    zoom_cmd(card, f"{OUT}/segments_music/s0.mp4", 5.0, "in")
+    still_cmd(card, f"{OUT}/segments_music/s0.mp4", 5.0)
     segs.append(f"{OUT}/segments_music/s0.mp4")
 
     seg_dur = (seconds - 5.0) / len(stills)
     for i, s in enumerate(stills):
         p = f"{OUT}/segments_music/s{i+1}.mp4"
-        zoom_cmd(s, p, seg_dur, "in" if i % 2 else "out")
+        still_cmd(s, p, seg_dur)
         segs.append(p)
 
     with open(f"{OUT}/list.txt", "w") as f:
