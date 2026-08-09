@@ -90,6 +90,27 @@ def _hours_since(iso: str) -> float | None:
         return None
 
 
+def _entry_views(entry: dict) -> int | None:
+    """Real view count, or None if analytics hasn't been fetched yet.
+
+    CRITICAL: absence of data must NOT be read as 0 views. New videos (uploaded
+    <24-48h ago, or a channel whose YouTube analytics sync is not running) often
+    have no fetched views yet. Treating them as 0 made the brain believe the
+    channel was flopping (e.g. "last 4 videos avg 0 views") and throttled
+    publishing, even though the Shorts had real views.
+    """
+    raw = entry.get("views")
+    if raw is None:
+        nested = entry.get("youtube_shorts") or entry.get("youtube") or {}
+        raw = nested.get("views")
+    if raw is None:
+        return None
+    try:
+        return int(raw)
+    except (TypeError, ValueError):
+        return None
+
+
 def _detect_quality_issues(entry: dict) -> list[str]:
     """Audit a single video for known quality/mistake issues."""
     issues: list[str] = []
@@ -216,7 +237,7 @@ def analyse() -> dict:
     total_views = 0
     view_count = 0
     for entry in history:
-        views = int(entry.get("views") or 0)
+        views = _entry_views(entry) or 0
         if views:
             total_views += views
             view_count += 1
@@ -273,7 +294,8 @@ def analyse() -> dict:
     best_caption = _best_buckets(cap_views, MIN_SAMPLES)[:1]
     best_voice = _best_buckets(voice_views, MIN_SAMPLES)[:1]
 
-    avg_views = _avg([v.get("views") or 0 for v in history]) if history else 0
+    _with_views = [v for v in history if _entry_views(v) is not None]
+    avg_views = _avg([_entry_views(v) for v in _with_views]) if _with_views else 0
     if avg_views >= WINNER_VIEWS:
         cadence = MAX_CADENCE
     elif avg_views >= 1000:
@@ -282,9 +304,13 @@ def analyse() -> dict:
         cadence = 1
     cadence = max(1, min(cadence, MAX_CADENCE))
 
+    # Only videos that actually have analytics data count toward the throttle.
+    # A Short uploaded <24-48h ago (or a channel whose analytics sync isn't
+    # running) has no fetched views yet — that is NOT a flop. Counting it as 0
+    # caused false throttling and a broken growth signal.
     mature = [v for v in history if _hours_since(v.get("posted_at")) is not None]
-    recent = mature[-THROTTLE_WINDOW:]
-    recent_avg = _avg([int(v.get("views") or 0) for v in recent]) if recent else 0
+    recent = [v for v in mature[-THROTTLE_WINDOW:] if _entry_views(v) is not None]
+    recent_avg = _avg([_entry_views(v) for v in recent]) if recent else 0
     throttle = bool(recent and len(recent) >= 3 and recent_avg < THROTTLE_VIEWS)
 
     traffic_insight = None
