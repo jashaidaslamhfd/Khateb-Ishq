@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-08-09T13:41:20.496398+00:00",
+  "generated_at": "2026-08-09T16:46:28.652688+00:00",
   "recommended_cadence": 1,
   "best_hook_frame": null,
   "avg_ctr": null,
   "avg_engagement": null,
-  "avg_hook_score": 62.0,
+  "avg_hook_score": 65.0,
   "throttle": false,
   "throttle_reason": "no data yet",
   "winning_themes": [],
@@ -24,7 +24,7 @@
   "quality_gate_min": 70,
   "quality_issues": [],
   "known_mistakes": [],
-  "total_videos": 5,
+  "total_videos": 6,
   "total_views": 0,
   "videos_with_views": 0
 }
