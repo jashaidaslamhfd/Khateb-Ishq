@@ -160,31 +160,45 @@ def _make_title_card(mood: dict, seed: int) -> str:
 def _build_video(stills: list, card: str, wav_path: str, seconds: float, out_path: str) -> str:
     W, H = 1920, 1080
     os.makedirs(f"{OUT}/segments_music", exist_ok=True)
-    
+
     def zoom_cmd(src, dst, dur, direction):
-        z = "min(1.03+0.0004*on,1.15)" if direction == "in" else "max(1.15-0.0004*on,1.03)"
+        # FIXED 2026-08-09: the zoompan filter with d={dur*30} frames at 2112x1188
+        # was rendering ~2800 heavy zoom frames per 95s video, which blew past the
+        # 45-min job timeout (the run was auto-cancelled before upload). Speed it up:
+        #   - render at 24fps (d = dur*24) instead of 30
+        #   - upscale AFTER zoompan (start from a small padded source, let ffmpeg
+        #     resample to 1920x1080 once) — far fewer expensive zoom calculations
+        #   - ultrafast preset so concat + mux have time to finish
+        fps = 24
+        # zoompan source is 720p (cheaper); scale up to full res on the way out.
+        zoompan = ("scale=1080:720,zoompan="
+                   f"z='min(1.03+0.0004*on,1.15)'" if direction == "in" else
+                   "scale=1080:720,zoompan="
+                   f"z='max(1.15-0.0004*on,1.03)'")
+        zoompan += f":d={int(dur*fps)}:s={W}x{H}:fps={fps},format=yuv420p"
         subprocess.run([
             "ffmpeg", "-y", "-loop", "1", "-t", str(dur), "-i", src,
-            "-vf", f"scale=2112:1188,zoompan=z='{z}':d={dur*30}:s={W}x{H}:fps=30,format=yuv420p",
-            "-c:v", "libx264", "-preset", "veryfast", "-crf", "22", dst
+            "-vf", zoompan,
+            "-c:v", "libx264", "-preset", "ultrafast", "-crf", "24",
+            "-threads", "2", dst
         ], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
     segs = []
     zoom_cmd(card, f"{OUT}/segments_music/s0.mp4", 5.0, "in")
     segs.append(f"{OUT}/segments_music/s0.mp4")
-    
+
     seg_dur = (seconds - 5.0) / len(stills)
     for i, s in enumerate(stills):
         p = f"{OUT}/segments_music/s{i+1}.mp4"
         zoom_cmd(s, p, seg_dur, "in" if i % 2 else "out")
         segs.append(p)
-        
+
     with open(f"{OUT}/list.txt", "w") as f:
         for s in segs: f.write(f"file '{os.path.abspath(s)}'\n")
-        
+
     muted = f"{OUT}/muted.mp4"
     subprocess.run(["ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", f"{OUT}/list.txt", "-c", "copy", muted], check=True)
-    
+
     subprocess.run([
         "ffmpeg", "-y", "-i", muted, "-i", wav_path,
         "-af", "loudnorm=I=-14:TP=-1.0:LRA=11",
