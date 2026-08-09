@@ -191,7 +191,13 @@ jobs:
           set -euo pipefail
           for attempt in 1 2 3; do
             echo "=== Attempt $attempt / 3 ==="
-            if python scripts/sad_music_short.py; then break
+            # FIXED 2026-08-09: this step was wrongly running scripts/sad_music_short.py
+            # (the LANDSCAPE MUSIC pipeline) instead of the poetry pipeline. That is why
+            # the channel got flooded with "Rainy Night Piano / Sad Background Music"
+            # uploads AND the run failed on output/music.wav — music generation ran under
+            # poetry env vars. The "Generate and upload poetry Short" step must call the
+            # poetry entrypoint src/main_advanced.py (which runs run_pipeline).
+            if python src/main_advanced.py; then break
             else
               rc=$?; echo "::warning::Failed attempt $attempt code $rc"
               if [ $attempt -eq 3 ]; then exit $rc; fi; sleep $((attempt * 30))
