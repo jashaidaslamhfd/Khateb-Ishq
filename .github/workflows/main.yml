@@ -129,7 +129,7 @@ jobs:
           # Urdu poetry needs a stronger model for valid Urdu JSON couplets — the
           # 8b model was emitting broken escaping / garbage 'poet' fields
           # (json_validate_failed). 70b is the env.example-recommended model.
-          GROQ_MODEL: "llama-3.3-70b-versatile"
+          GROQ_MODEL: "llama-3.1-70b-versatile"  # 2026-08-19: llama-3.3-70b retired (404)
           GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
           GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
           REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
@@ -164,6 +164,7 @@ jobs:
           TARGET_MAX_SECONDS: "57"
           AI_HORDE_API_KEY: ${{ secrets.AI_HORDE_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
           HF_API_KEY: ${{ secrets.HF_API_KEY }}
           DEEPAI_API_KEY: ${{ secrets.DEEPAI_API_KEY }}
           MODELSLAB_API_KEY: ${{ secrets.MODELSLAB_API_KEY }}

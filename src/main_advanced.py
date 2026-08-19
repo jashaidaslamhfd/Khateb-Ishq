@@ -244,7 +244,7 @@ def run_pipeline(theme: str = None) -> dict:
     logger.info("🎙️ Voice ready: %.1fs", narration)
 
     # ── Step 5: Video Build + Thumbnail ────────────────────────────────────
-    final_video = build_video(image_paths, segments, script["scenes"])
+    final_video = build_video(image_paths, segments, script["scenes"], theme=theme)
 
     # ── Step 5.2: Add EMOTION to the video (heartbeat + rain + soul) ──
     try:

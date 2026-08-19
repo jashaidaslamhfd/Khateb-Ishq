@@ -37,7 +37,7 @@ _FONT_CANDIDATES = [
 ]
 # Owner feedback 2026-07-26: "poetry short, zyada music" — bed now sits at
 # 3.5% (workflow env) with fades below; voice is the king of the mix.
-MUSIC_VOLUME = float(os.environ.get("MUSIC_VOLUME", "0.05"))
+MUSIC_VOLUME = float(os.environ.get("MUSIC_VOLUME", "0.12"))  # 2026-08-19: was 0.05 (inaudible) — 0.12 felt, still poetry-first
 ZOOM = 1.08  # gentle Ken-Burns max zoom
 
 # ---- RETENTION FIX (67.4% swipe away → target <40%) --------------------
@@ -276,29 +276,43 @@ def _compose_caption_image(caption: str) -> Image.Image:
     return strip
 
 
-def _pick_music() -> str | None:
+def _pick_music(theme: str = "") -> str | None:
+    """Pick the best BGM for this video. 2026-08-19 rewrite: the old priority
+    list referenced 7 track names but only 1 existed in assets/music — the
+    rest of the time a random (often drone/noise) track played, which is the
+    'bekar music' complaint. Now: exact-env override, theme-mood mapping to
+    REAL track families, viral picks second, safe random last."""
     exact = os.environ.get("MUSIC_TRACK", "").strip()
     tracks = glob.glob("assets/music/*.mp3") + glob.glob("assets/music/*.wav")
     tracks = [t for t in tracks if "gitkeep" not in t and "ATTRIBUTION" not in t.upper()]
     if exact:
         match = [t for t in tracks if t.endswith(exact)]
         return match[0] if match else None
-    # PRIORITY #1: Top TikTok/Reels Multi-Instrument Sad Master Tracks (Flute + Violins + Drums + Piano)
-    multi_instrument_tracks = [t for t in tracks if any(v in t for v in [
-        "viral_tiktok_sad_flute_violin_beat",
-        "jaun_elia_style_darbari_cello",
-        "tanhai_aesthetic_piano_violin_rain",
-        "rula_dene_wala_sarangi_bansuri",
-        "dil_ka_gham_piano",
-        "tanhai_flute_ambient",
-        "judai_sad_strings",
-    ])]
-    if multi_instrument_tracks:
-        return random.choice(multi_instrument_tracks)
+    theme_l = (theme or "").lower()
+    mood_lists = [
+        (["barish", "baad", "sawan", "pani", "khidki", "winter", "baadal"],
+         ["barish_piano_viral", "barish_rain_gm", "viral_rain_piano"]),
+        (["raat", "raaton", "neend", "sitar", "tanhai", "andhera", "sukoon"],
+         ["raat_ka_dard", "raat_drone_em", "tanhai_piano_am", "tanhai_ka_safar"]),
+        (["judai", "juda", "door", "alvida", "bewafa", "khafa", "alag"],
+         ["judai_ka_mausam", "dukh_ka_dariya", "viral_tiktok_sad_flute_violin_beat"]),
+        (["dil", "ishq", "pyar", "mohabbat", "chahat", "yaar", "dard", "zakhm"],
+         ["tiktok_style_poetry", "ultimate_sad_bg", "rich_cinematic_sad"]),
+        (["gham", "ansu", "rona", "rula", "mushkil", "takra", "toota"],
+         ["fast_sad_raag_violin", "dukh_ka_dariya", "ultimate_sad_bg"]),
+    ]
+    for words, family in mood_lists:
+        if any(w in theme_l for w in words):
+            pool = [t for t in tracks if any(f in t for f in family)]
+            if pool:
+                return random.choice(pool)
+    viral = [t for t in tracks if "viral" in t]
+    if viral:
+        return random.choice(viral)
     return random.choice(tracks) if tracks else None
 
 
-def build_video(image_paths: list, audio_segments: list, scenes: list) -> str:
+def build_video(image_paths: list, audio_segments: list, scenes: list, theme: str = "") -> str:
     from moviepy.editor import (AudioFileClip, CompositeAudioClip, ImageClip,
                                 concatenate_videoclips)
 
@@ -397,13 +411,30 @@ def build_video(image_paths: list, audio_segments: list, scenes: list) -> str:
     narration = concatenate_audioclips(audio_tracks).set_duration(video.duration)
     tracks = [narration]
 
-    music_path = _pick_music()
+    music_path = _pick_music(theme=theme)
     if music_path:
         music = AudioFileClip(music_path).volumex(MUSIC_VOLUME)
         if music.duration < video.duration:
             loops = int(np.ceil(video.duration / music.duration))
-            from moviepy.editor import concatenate_audioclips as _cat
-            music = _cat([music] * loops).subclip(0, video.duration)
+            # 2026-08-19: fade-in/out each looped piece so the bed
+            # never clicks/loops audibly — a dead giveaway of AI videos.
+            from moviepy.editor import concatenate_audioclips as _catx
+            _parts = []
+            for _li in range(loops):
+                _seg = music.subclip(0, min(music.duration, video.duration - _li * music.duration))
+                _parts.append(_seg)
+            music = _catx(_parts)
+            try:
+                from moviepy.audio.fx.all import fadein as _kfi, fadeout as _kfo
+                music = _kfi(music.set_duration(music.duration), 0.4).set_duration(music.duration)
+                music = _kfo(music.set_duration(music.duration), 0.4)
+            except Exception as _fad:  # noqa: BLE001 - never break the render
+                logger.warning("Loop fader skipped (%s)", _fad)
+            # NOTE: the loop pieces above already cover the full video
+            # duration — the legacy "_cat([music] * loops)" line was removed
+            # (it would have double-looped the bed). A final trim keeps us
+            # safely at video length.
+            music = music.set_duration(video.duration)
         else:
             music = music.subclip(0, video.duration)
         # Gentle in/out fades so the bed never slaps in or cuts off mid-note —

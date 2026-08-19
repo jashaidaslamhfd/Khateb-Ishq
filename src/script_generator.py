@@ -168,7 +168,7 @@ def _gemini_chat(messages: list) -> str | None:
         logger.warning("GEMINI_API_KEY not set — fallback disabled, Groq error will surface")
         return None
     body = _json.dumps({
-        "model": os.environ.get("GEMINI_MODEL", "gemini-2.5-flash"),
+        "model": os.environ.get("GEMINI_MODEL", "gemini-2.0-flash-lite"),  # 2026-08-19: 2.5-flash returns 404 on the free endpoint
         "messages": messages,
         "temperature": 0.9,
         "response_format": {"type": "json_object"},
@@ -185,9 +185,42 @@ def _gemini_chat(messages: list) -> str | None:
         raise
 
 
+
+def _openrouter_chat(messages: list) -> str | None:
+    """OpenRouter fallback — free/paid providers (deepseek, gpt-oss) mirror
+    what Neuro-Somaa and Mr-Nextep use. Returns None when the key is absent
+    or the request fails, so callers raise the original Groq error instead."""
+    import json as _json
+    import urllib.error as _uerr
+    import urllib.request as _ureq
+    key = os.environ.get("OPENROUTER_API_KEY", "")
+    if not key:
+        logger.warning("OPENROUTER_API_KEY not set — OpenRouter fallback disabled")
+        return None
+    body = _json.dumps({
+        "model": "deepseek/deepseek-chat-v3.1",
+        "messages": messages,
+        "temperature": 0.9,
+        "response_format": {"type": "json_object"},
+    }).encode()
+    req = _ureq.Request(
+        "https://openrouter.ai/api/v1/chat/completions",
+        data=body, method="POST",
+        headers={"Authorization": f"Bearer {key}",
+                 "Content-Type": "application/json"})
+    try:
+        with _ureq.urlopen(req, timeout=120) as r:
+            return _json.load(r)["choices"][0]["message"]["content"]
+    except (_uerr.HTTPError, _uerr.URLError) as e:
+        msg = str(e)[:200]
+        code = getattr(e, "code", "?")
+        logger.warning("OpenRouter HTTP %s: %s — trying next provider", code, msg)
+        return None
+
 def _create_completion(client, model: str, messages: list) -> str:
-    """Groq first; on ANY failure fall back to Gemini (keeps pipelines alive
-    when Groq's org cap is exhausted).  Re-raises the Groq error if both fail."""
+    """Groq first; on ANY failure try OpenRouter (if key set) then Gemini.
+    Keeps pipelines alive when Groq's org cap is exhausted or a model is
+    retired (llama-3.3-70b 404).  Re-raises the first error if ALL fail."""
     try:
         resp = client.chat.completions.create(
             model=model,
@@ -198,6 +231,13 @@ def _create_completion(client, model: str, messages: list) -> str:
         )
         return resp.choices[0].message.content
     except Exception as groq_exc:
+        if model == "__OPENROUTER__":
+            raw = _openrouter_chat(messages)
+            if raw:
+                logger.info("OpenRouter produced a script (Groq chain hit: %.120s)", groq_exc)
+                return raw
+            raise groq_exc
+        # Groq models exhausted -> Gemini free tier (last resort)
         try:
             raw = _gemini_chat(messages)
         except Exception:
@@ -319,11 +359,16 @@ def _default_tags(poet: str, mode: str) -> list:
 def generate_script(theme: str, hook_style: str | None = None) -> dict:
     single = os.environ.get("GROQ_MODEL", "").strip()
     models = ([single] if single else [
-        "llama-3.3-70b-versatile",
         "openai/gpt-oss-120b",
         "llama-3.1-70b-versatile",
         "llama-3.1-8b-instant"
     ])
+    # 2026-08-19: llama-3.3-70b-versatile was retired by Groq (404 model
+    # not found) and broke every shorts run. The fallback order is:
+    # Groq -> OpenRouter (mirrors Neuro-Somaa / Mr-Nextep) -> Gemini free.
+    _or_key = os.environ.get("OPENROUTER_API_KEY", "").strip()
+    if _or_key:
+        models.append("__OPENROUTER__")
     mode, poet_key = _pick_mode()
     client = _client()
 

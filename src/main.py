@@ -123,7 +123,7 @@ def run_pipeline(theme: str = None) -> dict:
     logger.info("Voice ready: %.1fs", narration)
 
     # 4. Video (+ thumbnail)
-    final_video = build_video(image_paths, segments, script["scenes"])
+    final_video = build_video(image_paths, segments, script["scenes"], theme=theme)
     thumb = generate_thumbnail(image_paths[0], script.get("title") or "اردو شاعری")
 
     # 5. Upload (private → publishAt at PKT peak)
