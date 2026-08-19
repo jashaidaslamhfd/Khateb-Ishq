@@ -412,6 +412,16 @@ def build_video(image_paths: list, audio_segments: list, scenes: list, theme: st
     tracks = [narration]
 
     music_path = _pick_music(theme=theme)
+    if os.environ.get("GENERATE_MUSIC", "1") not in ("0", "false", "no"):
+        # 2026-08-19: AI-generated viral sad-poetry BGM (TikTok/YouTube
+        # style: piano + violin + rain). Unique every video, royalty-free.
+        try:
+            from music_generator import pick_track
+            ai_path = pick_track(theme=theme, target_duration=video.duration)
+            if ai_path and os.path.exists(ai_path):
+                music_path = ai_path
+        except Exception as _mge:  # noqa: BLE001 - never block the render
+            logger.warning("AI music skipped (%s) — stock fallback", _mge)
     if music_path:
         music = AudioFileClip(music_path).volumex(MUSIC_VOLUME)
         if music.duration < video.duration:
