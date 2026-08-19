@@ -1,0 +1,35 @@
+name: "Music API Test (temporary)"
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Test ModelsLab music API
+        env:
+          MODELSLAB_API_KEY: ${{ secrets.MODELSLAB_API_KEY }}
+        run: |
+          set -euo pipefail
+          pip install requests
+          cat > /tmp/t.py << 'PY'
+import os, sys, time, requests, json
+sys.path.insert(0, "src")
+import logging
+logging.basicConfig(level=logging.INFO)
+from music_generator import generate_sad_music, _make_prompt
+print("KEY present:", bool(os.environ.get("MODELSLAB_API_KEY")))
+print("PROMPT:", _make_prompt("dard bhari"))
+out = generate_sad_music(theme="dard bhari", duration=55)
+print("RESULT:", out)
+PY
+          python3 /tmp/t.py
+      - name: Show vault files
+        if: always()
+        run: ls -la assets/music/ | tail -20
