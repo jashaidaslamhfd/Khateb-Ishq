@@ -8,8 +8,8 @@ on:
         required: false
         default: "8"
         type: string
-  # ⏸ WEEKLY POETRY MIX PAUSED 2026-07-26 with the poetry pivot (owner:
-  # "poetry ki bajay abi ke lie sad background music" — see sad_music.yml).
+  # PAUSED WEEKLY POETRY MIX PAUSED 2026-07-26 with the poetry pivot (owner:
+  # "poetry ki bajay abi ke lie sad background music" - see sad_music.yml).
   # Manual mixes still work via workflow_dispatch above; restore the Friday
   # cron when poetry resumes:
   #   - cron: "0 12 * * 5"
