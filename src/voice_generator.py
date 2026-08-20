@@ -75,6 +75,15 @@ def _engine() -> str:
     return "edge"
 
 
+class CloneHung(RuntimeError):
+    """Raised when a single voice-clone segment exceeds CLONE_SEGMENT_TIMEOUT
+    and the hard alarm fires. The outer poem loop catches it and re-renders
+    the whole poem via edge-TTS so one stuck clone never parks a run.
+    (2026-08-20: promoted to module scope — it was defined inside
+    _synth_clone_guarded but referenced at module level, which raised a
+    NameError on the very first edge-TTS run and killed the pipeline.)"""
+
+
 async def _synth(text: str, voice: str, rate: str, out_path: str) -> None:
     import edge_tts
     communicate = edge_tts.Communicate(text, voice, rate=rate)
@@ -191,12 +200,12 @@ def generate_voice_segments(scenes: List[dict], output_dir: str = "output/segmen
                 audio = audio / peak * 0.95
             raw_path = os.path.join(output_dir, f"raw_seg_{i}.wav")
             sf.write(raw_path, audio, sr)
-            _master_vocal_audio(raw_path, path)
+            _master_vocal_audio(raw_path, tmp_path + ".master.wav")
             if os.path.exists(raw_path):
                 os.remove(raw_path)
-            dur_audio, dur_sr = sf.read(path)
+            dur_audio, dur_sr = sf.read(tmp_path + ".master.wav")
             duration_s = len(dur_audio) / dur_sr
-            segments.append({"path": path, "duration": duration_s,
+            segments.append({"path": tmp_path + ".master.wav", "duration": duration_s,
                              "caption": caption, "tts_engine": f"{eng}:{speaker_tag}"})
             logger.info("Segment %d/%d via %s (%.1fs) [Mastered]", i + 1, len(scenes), speaker_tag, duration_s)
         engines = {s["tts_engine"] for s in segments}
