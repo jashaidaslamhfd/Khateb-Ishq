@@ -45,7 +45,20 @@ def generate_scene_image(index: int, scene: dict, used_hashes: set, used_fallbac
     scene_text = scene.get("caption") or None
     os.makedirs("output/images", exist_ok=True)
 
-    for provider in available_providers():
+    # 2026-08-20: optional provider ordering — IMAGE_PROVIDER_ORDER lets an
+    # operator rank preferred providers first (e.g. "Pollinations-flux" before
+    # AI-Horde) without changing code. Unlisted available providers stay in
+    # the tail of the chain as fallbacks; unknown names are ignored.
+    providers = available_providers()
+    ordered = os.environ.get("IMAGE_PROVIDER_ORDER", "").strip()
+    if ordered:
+        rank = {n.strip(): i for i, n in enumerate(ordered.split(",")) if n.strip()}
+        providers = sorted(
+            providers,
+            key=lambda p: (0, rank.get(p["name"], len(rank))) if p["name"] in rank else (1, 0),
+        )
+
+    for provider in providers:
         try:
             seed = random.randint(1000, 999999)  # fresh seed per provider try
             data, ext = _provider_generate(provider, prompt, seed, scene_text)
