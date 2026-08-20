@@ -322,13 +322,16 @@ def build_video(image_paths: list, audio_segments: list, scenes: list, theme: st
         files = _scene_visual_files(img_path, i)           # graded crops (1 or 2)
         per = duration / len(files)
         cuts = []
+        # 2026-08-20 PROFESSIONAL MOTION (owner: "unprofessional zoom in/out"):
+        # replaced flat linear zoom with eased, HARD-CAPPED Ken Burns —
+        # gentle S-curve speed, max 12% zoom per beat, subtle pan drift;
+        # alternating push/pull across beats like a human editor.
+        from cine_motion import ken_burns_clip as _kb
         for j, f in enumerate(files):
-            base = ImageClip(f).set_duration(per)
-            start_zoom = 1.0 + (ZOOM - 1.0) * (j / max(len(files) - 1, 1)) * 0.6
-            zoomed = base.resize(
-                lambda t, z0=start_zoom: z0 + ((ZOOM - 1.0) - (z0 - 1.0)) * min(1.0, t / max(per, 0.01))
-            ).set_position(("center", "center"))
-            cuts.append(zoomed.on_color(size=(WIDTH, HEIGHT), color=(8, 8, 12), pos="center", col_opacity=1))
+            direction = "in" if j == 0 else "out"
+            beat = _kb(f, per, direction, hook_snap=(i == 0 and j == 0),
+                       canvas=(WIDTH, HEIGHT))
+            cuts.append(beat.on_color(size=(WIDTH, HEIGHT), color=(8, 8, 12), pos="center", col_opacity=1))
         canvas = (concatenate_videoclips(cuts, method="compose") if len(cuts) > 1 else cuts[0])
         canvas = canvas.set_duration(duration)
 
