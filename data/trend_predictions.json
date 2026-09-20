@@ -1,553 +1,553 @@
 {
   "predictions": [
     {
-      "topic": "poetry background music instrumental",
-      "score": 1.32,
-      "confidence": 0.44,
+      "topic": "patriotic Defence Day shayari",
+      "score": 1.16,
+      "confidence": 0.387,
+      "source": "cultural_event",
+      "momentum": 1.0,
+      "seasonal": 1.4,
+      "performance": 1.0,
+      "predicted_for": "2026-09-20",
+      "month": 9
+    },
+    {
+      "topic": "poetry background music no copyright",
+      "score": 1.08,
+      "confidence": 0.36,
       "source": "autosuggest",
-      "momentum": 1.8,
+      "momentum": 1.2,
       "seasonal": 1.0,
       "performance": 1.0,
-      "predicted_for": "2026-09-19",
+      "predicted_for": "2026-09-20",
+      "month": 9
+    },
+    {
+      "topic": "poetry background music guitar",
+      "score": 1.08,
+      "confidence": 0.36,
+      "source": "autosuggest",
+      "momentum": 1.2,
+      "seasonal": 1.0,
+      "performance": 1.0,
+      "predicted_for": "2026-09-20",
+      "month": 9
+    },
+    {
+      "topic": "poetry background music instrumental",
+      "score": 1.08,
+      "confidence": 0.36,
+      "source": "autosuggest",
+      "momentum": 1.2,
+      "seasonal": 1.0,
+      "performance": 1.0,
+      "predicted_for": "2026-09-20",
+      "month": 9
+    },
+    {
+      "topic": "poetry background music hindi",
+      "score": 1.08,
+      "confidence": 0.36,
+      "source": "autosuggest",
+      "momentum": 1.2,
+      "seasonal": 1.0,
+      "performance": 1.0,
+      "predicted_for": "2026-09-20",
+      "month": 9
+    },
+    {
+      "topic": "poetry background music flute no copyright",
+      "score": 1.08,
+      "confidence": 0.36,
+      "source": "autosuggest",
+      "momentum": 1.2,
+      "seasonal": 1.0,
+      "performance": 1.0,
+      "predicted_for": "2026-09-20",
       "month": 9
     },
     {
       "topic": "poetry background music tiktok",
-      "score": 1.32,
-      "confidence": 0.44,
+      "score": 1.08,
+      "confidence": 0.36,
       "source": "autosuggest",
-      "momentum": 1.8,
+      "momentum": 1.2,
       "seasonal": 1.0,
       "performance": 1.0,
-      "predicted_for": "2026-09-19",
+      "predicted_for": "2026-09-20",
+      "month": 9
+    },
+    {
+      "topic": "poetry background music sad",
+      "score": 1.08,
+      "confidence": 0.36,
+      "source": "autosuggest",
+      "momentum": 1.2,
+      "seasonal": 1.0,
+      "performance": 1.0,
+      "predicted_for": "2026-09-20",
       "month": 9
     },
     {
       "topic": "poetry background music piano",
-      "score": 1.32,
-      "confidence": 0.44,
+      "score": 1.08,
+      "confidence": 0.36,
       "source": "autosuggest",
-      "momentum": 1.8,
+      "momentum": 1.2,
       "seasonal": 1.0,
       "performance": 1.0,
-      "predicted_for": "2026-09-19",
+      "predicted_for": "2026-09-20",
+      "month": 9
+    },
+    {
+      "topic": "sad shayari background music",
+      "score": 1.08,
+      "confidence": 0.36,
+      "source": "autosuggest",
+      "momentum": 1.2,
+      "seasonal": 1.0,
+      "performance": 1.0,
+      "predicted_for": "2026-09-20",
       "month": 9
     },
     {
       "topic": "sad shayari background music black screen",
-      "score": 1.32,
-      "confidence": 0.44,
+      "score": 1.08,
+      "confidence": 0.36,
       "source": "autosuggest",
-      "momentum": 1.8,
+      "momentum": 1.2,
       "seasonal": 1.0,
       "performance": 1.0,
-      "predicted_for": "2026-09-19",
+      "predicted_for": "2026-09-20",
+      "month": 9
+    },
+    {
+      "topic": "sad shayari background music no copyright",
+      "score": 1.08,
+      "confidence": 0.36,
+      "source": "autosuggest",
+      "momentum": 1.2,
+      "seasonal": 1.0,
+      "performance": 1.0,
+      "predicted_for": "2026-09-20",
+      "month": 9
+    },
+    {
+      "topic": "sad shayari background music hindi",
+      "score": 1.08,
+      "confidence": 0.36,
+      "source": "autosuggest",
+      "momentum": 1.2,
+      "seasonal": 1.0,
+      "performance": 1.0,
+      "predicted_for": "2026-09-20",
       "month": 9
     },
     {
       "topic": "sad shayari background music breakup music",
-      "score": 1.32,
-      "confidence": 0.44,
+      "score": 1.08,
+      "confidence": 0.36,
       "source": "autosuggest",
-      "momentum": 1.8,
+      "momentum": 1.2,
       "seasonal": 1.0,
       "performance": 1.0,
-      "predicted_for": "2026-09-19",
+      "predicted_for": "2026-09-20",
+      "month": 9
+    },
+    {
+      "topic": "sad shayari background music copyright free",
+      "score": 1.08,
+      "confidence": 0.36,
+      "source": "autosuggest",
+      "momentum": 1.2,
+      "seasonal": 1.0,
+      "performance": 1.0,
+      "predicted_for": "2026-09-20",
+      "month": 9
+    },
+    {
+      "topic": "sad shayari background music 30 seconds",
+      "score": 1.08,
+      "confidence": 0.36,
+      "source": "autosuggest",
+      "momentum": 1.2,
+      "seasonal": 1.0,
+      "performance": 1.0,
+      "predicted_for": "2026-09-20",
+      "month": 9
+    },
+    {
+      "topic": "sad shayari background music instagram",
+      "score": 1.08,
+      "confidence": 0.36,
+      "source": "autosuggest",
+      "momentum": 1.2,
+      "seasonal": 1.0,
+      "performance": 1.0,
+      "predicted_for": "2026-09-20",
+      "month": 9
+    },
+    {
+      "topic": "background music for poetry reading",
+      "score": 1.08,
+      "confidence": 0.36,
+      "source": "autosuggest",
+      "momentum": 1.2,
+      "seasonal": 1.0,
+      "performance": 1.0,
+      "predicted_for": "2026-09-20",
+      "month": 9
+    },
+    {
+      "topic": "background music for poetry no copyright",
+      "score": 1.08,
+      "confidence": 0.36,
+      "source": "autosuggest",
+      "momentum": 1.2,
+      "seasonal": 1.0,
+      "performance": 1.0,
+      "predicted_for": "2026-09-20",
+      "month": 9
+    },
+    {
+      "topic": "background music for poetry hindi",
+      "score": 1.08,
+      "confidence": 0.36,
+      "source": "autosuggest",
+      "momentum": 1.2,
+      "seasonal": 1.0,
+      "performance": 1.0,
+      "predicted_for": "2026-09-20",
+      "month": 9
+    },
+    {
+      "topic": "background music for poetry recitation",
+      "score": 1.08,
+      "confidence": 0.36,
+      "source": "autosuggest",
+      "momentum": 1.2,
+      "seasonal": 1.0,
+      "performance": 1.0,
+      "predicted_for": "2026-09-20",
       "month": 9
     },
     {
       "topic": "background music for poetry copyright free",
-      "score": 1.32,
-      "confidence": 0.44,
+      "score": 1.08,
+      "confidence": 0.36,
       "source": "autosuggest",
-      "momentum": 1.8,
+      "momentum": 1.2,
       "seasonal": 1.0,
       "performance": 1.0,
-      "predicted_for": "2026-09-19",
+      "predicted_for": "2026-09-20",
+      "month": 9
+    },
+    {
+      "topic": "background music for poetry nepali",
+      "score": 1.08,
+      "confidence": 0.36,
+      "source": "autosuggest",
+      "momentum": 1.2,
+      "seasonal": 1.0,
+      "performance": 1.0,
+      "predicted_for": "2026-09-20",
+      "month": 9
+    },
+    {
+      "topic": "background music poetry attitude",
+      "score": 1.08,
+      "confidence": 0.36,
+      "source": "autosuggest",
+      "momentum": 1.2,
+      "seasonal": 1.0,
+      "performance": 1.0,
+      "predicted_for": "2026-09-20",
+      "month": 9
+    },
+    {
+      "topic": "background music poetry no copyright",
+      "score": 1.08,
+      "confidence": 0.36,
+      "source": "autosuggest",
+      "momentum": 1.2,
+      "seasonal": 1.0,
+      "performance": 1.0,
+      "predicted_for": "2026-09-20",
+      "month": 9
+    },
+    {
+      "topic": "background music spoken poetry",
+      "score": 1.08,
+      "confidence": 0.36,
+      "source": "autosuggest",
+      "momentum": 1.2,
+      "seasonal": 1.0,
+      "performance": 1.0,
+      "predicted_for": "2026-09-20",
+      "month": 9
+    },
+    {
+      "topic": "poetry bg music no copyright",
+      "score": 1.08,
+      "confidence": 0.36,
+      "source": "autosuggest",
+      "momentum": 1.2,
+      "seasonal": 1.0,
+      "performance": 1.0,
+      "predicted_for": "2026-09-20",
+      "month": 9
+    },
+    {
+      "topic": "poetry background music ringtone",
+      "score": 1.08,
+      "confidence": 0.36,
+      "source": "autosuggest",
+      "momentum": 1.2,
+      "seasonal": 1.0,
+      "performance": 1.0,
+      "predicted_for": "2026-09-20",
+      "month": 9
+    },
+    {
+      "topic": "poetry background music arabic",
+      "score": 1.08,
+      "confidence": 0.36,
+      "source": "autosuggest",
+      "momentum": 1.2,
+      "seasonal": 1.0,
+      "performance": 1.0,
+      "predicted_for": "2026-09-20",
+      "month": 9
+    },
+    {
+      "topic": "sad background music no copyright",
+      "score": 1.08,
+      "confidence": 0.36,
+      "source": "autosuggest",
+      "momentum": 1.2,
+      "seasonal": 1.0,
+      "performance": 1.0,
+      "predicted_for": "2026-09-20",
+      "month": 9
+    },
+    {
+      "topic": "sad background music instrumental",
+      "score": 1.08,
+      "confidence": 0.36,
+      "source": "autosuggest",
+      "momentum": 1.2,
+      "seasonal": 1.0,
+      "performance": 1.0,
+      "predicted_for": "2026-09-20",
       "month": 9
     },
     {
       "topic": "sad background music tiktok",
-      "score": 1.32,
-      "confidence": 0.44,
+      "score": 1.08,
+      "confidence": 0.36,
       "source": "autosuggest",
-      "momentum": 1.8,
+      "momentum": 1.2,
       "seasonal": 1.0,
       "performance": 1.0,
-      "predicted_for": "2026-09-19",
+      "predicted_for": "2026-09-20",
       "month": 9
     },
     {
       "topic": "sad background music no lyrics",
-      "score": 1.32,
-      "confidence": 0.44,
+      "score": 1.08,
+      "confidence": 0.36,
       "source": "autosuggest",
-      "momentum": 1.8,
+      "momentum": 1.2,
       "seasonal": 1.0,
       "performance": 1.0,
-      "predicted_for": "2026-09-19",
+      "predicted_for": "2026-09-20",
       "month": 9
     },
     {
       "topic": "sad background music violin",
-      "score": 1.32,
-      "confidence": 0.44,
+      "score": 1.08,
+      "confidence": 0.36,
       "source": "autosuggest",
-      "momentum": 1.8,
+      "momentum": 1.2,
       "seasonal": 1.0,
       "performance": 1.0,
-      "predicted_for": "2026-09-19",
+      "predicted_for": "2026-09-20",
       "month": 9
     },
     {
       "topic": "sad background music for videos",
-      "score": 1.32,
-      "confidence": 0.44,
+      "score": 1.08,
+      "confidence": 0.36,
       "source": "autosuggest",
-      "momentum": 1.8,
+      "momentum": 1.2,
       "seasonal": 1.0,
       "performance": 1.0,
-      "predicted_for": "2026-09-19",
+      "predicted_for": "2026-09-20",
       "month": 9
     },
     {
       "topic": "sad background music piano",
-      "score": 1.32,
-      "confidence": 0.44,
+      "score": 1.08,
+      "confidence": 0.36,
       "source": "autosuggest",
-      "momentum": 1.8,
+      "momentum": 1.2,
       "seasonal": 1.0,
       "performance": 1.0,
-      "predicted_for": "2026-09-19",
+      "predicted_for": "2026-09-20",
+      "month": 9
+    },
+    {
+      "topic": "copyright free background music for youtube videos",
+      "score": 1.08,
+      "confidence": 0.36,
+      "source": "autosuggest",
+      "momentum": 1.2,
+      "seasonal": 1.0,
+      "performance": 1.0,
+      "predicted_for": "2026-09-20",
       "month": 9
     },
     {
       "topic": "copyright free background music upbeat",
-      "score": 1.32,
-      "confidence": 0.44,
+      "score": 1.08,
+      "confidence": 0.36,
       "source": "autosuggest",
-      "momentum": 1.8,
+      "momentum": 1.2,
       "seasonal": 1.0,
       "performance": 1.0,
-      "predicted_for": "2026-09-19",
+      "predicted_for": "2026-09-20",
       "month": 9
     },
     {
       "topic": "copyright free background music hip hop",
-      "score": 1.32,
-      "confidence": 0.44,
+      "score": 1.08,
+      "confidence": 0.36,
       "source": "autosuggest",
-      "momentum": 1.8,
+      "momentum": 1.2,
       "seasonal": 1.0,
       "performance": 1.0,
-      "predicted_for": "2026-09-19",
+      "predicted_for": "2026-09-20",
       "month": 9
     },
     {
       "topic": "copyright free background music r\\u0026b",
-      "score": 1.32,
-      "confidence": 0.44,
+      "score": 1.08,
+      "confidence": 0.36,
       "source": "autosuggest",
-      "momentum": 1.8,
+      "momentum": 1.2,
       "seasonal": 1.0,
       "performance": 1.0,
-      "predicted_for": "2026-09-19",
+      "predicted_for": "2026-09-20",
       "month": 9
     },
     {
       "topic": "copyright free background music for gaming",
-      "score": 1.32,
-      "confidence": 0.44,
+      "score": 1.08,
+      "confidence": 0.36,
       "source": "autosuggest",
-      "momentum": 1.8,
+      "momentum": 1.2,
       "seasonal": 1.0,
       "performance": 1.0,
-      "predicted_for": "2026-09-19",
+      "predicted_for": "2026-09-20",
       "month": 9
     },
     {
       "topic": "copyright free background music for vlogs",
-      "score": 1.32,
-      "confidence": 0.44,
+      "score": 1.08,
+      "confidence": 0.36,
       "source": "autosuggest",
-      "momentum": 1.8,
+      "momentum": 1.2,
       "seasonal": 1.0,
       "performance": 1.0,
-      "predicted_for": "2026-09-19",
+      "predicted_for": "2026-09-20",
+      "month": 9
+    },
+    {
+      "topic": "no copyright music instrumental",
+      "score": 1.08,
+      "confidence": 0.36,
+      "source": "autosuggest",
+      "momentum": 1.2,
+      "seasonal": 1.0,
+      "performance": 1.0,
+      "predicted_for": "2026-09-20",
+      "month": 9
+    },
+    {
+      "topic": "no copyright music background",
+      "score": 1.08,
+      "confidence": 0.36,
+      "source": "autosuggest",
+      "momentum": 1.2,
+      "seasonal": 1.0,
+      "performance": 1.0,
+      "predicted_for": "2026-09-20",
       "month": 9
     },
     {
       "topic": "no copyright music hip hop",
-      "score": 1.32,
-      "confidence": 0.44,
+      "score": 1.08,
+      "confidence": 0.36,
       "source": "autosuggest",
-      "momentum": 1.8,
+      "momentum": 1.2,
       "seasonal": 1.0,
       "performance": 1.0,
-      "predicted_for": "2026-09-19",
+      "predicted_for": "2026-09-20",
+      "month": 9
+    },
+    {
+      "topic": "no copyright music chill",
+      "score": 1.08,
+      "confidence": 0.36,
+      "source": "autosuggest",
+      "momentum": 1.2,
+      "seasonal": 1.0,
+      "performance": 1.0,
+      "predicted_for": "2026-09-20",
       "month": 9
     },
     {
       "topic": "no copyright music gaming",
-      "score": 1.32,
-      "confidence": 0.44,
+      "score": 1.08,
+      "confidence": 0.36,
       "source": "autosuggest",
-      "momentum": 1.8,
+      "momentum": 1.2,
       "seasonal": 1.0,
       "performance": 1.0,
-      "predicted_for": "2026-09-19",
+      "predicted_for": "2026-09-20",
+      "month": 9
+    },
+    {
+      "topic": "urdu poetry background music",
+      "score": 1.08,
+      "confidence": 0.36,
+      "source": "autosuggest",
+      "momentum": 1.2,
+      "seasonal": 1.0,
+      "performance": 1.0,
+      "predicted_for": "2026-09-20",
       "month": 9
     },
     {
       "topic": "urdu poetry english translation",
-      "score": 1.32,
-      "confidence": 0.44,
+      "score": 1.08,
+      "confidence": 0.36,
       "source": "autosuggest",
-      "momentum": 1.8,
+      "momentum": 1.2,
       "seasonal": 1.0,
       "performance": 1.0,
-      "predicted_for": "2026-09-19",
+      "predicted_for": "2026-09-20",
       "month": 9
     },
     {
-      "topic": "urdu poetry with music",
-      "score": 1.32,
-      "confidence": 0.44,
+      "topic": "urdu poetry status",
+      "score": 1.08,
+      "confidence": 0.36,
       "source": "autosuggest",
-      "momentum": 1.8,
+      "momentum": 1.2,
       "seasonal": 1.0,
       "performance": 1.0,
-      "predicted_for": "2026-09-19",
-      "month": 9
-    },
-    {
-      "topic": "urdu poetry with english subtitles",
-      "score": 1.32,
-      "confidence": 0.44,
-      "source": "autosuggest",
-      "momentum": 1.8,
-      "seasonal": 1.0,
-      "performance": 1.0,
-      "predicted_for": "2026-09-19",
-      "month": 9
-    },
-    {
-      "topic": "sad shayari black screen",
-      "score": 1.32,
-      "confidence": 0.44,
-      "source": "autosuggest",
-      "momentum": 1.8,
-      "seasonal": 1.0,
-      "performance": 1.0,
-      "predicted_for": "2026-09-19",
-      "month": 9
-    },
-    {
-      "topic": "sad shayari punjabi",
-      "score": 1.32,
-      "confidence": 0.44,
-      "source": "autosuggest",
-      "momentum": 1.8,
-      "seasonal": 1.0,
-      "performance": 1.0,
-      "predicted_for": "2026-09-19",
-      "month": 9
-    },
-    {
-      "topic": "heart touching poetry of mirza ghalib",
-      "score": 1.32,
-      "confidence": 0.44,
-      "source": "autosuggest",
-      "momentum": 1.8,
-      "seasonal": 1.0,
-      "performance": 1.0,
-      "predicted_for": "2026-09-19",
-      "month": 9
-    },
-    {
-      "topic": "ghalib shayari in english",
-      "score": 1.32,
-      "confidence": 0.44,
-      "source": "autosuggest",
-      "momentum": 1.8,
-      "seasonal": 1.0,
-      "performance": 1.0,
-      "predicted_for": "2026-09-19",
-      "month": 9
-    },
-    {
-      "topic": "ghalib shayari naseeruddin shah",
-      "score": 1.32,
-      "confidence": 0.44,
-      "source": "autosuggest",
-      "momentum": 1.8,
-      "seasonal": 1.0,
-      "performance": 1.0,
-      "predicted_for": "2026-09-19",
-      "month": 9
-    },
-    {
-      "topic": "ishq shayari pakistani",
-      "score": 1.32,
-      "confidence": 0.44,
-      "source": "autosuggest",
-      "momentum": 1.8,
-      "seasonal": 1.0,
-      "performance": 1.0,
-      "predicted_for": "2026-09-19",
-      "month": 9
-    },
-    {
-      "topic": "ishq shayari allama iqbal",
-      "score": 1.32,
-      "confidence": 0.44,
-      "source": "autosuggest",
-      "momentum": 1.8,
-      "seasonal": 1.0,
-      "performance": 1.0,
-      "predicted_for": "2026-09-19",
-      "month": 9
-    },
-    {
-      "topic": "ishq shayari hindi",
-      "score": 1.32,
-      "confidence": 0.44,
-      "source": "autosuggest",
-      "momentum": 1.8,
-      "seasonal": 1.0,
-      "performance": 1.0,
-      "predicted_for": "2026-09-19",
-      "month": 9
-    },
-    {
-      "topic": "ishq shayari amir ameer",
-      "score": 1.32,
-      "confidence": 0.44,
-      "source": "autosuggest",
-      "momentum": 1.8,
-      "seasonal": 1.0,
-      "performance": 1.0,
-      "predicted_for": "2026-09-19",
-      "month": 9
-    },
-    {
-      "topic": "dard bhari shayari hindi mein",
-      "score": 1.32,
-      "confidence": 0.44,
-      "source": "autosuggest",
-      "momentum": 1.8,
-      "seasonal": 1.0,
-      "performance": 1.0,
-      "predicted_for": "2026-09-19",
-      "month": 9
-    },
-    {
-      "topic": "dard bhari shayari hindi",
-      "score": 1.32,
-      "confidence": 0.44,
-      "source": "autosuggest",
-      "momentum": 1.8,
-      "seasonal": 1.0,
-      "performance": 1.0,
-      "predicted_for": "2026-09-19",
-      "month": 9
-    },
-    {
-      "topic": "dard bhari shayari ladki ke liye",
-      "score": 1.32,
-      "confidence": 0.44,
-      "source": "autosuggest",
-      "momentum": 1.8,
-      "seasonal": 1.0,
-      "performance": 1.0,
-      "predicted_for": "2026-09-19",
-      "month": 9
-    },
-    {
-      "topic": "dard bhari shayari photo",
-      "score": 1.32,
-      "confidence": 0.44,
-      "source": "autosuggest",
-      "momentum": 1.8,
-      "seasonal": 1.0,
-      "performance": 1.0,
-      "predicted_for": "2026-09-19",
-      "month": 9
-    },
-    {
-      "topic": "dard bhari shayari ringtone",
-      "score": 1.32,
-      "confidence": 0.44,
-      "source": "autosuggest",
-      "momentum": 1.8,
-      "seasonal": 1.0,
-      "performance": 1.0,
-      "predicted_for": "2026-09-19",
-      "month": 9
-    },
-    {
-      "topic": "dard bhari shayari image",
-      "score": 1.32,
-      "confidence": 0.44,
-      "source": "autosuggest",
-      "momentum": 1.8,
-      "seasonal": 1.0,
-      "performance": 1.0,
-      "predicted_for": "2026-09-19",
-      "month": 9
-    },
-    {
-      "topic": "dard bhari shayari full video",
-      "score": 1.32,
-      "confidence": 0.44,
-      "source": "autosuggest",
-      "momentum": 1.8,
-      "seasonal": 1.0,
-      "performance": 1.0,
-      "predicted_for": "2026-09-19",
-      "month": 9
-    },
-    {
-      "topic": "sufi kalam coke studio",
-      "score": 1.32,
-      "confidence": 0.44,
-      "source": "autosuggest",
-      "momentum": 1.8,
-      "seasonal": 1.0,
-      "performance": 1.0,
-      "predicted_for": "2026-09-19",
-      "month": 9
-    },
-    {
-      "topic": "sufi kalam punjabi",
-      "score": 1.32,
-      "confidence": 0.44,
-      "source": "autosuggest",
-      "momentum": 1.8,
-      "seasonal": 1.0,
-      "performance": 1.0,
-      "predicted_for": "2026-09-19",
-      "month": 9
-    },
-    {
-      "topic": "sufi kalam without music",
-      "score": 1.32,
-      "confidence": 0.44,
-      "source": "autosuggest",
-      "momentum": 1.8,
-      "seasonal": 1.0,
-      "performance": 1.0,
-      "predicted_for": "2026-09-19",
-      "month": 9
-    },
-    {
-      "topic": "status shayari hindi",
-      "score": 1.32,
-      "confidence": 0.44,
-      "source": "autosuggest",
-      "momentum": 1.8,
-      "seasonal": 1.0,
-      "performance": 1.0,
-      "predicted_for": "2026-09-19",
-      "month": 9
-    },
-    {
-      "topic": "status shayari kaise banaen",
-      "score": 1.32,
-      "confidence": 0.44,
-      "source": "autosuggest",
-      "momentum": 1.8,
-      "seasonal": 1.0,
-      "performance": 1.0,
-      "predicted_for": "2026-09-19",
-      "month": 9
-    },
-    {
-      "topic": "one sided love poetry english",
-      "score": 1.32,
-      "confidence": 0.44,
-      "source": "autosuggest",
-      "momentum": 1.8,
-      "seasonal": 1.0,
-      "performance": 1.0,
-      "predicted_for": "2026-09-19",
-      "month": 9
-    },
-    {
-      "topic": "one sided love poetry abhash jha",
-      "score": 1.32,
-      "confidence": 0.44,
-      "source": "autosuggest",
-      "momentum": 1.8,
-      "seasonal": 1.0,
-      "performance": 1.0,
-      "predicted_for": "2026-09-19",
-      "month": 9
-    },
-    {
-      "topic": "sad shayari background music urdu",
-      "score": 1.2,
-      "confidence": 0.4,
-      "source": "autosuggest",
-      "momentum": 1.5,
-      "seasonal": 1.0,
-      "performance": 1.0,
-      "predicted_for": "2026-09-19",
-      "month": 9
-    },
-    {
-      "topic": "copyright free background music jazz",
-      "score": 1.2,
-      "confidence": 0.4,
-      "source": "autosuggest",
-      "momentum": 1.5,
-      "seasonal": 1.0,
-      "performance": 1.0,
-      "predicted_for": "2026-09-19",
-      "month": 9
-    },
-    {
-      "topic": "copyright free background music lofi",
-      "score": 1.2,
-      "confidence": 0.4,
-      "source": "autosuggest",
-      "momentum": 1.5,
-      "seasonal": 1.0,
-      "performance": 1.0,
-      "predicted_for": "2026-09-19",
-      "month": 9
-    },
-    {
-      "topic": "urdu poetry song",
-      "score": 1.2,
-      "confidence": 0.4,
-      "source": "autosuggest",
-      "momentum": 1.5,
-      "seasonal": 1.0,
-      "performance": 1.0,
-      "predicted_for": "2026-09-19",
-      "month": 9
-    },
-    {
-      "topic": "sad shayari urdu",
-      "score": 1.2,
-      "confidence": 0.4,
-      "source": "autosuggest",
-      "momentum": 1.5,
-      "seasonal": 1.0,
-      "performance": 1.0,
-      "predicted_for": "2026-09-19",
-      "month": 9
-    },
-    {
-      "topic": "heart touching poetry girl",
-      "score": 1.2,
-      "confidence": 0.4,
-      "source": "autosuggest",
-      "momentum": 1.5,
-      "seasonal": 1.0,
-      "performance": 1.0,
-      "predicted_for": "2026-09-19",
+      "predicted_for": "2026-09-20",
       "month": 9
     }
   ],
@@ -565,7 +565,7 @@
         "poetry background music sad",
         "poetry background music piano"
       ],
-      "fetched_at": "2026-09-19T08:21:41.606157+00:00"
+      "fetched_at": "2026-09-20T08:53:32.938775+00:00"
     },
     "sad shayari background music": {
       "suggestions": [
@@ -580,7 +580,7 @@
         "sad shayari background music 30 seconds",
         "sad shayari background music instagram"
       ],
-      "fetched_at": "2026-09-19T08:21:41.635244+00:00"
+      "fetched_at": "2026-09-20T08:53:32.983733+00:00"
     },
     "background music for poetry": {
       "suggestions": [
@@ -595,7 +595,7 @@
         "background music for poetry sad",
         "background music for poetry love"
       ],
-      "fetched_at": "2026-09-19T08:21:41.665002+00:00"
+      "fetched_at": "2026-09-20T08:53:33.029277+00:00"
     },
     "background music poetry": {
       "suggestions": [
@@ -610,7 +610,7 @@
         "background song poetry",
         "background music spoken poetry"
       ],
-      "fetched_at": "2026-09-19T08:21:41.703602+00:00"
+      "fetched_at": "2026-09-20T08:53:33.087300+00:00"
     },
     "poetry bg music": {
       "suggestions": [
@@ -625,7 +625,7 @@
         "poetry background music arabic",
         "poetry background music hindi"
       ],
-      "fetched_at": "2026-09-19T08:21:41.741756+00:00"
+      "fetched_at": "2026-09-20T08:53:33.141968+00:00"
     },
     "sad background music": {
       "suggestions": [
@@ -640,7 +640,7 @@
         "sad background music for videos",
         "sad background music piano"
       ],
-      "fetched_at": "2026-09-19T08:21:41.772489+00:00"
+      "fetched_at": "2026-09-20T08:53:33.191857+00:00"
     },
     "copyright free background music": {
       "suggestions": [
@@ -655,22 +655,22 @@
         "copyright free background music for gaming",
         "copyright free background music for vlogs"
       ],
-      "fetched_at": "2026-09-19T08:21:41.806323+00:00"
+      "fetched_at": "2026-09-20T08:53:33.239276+00:00"
     },
     "no copyright music": {
       "suggestions": [
         "no copyright music",
         "no copyright music",
+        "no copyright music instrumental",
         "no copyright music vlog",
         "no copyright music background",
-        "no copyright music instrumental",
         "no copyright music lofi",
         "no copyright music hip hop",
         "no copyright music chill",
         "no copyright music gaming",
         "no copyright music rock"
       ],
-      "fetched_at": "2026-09-19T08:21:41.837105+00:00"
+      "fetched_at": "2026-09-20T08:53:33.286828+00:00"
     },
     "urdu poetry": {
       "suggestions": [
@@ -685,7 +685,7 @@
         "urdu poetry sad",
         "urdu poetry song"
       ],
-      "fetched_at": "2026-09-19T08:21:41.867858+00:00"
+      "fetched_at": "2026-09-20T08:53:33.333198+00:00"
     },
     "sad shayari": {
       "suggestions": [
@@ -700,7 +700,7 @@
         "sad shayari urdu",
         "sad shayari punjabi"
       ],
-      "fetched_at": "2026-09-19T08:21:41.901440+00:00"
+      "fetched_at": "2026-09-20T08:53:33.378004+00:00"
     },
     "heart touching poetry": {
       "suggestions": [
@@ -715,7 +715,7 @@
         "heart touching poetry in hindi",
         "heart touching poetry for love"
       ],
-      "fetched_at": "2026-09-19T08:21:41.931668+00:00"
+      "fetched_at": "2026-09-20T08:53:33.424619+00:00"
     },
     "2 line poetry urdu": {
       "suggestions": [
@@ -730,7 +730,7 @@
         "deep 2 line poetry in urdu",
         "2 line shayari sad poetry urdu poetry #shorts"
       ],
-      "fetched_at": "2026-09-19T08:21:41.988855+00:00"
+      "fetched_at": "2026-09-20T08:53:33.508185+00:00"
     },
     "ghalib shayari": {
       "suggestions": [
@@ -745,7 +745,7 @@
         "ghalib shayari status",
         "ghalib shayari naseeruddin shah"
       ],
-      "fetched_at": "2026-09-19T08:21:42.020186+00:00"
+      "fetched_at": "2026-09-20T08:53:33.554054+00:00"
     },
     "ishq shayari": {
       "suggestions": [
@@ -760,7 +760,7 @@
         "ishq shayari song",
         "ishq shayari uid"
       ],
-      "fetched_at": "2026-09-19T08:21:42.049515+00:00"
+      "fetched_at": "2026-09-20T08:53:33.602990+00:00"
     },
     "dard bhari shayari": {
       "suggestions": [
@@ -775,7 +775,7 @@
         "dard bhari shayari image",
         "dard bhari shayari full video"
       ],
-      "fetched_at": "2026-09-19T08:21:42.078124+00:00"
+      "fetched_at": "2026-09-20T08:53:33.651247+00:00"
     },
     "rain poetry": {
       "suggestions": [
@@ -790,7 +790,7 @@
         "december rain poetry",
         "kiss the rain poetry"
       ],
-      "fetched_at": "2026-09-19T08:21:42.127346+00:00"
+      "fetched_at": "2026-09-20T08:53:33.745583+00:00"
     },
     "night poetry urdu": {
       "suggestions": [
@@ -803,7 +803,7 @@
         "night poetry status",
         "k"
       ],
-      "fetched_at": "2026-09-19T08:21:42.177786+00:00"
+      "fetched_at": "2026-09-20T08:53:33.840630+00:00"
     },
     "motivational poetry urdu": {
       "suggestions": [
@@ -818,22 +818,22 @@
         "motivational urdu shayari for students",
         "motivational urdu shayari allama iqbal"
       ],
-      "fetched_at": "2026-09-19T08:21:42.214935+00:00"
+      "fetched_at": "2026-09-20T08:53:33.893050+00:00"
     },
     "sufi kalam": {
       "suggestions": [
         "sufi kalam",
         "sufi kalam",
         "sufi kalam qawwali",
-        "sufi kalam song",
         "sufi kalam bulleh shah",
+        "sufi kalam song",
         "sufi kalam abida parveen",
         "sufi kalam nusrat fateh ali khan",
         "sufi kalam coke studio",
         "sufi kalam punjabi",
         "sufi kalam without music"
       ],
-      "fetched_at": "2026-09-19T08:21:42.247394+00:00"
+      "fetched_at": "2026-09-20T08:53:33.940055+00:00"
     },
     "punjabi sad poetry": {
       "suggestions": [
@@ -848,7 +848,7 @@
         "punjabi sad shayari",
         "punjabi sad shayari status"
       ],
-      "fetched_at": "2026-09-19T08:21:42.286309+00:00"
+      "fetched_at": "2026-09-20T08:53:33.994982+00:00"
     },
     "status shayari": {
       "suggestions": [
@@ -863,7 +863,7 @@
         "status shayari love",
         "status shayari sad"
       ],
-      "fetched_at": "2026-09-19T08:21:42.316904+00:00"
+      "fetched_at": "2026-09-20T08:53:34.048544+00:00"
     },
     "breakup poetry": {
       "suggestions": [
@@ -878,7 +878,7 @@
         "breakup poetry status",
         "breakup poetry by abhash jha"
       ],
-      "fetched_at": "2026-09-19T08:21:42.353597+00:00"
+      "fetched_at": "2026-09-20T08:53:34.104743+00:00"
     },
     "one sided love poetry": {
       "suggestions": [
@@ -893,8 +893,8 @@
         "one sided love poetry in hindi",
         "one sided love poetry by nayab midha"
       ],
-      "fetched_at": "2026-09-19T08:21:42.379818+00:00"
+      "fetched_at": "2026-09-20T08:53:34.151389+00:00"
     }
   },
-  "last_updated": "2026-09-19T08:21:42.381526+00:00"
+  "last_updated": "2026-09-20T08:53:34.152751+00:00"
 }
