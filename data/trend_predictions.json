@@ -1,25 +1,410 @@
 {
   "predictions": [
     {
-      "topic": "sad background music piano",
+      "topic": "dard bhari shayari short video",
+      "score": 1.44,
+      "confidence": 0.48,
+      "source": "autosuggest",
+      "momentum": 1.8,
+      "seasonal": 1.3,
+      "performance": 1.0,
+      "predicted_for": "2026-11-05",
+      "month": 11
+    },
+    {
+      "topic": "dard bhari shayari likha hua",
+      "score": 1.44,
+      "confidence": 0.48,
+      "source": "autosuggest",
+      "momentum": 1.8,
+      "seasonal": 1.3,
+      "performance": 1.0,
+      "predicted_for": "2026-11-05",
+      "month": 11
+    },
+    {
+      "topic": "dard bhari shayari english",
+      "score": 1.44,
+      "confidence": 0.48,
+      "source": "autosuggest",
+      "momentum": 1.8,
+      "seasonal": 1.3,
+      "performance": 1.0,
+      "predicted_for": "2026-11-05",
+      "month": 11
+    },
+    {
+      "topic": "sad shayari background music short",
+      "score": 1.4,
+      "confidence": 0.467,
+      "source": "autosuggest",
+      "momentum": 1.8,
+      "seasonal": 1.2,
+      "performance": 1.0,
+      "predicted_for": "2026-11-05",
+      "month": 11
+    },
+    {
+      "topic": "sad shayari background music trending",
+      "score": 1.4,
+      "confidence": 0.467,
+      "source": "autosuggest",
+      "momentum": 1.8,
+      "seasonal": 1.2,
+      "performance": 1.0,
+      "predicted_for": "2026-11-05",
+      "month": 11
+    },
+    {
+      "topic": "sad shayari background music full song",
+      "score": 1.4,
+      "confidence": 0.467,
+      "source": "autosuggest",
+      "momentum": 1.8,
+      "seasonal": 1.2,
+      "performance": 1.0,
+      "predicted_for": "2026-11-05",
+      "month": 11
+    },
+    {
+      "topic": "sad shayari compilation",
+      "score": 1.4,
+      "confidence": 0.467,
+      "source": "autosuggest",
+      "momentum": 1.8,
+      "seasonal": 1.2,
+      "performance": 1.0,
+      "predicted_for": "2026-11-05",
+      "month": 11
+    },
+    {
+      "topic": "sad shayari jaun elia",
+      "score": 1.4,
+      "confidence": 0.467,
+      "source": "autosuggest",
+      "momentum": 1.8,
+      "seasonal": 1.2,
+      "performance": 1.0,
+      "predicted_for": "2026-11-05",
+      "month": 11
+    },
+    {
+      "topic": "ghalib shayari on life",
+      "score": 1.4,
+      "confidence": 0.467,
+      "source": "autosuggest",
+      "momentum": 1.8,
+      "seasonal": 1.2,
+      "performance": 1.0,
+      "predicted_for": "2026-11-05",
+      "month": 11
+    },
+    {
+      "topic": "ghalib shayari with meaning",
+      "score": 1.4,
+      "confidence": 0.467,
+      "source": "autosuggest",
+      "momentum": 1.8,
+      "seasonal": 1.2,
+      "performance": 1.0,
+      "predicted_for": "2026-11-05",
+      "month": 11
+    },
+    {
+      "topic": "ishq shayari punjabi",
+      "score": 1.4,
+      "confidence": 0.467,
+      "source": "autosuggest",
+      "momentum": 1.8,
+      "seasonal": 1.2,
+      "performance": 1.0,
+      "predicted_for": "2026-11-05",
+      "month": 11
+    },
+    {
+      "topic": "punjabi sad shayari short video",
+      "score": 1.4,
+      "confidence": 0.467,
+      "source": "autosuggest",
+      "momentum": 1.8,
+      "seasonal": 1.2,
+      "performance": 1.0,
+      "predicted_for": "2026-11-05",
+      "month": 11
+    },
+    {
+      "topic": "punjabi sad shayari lyrics status black background",
+      "score": 1.4,
+      "confidence": 0.467,
+      "source": "autosuggest",
+      "momentum": 1.8,
+      "seasonal": 1.2,
+      "performance": 1.0,
+      "predicted_for": "2026-11-05",
+      "month": 11
+    },
+    {
+      "topic": "status shayari dosti",
+      "score": 1.4,
+      "confidence": 0.467,
+      "source": "autosuggest",
+      "momentum": 1.8,
+      "seasonal": 1.2,
+      "performance": 1.0,
+      "predicted_for": "2026-11-05",
+      "month": 11
+    },
+    {
+      "topic": "poetry background music piano",
       "score": 1.32,
       "confidence": 0.44,
       "source": "autosuggest",
       "momentum": 1.8,
       "seasonal": 1.0,
       "performance": 1.0,
-      "predicted_for": "2026-11-04",
+      "predicted_for": "2026-11-05",
       "month": 11
     },
     {
-      "topic": "k",
+      "topic": "background music for poetry piano",
+      "score": 1.32,
+      "confidence": 0.44,
+      "source": "autosuggest",
+      "momentum": 1.8,
+      "seasonal": 1.0,
+      "performance": 1.0,
+      "predicted_for": "2026-11-05",
+      "month": 11
+    },
+    {
+      "topic": "urdu poetry on father",
+      "score": 1.32,
+      "confidence": 0.44,
+      "source": "autosuggest",
+      "momentum": 1.8,
+      "seasonal": 1.0,
+      "performance": 1.0,
+      "predicted_for": "2026-11-05",
+      "month": 11
+    },
+    {
+      "topic": "heart touching poetry of allama iqbal",
+      "score": 1.32,
+      "confidence": 0.44,
+      "source": "autosuggest",
+      "momentum": 1.8,
+      "seasonal": 1.0,
+      "performance": 1.0,
+      "predicted_for": "2026-11-05",
+      "month": 11
+    },
+    {
+      "topic": "heart touching poetry in english",
+      "score": 1.32,
+      "confidence": 0.44,
+      "source": "autosuggest",
+      "momentum": 1.8,
+      "seasonal": 1.0,
+      "performance": 1.0,
+      "predicted_for": "2026-11-05",
+      "month": 11
+    },
+    {
+      "topic": "heart touching poetry for teachers",
+      "score": 1.32,
+      "confidence": 0.44,
+      "source": "autosuggest",
+      "momentum": 1.8,
+      "seasonal": 1.0,
+      "performance": 1.0,
+      "predicted_for": "2026-11-05",
+      "month": 11
+    },
+    {
+      "topic": "heart touching poetry for best friend in urdu",
+      "score": 1.32,
+      "confidence": 0.44,
+      "source": "autosuggest",
+      "momentum": 1.8,
+      "seasonal": 1.0,
+      "performance": 1.0,
+      "predicted_for": "2026-11-05",
+      "month": 11
+    },
+    {
+      "topic": "dard bhari shayari song",
+      "score": 1.32,
+      "confidence": 0.44,
+      "source": "autosuggest",
+      "momentum": 1.5,
+      "seasonal": 1.3,
+      "performance": 1.0,
+      "predicted_for": "2026-11-05",
+      "month": 11
+    },
+    {
+      "topic": "dard bhari shayari urdu",
+      "score": 1.32,
+      "confidence": 0.44,
+      "source": "autosuggest",
+      "momentum": 1.5,
+      "seasonal": 1.3,
+      "performance": 1.0,
+      "predicted_for": "2026-11-05",
+      "month": 11
+    },
+    {
+      "topic": "motivational poetry in urdu status",
+      "score": 1.32,
+      "confidence": 0.44,
+      "source": "autosuggest",
+      "momentum": 1.8,
+      "seasonal": 1.0,
+      "performance": 1.0,
+      "predicted_for": "2026-11-05",
+      "month": 11
+    },
+    {
+      "topic": "breakup poetry for boy",
+      "score": 1.32,
+      "confidence": 0.44,
+      "source": "autosuggest",
+      "momentum": 1.8,
+      "seasonal": 1.0,
+      "performance": 1.0,
+      "predicted_for": "2026-11-05",
+      "month": 11
+    },
+    {
+      "topic": "breakup poetry short",
+      "score": 1.32,
+      "confidence": 0.44,
+      "source": "autosuggest",
+      "momentum": 1.8,
+      "seasonal": 1.0,
+      "performance": 1.0,
+      "predicted_for": "2026-11-05",
+      "month": 11
+    },
+    {
+      "topic": "one sided love poetry john elia",
+      "score": 1.32,
+      "confidence": 0.44,
+      "source": "autosuggest",
+      "momentum": 1.8,
+      "seasonal": 1.0,
+      "performance": 1.0,
+      "predicted_for": "2026-11-05",
+      "month": 11
+    },
+    {
+      "topic": "sad shayari background music song",
+      "score": 1.28,
+      "confidence": 0.427,
+      "source": "autosuggest",
+      "momentum": 1.5,
+      "seasonal": 1.2,
+      "performance": 1.0,
+      "predicted_for": "2026-11-05",
+      "month": 11
+    },
+    {
+      "topic": "sad shayari background music only",
+      "score": 1.28,
+      "confidence": 0.427,
+      "source": "autosuggest",
+      "momentum": 1.5,
+      "seasonal": 1.2,
+      "performance": 1.0,
+      "predicted_for": "2026-11-05",
+      "month": 11
+    },
+    {
+      "topic": "sad shayari background music new",
+      "score": 1.28,
+      "confidence": 0.427,
+      "source": "autosuggest",
+      "momentum": 1.5,
+      "seasonal": 1.2,
+      "performance": 1.0,
+      "predicted_for": "2026-11-05",
+      "month": 11
+    },
+    {
+      "topic": "ishq shayari boss",
+      "score": 1.28,
+      "confidence": 0.427,
+      "source": "autosuggest",
+      "momentum": 1.5,
+      "seasonal": 1.2,
+      "performance": 1.0,
+      "predicted_for": "2026-11-05",
+      "month": 11
+    },
+    {
+      "topic": "status shayari urdu",
+      "score": 1.28,
+      "confidence": 0.427,
+      "source": "autosuggest",
+      "momentum": 1.5,
+      "seasonal": 1.2,
+      "performance": 1.0,
+      "predicted_for": "2026-11-05",
+      "month": 11
+    },
+    {
+      "topic": "poetry background music love",
       "score": 1.2,
       "confidence": 0.4,
       "source": "autosuggest",
       "momentum": 1.5,
       "seasonal": 1.0,
       "performance": 1.0,
-      "predicted_for": "2026-11-04",
+      "predicted_for": "2026-11-05",
+      "month": 11
+    },
+    {
+      "topic": "background music for poetry urdu",
+      "score": 1.2,
+      "confidence": 0.4,
+      "source": "autosuggest",
+      "momentum": 1.5,
+      "seasonal": 1.0,
+      "performance": 1.0,
+      "predicted_for": "2026-11-05",
+      "month": 11
+    },
+    {
+      "topic": "bgm music poetry",
+      "score": 1.2,
+      "confidence": 0.4,
+      "source": "autosuggest",
+      "momentum": 1.5,
+      "seasonal": 1.0,
+      "performance": 1.0,
+      "predicted_for": "2026-11-05",
+      "month": 11
+    },
+    {
+      "topic": "no copyright music rap",
+      "score": 1.2,
+      "confidence": 0.4,
+      "source": "autosuggest",
+      "momentum": 1.5,
+      "seasonal": 1.0,
+      "performance": 1.0,
+      "predicted_for": "2026-11-05",
+      "month": 11
+    },
+    {
+      "topic": "2 line sad poetry",
+      "score": 1.2,
+      "confidence": 0.4,
+      "source": "autosuggest",
+      "momentum": 1.5,
+      "seasonal": 1.0,
+      "performance": 1.0,
+      "predicted_for": "2026-11-05",
       "month": 11
     },
     {
@@ -30,29 +415,7 @@
       "momentum": 1.2,
       "seasonal": 1.3,
       "performance": 1.0,
-      "predicted_for": "2026-11-04",
-      "month": 11
-    },
-    {
-      "topic": "dard bhari shayari hindi",
-      "score": 1.2,
-      "confidence": 0.4,
-      "source": "autosuggest",
-      "momentum": 1.2,
-      "seasonal": 1.3,
-      "performance": 1.0,
-      "predicted_for": "2026-11-04",
-      "month": 11
-    },
-    {
-      "topic": "dard bhari shayari ladki ke liye",
-      "score": 1.2,
-      "confidence": 0.4,
-      "source": "autosuggest",
-      "momentum": 1.2,
-      "seasonal": 1.3,
-      "performance": 1.0,
-      "predicted_for": "2026-11-04",
+      "predicted_for": "2026-11-05",
       "month": 11
     },
     {
@@ -63,29 +426,7 @@
       "momentum": 1.2,
       "seasonal": 1.3,
       "performance": 1.0,
-      "predicted_for": "2026-11-04",
-      "month": 11
-    },
-    {
-      "topic": "dard bhari shayari photo",
-      "score": 1.2,
-      "confidence": 0.4,
-      "source": "autosuggest",
-      "momentum": 1.2,
-      "seasonal": 1.3,
-      "performance": 1.0,
-      "predicted_for": "2026-11-04",
-      "month": 11
-    },
-    {
-      "topic": "dard bhari shayari ringtone",
-      "score": 1.2,
-      "confidence": 0.4,
-      "source": "autosuggest",
-      "momentum": 1.2,
-      "seasonal": 1.3,
-      "performance": 1.0,
-      "predicted_for": "2026-11-04",
+      "predicted_for": "2026-11-05",
       "month": 11
     },
     {
@@ -96,18 +437,40 @@
       "momentum": 1.2,
       "seasonal": 1.3,
       "performance": 1.0,
-      "predicted_for": "2026-11-04",
+      "predicted_for": "2026-11-05",
       "month": 11
     },
     {
-      "topic": "dard bhari shayari full video",
+      "topic": "rain poetry sad",
       "score": 1.2,
       "confidence": 0.4,
       "source": "autosuggest",
-      "momentum": 1.2,
-      "seasonal": 1.3,
+      "momentum": 1.5,
+      "seasonal": 1.0,
       "performance": 1.0,
-      "predicted_for": "2026-11-04",
+      "predicted_for": "2026-11-05",
+      "month": 11
+    },
+    {
+      "topic": "sufi kalam urdu",
+      "score": 1.2,
+      "confidence": 0.4,
+      "source": "autosuggest",
+      "momentum": 1.5,
+      "seasonal": 1.0,
+      "performance": 1.0,
+      "predicted_for": "2026-11-05",
+      "month": 11
+    },
+    {
+      "topic": "one sided love poetry girl",
+      "score": 1.2,
+      "confidence": 0.4,
+      "source": "autosuggest",
+      "momentum": 1.5,
+      "seasonal": 1.0,
+      "performance": 1.0,
+      "predicted_for": "2026-11-05",
       "month": 11
     },
     {
@@ -118,7 +481,7 @@
       "momentum": 1.0,
       "seasonal": 1.5,
       "performance": 1.0,
-      "predicted_for": "2026-11-04",
+      "predicted_for": "2026-11-05",
       "month": 11
     },
     {
@@ -129,18 +492,7 @@
       "momentum": 1.2,
       "seasonal": 1.2,
       "performance": 1.0,
-      "predicted_for": "2026-11-04",
-      "month": 11
-    },
-    {
-      "topic": "sad shayari background music black screen",
-      "score": 1.16,
-      "confidence": 0.387,
-      "source": "autosuggest",
-      "momentum": 1.2,
-      "seasonal": 1.2,
-      "performance": 1.0,
-      "predicted_for": "2026-11-04",
+      "predicted_for": "2026-11-05",
       "month": 11
     },
     {
@@ -151,7 +503,7 @@
       "momentum": 1.2,
       "seasonal": 1.2,
       "performance": 1.0,
-      "predicted_for": "2026-11-04",
+      "predicted_for": "2026-11-05",
       "month": 11
     },
     {
@@ -162,51 +514,7 @@
       "momentum": 1.2,
       "seasonal": 1.2,
       "performance": 1.0,
-      "predicted_for": "2026-11-04",
-      "month": 11
-    },
-    {
-      "topic": "sad shayari background music breakup music",
-      "score": 1.16,
-      "confidence": 0.387,
-      "source": "autosuggest",
-      "momentum": 1.2,
-      "seasonal": 1.2,
-      "performance": 1.0,
-      "predicted_for": "2026-11-04",
-      "month": 11
-    },
-    {
-      "topic": "sad shayari background music copyright free",
-      "score": 1.16,
-      "confidence": 0.387,
-      "source": "autosuggest",
-      "momentum": 1.2,
-      "seasonal": 1.2,
-      "performance": 1.0,
-      "predicted_for": "2026-11-04",
-      "month": 11
-    },
-    {
-      "topic": "sad shayari background music 30 seconds",
-      "score": 1.16,
-      "confidence": 0.387,
-      "source": "autosuggest",
-      "momentum": 1.2,
-      "seasonal": 1.2,
-      "performance": 1.0,
-      "predicted_for": "2026-11-04",
-      "month": 11
-    },
-    {
-      "topic": "sad shayari background music instagram",
-      "score": 1.16,
-      "confidence": 0.387,
-      "source": "autosuggest",
-      "momentum": 1.2,
-      "seasonal": 1.2,
-      "performance": 1.0,
-      "predicted_for": "2026-11-04",
+      "predicted_for": "2026-11-05",
       "month": 11
     },
     {
@@ -217,7 +525,7 @@
       "momentum": 1.2,
       "seasonal": 1.2,
       "performance": 1.0,
-      "predicted_for": "2026-11-04",
+      "predicted_for": "2026-11-05",
       "month": 11
     },
     {
@@ -228,7 +536,7 @@
       "momentum": 1.2,
       "seasonal": 1.2,
       "performance": 1.0,
-      "predicted_for": "2026-11-04",
+      "predicted_for": "2026-11-05",
       "month": 11
     },
     {
@@ -239,315 +547,7 @@
       "momentum": 1.2,
       "seasonal": 1.2,
       "performance": 1.0,
-      "predicted_for": "2026-11-04",
-      "month": 11
-    },
-    {
-      "topic": "sad shayari video",
-      "score": 1.16,
-      "confidence": 0.387,
-      "source": "autosuggest",
-      "momentum": 1.2,
-      "seasonal": 1.2,
-      "performance": 1.0,
-      "predicted_for": "2026-11-04",
-      "month": 11
-    },
-    {
-      "topic": "sad shayari hindi",
-      "score": 1.16,
-      "confidence": 0.387,
-      "source": "autosuggest",
-      "momentum": 1.2,
-      "seasonal": 1.2,
-      "performance": 1.0,
-      "predicted_for": "2026-11-04",
-      "month": 11
-    },
-    {
-      "topic": "sad shayari punjabi",
-      "score": 1.16,
-      "confidence": 0.387,
-      "source": "autosuggest",
-      "momentum": 1.2,
-      "seasonal": 1.2,
-      "performance": 1.0,
-      "predicted_for": "2026-11-04",
-      "month": 11
-    },
-    {
-      "topic": "2 line shayari sad poetry urdu poetry #shorts",
-      "score": 1.16,
-      "confidence": 0.387,
-      "source": "autosuggest",
-      "momentum": 1.2,
-      "seasonal": 1.2,
-      "performance": 1.0,
-      "predicted_for": "2026-11-04",
-      "month": 11
-    },
-    {
-      "topic": "ghalib shayari with explanation",
-      "score": 1.16,
-      "confidence": 0.387,
-      "source": "autosuggest",
-      "momentum": 1.2,
-      "seasonal": 1.2,
-      "performance": 1.0,
-      "predicted_for": "2026-11-04",
-      "month": 11
-    },
-    {
-      "topic": "ghalib shayari in hindi",
-      "score": 1.16,
-      "confidence": 0.387,
-      "source": "autosuggest",
-      "momentum": 1.2,
-      "seasonal": 1.2,
-      "performance": 1.0,
-      "predicted_for": "2026-11-04",
-      "month": 11
-    },
-    {
-      "topic": "ghalib shayari on sharab",
-      "score": 1.16,
-      "confidence": 0.387,
-      "source": "autosuggest",
-      "momentum": 1.2,
-      "seasonal": 1.2,
-      "performance": 1.0,
-      "predicted_for": "2026-11-04",
-      "month": 11
-    },
-    {
-      "topic": "ghalib shayari collection",
-      "score": 1.16,
-      "confidence": 0.387,
-      "source": "autosuggest",
-      "momentum": 1.2,
-      "seasonal": 1.2,
-      "performance": 1.0,
-      "predicted_for": "2026-11-04",
-      "month": 11
-    },
-    {
-      "topic": "ghalib shayari in english",
-      "score": 1.16,
-      "confidence": 0.387,
-      "source": "autosuggest",
-      "momentum": 1.2,
-      "seasonal": 1.2,
-      "performance": 1.0,
-      "predicted_for": "2026-11-04",
-      "month": 11
-    },
-    {
-      "topic": "ghalib shayari status",
-      "score": 1.16,
-      "confidence": 0.387,
-      "source": "autosuggest",
-      "momentum": 1.2,
-      "seasonal": 1.2,
-      "performance": 1.0,
-      "predicted_for": "2026-11-04",
-      "month": 11
-    },
-    {
-      "topic": "ghalib shayari naseeruddin shah",
-      "score": 1.16,
-      "confidence": 0.387,
-      "source": "autosuggest",
-      "momentum": 1.2,
-      "seasonal": 1.2,
-      "performance": 1.0,
-      "predicted_for": "2026-11-04",
-      "month": 11
-    },
-    {
-      "topic": "ishq shayari pakistani",
-      "score": 1.16,
-      "confidence": 0.387,
-      "source": "autosuggest",
-      "momentum": 1.2,
-      "seasonal": 1.2,
-      "performance": 1.0,
-      "predicted_for": "2026-11-04",
-      "month": 11
-    },
-    {
-      "topic": "ishq shayari allama iqbal",
-      "score": 1.16,
-      "confidence": 0.387,
-      "source": "autosuggest",
-      "momentum": 1.2,
-      "seasonal": 1.2,
-      "performance": 1.0,
-      "predicted_for": "2026-11-04",
-      "month": 11
-    },
-    {
-      "topic": "ishq shayari status",
-      "score": 1.16,
-      "confidence": 0.387,
-      "source": "autosuggest",
-      "momentum": 1.2,
-      "seasonal": 1.2,
-      "performance": 1.0,
-      "predicted_for": "2026-11-04",
-      "month": 11
-    },
-    {
-      "topic": "ishq shayari hindi",
-      "score": 1.16,
-      "confidence": 0.387,
-      "source": "autosuggest",
-      "momentum": 1.2,
-      "seasonal": 1.2,
-      "performance": 1.0,
-      "predicted_for": "2026-11-04",
-      "month": 11
-    },
-    {
-      "topic": "ishq shayari amir ameer",
-      "score": 1.16,
-      "confidence": 0.387,
-      "source": "autosuggest",
-      "momentum": 1.2,
-      "seasonal": 1.2,
-      "performance": 1.0,
-      "predicted_for": "2026-11-04",
-      "month": 11
-    },
-    {
-      "topic": "motivational shayari urdu mein",
-      "score": 1.16,
-      "confidence": 0.387,
-      "source": "autosuggest",
-      "momentum": 1.2,
-      "seasonal": 1.2,
-      "performance": 1.0,
-      "predicted_for": "2026-11-04",
-      "month": 11
-    },
-    {
-      "topic": "motivational urdu shayari allama iqbal",
-      "score": 1.16,
-      "confidence": 0.387,
-      "source": "autosuggest",
-      "momentum": 1.2,
-      "seasonal": 1.2,
-      "performance": 1.0,
-      "predicted_for": "2026-11-04",
-      "month": 11
-    },
-    {
-      "topic": "punjabi sad shayari status",
-      "score": 1.16,
-      "confidence": 0.387,
-      "source": "autosuggest",
-      "momentum": 1.2,
-      "seasonal": 1.2,
-      "performance": 1.0,
-      "predicted_for": "2026-11-04",
-      "month": 11
-    },
-    {
-      "topic": "status shayari video",
-      "score": 1.16,
-      "confidence": 0.387,
-      "source": "autosuggest",
-      "momentum": 1.2,
-      "seasonal": 1.2,
-      "performance": 1.0,
-      "predicted_for": "2026-11-04",
-      "month": 11
-    },
-    {
-      "topic": "status shayari hindi",
-      "score": 1.16,
-      "confidence": 0.387,
-      "source": "autosuggest",
-      "momentum": 1.2,
-      "seasonal": 1.2,
-      "performance": 1.0,
-      "predicted_for": "2026-11-04",
-      "month": 11
-    },
-    {
-      "topic": "status shayari kaise banaen",
-      "score": 1.16,
-      "confidence": 0.387,
-      "source": "autosuggest",
-      "momentum": 1.2,
-      "seasonal": 1.2,
-      "performance": 1.0,
-      "predicted_for": "2026-11-04",
-      "month": 11
-    },
-    {
-      "topic": "status shayari attitude",
-      "score": 1.16,
-      "confidence": 0.387,
-      "source": "autosuggest",
-      "momentum": 1.2,
-      "seasonal": 1.2,
-      "performance": 1.0,
-      "predicted_for": "2026-11-04",
-      "month": 11
-    },
-    {
-      "topic": "dard bhari shayari",
-      "score": 1.12,
-      "confidence": 0.373,
-      "source": "autosuggest",
-      "momentum": 1.0,
-      "seasonal": 1.3,
-      "performance": 1.0,
-      "predicted_for": "2026-11-04",
-      "month": 11
-    },
-    {
-      "topic": "sardi aur dard",
-      "score": 1.12,
-      "confidence": 0.373,
-      "source": "seasonal",
-      "momentum": 1.0,
-      "seasonal": 1.3,
-      "performance": 1.0,
-      "predicted_for": "2026-11-04",
-      "month": 11
-    },
-    {
-      "topic": "poetry background music",
-      "score": 1.08,
-      "confidence": 0.36,
-      "source": "autosuggest",
-      "momentum": 1.2,
-      "seasonal": 1.0,
-      "performance": 1.0,
-      "predicted_for": "2026-11-04",
-      "month": 11
-    },
-    {
-      "topic": "poetry background music no copyright",
-      "score": 1.08,
-      "confidence": 0.36,
-      "source": "autosuggest",
-      "momentum": 1.2,
-      "seasonal": 1.0,
-      "performance": 1.0,
-      "predicted_for": "2026-11-04",
-      "month": 11
-    },
-    {
-      "topic": "poetry background music guitar",
-      "score": 1.08,
-      "confidence": 0.36,
-      "source": "autosuggest",
-      "momentum": 1.2,
-      "seasonal": 1.0,
-      "performance": 1.0,
-      "predicted_for": "2026-11-04",
+      "predicted_for": "2026-11-05",
       "month": 11
     }
   ],
@@ -557,30 +557,30 @@
         "poetry background music",
         "poetry background music",
         "poetry background music no copyright",
-        "poetry background music guitar",
         "poetry background music instrumental",
-        "poetry background music hindi",
-        "poetry background music flute no copyright",
-        "poetry background music tiktok",
         "poetry background music sad",
-        "poetry background music piano"
+        "poetry background music piano",
+        "poetry background music tiktok",
+        "poetry background music guitar",
+        "poetry background music flute no copyright",
+        "poetry background music love"
       ],
-      "fetched_at": "2026-11-04T11:42:30.244072+00:00"
+      "fetched_at": "2026-11-05T11:42:06.320977+00:00"
     },
     "sad shayari background music": {
       "suggestions": [
         "sad shayari background music",
         "sad shayari background music",
-        "sad shayari background music black screen",
         "sad shayari background music no copyright",
         "sad shayari background music hindi",
-        "sad shayari background music breakup music",
-        "sad shayari background music urdu",
-        "sad shayari background music copyright free",
-        "sad shayari background music 30 seconds",
-        "sad shayari background music instagram"
+        "sad shayari background music song",
+        "sad shayari background music only",
+        "sad shayari background music short",
+        "sad shayari background music new",
+        "sad shayari background music trending",
+        "sad shayari background music full song"
       ],
-      "fetched_at": "2026-11-04T11:42:30.282761+00:00"
+      "fetched_at": "2026-11-05T11:42:06.396499+00:00"
     },
     "background music for poetry": {
       "suggestions": [
@@ -588,14 +588,14 @@
         "background music for poetry",
         "background music for poetry reading",
         "background music for poetry no copyright",
-        "background music for poetry hindi",
         "background music for poetry recitation",
+        "background music for poetry hindi",
+        "background music for poetry urdu",
+        "background music for poetry piano",
         "background music for poetry copyright free",
-        "background music for poetry nepali",
-        "background music for poetry sad",
-        "background music for poetry love"
+        "background music for poetry nepali"
       ],
-      "fetched_at": "2026-11-04T11:42:30.317213+00:00"
+      "fetched_at": "2026-11-05T11:42:06.470063+00:00"
     },
     "background music poetry": {
       "suggestions": [
@@ -604,43 +604,43 @@
         "background music poetry sad",
         "background music poetry love",
         "background music poetry attitude",
-        "background music poetry no copyright",
         "background music poetry urdu",
+        "background music poetry no copyright",
         "instrumental music poetry",
-        "background music spoken poetry",
-        "background music for poetry nepali"
+        "bgm music poetry",
+        "background music spoken poetry"
       ],
-      "fetched_at": "2026-11-04T11:42:30.362535+00:00"
+      "fetched_at": "2026-11-05T11:42:06.562296+00:00"
     },
     "poetry bg music": {
       "suggestions": [
         "poetry bg music",
         "poetry bg music",
         "poetry bg music no copyright",
-        "poetry background music",
         "poetry background music sad",
         "poetry background music nepali",
         "poetry background music hindi",
         "poetry background music ringtone",
         "poetry background music guitar",
-        "poem bg music"
+        "poem bg music",
+        "poetry background music piano"
       ],
-      "fetched_at": "2026-11-04T11:42:30.407007+00:00"
+      "fetched_at": "2026-11-05T11:42:06.648771+00:00"
     },
     "sad background music": {
       "suggestions": [
         "sad background music",
         "sad background music",
         "sad background music instrumental",
-        "sad background music tiktok",
         "sad background music meme",
         "sad background music no lyrics",
-        "sad background music violin",
-        "sad background music for poetry",
+        "sad background music tiktok",
         "sad background music for videos",
-        "sad background music piano"
+        "sad background music piano",
+        "sad background music for poetry",
+        "sad background music violin"
       ],
-      "fetched_at": "2026-11-04T11:42:30.446846+00:00"
+      "fetched_at": "2026-11-05T11:42:06.733761+00:00"
     },
     "copyright free background music": {
       "suggestions": [
@@ -655,22 +655,22 @@
         "copyright free background music for gaming",
         "copyright free background music for vlogs"
       ],
-      "fetched_at": "2026-11-04T11:42:30.484837+00:00"
+      "fetched_at": "2026-11-05T11:42:06.811903+00:00"
     },
     "no copyright music": {
       "suggestions": [
         "no copyright music",
         "no copyright music",
-        "no copyright music vlog",
         "no copyright music background",
+        "no copyright music vlog",
         "no copyright music instrumental",
         "no copyright music lofi",
         "no copyright music hip hop",
-        "no copyright music gaming",
         "no copyright music chill",
-        "no copyright music rock"
+        "no copyright music gaming",
+        "no copyright music rap"
       ],
-      "fetched_at": "2026-11-04T11:42:30.524716+00:00"
+      "fetched_at": "2026-11-05T11:42:06.894894+00:00"
     },
     "urdu poetry": {
       "suggestions": [
@@ -679,13 +679,13 @@
         "urdu poetry shayari",
         "urdu poetry background music",
         "urdu poetry english translation",
-        "urdu poetry status",
         "urdu poetry love",
         "urdu poetry with music",
-        "urdu poetry with english subtitles",
-        "urdu poetry sad"
+        "urdu poetry on father",
+        "urdu poetry status",
+        "urdu poetry with english subtitles"
       ],
-      "fetched_at": "2026-11-04T11:42:30.561818+00:00"
+      "fetched_at": "2026-11-05T11:42:06.970391+00:00"
     },
     "sad shayari": {
       "suggestions": [
@@ -696,26 +696,26 @@
         "sad shayari status",
         "sad shayari video",
         "sad shayari song",
-        "sad shayari hindi",
         "sad shayari urdu",
-        "sad shayari punjabi"
+        "sad shayari compilation",
+        "sad shayari jaun elia"
       ],
-      "fetched_at": "2026-11-04T11:42:30.599045+00:00"
+      "fetched_at": "2026-11-05T11:42:07.045390+00:00"
     },
     "heart touching poetry": {
       "suggestions": [
         "heart touching poetry",
         "heart touching poetry",
-        "heart touching poetry in urdu",
-        "heart touching poetry for best friend",
-        "heart touching poetry of lights and happiness by ankit gupta",
-        "heart touching poetry of mirza ghalib",
-        "heart touching poetry girl",
         "heart touching poetry status",
+        "heart touching poetry of allama iqbal",
+        "heart touching poetry for best friend",
+        "heart touching poetry for love",
         "heart touching poetry in hindi",
-        "heart touching poetry for love"
+        "heart touching poetry in english",
+        "heart touching poetry for teachers",
+        "heart touching poetry for best friend in urdu"
       ],
-      "fetched_at": "2026-11-04T11:42:30.636683+00:00"
+      "fetched_at": "2026-11-05T11:42:07.126946+00:00"
     },
     "2 line poetry urdu": {
       "suggestions": [
@@ -728,9 +728,9 @@
         "2 line shayari sad poetry urdu poetry #shorts",
         "mohabbat romantic urdu 2 line poetry",
         "2 line poetry",
-        "k"
+        "2 line sad poetry"
       ],
-      "fetched_at": "2026-11-04T11:42:30.724143+00:00"
+      "fetched_at": "2026-11-05T11:42:07.234368+00:00"
     },
     "ghalib shayari": {
       "suggestions": [
@@ -739,58 +739,58 @@
         "ghalib shayari with explanation",
         "ghalib shayari in hindi",
         "ghalib shayari on sharab",
+        "ghalib shayari in english",
         "ghalib shayari collection",
         "ghalib shayari song",
-        "ghalib shayari in english",
-        "ghalib shayari status",
-        "ghalib shayari naseeruddin shah"
+        "ghalib shayari on life",
+        "ghalib shayari with meaning"
       ],
-      "fetched_at": "2026-11-04T11:42:30.761058+00:00"
+      "fetched_at": "2026-11-05T11:42:07.304684+00:00"
     },
     "ishq shayari": {
       "suggestions": [
         "ishq shayari",
         "ishq shayari",
         "ishq shayari urdu",
-        "ishq shayari pakistani",
+        "ishq shayari punjabi",
+        "ishq shayari hindi",
         "ishq shayari allama iqbal",
         "ishq shayari status",
-        "ishq shayari hindi",
-        "ishq shayari amir ameer",
         "ishq shayari song",
+        "ishq shayari boss",
         "ishq shayari uid"
       ],
-      "fetched_at": "2026-11-04T11:42:30.800558+00:00"
+      "fetched_at": "2026-11-05T11:42:07.385435+00:00"
     },
     "dard bhari shayari": {
       "suggestions": [
         "dard bhari shayari",
         "dard bhari shayari",
+        "dard bhari shayari song",
         "dard bhari shayari hindi mein",
-        "dard bhari shayari hindi",
-        "dard bhari shayari ladki ke liye",
+        "dard bhari shayari short video",
         "dard bhari shayari status",
-        "dard bhari shayari photo",
-        "dard bhari shayari ringtone",
+        "dard bhari shayari likha hua",
         "dard bhari shayari image",
-        "dard bhari shayari full video"
+        "dard bhari shayari urdu",
+        "dard bhari shayari english"
       ],
-      "fetched_at": "2026-11-04T11:42:30.836712+00:00"
+      "fetched_at": "2026-11-05T11:42:07.472037+00:00"
     },
     "rain poetry": {
       "suggestions": [
         "rain poetry",
         "rain poetry",
-        "rain poetry in urdu",
         "rain poetry in english",
-        "rain poetry whatsapp status",
+        "rain poetry in urdu",
         "rain poetry status",
         "rain poetry in tamil",
+        "rain poetry whatsapp status",
+        "rain poetry sad",
         "rain spoken poetry",
-        "rain weather poetry",
-        "rain in summer poetry"
+        "rain weather poetry"
       ],
-      "fetched_at": "2026-11-04T11:42:30.925616+00:00"
+      "fetched_at": "2026-11-05T11:42:07.562909+00:00"
     },
     "night poetry urdu": {
       "suggestions": [
@@ -799,10 +799,9 @@
         "good night poetry in urdu",
         "sad night poetry in urdu",
         "night poetry",
-        "night poetry status",
         "k"
       ],
-      "fetched_at": "2026-11-04T11:42:30.992912+00:00"
+      "fetched_at": "2026-11-05T11:42:07.660598+00:00"
     },
     "motivational poetry urdu": {
       "suggestions": [
@@ -813,11 +812,11 @@
         "motivational shayari urdu mein",
         "motivational poetry in urdu for success",
         "motivational poetry in urdu by allama iqbal",
+        "motivational poetry in urdu status",
         "motivational urdu shayari allama iqbal",
-        "inspirational urdu poetry",
-        "motivational poems in urdu"
+        "inspirational urdu poetry"
       ],
-      "fetched_at": "2026-11-04T11:42:31.038403+00:00"
+      "fetched_at": "2026-11-05T11:42:07.740068+00:00"
     },
     "sufi kalam": {
       "suggestions": [
@@ -825,75 +824,75 @@
         "sufi kalam",
         "sufi kalam qawwali",
         "sufi kalam bulleh shah",
+        "sufi kalam song",
         "sufi kalam abida parveen",
         "sufi kalam nusrat fateh ali khan",
         "sufi kalam coke studio",
-        "sufi kalam punjabi",
-        "sufi kalam song",
+        "sufi kalam urdu",
         "sufi kalam without music"
       ],
-      "fetched_at": "2026-11-04T11:42:31.076104+00:00"
+      "fetched_at": "2026-11-05T11:42:07.808887+00:00"
     },
     "punjabi sad poetry": {
       "suggestions": [
         "punjabi sad poetry",
         "punjabi sad poetry",
-        "punjabi sad poetry whatsapp status",
-        "punjabi sad poetry status",
         "punjabi sad poetry love",
+        "punjabi sad poetry status",
         "punjabi sad poetry background music",
-        "punjabi sad poetry urdu sad poetry",
         "sad punjabi poetry heart touching",
         "punjabi sad shayari",
-        "punjabi sad shayari status"
+        "punjabi sad shayari status",
+        "punjabi sad shayari short video",
+        "punjabi sad shayari lyrics status black background"
       ],
-      "fetched_at": "2026-11-04T11:42:31.121099+00:00"
+      "fetched_at": "2026-11-05T11:42:07.895698+00:00"
     },
     "status shayari": {
       "suggestions": [
         "status shayari",
         "status shayari",
         "status shayari video",
-        "status shayari hindi",
-        "status shayari kaise banaen",
+        "status shayari urdu",
+        "status shayari dosti",
         "status shayari wala",
         "status shayari attitude",
         "status shayari wale",
-        "status shayari love",
-        "status shayari sad"
+        "status shayari sad",
+        "status shayari love"
       ],
-      "fetched_at": "2026-11-04T11:42:31.160216+00:00"
+      "fetched_at": "2026-11-05T11:42:07.972769+00:00"
     },
     "breakup poetry": {
       "suggestions": [
         "breakup poetry",
         "breakup poetry",
         "breakup poetry hot tub time machine",
-        "breakup poetry for girl",
+        "breakup poetry for boy",
         "breakup poetry hindi",
         "breakup poetry nepali",
-        "breakup poetry english",
         "breakup poetry in urdu",
         "breakup poetry status",
-        "breakup poetry by abhash jha"
+        "breakup poetry for girl",
+        "breakup poetry short"
       ],
-      "fetched_at": "2026-11-04T11:42:31.208059+00:00"
+      "fetched_at": "2026-11-05T11:42:08.060116+00:00"
     },
     "one sided love poetry": {
       "suggestions": [
         "one sided love poetry",
         "one sided love poetry",
-        "one sided love poetry english",
         "one sided love poetry urdu",
-        "one sided love poetry female version",
+        "one sided love poetry english",
         "one sided love poetry jaun elia",
-        "one sided love poetry abhash jha",
-        "one sided love poetry status",
+        "one sided love poetry female version",
         "one sided love poetry in hindi",
+        "one sided love poetry girl",
+        "one sided love poetry john elia",
         "one sided love poetry by nayab midha"
       ],
-      "fetched_at": "2026-11-04T11:42:31.243836+00:00"
+      "fetched_at": "2026-11-05T11:42:08.127570+00:00"
     }
   },
-  "last_updated": "2026-11-04T11:42:31.246081+00:00"
+  "last_updated": "2026-11-05T11:42:08.128866+00:00"
 }
