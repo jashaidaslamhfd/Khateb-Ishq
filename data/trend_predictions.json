@@ -1,11 +1,11 @@
 {
   "predictions": [
     {
-      "topic": "one sided love poetry in hindi",
-      "score": 1.32,
-      "confidence": 0.44,
+      "topic": "k",
+      "score": 1.2,
+      "confidence": 0.4,
       "source": "autosuggest",
-      "momentum": 1.8,
+      "momentum": 1.5,
       "seasonal": 1.0,
       "performance": 1.0,
       "predicted_for": "2026-11-09",
@@ -565,7 +565,7 @@
         "poetry background music flute no copyright",
         "poetry background music love"
       ],
-      "fetched_at": "2026-11-09T12:17:23.482262+00:00"
+      "fetched_at": "2026-11-09T14:35:51.400699+00:00"
     },
     "sad shayari background music": {
       "suggestions": [
@@ -580,7 +580,7 @@
         "sad shayari background music trending",
         "sad shayari background music full song"
       ],
-      "fetched_at": "2026-11-09T12:17:23.528518+00:00"
+      "fetched_at": "2026-11-09T14:35:51.453123+00:00"
     },
     "background music for poetry": {
       "suggestions": [
@@ -595,7 +595,7 @@
         "background music for poetry copyright free",
         "background music for poetry nepali"
       ],
-      "fetched_at": "2026-11-09T12:17:23.586640+00:00"
+      "fetched_at": "2026-11-09T14:35:51.514468+00:00"
     },
     "background music poetry": {
       "suggestions": [
@@ -610,7 +610,7 @@
         "bgm music poetry",
         "background music spoken poetry"
       ],
-      "fetched_at": "2026-11-09T12:17:23.641295+00:00"
+      "fetched_at": "2026-11-09T14:35:51.576456+00:00"
     },
     "poetry bg music": {
       "suggestions": [
@@ -625,7 +625,7 @@
         "poem bg music",
         "poetry background music piano"
       ],
-      "fetched_at": "2026-11-09T12:17:23.690859+00:00"
+      "fetched_at": "2026-11-09T14:35:51.631758+00:00"
     },
     "sad background music": {
       "suggestions": [
@@ -640,7 +640,7 @@
         "sad background music violin",
         "sad background music for poetry"
       ],
-      "fetched_at": "2026-11-09T12:17:23.737593+00:00"
+      "fetched_at": "2026-11-09T14:35:51.683122+00:00"
     },
     "copyright free background music": {
       "suggestions": [
@@ -655,7 +655,7 @@
         "copyright free background music for gaming",
         "copyright free background music for vlogs"
       ],
-      "fetched_at": "2026-11-09T12:17:23.783780+00:00"
+      "fetched_at": "2026-11-09T14:35:51.732957+00:00"
     },
     "no copyright music": {
       "suggestions": [
@@ -670,7 +670,7 @@
         "no copyright music gaming",
         "no copyright music rap"
       ],
-      "fetched_at": "2026-11-09T12:17:23.831918+00:00"
+      "fetched_at": "2026-11-09T14:35:51.784918+00:00"
     },
     "urdu poetry": {
       "suggestions": [
@@ -685,7 +685,7 @@
         "urdu poetry status",
         "urdu poetry with english subtitles"
       ],
-      "fetched_at": "2026-11-09T12:17:23.883911+00:00"
+      "fetched_at": "2026-11-09T14:35:51.842213+00:00"
     },
     "sad shayari": {
       "suggestions": [
@@ -700,7 +700,7 @@
         "sad shayari urdu",
         "sad shayari jaun elia"
       ],
-      "fetched_at": "2026-11-09T12:17:23.928110+00:00"
+      "fetched_at": "2026-11-09T14:35:51.895483+00:00"
     },
     "heart touching poetry": {
       "suggestions": [
@@ -715,7 +715,7 @@
         "heart touching poetry for teachers",
         "heart touching poetry for best friend in urdu"
       ],
-      "fetched_at": "2026-11-09T12:17:23.973129+00:00"
+      "fetched_at": "2026-11-09T14:35:51.948074+00:00"
     },
     "2 line poetry urdu": {
       "suggestions": [
@@ -728,9 +728,9 @@
         "2 line shayari sad poetry urdu poetry #shorts",
         "mohabbat romantic urdu 2 line poetry",
         "2 line poetry",
-        "2 line sad poetry"
+        "k"
       ],
-      "fetched_at": "2026-11-09T12:17:24.074800+00:00"
+      "fetched_at": "2026-11-09T14:35:52.036110+00:00"
     },
     "ghalib shayari": {
       "suggestions": [
@@ -745,7 +745,7 @@
         "ghalib shayari on life",
         "ghalib shayari with meaning"
       ],
-      "fetched_at": "2026-11-09T12:17:24.116594+00:00"
+      "fetched_at": "2026-11-09T14:35:52.088287+00:00"
     },
     "ishq shayari": {
       "suggestions": [
@@ -760,7 +760,7 @@
         "ishq shayari boss",
         "ishq shayari uid"
       ],
-      "fetched_at": "2026-11-09T12:17:24.159396+00:00"
+      "fetched_at": "2026-11-09T14:35:52.144721+00:00"
     },
     "dard bhari shayari": {
       "suggestions": [
@@ -775,7 +775,7 @@
         "dard bhari shayari urdu",
         "dard bhari shayari english"
       ],
-      "fetched_at": "2026-11-09T12:17:24.198959+00:00"
+      "fetched_at": "2026-11-09T14:35:52.199288+00:00"
     },
     "rain poetry": {
       "suggestions": [
@@ -790,7 +790,7 @@
         "rain spoken poetry",
         "rain weather poetry"
       ],
-      "fetched_at": "2026-11-09T12:17:24.252385+00:00"
+      "fetched_at": "2026-11-09T14:35:52.261070+00:00"
     },
     "night poetry urdu": {
       "suggestions": [
@@ -801,7 +801,7 @@
         "night poetry",
         "k"
       ],
-      "fetched_at": "2026-11-09T12:17:24.347839+00:00"
+      "fetched_at": "2026-11-09T14:35:52.379238+00:00"
     },
     "motivational poetry urdu": {
       "suggestions": [
@@ -816,7 +816,7 @@
         "motivational urdu shayari allama iqbal",
         "inspirational urdu poetry"
       ],
-      "fetched_at": "2026-11-09T12:17:24.409665+00:00"
+      "fetched_at": "2026-11-09T14:35:52.438194+00:00"
     },
     "sufi kalam": {
       "suggestions": [
@@ -831,7 +831,7 @@
         "sufi kalam nusrat fateh ali khan",
         "sufi kalam urdu"
       ],
-      "fetched_at": "2026-11-09T12:17:24.453048+00:00"
+      "fetched_at": "2026-11-09T14:35:52.493158+00:00"
     },
     "punjabi sad poetry": {
       "suggestions": [
@@ -846,7 +846,7 @@
         "punjabi sad shayari short video",
         "punjabi sad shayari lyrics status black background"
       ],
-      "fetched_at": "2026-11-09T12:17:24.508240+00:00"
+      "fetched_at": "2026-11-09T14:35:52.556317+00:00"
     },
     "status shayari": {
       "suggestions": [
@@ -861,7 +861,7 @@
         "status shayari sad",
         "status shayari love"
       ],
-      "fetched_at": "2026-11-09T12:17:24.567322+00:00"
+      "fetched_at": "2026-11-09T14:35:52.610632+00:00"
     },
     "breakup poetry": {
       "suggestions": [
@@ -876,7 +876,7 @@
         "breakup poetry for girl",
         "breakup poetry short"
       ],
-      "fetched_at": "2026-11-09T12:17:24.615728+00:00"
+      "fetched_at": "2026-11-09T14:35:52.671208+00:00"
     },
     "one sided love poetry": {
       "suggestions": [
@@ -891,8 +891,8 @@
         "one sided love poetry john elia",
         "one sided love poetry by nayab midha"
       ],
-      "fetched_at": "2026-11-09T12:17:24.659699+00:00"
+      "fetched_at": "2026-11-09T14:35:52.722565+00:00"
     }
   },
-  "last_updated": "2026-11-09T12:17:24.661596+00:00"
+  "last_updated": "2026-11-09T14:35:52.724652+00:00"
 }
