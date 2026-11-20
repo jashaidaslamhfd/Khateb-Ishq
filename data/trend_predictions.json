@@ -1,36 +1,14 @@
 {
   "predictions": [
     {
-      "topic": "no copyright music instrumental",
-      "score": 1.32,
-      "confidence": 0.44,
-      "source": "autosuggest",
-      "momentum": 1.8,
-      "seasonal": 1.0,
-      "performance": 1.0,
-      "predicted_for": "2026-11-19",
-      "month": 11
-    },
-    {
-      "topic": "one sided love poetry by nayab midha",
-      "score": 1.32,
-      "confidence": 0.44,
-      "source": "autosuggest",
-      "momentum": 1.8,
-      "seasonal": 1.0,
-      "performance": 1.0,
-      "predicted_for": "2026-11-19",
-      "month": 11
-    },
-    {
-      "topic": "2 line sad poetry",
+      "topic": "k",
       "score": 1.2,
       "confidence": 0.4,
       "source": "autosuggest",
       "momentum": 1.5,
       "seasonal": 1.0,
       "performance": 1.0,
-      "predicted_for": "2026-11-19",
+      "predicted_for": "2026-11-20",
       "month": 11
     },
     {
@@ -41,7 +19,7 @@
       "momentum": 1.2,
       "seasonal": 1.3,
       "performance": 1.0,
-      "predicted_for": "2026-11-19",
+      "predicted_for": "2026-11-20",
       "month": 11
     },
     {
@@ -52,7 +30,7 @@
       "momentum": 1.2,
       "seasonal": 1.3,
       "performance": 1.0,
-      "predicted_for": "2026-11-19",
+      "predicted_for": "2026-11-20",
       "month": 11
     },
     {
@@ -63,7 +41,7 @@
       "momentum": 1.2,
       "seasonal": 1.3,
       "performance": 1.0,
-      "predicted_for": "2026-11-19",
+      "predicted_for": "2026-11-20",
       "month": 11
     },
     {
@@ -74,7 +52,7 @@
       "momentum": 1.2,
       "seasonal": 1.3,
       "performance": 1.0,
-      "predicted_for": "2026-11-19",
+      "predicted_for": "2026-11-20",
       "month": 11
     },
     {
@@ -85,7 +63,7 @@
       "momentum": 1.2,
       "seasonal": 1.3,
       "performance": 1.0,
-      "predicted_for": "2026-11-19",
+      "predicted_for": "2026-11-20",
       "month": 11
     },
     {
@@ -96,7 +74,7 @@
       "momentum": 1.2,
       "seasonal": 1.3,
       "performance": 1.0,
-      "predicted_for": "2026-11-19",
+      "predicted_for": "2026-11-20",
       "month": 11
     },
     {
@@ -107,7 +85,7 @@
       "momentum": 1.2,
       "seasonal": 1.3,
       "performance": 1.0,
-      "predicted_for": "2026-11-19",
+      "predicted_for": "2026-11-20",
       "month": 11
     },
     {
@@ -118,7 +96,7 @@
       "momentum": 1.0,
       "seasonal": 1.5,
       "performance": 1.0,
-      "predicted_for": "2026-11-19",
+      "predicted_for": "2026-11-20",
       "month": 11
     },
     {
@@ -129,7 +107,7 @@
       "momentum": 1.2,
       "seasonal": 1.2,
       "performance": 1.0,
-      "predicted_for": "2026-11-19",
+      "predicted_for": "2026-11-20",
       "month": 11
     },
     {
@@ -140,7 +118,7 @@
       "momentum": 1.2,
       "seasonal": 1.2,
       "performance": 1.0,
-      "predicted_for": "2026-11-19",
+      "predicted_for": "2026-11-20",
       "month": 11
     },
     {
@@ -151,7 +129,7 @@
       "momentum": 1.2,
       "seasonal": 1.2,
       "performance": 1.0,
-      "predicted_for": "2026-11-19",
+      "predicted_for": "2026-11-20",
       "month": 11
     },
     {
@@ -162,7 +140,7 @@
       "momentum": 1.2,
       "seasonal": 1.2,
       "performance": 1.0,
-      "predicted_for": "2026-11-19",
+      "predicted_for": "2026-11-20",
       "month": 11
     },
     {
@@ -173,7 +151,7 @@
       "momentum": 1.2,
       "seasonal": 1.2,
       "performance": 1.0,
-      "predicted_for": "2026-11-19",
+      "predicted_for": "2026-11-20",
       "month": 11
     },
     {
@@ -184,7 +162,7 @@
       "momentum": 1.2,
       "seasonal": 1.2,
       "performance": 1.0,
-      "predicted_for": "2026-11-19",
+      "predicted_for": "2026-11-20",
       "month": 11
     },
     {
@@ -195,7 +173,7 @@
       "momentum": 1.2,
       "seasonal": 1.2,
       "performance": 1.0,
-      "predicted_for": "2026-11-19",
+      "predicted_for": "2026-11-20",
       "month": 11
     },
     {
@@ -206,7 +184,7 @@
       "momentum": 1.2,
       "seasonal": 1.2,
       "performance": 1.0,
-      "predicted_for": "2026-11-19",
+      "predicted_for": "2026-11-20",
       "month": 11
     },
     {
@@ -217,7 +195,7 @@
       "momentum": 1.2,
       "seasonal": 1.2,
       "performance": 1.0,
-      "predicted_for": "2026-11-19",
+      "predicted_for": "2026-11-20",
       "month": 11
     },
     {
@@ -228,7 +206,7 @@
       "momentum": 1.2,
       "seasonal": 1.2,
       "performance": 1.0,
-      "predicted_for": "2026-11-19",
+      "predicted_for": "2026-11-20",
       "month": 11
     },
     {
@@ -239,7 +217,7 @@
       "momentum": 1.2,
       "seasonal": 1.2,
       "performance": 1.0,
-      "predicted_for": "2026-11-19",
+      "predicted_for": "2026-11-20",
       "month": 11
     },
     {
@@ -250,7 +228,7 @@
       "momentum": 1.2,
       "seasonal": 1.2,
       "performance": 1.0,
-      "predicted_for": "2026-11-19",
+      "predicted_for": "2026-11-20",
       "month": 11
     },
     {
@@ -261,7 +239,7 @@
       "momentum": 1.2,
       "seasonal": 1.2,
       "performance": 1.0,
-      "predicted_for": "2026-11-19",
+      "predicted_for": "2026-11-20",
       "month": 11
     },
     {
@@ -272,7 +250,7 @@
       "momentum": 1.2,
       "seasonal": 1.2,
       "performance": 1.0,
-      "predicted_for": "2026-11-19",
+      "predicted_for": "2026-11-20",
       "month": 11
     },
     {
@@ -283,7 +261,7 @@
       "momentum": 1.2,
       "seasonal": 1.2,
       "performance": 1.0,
-      "predicted_for": "2026-11-19",
+      "predicted_for": "2026-11-20",
       "month": 11
     },
     {
@@ -294,7 +272,7 @@
       "momentum": 1.2,
       "seasonal": 1.2,
       "performance": 1.0,
-      "predicted_for": "2026-11-19",
+      "predicted_for": "2026-11-20",
       "month": 11
     },
     {
@@ -305,7 +283,7 @@
       "momentum": 1.2,
       "seasonal": 1.2,
       "performance": 1.0,
-      "predicted_for": "2026-11-19",
+      "predicted_for": "2026-11-20",
       "month": 11
     },
     {
@@ -316,7 +294,7 @@
       "momentum": 1.2,
       "seasonal": 1.2,
       "performance": 1.0,
-      "predicted_for": "2026-11-19",
+      "predicted_for": "2026-11-20",
       "month": 11
     },
     {
@@ -327,7 +305,7 @@
       "momentum": 1.2,
       "seasonal": 1.2,
       "performance": 1.0,
-      "predicted_for": "2026-11-19",
+      "predicted_for": "2026-11-20",
       "month": 11
     },
     {
@@ -338,7 +316,7 @@
       "momentum": 1.2,
       "seasonal": 1.2,
       "performance": 1.0,
-      "predicted_for": "2026-11-19",
+      "predicted_for": "2026-11-20",
       "month": 11
     },
     {
@@ -349,7 +327,7 @@
       "momentum": 1.2,
       "seasonal": 1.2,
       "performance": 1.0,
-      "predicted_for": "2026-11-19",
+      "predicted_for": "2026-11-20",
       "month": 11
     },
     {
@@ -360,7 +338,7 @@
       "momentum": 1.2,
       "seasonal": 1.2,
       "performance": 1.0,
-      "predicted_for": "2026-11-19",
+      "predicted_for": "2026-11-20",
       "month": 11
     },
     {
@@ -371,7 +349,7 @@
       "momentum": 1.2,
       "seasonal": 1.2,
       "performance": 1.0,
-      "predicted_for": "2026-11-19",
+      "predicted_for": "2026-11-20",
       "month": 11
     },
     {
@@ -382,7 +360,7 @@
       "momentum": 1.2,
       "seasonal": 1.2,
       "performance": 1.0,
-      "predicted_for": "2026-11-19",
+      "predicted_for": "2026-11-20",
       "month": 11
     },
     {
@@ -393,7 +371,7 @@
       "momentum": 1.2,
       "seasonal": 1.2,
       "performance": 1.0,
-      "predicted_for": "2026-11-19",
+      "predicted_for": "2026-11-20",
       "month": 11
     },
     {
@@ -404,7 +382,7 @@
       "momentum": 1.2,
       "seasonal": 1.2,
       "performance": 1.0,
-      "predicted_for": "2026-11-19",
+      "predicted_for": "2026-11-20",
       "month": 11
     },
     {
@@ -415,7 +393,7 @@
       "momentum": 1.2,
       "seasonal": 1.2,
       "performance": 1.0,
-      "predicted_for": "2026-11-19",
+      "predicted_for": "2026-11-20",
       "month": 11
     },
     {
@@ -426,7 +404,7 @@
       "momentum": 1.2,
       "seasonal": 1.2,
       "performance": 1.0,
-      "predicted_for": "2026-11-19",
+      "predicted_for": "2026-11-20",
       "month": 11
     },
     {
@@ -437,7 +415,7 @@
       "momentum": 1.2,
       "seasonal": 1.2,
       "performance": 1.0,
-      "predicted_for": "2026-11-19",
+      "predicted_for": "2026-11-20",
       "month": 11
     },
     {
@@ -448,7 +426,7 @@
       "momentum": 1.2,
       "seasonal": 1.2,
       "performance": 1.0,
-      "predicted_for": "2026-11-19",
+      "predicted_for": "2026-11-20",
       "month": 11
     },
     {
@@ -459,7 +437,7 @@
       "momentum": 1.2,
       "seasonal": 1.2,
       "performance": 1.0,
-      "predicted_for": "2026-11-19",
+      "predicted_for": "2026-11-20",
       "month": 11
     },
     {
@@ -470,7 +448,7 @@
       "momentum": 1.2,
       "seasonal": 1.2,
       "performance": 1.0,
-      "predicted_for": "2026-11-19",
+      "predicted_for": "2026-11-20",
       "month": 11
     },
     {
@@ -481,7 +459,7 @@
       "momentum": 1.0,
       "seasonal": 1.3,
       "performance": 1.0,
-      "predicted_for": "2026-11-19",
+      "predicted_for": "2026-11-20",
       "month": 11
     },
     {
@@ -492,7 +470,7 @@
       "momentum": 1.0,
       "seasonal": 1.3,
       "performance": 1.0,
-      "predicted_for": "2026-11-19",
+      "predicted_for": "2026-11-20",
       "month": 11
     },
     {
@@ -503,7 +481,7 @@
       "momentum": 1.0,
       "seasonal": 1.3,
       "performance": 1.0,
-      "predicted_for": "2026-11-19",
+      "predicted_for": "2026-11-20",
       "month": 11
     },
     {
@@ -514,7 +492,7 @@
       "momentum": 1.2,
       "seasonal": 1.0,
       "performance": 1.0,
-      "predicted_for": "2026-11-19",
+      "predicted_for": "2026-11-20",
       "month": 11
     },
     {
@@ -525,7 +503,7 @@
       "momentum": 1.2,
       "seasonal": 1.0,
       "performance": 1.0,
-      "predicted_for": "2026-11-19",
+      "predicted_for": "2026-11-20",
       "month": 11
     },
     {
@@ -536,7 +514,7 @@
       "momentum": 1.2,
       "seasonal": 1.0,
       "performance": 1.0,
-      "predicted_for": "2026-11-19",
+      "predicted_for": "2026-11-20",
       "month": 11
     },
     {
@@ -547,7 +525,29 @@
       "momentum": 1.2,
       "seasonal": 1.0,
       "performance": 1.0,
-      "predicted_for": "2026-11-19",
+      "predicted_for": "2026-11-20",
+      "month": 11
+    },
+    {
+      "topic": "poetry background music tiktok",
+      "score": 1.08,
+      "confidence": 0.36,
+      "source": "autosuggest",
+      "momentum": 1.2,
+      "seasonal": 1.0,
+      "performance": 1.0,
+      "predicted_for": "2026-11-20",
+      "month": 11
+    },
+    {
+      "topic": "poetry background music guitar",
+      "score": 1.08,
+      "confidence": 0.36,
+      "source": "autosuggest",
+      "momentum": 1.2,
+      "seasonal": 1.0,
+      "performance": 1.0,
+      "predicted_for": "2026-11-20",
       "month": 11
     }
   ],
@@ -565,7 +565,7 @@
         "poetry background music hindi",
         "poetry background music urdu"
       ],
-      "fetched_at": "2026-11-19T12:18:07.277579+00:00"
+      "fetched_at": "2026-11-20T12:18:18.763271+00:00"
     },
     "sad shayari background music": {
       "suggestions": [
@@ -580,7 +580,7 @@
         "sad shayari background music new",
         "sad shayari background music arijit singh"
       ],
-      "fetched_at": "2026-11-19T12:18:07.312583+00:00"
+      "fetched_at": "2026-11-20T12:18:18.799253+00:00"
     },
     "background music for poetry": {
       "suggestions": [
@@ -595,7 +595,7 @@
         "background music for poetry nepali",
         "background music for poetry urdu"
       ],
-      "fetched_at": "2026-11-19T12:18:07.350166+00:00"
+      "fetched_at": "2026-11-20T12:18:18.835668+00:00"
     },
     "background music poetry": {
       "suggestions": [
@@ -610,7 +610,7 @@
         "background music spoken poetry",
         "background music for poetry nepali"
       ],
-      "fetched_at": "2026-11-19T12:18:07.402615+00:00"
+      "fetched_at": "2026-11-20T12:18:18.880634+00:00"
     },
     "poetry bg music": {
       "suggestions": [
@@ -625,7 +625,7 @@
         "poem bg music",
         "poetry background music piano"
       ],
-      "fetched_at": "2026-11-19T12:18:07.446413+00:00"
+      "fetched_at": "2026-11-20T12:18:18.930958+00:00"
     },
     "sad background music": {
       "suggestions": [
@@ -640,7 +640,7 @@
         "sad background music piano",
         "sad background music violin"
       ],
-      "fetched_at": "2026-11-19T12:18:07.487168+00:00"
+      "fetched_at": "2026-11-20T12:18:18.967384+00:00"
     },
     "copyright free background music": {
       "suggestions": [
@@ -655,7 +655,7 @@
         "copyright free background music for gaming",
         "copyright free background music for vlogs"
       ],
-      "fetched_at": "2026-11-19T12:18:07.526814+00:00"
+      "fetched_at": "2026-11-20T12:18:19.005756+00:00"
     },
     "no copyright music": {
       "suggestions": [
@@ -670,7 +670,7 @@
         "no copyright music rap",
         "no copyright music gaming"
       ],
-      "fetched_at": "2026-11-19T12:18:07.567658+00:00"
+      "fetched_at": "2026-11-20T12:18:19.041541+00:00"
     },
     "urdu poetry": {
       "suggestions": [
@@ -685,7 +685,7 @@
         "urdu poetry status",
         "urdu poetry zia mohyeddin"
       ],
-      "fetched_at": "2026-11-19T12:18:07.605823+00:00"
+      "fetched_at": "2026-11-20T12:18:19.077355+00:00"
     },
     "sad shayari": {
       "suggestions": [
@@ -700,7 +700,7 @@
         "sad shayari hindi",
         "sad shayari jaun elia"
       ],
-      "fetched_at": "2026-11-19T12:18:07.644138+00:00"
+      "fetched_at": "2026-11-20T12:18:19.116367+00:00"
     },
     "heart touching poetry": {
       "suggestions": [
@@ -715,7 +715,7 @@
         "heart touching poetry for teachers",
         "heart touching poetry lines"
       ],
-      "fetched_at": "2026-11-19T12:18:07.681795+00:00"
+      "fetched_at": "2026-11-20T12:18:19.151467+00:00"
     },
     "2 line poetry urdu": {
       "suggestions": [
@@ -728,9 +728,9 @@
         "2 line shayari sad poetry urdu poetry #shorts",
         "mohabbat romantic urdu 2 line poetry",
         "2 line poetry",
-        "2 line sad poetry"
+        "k"
       ],
-      "fetched_at": "2026-11-19T12:18:07.769588+00:00"
+      "fetched_at": "2026-11-20T12:18:19.239292+00:00"
     },
     "ghalib shayari": {
       "suggestions": [
@@ -745,7 +745,7 @@
         "ghalib shayari collection",
         "ghalib shayari on life"
       ],
-      "fetched_at": "2026-11-19T12:18:07.806001+00:00"
+      "fetched_at": "2026-11-20T12:18:19.274922+00:00"
     },
     "ishq shayari": {
       "suggestions": [
@@ -760,7 +760,7 @@
         "ishq shayari uid",
         "ishq shayari video"
       ],
-      "fetched_at": "2026-11-19T12:18:07.839653+00:00"
+      "fetched_at": "2026-11-20T12:18:19.309378+00:00"
     },
     "dard bhari shayari": {
       "suggestions": [
@@ -775,7 +775,7 @@
         "dard bhari shayari video",
         "dard bhari shayari song"
       ],
-      "fetched_at": "2026-11-19T12:18:07.878063+00:00"
+      "fetched_at": "2026-11-20T12:18:19.345572+00:00"
     },
     "rain poetry": {
       "suggestions": [
@@ -790,7 +790,7 @@
         "rain spoken poetry",
         "rain weather poetry"
       ],
-      "fetched_at": "2026-11-19T12:18:07.936909+00:00"
+      "fetched_at": "2026-11-20T12:18:19.390323+00:00"
     },
     "night poetry urdu": {
       "suggestions": [
@@ -801,7 +801,7 @@
         "night poetry",
         "k"
       ],
-      "fetched_at": "2026-11-19T12:18:08.025826+00:00"
+      "fetched_at": "2026-11-20T12:18:19.478572+00:00"
     },
     "motivational poetry urdu": {
       "suggestions": [
@@ -816,7 +816,7 @@
         "motivational urdu shayari allama iqbal",
         "inspirational urdu poetry"
       ],
-      "fetched_at": "2026-11-19T12:18:08.078845+00:00"
+      "fetched_at": "2026-11-20T12:18:19.527588+00:00"
     },
     "sufi kalam": {
       "suggestions": [
@@ -831,7 +831,7 @@
         "sufi kalam without music",
         "sufi kalam urdu"
       ],
-      "fetched_at": "2026-11-19T12:18:08.114326+00:00"
+      "fetched_at": "2026-11-20T12:18:19.564483+00:00"
     },
     "punjabi sad poetry": {
       "suggestions": [
@@ -846,7 +846,7 @@
         "punjabi sad shayari short video",
         "punjabi sad shayari lyrics status black background"
       ],
-      "fetched_at": "2026-11-19T12:18:08.163573+00:00"
+      "fetched_at": "2026-11-20T12:18:19.608588+00:00"
     },
     "status shayari": {
       "suggestions": [
@@ -861,7 +861,7 @@
         "status shayari song",
         "status shayari love"
       ],
-      "fetched_at": "2026-11-19T12:18:08.200207+00:00"
+      "fetched_at": "2026-11-20T12:18:19.648201+00:00"
     },
     "breakup poetry": {
       "suggestions": [
@@ -876,7 +876,7 @@
         "breakup poetry status",
         "breakup poetry short"
       ],
-      "fetched_at": "2026-11-19T12:18:08.243180+00:00"
+      "fetched_at": "2026-11-20T12:18:19.694227+00:00"
     },
     "one sided love poetry": {
       "suggestions": [
@@ -891,8 +891,8 @@
         "one sided love poetry john elia",
         "one sided love poetry by nayab midha"
       ],
-      "fetched_at": "2026-11-19T12:18:08.278261+00:00"
+      "fetched_at": "2026-11-20T12:18:19.728118+00:00"
     }
   },
-  "last_updated": "2026-11-19T12:18:08.279513+00:00"
+  "last_updated": "2026-11-20T12:18:19.730212+00:00"
 }
