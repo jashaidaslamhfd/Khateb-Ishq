@@ -1,6 +1,50 @@
 {
   "predictions": [
     {
+      "topic": "poetry background music urdu",
+      "score": 1.32,
+      "confidence": 0.44,
+      "source": "autosuggest",
+      "momentum": 1.8,
+      "seasonal": 1.0,
+      "performance": 1.0,
+      "predicted_for": "2026-11-24",
+      "month": 11
+    },
+    {
+      "topic": "sad background music copyright free",
+      "score": 1.32,
+      "confidence": 0.44,
+      "source": "autosuggest",
+      "momentum": 1.8,
+      "seasonal": 1.0,
+      "performance": 1.0,
+      "predicted_for": "2026-11-24",
+      "month": 11
+    },
+    {
+      "topic": "no copyright music r\\u0026b",
+      "score": 1.32,
+      "confidence": 0.44,
+      "source": "autosuggest",
+      "momentum": 1.8,
+      "seasonal": 1.0,
+      "performance": 1.0,
+      "predicted_for": "2026-11-24",
+      "month": 11
+    },
+    {
+      "topic": "bgm music poetry",
+      "score": 1.2,
+      "confidence": 0.4,
+      "source": "autosuggest",
+      "momentum": 1.5,
+      "seasonal": 1.0,
+      "performance": 1.0,
+      "predicted_for": "2026-11-24",
+      "month": 11
+    },
+    {
       "topic": "dard bhari shayari short video",
       "score": 1.2,
       "confidence": 0.4,
@@ -8,7 +52,7 @@
       "momentum": 1.2,
       "seasonal": 1.3,
       "performance": 1.0,
-      "predicted_for": "2026-11-23",
+      "predicted_for": "2026-11-24",
       "month": 11
     },
     {
@@ -19,7 +63,7 @@
       "momentum": 1.2,
       "seasonal": 1.3,
       "performance": 1.0,
-      "predicted_for": "2026-11-23",
+      "predicted_for": "2026-11-24",
       "month": 11
     },
     {
@@ -30,7 +74,7 @@
       "momentum": 1.2,
       "seasonal": 1.3,
       "performance": 1.0,
-      "predicted_for": "2026-11-23",
+      "predicted_for": "2026-11-24",
       "month": 11
     },
     {
@@ -41,7 +85,7 @@
       "momentum": 1.2,
       "seasonal": 1.3,
       "performance": 1.0,
-      "predicted_for": "2026-11-23",
+      "predicted_for": "2026-11-24",
       "month": 11
     },
     {
@@ -52,7 +96,7 @@
       "momentum": 1.2,
       "seasonal": 1.3,
       "performance": 1.0,
-      "predicted_for": "2026-11-23",
+      "predicted_for": "2026-11-24",
       "month": 11
     },
     {
@@ -63,7 +107,7 @@
       "momentum": 1.2,
       "seasonal": 1.3,
       "performance": 1.0,
-      "predicted_for": "2026-11-23",
+      "predicted_for": "2026-11-24",
       "month": 11
     },
     {
@@ -74,7 +118,40 @@
       "momentum": 1.2,
       "seasonal": 1.3,
       "performance": 1.0,
-      "predicted_for": "2026-11-23",
+      "predicted_for": "2026-11-24",
+      "month": 11
+    },
+    {
+      "topic": "motivational poem in urdu",
+      "score": 1.2,
+      "confidence": 0.4,
+      "source": "autosuggest",
+      "momentum": 1.5,
+      "seasonal": 1.0,
+      "performance": 1.0,
+      "predicted_for": "2026-11-24",
+      "month": 11
+    },
+    {
+      "topic": "best motivational urdu poetry",
+      "score": 1.2,
+      "confidence": 0.4,
+      "source": "autosuggest",
+      "momentum": 1.5,
+      "seasonal": 1.0,
+      "performance": 1.0,
+      "predicted_for": "2026-11-24",
+      "month": 11
+    },
+    {
+      "topic": "sufi kalam urdu",
+      "score": 1.2,
+      "confidence": 0.4,
+      "source": "autosuggest",
+      "momentum": 1.5,
+      "seasonal": 1.0,
+      "performance": 1.0,
+      "predicted_for": "2026-11-24",
       "month": 11
     },
     {
@@ -85,7 +162,7 @@
       "momentum": 1.0,
       "seasonal": 1.5,
       "performance": 1.0,
-      "predicted_for": "2026-11-23",
+      "predicted_for": "2026-11-24",
       "month": 11
     },
     {
@@ -96,7 +173,7 @@
       "momentum": 1.2,
       "seasonal": 1.2,
       "performance": 1.0,
-      "predicted_for": "2026-11-23",
+      "predicted_for": "2026-11-24",
       "month": 11
     },
     {
@@ -107,7 +184,7 @@
       "momentum": 1.2,
       "seasonal": 1.2,
       "performance": 1.0,
-      "predicted_for": "2026-11-23",
+      "predicted_for": "2026-11-24",
       "month": 11
     },
     {
@@ -118,7 +195,7 @@
       "momentum": 1.2,
       "seasonal": 1.2,
       "performance": 1.0,
-      "predicted_for": "2026-11-23",
+      "predicted_for": "2026-11-24",
       "month": 11
     },
     {
@@ -129,7 +206,7 @@
       "momentum": 1.2,
       "seasonal": 1.2,
       "performance": 1.0,
-      "predicted_for": "2026-11-23",
+      "predicted_for": "2026-11-24",
       "month": 11
     },
     {
@@ -140,7 +217,7 @@
       "momentum": 1.2,
       "seasonal": 1.2,
       "performance": 1.0,
-      "predicted_for": "2026-11-23",
+      "predicted_for": "2026-11-24",
       "month": 11
     },
     {
@@ -151,7 +228,7 @@
       "momentum": 1.2,
       "seasonal": 1.2,
       "performance": 1.0,
-      "predicted_for": "2026-11-23",
+      "predicted_for": "2026-11-24",
       "month": 11
     },
     {
@@ -162,7 +239,7 @@
       "momentum": 1.2,
       "seasonal": 1.2,
       "performance": 1.0,
-      "predicted_for": "2026-11-23",
+      "predicted_for": "2026-11-24",
       "month": 11
     },
     {
@@ -173,18 +250,7 @@
       "momentum": 1.2,
       "seasonal": 1.2,
       "performance": 1.0,
-      "predicted_for": "2026-11-23",
-      "month": 11
-    },
-    {
-      "topic": "sad shayari video",
-      "score": 1.16,
-      "confidence": 0.387,
-      "source": "autosuggest",
-      "momentum": 1.2,
-      "seasonal": 1.2,
-      "performance": 1.0,
-      "predicted_for": "2026-11-23",
+      "predicted_for": "2026-11-24",
       "month": 11
     },
     {
@@ -195,18 +261,18 @@
       "momentum": 1.2,
       "seasonal": 1.2,
       "performance": 1.0,
-      "predicted_for": "2026-11-23",
+      "predicted_for": "2026-11-24",
       "month": 11
     },
     {
-      "topic": "sad shayari compilation",
+      "topic": "sad shayari video",
       "score": 1.16,
       "confidence": 0.387,
       "source": "autosuggest",
       "momentum": 1.2,
       "seasonal": 1.2,
       "performance": 1.0,
-      "predicted_for": "2026-11-23",
+      "predicted_for": "2026-11-24",
       "month": 11
     },
     {
@@ -217,7 +283,18 @@
       "momentum": 1.2,
       "seasonal": 1.2,
       "performance": 1.0,
-      "predicted_for": "2026-11-23",
+      "predicted_for": "2026-11-24",
+      "month": 11
+    },
+    {
+      "topic": "sad shayari compilation",
+      "score": 1.16,
+      "confidence": 0.387,
+      "source": "autosuggest",
+      "momentum": 1.2,
+      "seasonal": 1.2,
+      "performance": 1.0,
+      "predicted_for": "2026-11-24",
       "month": 11
     },
     {
@@ -228,7 +305,7 @@
       "momentum": 1.2,
       "seasonal": 1.2,
       "performance": 1.0,
-      "predicted_for": "2026-11-23",
+      "predicted_for": "2026-11-24",
       "month": 11
     },
     {
@@ -239,7 +316,7 @@
       "momentum": 1.2,
       "seasonal": 1.2,
       "performance": 1.0,
-      "predicted_for": "2026-11-23",
+      "predicted_for": "2026-11-24",
       "month": 11
     },
     {
@@ -250,7 +327,7 @@
       "momentum": 1.2,
       "seasonal": 1.2,
       "performance": 1.0,
-      "predicted_for": "2026-11-23",
+      "predicted_for": "2026-11-24",
       "month": 11
     },
     {
@@ -261,7 +338,7 @@
       "momentum": 1.2,
       "seasonal": 1.2,
       "performance": 1.0,
-      "predicted_for": "2026-11-23",
+      "predicted_for": "2026-11-24",
       "month": 11
     },
     {
@@ -272,7 +349,7 @@
       "momentum": 1.2,
       "seasonal": 1.2,
       "performance": 1.0,
-      "predicted_for": "2026-11-23",
+      "predicted_for": "2026-11-24",
       "month": 11
     },
     {
@@ -283,7 +360,7 @@
       "momentum": 1.2,
       "seasonal": 1.2,
       "performance": 1.0,
-      "predicted_for": "2026-11-23",
+      "predicted_for": "2026-11-24",
       "month": 11
     },
     {
@@ -294,7 +371,7 @@
       "momentum": 1.2,
       "seasonal": 1.2,
       "performance": 1.0,
-      "predicted_for": "2026-11-23",
+      "predicted_for": "2026-11-24",
       "month": 11
     },
     {
@@ -305,7 +382,7 @@
       "momentum": 1.2,
       "seasonal": 1.2,
       "performance": 1.0,
-      "predicted_for": "2026-11-23",
+      "predicted_for": "2026-11-24",
       "month": 11
     },
     {
@@ -316,7 +393,7 @@
       "momentum": 1.2,
       "seasonal": 1.2,
       "performance": 1.0,
-      "predicted_for": "2026-11-23",
+      "predicted_for": "2026-11-24",
       "month": 11
     },
     {
@@ -327,7 +404,7 @@
       "momentum": 1.2,
       "seasonal": 1.2,
       "performance": 1.0,
-      "predicted_for": "2026-11-23",
+      "predicted_for": "2026-11-24",
       "month": 11
     },
     {
@@ -338,7 +415,7 @@
       "momentum": 1.2,
       "seasonal": 1.2,
       "performance": 1.0,
-      "predicted_for": "2026-11-23",
+      "predicted_for": "2026-11-24",
       "month": 11
     },
     {
@@ -349,7 +426,7 @@
       "momentum": 1.2,
       "seasonal": 1.2,
       "performance": 1.0,
-      "predicted_for": "2026-11-23",
+      "predicted_for": "2026-11-24",
       "month": 11
     },
     {
@@ -360,29 +437,7 @@
       "momentum": 1.2,
       "seasonal": 1.2,
       "performance": 1.0,
-      "predicted_for": "2026-11-23",
-      "month": 11
-    },
-    {
-      "topic": "motivational shayari urdu mein",
-      "score": 1.16,
-      "confidence": 0.387,
-      "source": "autosuggest",
-      "momentum": 1.2,
-      "seasonal": 1.2,
-      "performance": 1.0,
-      "predicted_for": "2026-11-23",
-      "month": 11
-    },
-    {
-      "topic": "motivational urdu shayari allama iqbal",
-      "score": 1.16,
-      "confidence": 0.387,
-      "source": "autosuggest",
-      "momentum": 1.2,
-      "seasonal": 1.2,
-      "performance": 1.0,
-      "predicted_for": "2026-11-23",
+      "predicted_for": "2026-11-24",
       "month": 11
     },
     {
@@ -393,7 +448,7 @@
       "momentum": 1.2,
       "seasonal": 1.2,
       "performance": 1.0,
-      "predicted_for": "2026-11-23",
+      "predicted_for": "2026-11-24",
       "month": 11
     },
     {
@@ -404,7 +459,7 @@
       "momentum": 1.2,
       "seasonal": 1.2,
       "performance": 1.0,
-      "predicted_for": "2026-11-23",
+      "predicted_for": "2026-11-24",
       "month": 11
     },
     {
@@ -415,7 +470,7 @@
       "momentum": 1.2,
       "seasonal": 1.2,
       "performance": 1.0,
-      "predicted_for": "2026-11-23",
+      "predicted_for": "2026-11-24",
       "month": 11
     },
     {
@@ -426,7 +481,7 @@
       "momentum": 1.2,
       "seasonal": 1.2,
       "performance": 1.0,
-      "predicted_for": "2026-11-23",
+      "predicted_for": "2026-11-24",
       "month": 11
     },
     {
@@ -437,7 +492,7 @@
       "momentum": 1.2,
       "seasonal": 1.2,
       "performance": 1.0,
-      "predicted_for": "2026-11-23",
+      "predicted_for": "2026-11-24",
       "month": 11
     },
     {
@@ -448,7 +503,7 @@
       "momentum": 1.0,
       "seasonal": 1.3,
       "performance": 1.0,
-      "predicted_for": "2026-11-23",
+      "predicted_for": "2026-11-24",
       "month": 11
     },
     {
@@ -459,7 +514,7 @@
       "momentum": 1.0,
       "seasonal": 1.3,
       "performance": 1.0,
-      "predicted_for": "2026-11-23",
+      "predicted_for": "2026-11-24",
       "month": 11
     },
     {
@@ -470,7 +525,7 @@
       "momentum": 1.0,
       "seasonal": 1.3,
       "performance": 1.0,
-      "predicted_for": "2026-11-23",
+      "predicted_for": "2026-11-24",
       "month": 11
     },
     {
@@ -481,7 +536,7 @@
       "momentum": 1.2,
       "seasonal": 1.0,
       "performance": 1.0,
-      "predicted_for": "2026-11-23",
+      "predicted_for": "2026-11-24",
       "month": 11
     },
     {
@@ -492,62 +547,7 @@
       "momentum": 1.2,
       "seasonal": 1.0,
       "performance": 1.0,
-      "predicted_for": "2026-11-23",
-      "month": 11
-    },
-    {
-      "topic": "poetry background music piano",
-      "score": 1.08,
-      "confidence": 0.36,
-      "source": "autosuggest",
-      "momentum": 1.2,
-      "seasonal": 1.0,
-      "performance": 1.0,
-      "predicted_for": "2026-11-23",
-      "month": 11
-    },
-    {
-      "topic": "poetry background music sad",
-      "score": 1.08,
-      "confidence": 0.36,
-      "source": "autosuggest",
-      "momentum": 1.2,
-      "seasonal": 1.0,
-      "performance": 1.0,
-      "predicted_for": "2026-11-23",
-      "month": 11
-    },
-    {
-      "topic": "poetry background music tiktok",
-      "score": 1.08,
-      "confidence": 0.36,
-      "source": "autosuggest",
-      "momentum": 1.2,
-      "seasonal": 1.0,
-      "performance": 1.0,
-      "predicted_for": "2026-11-23",
-      "month": 11
-    },
-    {
-      "topic": "poetry background music guitar",
-      "score": 1.08,
-      "confidence": 0.36,
-      "source": "autosuggest",
-      "momentum": 1.2,
-      "seasonal": 1.0,
-      "performance": 1.0,
-      "predicted_for": "2026-11-23",
-      "month": 11
-    },
-    {
-      "topic": "poetry background music hindi",
-      "score": 1.08,
-      "confidence": 0.36,
-      "source": "autosuggest",
-      "momentum": 1.2,
-      "seasonal": 1.0,
-      "performance": 1.0,
-      "predicted_for": "2026-11-23",
+      "predicted_for": "2026-11-24",
       "month": 11
     }
   ],
@@ -565,7 +565,7 @@
         "poetry background music hindi",
         "poetry background music urdu"
       ],
-      "fetched_at": "2026-11-23T16:44:03.778590+00:00"
+      "fetched_at": "2026-11-24T14:23:19.046076+00:00"
     },
     "sad shayari background music": {
       "suggestions": [
@@ -580,7 +580,7 @@
         "sad shayari background music new",
         "sad shayari background music arijit singh"
       ],
-      "fetched_at": "2026-11-23T16:44:03.824217+00:00"
+      "fetched_at": "2026-11-24T14:23:19.092090+00:00"
     },
     "background music for poetry": {
       "suggestions": [
@@ -595,7 +595,7 @@
         "background music for poetry nepali",
         "background music for poetry urdu"
       ],
-      "fetched_at": "2026-11-23T16:44:03.871801+00:00"
+      "fetched_at": "2026-11-24T14:23:19.133733+00:00"
     },
     "background music poetry": {
       "suggestions": [
@@ -605,12 +605,12 @@
         "background music poetry love",
         "background music poetry attitude",
         "background music poetry no copyright",
-        "background music poetry urdu",
         "instrumental music poetry",
+        "bgm music poetry",
         "background music spoken poetry",
         "background music for poetry nepali"
       ],
-      "fetched_at": "2026-11-23T16:44:03.923244+00:00"
+      "fetched_at": "2026-11-24T14:23:19.188858+00:00"
     },
     "poetry bg music": {
       "suggestions": [
@@ -620,27 +620,27 @@
         "poetry background music sad",
         "poetry background music nepali",
         "poetry background music hindi",
-        "poetry background music ringtone",
+        "poetry background music urdu",
         "poetry background music guitar",
         "poem bg music",
-        "poetry background music piano"
+        "poetry background music ringtone"
       ],
-      "fetched_at": "2026-11-23T16:44:03.988640+00:00"
+      "fetched_at": "2026-11-24T14:23:19.248463+00:00"
     },
     "sad background music": {
       "suggestions": [
         "sad background music",
         "sad background music",
-        "sad background music no copyright",
         "sad background music instrumental",
         "sad background music meme",
         "sad background music tiktok",
         "sad background music no lyrics",
         "sad background music for videos",
         "sad background music piano",
+        "sad background music copyright free",
         "sad background music violin"
       ],
-      "fetched_at": "2026-11-23T16:44:04.026672+00:00"
+      "fetched_at": "2026-11-24T14:23:19.290688+00:00"
     },
     "copyright free background music": {
       "suggestions": [
@@ -655,22 +655,22 @@
         "copyright free background music for gaming",
         "copyright free background music for vlogs"
       ],
-      "fetched_at": "2026-11-23T16:44:04.074668+00:00"
+      "fetched_at": "2026-11-24T14:23:19.339258+00:00"
     },
     "no copyright music": {
       "suggestions": [
         "no copyright music",
         "no copyright music",
-        "no copyright music vlog",
         "no copyright music background",
-        "no copyright music instrumental",
+        "no copyright music vlog",
         "no copyright music lofi",
         "no copyright music hip hop",
         "no copyright music chill",
         "no copyright music rap",
-        "no copyright music gaming"
+        "no copyright music gaming",
+        "no copyright music r\\u0026b"
       ],
-      "fetched_at": "2026-11-23T16:44:04.111050+00:00"
+      "fetched_at": "2026-11-24T14:23:19.388402+00:00"
     },
     "urdu poetry": {
       "suggestions": [
@@ -685,22 +685,22 @@
         "urdu poetry status",
         "urdu poetry zia mohyeddin"
       ],
-      "fetched_at": "2026-11-23T16:44:04.156911+00:00"
+      "fetched_at": "2026-11-24T14:23:19.436361+00:00"
     },
     "sad shayari": {
       "suggestions": [
         "sad shayari",
         "sad shayari",
-        "sad shayari background music",
         "sad shayari black screen",
-        "sad shayari video",
+        "sad shayari background music",
         "sad shayari status",
-        "sad shayari compilation",
+        "sad shayari video",
         "sad shayari song",
         "sad shayari hindi",
+        "sad shayari compilation",
         "sad shayari jaun elia"
       ],
-      "fetched_at": "2026-11-23T16:44:04.202111+00:00"
+      "fetched_at": "2026-11-24T14:23:19.484481+00:00"
     },
     "heart touching poetry": {
       "suggestions": [
@@ -715,7 +715,7 @@
         "heart touching poetry for teachers",
         "heart touching poetry lines"
       ],
-      "fetched_at": "2026-11-23T16:44:04.248417+00:00"
+      "fetched_at": "2026-11-24T14:23:19.528238+00:00"
     },
     "2 line poetry urdu": {
       "suggestions": [
@@ -730,7 +730,7 @@
         "2 line poetry",
         "k"
       ],
-      "fetched_at": "2026-11-23T16:44:04.345600+00:00"
+      "fetched_at": "2026-11-24T14:23:19.600690+00:00"
     },
     "ghalib shayari": {
       "suggestions": [
@@ -745,7 +745,7 @@
         "ghalib shayari collection",
         "ghalib shayari on life"
       ],
-      "fetched_at": "2026-11-23T16:44:04.397280+00:00"
+      "fetched_at": "2026-11-24T14:23:19.643619+00:00"
     },
     "ishq shayari": {
       "suggestions": [
@@ -760,7 +760,7 @@
         "ishq shayari uid",
         "ishq shayari video"
       ],
-      "fetched_at": "2026-11-23T16:44:04.438727+00:00"
+      "fetched_at": "2026-11-24T14:23:19.692728+00:00"
     },
     "dard bhari shayari": {
       "suggestions": [
@@ -775,7 +775,7 @@
         "dard bhari shayari video",
         "dard bhari shayari song"
       ],
-      "fetched_at": "2026-11-23T16:44:04.491052+00:00"
+      "fetched_at": "2026-11-24T14:23:19.737340+00:00"
     },
     "rain poetry": {
       "suggestions": [
@@ -790,7 +790,7 @@
         "rain spoken poetry",
         "rain weather poetry"
       ],
-      "fetched_at": "2026-11-23T16:44:04.541203+00:00"
+      "fetched_at": "2026-11-24T14:23:19.787761+00:00"
     },
     "night poetry urdu": {
       "suggestions": [
@@ -801,7 +801,7 @@
         "night poetry",
         "k"
       ],
-      "fetched_at": "2026-11-23T16:44:04.633666+00:00"
+      "fetched_at": "2026-11-24T14:23:19.852828+00:00"
     },
     "motivational poetry urdu": {
       "suggestions": [
@@ -809,14 +809,14 @@
         "motivational poetry urdu",
         "motivational urdu poetry for students",
         "motivational shayari urdu",
-        "motivational shayari urdu mein",
         "motivational poetry in urdu for success",
         "motivational poetry in urdu by allama iqbal",
         "motivational poetry in urdu status",
-        "motivational urdu shayari allama iqbal",
-        "inspirational urdu poetry"
+        "inspirational urdu poetry",
+        "motivational poem in urdu",
+        "best motivational urdu poetry"
       ],
-      "fetched_at": "2026-11-23T16:44:04.685122+00:00"
+      "fetched_at": "2026-11-24T14:23:19.916804+00:00"
     },
     "sufi kalam": {
       "suggestions": [
@@ -826,12 +826,12 @@
         "sufi kalam bulleh shah",
         "sufi kalam abida parveen",
         "sufi kalam song",
-        "sufi kalam punjabi",
         "sufi kalam coke studio",
         "sufi kalam nusrat fateh ali khan",
-        "sufi kalam without music"
+        "sufi kalam without music",
+        "sufi kalam urdu"
       ],
-      "fetched_at": "2026-11-23T16:44:04.725697+00:00"
+      "fetched_at": "2026-11-24T14:23:19.963640+00:00"
     },
     "punjabi sad poetry": {
       "suggestions": [
@@ -846,7 +846,7 @@
         "punjabi sad shayari short video",
         "punjabi sad shayari lyrics status black background"
       ],
-      "fetched_at": "2026-11-23T16:44:04.787465+00:00"
+      "fetched_at": "2026-11-24T14:23:20.020081+00:00"
     },
     "status shayari": {
       "suggestions": [
@@ -861,7 +861,7 @@
         "status shayari song",
         "status shayari love"
       ],
-      "fetched_at": "2026-11-23T16:44:04.836448+00:00"
+      "fetched_at": "2026-11-24T14:23:20.061563+00:00"
     },
     "breakup poetry": {
       "suggestions": [
@@ -876,7 +876,7 @@
         "breakup poetry status",
         "breakup poetry short"
       ],
-      "fetched_at": "2026-11-23T16:44:04.886733+00:00"
+      "fetched_at": "2026-11-24T14:23:20.112538+00:00"
     },
     "one sided love poetry": {
       "suggestions": [
@@ -891,8 +891,8 @@
         "one sided love poetry john elia",
         "one sided love poetry by nayab midha"
       ],
-      "fetched_at": "2026-11-23T16:44:04.927135+00:00"
+      "fetched_at": "2026-11-24T14:23:20.153623+00:00"
     }
   },
-  "last_updated": "2026-11-23T16:44:04.928329+00:00"
+  "last_updated": "2026-11-24T14:23:20.155162+00:00"
 }
